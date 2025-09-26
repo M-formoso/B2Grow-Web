@@ -1,0 +1,8 @@
+.text-type {
+  display: inline-block;
+}
+
+.text-type-cursor {
+  display: inline-block;
+  color: hsl(var(--primary));
+}

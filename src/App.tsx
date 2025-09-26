@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SplashCursor from "@/components/effects/SplashCursor";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Calculator from "./pages/Calculator";
@@ -17,6 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SplashCursor />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
