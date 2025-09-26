@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
 import powerStationHero from "@/assets/power-station-hero.png";
+import solarPanelsHero from "@/assets/solar-panels-hero.png";
+import ledLightingHero from "@/assets/led-lighting-hero.png";
 import GradientText from "@/components/effects/GradientText";
 import TextType from "@/components/effects/TextType";
 import ElectricBorder from "@/components/effects/ElectricBorder";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 
 const Hero = () => {
   return (
@@ -92,16 +95,69 @@ const Hero = () => {
             </div>
           </div>
 
-          <ElectricBorder color="#ff4757" speed={0.6} chaos={0.2}>
-            <div className="relative animate-scale-in p-6" style={{ animationDelay: "300ms" }}>
-              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-20 animate-glow"></div>
-              <img 
-                src={powerStationHero} 
-                alt="Estación de Energía B2Grow" 
-                className="relative z-10 w-full max-w-lg mx-auto animate-float"
-              />
-            </div>
-          </ElectricBorder>
+          <div className="relative animate-scale-in" style={{ animationDelay: "300ms", height: "600px" }}>
+            <ScrollStack 
+              className="h-full"
+              itemDistance={50}
+              itemScale={0.05}
+              itemStackDistance={20}
+              stackPosition="30%"
+              scaleEndPosition="15%"
+              baseScale={0.9}
+              useWindowScroll={true}
+            >
+              <ScrollStackItem>
+                <ElectricBorder color="#ff4757" speed={0.8} chaos={0.3}>
+                  <div className="relative w-full h-full bg-gradient-primary/20 backdrop-blur-sm rounded-xl overflow-hidden">
+                    <img 
+                      src={powerStationHero} 
+                      alt="Estación de Energía Portátil B2Grow" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-foreground">
+                      <h3 className="text-lg font-bold mb-1">Estación de Energía</h3>
+                      <p className="text-sm text-muted-foreground">Portátil e Inteligente</p>
+                    </div>
+                  </div>
+                </ElectricBorder>
+              </ScrollStackItem>
+              
+              <ScrollStackItem>
+                <ElectricBorder color="#2ed573" speed={0.9} chaos={0.4}>
+                  <div className="relative w-full h-full bg-gradient-primary/20 backdrop-blur-sm rounded-xl overflow-hidden">
+                    <img 
+                      src={solarPanelsHero} 
+                      alt="Paneles Solares Flexibles B2Grow" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-foreground">
+                      <h3 className="text-lg font-bold mb-1">Paneles Solares</h3>
+                      <p className="text-sm text-muted-foreground">Flexibles y Eficientes</p>
+                    </div>
+                  </div>
+                </ElectricBorder>
+              </ScrollStackItem>
+              
+              <ScrollStackItem>
+                <ElectricBorder color="#ffa502" speed={0.7} chaos={0.2}>
+                  <div className="relative w-full h-full bg-gradient-primary/20 backdrop-blur-sm rounded-xl overflow-hidden">
+                    <img 
+                      src={ledLightingHero} 
+                      alt="Iluminación LED Inteligente B2Grow" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-foreground">
+                      <h3 className="text-lg font-bold mb-1">Iluminación LED</h3>
+                      <p className="text-sm text-muted-foreground">Inteligente y Sustentable</p>
+                    </div>
+                  </div>
+                </ElectricBorder>
+              </ScrollStackItem>
+            </ScrollStack>
+          </div>
         </div>
       </div>
     </section>
