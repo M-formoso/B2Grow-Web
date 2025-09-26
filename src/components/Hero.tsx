@@ -4,34 +4,25 @@ import powerStationHero from "@/assets/power-station-hero.png";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import GradientText from "@/components/effects/GradientText";
-import TextType from "@/components/effects/TextType";
 import ElectricBorder from "@/components/effects/ElectricBorder";
 import ScrollReveal from "@/components/effects/ScrollReveal";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-gradient-tech relative overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-tech">
       {/* Animated background elements */}
       <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
       <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-float"></div>
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
       
-      <div className="container mx-auto px-4 pt-20">
-        <ScrollStack 
-          className="h-screen"
-          itemDistance={80}
-          itemScale={0.08}
-          itemStackDistance={40}
-          stackPosition="20%"
-          scaleEndPosition="10%"
-          baseScale={0.85}
-          useWindowScroll={true}
-        >
-          {/* Estación de Energía Card */}
-          <ScrollStackItem>
+      {/* Scroll Stack Container */}
+      <div className="scroll-stack-scroller" style={{ height: "300vh" }}>
+        <div className="scroll-stack-inner">
+          
+          {/* Card 1: Energía Portátil */}
+          <div className="scroll-stack-card">
             <ElectricBorder color="#ff4757" speed={1.5} chaos={0.3}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full w-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
                 <div className="text-center lg:text-left">
                   <h1 className="text-5xl lg:text-7xl font-bold mb-6">
                     <GradientText 
@@ -89,12 +80,12 @@ const Hero = () => {
                 </div>
               </div>
             </ElectricBorder>
-          </ScrollStackItem>
+          </div>
           
-          {/* Paneles Solares Card */}
-          <ScrollStackItem>
+          {/* Card 2: Paneles Solares */}
+          <div className="scroll-stack-card">
             <ElectricBorder color="#2ed573" speed={1.2} chaos={0.4}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full w-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
                 <div className="text-center lg:text-left">
                   <h1 className="text-5xl lg:text-7xl font-bold mb-6">
                     <GradientText 
@@ -152,12 +143,12 @@ const Hero = () => {
                 </div>
               </div>
             </ElectricBorder>
-          </ScrollStackItem>
+          </div>
           
-          {/* LED Inteligente Card */}
-          <ScrollStackItem>
+          {/* Card 3: LED Inteligente */}
+          <div className="scroll-stack-card">
             <ElectricBorder color="#ffa502" speed={0.9} chaos={0.2}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full w-full p-8 bg-gradient-primary/10 backdrop-blur-sm rounded-xl">
                 <div className="text-center lg:text-left">
                   <h1 className="text-5xl lg:text-7xl font-bold mb-6">
                     <GradientText 
@@ -215,8 +206,11 @@ const Hero = () => {
                 </div>
               </div>
             </ElectricBorder>
-          </ScrollStackItem>
-        </ScrollStack>
+          </div>
+
+          {/* End spacer */}
+          <div className="scroll-stack-end" />
+        </div>
       </div>
     </section>
   );

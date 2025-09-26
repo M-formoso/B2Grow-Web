@@ -1,0 +1,16 @@
+.scroll-stack-effect {
+  position: relative;
+}
+
+.scroll-stack-effect .scroll-stack-card {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  position: sticky;
+  top: 20vh;
+  margin-bottom: 80px;
+}
+
+.scroll-stack-effect .scroll-stack-card:last-child {
+  margin-bottom: 50rem; /* Extra space for the last card */
+}
