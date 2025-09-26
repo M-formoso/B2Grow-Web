@@ -70,9 +70,18 @@ const Calculator = () => {
   };
 
   return (
-    <section id="calculadora" className="min-h-screen flex flex-col justify-end py-8 bg-card/30 relative overflow-hidden">
+    <section id="calculadora" className="min-h-screen flex flex-col justify-end py-8 relative overflow-hidden">
+      {/* Background effects */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-48 -translate-y-48"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-x-48 translate-y-48"></div>
+      
+      {/* Laser effect covering the entire section - falling from above */}
+      <LaserFlow 
+        className="absolute inset-0 z-30 pointer-events-none"
+        color="#B19EEF"
+        horizontalBeamOffset={0.5}
+        verticalBeamOffset={0.0}
+      />
       
       <div className="container mx-auto px-4 relative z-10 mt-auto">
         <div className="max-w-4xl mx-auto mb-8">
@@ -89,25 +98,17 @@ const Calculator = () => {
             </TabsList>
 
             <TabsContent value="energy">
-              <div className="relative overflow-hidden rounded-lg min-h-[600px] bg-gradient-to-b from-background/20 to-background/5">
-                <div className="absolute inset-0 z-10">
-                  <LaserFlow 
-                    color="#B19EEF" 
-                    horizontalBeamOffset={0.5}
-                    verticalBeamOffset={0.0}
-                  />
-                </div>
-                <Card className="animate-scale-in relative z-20 bg-background/40 backdrop-blur-sm border-primary/30 shadow-lg shadow-primary/10">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-2xl">
-                      <CalcIcon className="h-6 w-6 text-primary" />
-                      Calculadora de Producto a Medida
-                      <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
-                        <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                        IA Integrada
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
+              <Card className="animate-scale-in bg-background/60 backdrop-blur-sm border-primary/30 shadow-lg shadow-primary/10">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-2xl">
+                    <CalcIcon className="h-6 w-6 text-primary" />
+                    Calculadora de Producto a Medida
+                    <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
+                      <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                      IA Integrada
+                    </div>
+                  </CardTitle>
+                </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="group">
@@ -183,19 +184,10 @@ const Calculator = () => {
                     )}
                   </CardContent>
                 </Card>
-              </div>
             </TabsContent>
 
             <TabsContent value="efficiency">
-              <div className="relative overflow-hidden rounded-lg min-h-[600px] bg-gradient-to-b from-background/20 to-background/5">
-                <div className="absolute inset-0 z-10">
-                  <LaserFlow 
-                    color="#22C55E" 
-                    horizontalBeamOffset={0.3}
-                    verticalBeamOffset={0.0}
-                  />
-                </div>
-                <Card className="animate-scale-in relative z-20 bg-background/40 backdrop-blur-sm border-accent/30 shadow-lg shadow-accent/10">
+              <Card className="animate-scale-in bg-background/60 backdrop-blur-sm border-accent/30 shadow-lg shadow-accent/10">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <Lightbulb className="h-6 w-6 text-accent" />
@@ -302,7 +294,6 @@ const Calculator = () => {
                     )}
                   </CardContent>
                 </Card>
-              </div>
             </TabsContent>
           </Tabs>
         </div>
