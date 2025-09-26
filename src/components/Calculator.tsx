@@ -90,12 +90,14 @@ const Calculator = () => {
 
             <TabsContent value="energy">
               <div className="relative overflow-hidden rounded-lg min-h-[600px]">
-                <LaserFlow 
-                  color="#5227FF" 
-                  horizontalBeamOffset={0.85}
-                  verticalBeamOffset={0.0}
-                />
-                <Card className="animate-scale-in relative z-20 bg-card/80 backdrop-blur-sm border-primary/20">
+                <div className="absolute inset-0 z-10">
+                  <LaserFlow 
+                    color="#B19EEF" 
+                    horizontalBeamOffset={0.5}
+                    verticalBeamOffset={0.0}
+                  />
+                </div>
+                <Card className="animate-scale-in relative z-20 bg-card/60 backdrop-blur-md border-primary/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <CalcIcon className="h-6 w-6 text-primary" />
@@ -186,12 +188,14 @@ const Calculator = () => {
 
             <TabsContent value="efficiency">
               <div className="relative overflow-hidden rounded-lg min-h-[600px]">
-                <LaserFlow 
-                  color="#22C55E" 
-                  horizontalBeamOffset={0.15}
-                  verticalBeamOffset={0.0}
-                />
-                <Card className="animate-scale-in relative z-20 bg-card/80 backdrop-blur-sm border-accent/20">
+                <div className="absolute inset-0 z-10">
+                  <LaserFlow 
+                    color="#22C55E" 
+                    horizontalBeamOffset={0.3}
+                    verticalBeamOffset={0.0}
+                  />
+                </div>
+                <Card className="animate-scale-in relative z-20 bg-card/60 backdrop-blur-md border-accent/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <Lightbulb className="h-6 w-6 text-accent" />
