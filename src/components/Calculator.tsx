@@ -70,12 +70,12 @@ const Calculator = () => {
   };
 
   return (
-    <section id="calculadora" className="min-h-screen py-20 bg-card/30 relative overflow-hidden">
+    <section id="calculadora" className="min-h-screen flex flex-col justify-end py-8 bg-card/30 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-48 -translate-y-48"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-x-48 translate-y-48"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
+      <div className="container mx-auto px-4 relative z-10 mt-auto">
+        <div className="max-w-4xl mx-auto mb-8">
           <Tabs defaultValue="energy" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="energy" className="flex items-center gap-2">

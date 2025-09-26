@@ -49,7 +49,7 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
       }
     `;
 
-    // Fragment shader for laser beam effect
+    // Fragment shader for laser beam effect - thin thread-like laser
     const fragmentShader = `
       precision highp float;
       uniform vec2 uResolution;
@@ -76,47 +76,41 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
       void main() {
         vec2 uv = gl_FragCoord.xy / uResolution.xy;
         
-        // Create vertical laser beam
+        // Create very thin vertical laser thread
         float beamX = uBeamX;
         float distFromBeam = abs(uv.x - beamX);
         
-        // Main beam with stronger intensity
-        float beam = 1.0 / (1.0 + distFromBeam * 80.0);
-        beam = pow(beam, 0.5);
+        // Very thin core thread - like a wire
+        float thread = 1.0 / (1.0 + distFromBeam * 2000.0);
+        thread = pow(thread, 0.1);
         
-        // Outer glow
-        float glow = 1.0 / (1.0 + distFromBeam * 20.0);
-        glow = pow(glow, 0.3);
+        // Minimal glow around the thread
+        float glow = 1.0 / (1.0 + distFromBeam * 100.0);
+        glow = pow(glow, 0.8);
         
-        // Inner core - very bright
-        float core = 1.0 / (1.0 + distFromBeam * 500.0);
-        core = pow(core, 0.2);
+        // Subtle animated flow along the thread
+        float flow = sin(uv.y * 15.0 - uTime * 12.0) * 0.3 + 0.7;
         
-        // Animated flow effect - more pronounced
-        float flow1 = sin(uv.y * 6.0 - uTime * 8.0) * 0.5 + 0.5;
-        float flow2 = sin(uv.y * 10.0 - uTime * 5.0) * 0.3 + 0.7;
-        float flowPattern = flow1 * flow2;
+        // Add very subtle noise for texture
+        float noisePattern = noise(vec2(uv.x * 100.0, uv.y * 50.0 - uTime * 5.0)) * 0.1;
         
-        // Add noise for texture
-        float noisePattern = noise(vec2(uv.x * 30.0, uv.y * 15.0 - uTime * 3.0));
+        // Vertical fade from top - stronger fall effect
+        float verticalFade = smoothstep(0.0, 0.2, uv.y) * smoothstep(1.0, 0.8, uv.y);
+        verticalFade = max(verticalFade, 0.3);
         
-        // Vertical fade - stronger at top to create "falling" effect
-        float verticalFade = smoothstep(0.0, 0.4, uv.y) * smoothstep(1.0, 0.6, uv.y);
-        verticalFade = max(verticalFade, 0.2); // Ensure minimum visibility
+        // Combine effects - emphasize the thin thread
+        float intensity = (thread * 4.0 + glow * 0.5) * flow * verticalFade;
+        intensity += noisePattern * intensity;
+        intensity = max(intensity, 0.05);
         
-        // Combine all effects with higher base intensity
-        float intensity = (core * 3.0 + beam * 2.0 + glow * 1.0) * flowPattern * verticalFade;
-        intensity += noisePattern * 0.2 * intensity;
-        intensity = max(intensity, 0.1); // Ensure minimum visibility
+        // Apply color with higher saturation for thin thread visibility
+        vec3 finalColor = uColor * intensity * 3.0;
         
-        // Apply color with higher intensity
-        vec3 finalColor = uColor * intensity * 2.0;
-        
-        // Add bloom effect
-        float bloom = intensity * 0.5;
+        // Minimal bloom to maintain thread-like appearance
+        float bloom = intensity * 0.2;
         finalColor += uColor * bloom;
         
-        gl_FragColor = vec4(finalColor, intensity);
+        gl_FragColor = vec4(finalColor, intensity * 0.8);
       }
     `;
 

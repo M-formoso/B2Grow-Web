@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 
 const CalculatorPage = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
-      <div className="pt-20">
+      <div className="flex-1 flex flex-col justify-end pt-20">
         <Calculator />
       </div>
       <Footer />
