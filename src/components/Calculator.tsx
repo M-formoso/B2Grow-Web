@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator as CalcIcon, Zap, Leaf, TrendingUp, Battery, Lightbulb } from "lucide-react";
-import calculatorHero from "@/assets/calculator-hero.png";
+import { Calculator as CalcIcon, Zap, Leaf, TrendingUp, Battery, Lightbulb, Sparkles } from "lucide-react";
+import LaserFlow from "@/components/effects/LaserFlow";
 
 const Calculator = () => {
   const [energyValues, setEnergyValues] = useState({
@@ -84,14 +84,29 @@ const Calculator = () => {
             Descubre el equipo perfecto para tus necesidades y calcula tu potencial de ahorro energético.
           </p>
           
-          {/* Hero Calculator Image */}
-          <div className="relative max-w-md mx-auto mb-8 animate-scale-in" style={{ animationDelay: "200ms" }}>
-            <div className="absolute inset-0 bg-gradient-energy rounded-2xl blur-2xl opacity-20 animate-glow"></div>
-            <img 
-              src={calculatorHero} 
-              alt="Calculadora Energética Inteligente" 
-              className="relative z-10 w-full rounded-2xl shadow-lift"
-            />
+          {/* Interactive Calculator Preview */}
+          <div className="relative max-w-2xl mx-auto mb-8 animate-scale-in" style={{ animationDelay: "200ms" }}>
+            <div className="relative bg-gradient-to-r from-card/50 to-card/30 backdrop-blur-sm rounded-3xl p-8 border border-primary/20 overflow-hidden">
+              <LaserFlow 
+                color="#B19EEF" 
+                horizontalBeamOffset={0.5}
+                verticalBeamOffset={0.0}
+              />
+              <div className="relative z-10 flex items-center justify-center space-x-6">
+                <div className="flex items-center space-x-3 text-primary">
+                  <Sparkles className="h-8 w-8 animate-pulse" />
+                  <span className="text-2xl font-bold">IA Avanzada</span>
+                </div>
+                <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary to-transparent"></div>
+                <div className="flex items-center space-x-3 text-accent">
+                  <Zap className="h-8 w-8 animate-bounce" />
+                  <span className="text-2xl font-bold">Cálculo Inteligente</span>
+                </div>
+              </div>
+              <div className="absolute top-4 right-4 text-xs text-muted-foreground/70">
+                Powered by B2Grow AI
+              </div>
+            </div>
           </div>
         </div>
 
@@ -109,177 +124,216 @@ const Calculator = () => {
             </TabsList>
 
             <TabsContent value="energy">
-              <Card className="animate-scale-in">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-2xl">
-                    <CalcIcon className="h-6 w-6 text-primary" />
-                    Calculadora de Producto a Medida
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="consumption">Consumo (W)</Label>
-                      <Input
-                        id="consumption"
-                        type="number"
-                        placeholder="Ej: 500"
-                        value={energyValues.consumption}
-                        onChange={(e) => setEnergyValues(prev => ({ ...prev, consumption: e.target.value }))}
-                        className="mt-2"
-                      />
+              <div className="relative overflow-hidden">
+                <LaserFlow 
+                  color="#5227FF" 
+                  horizontalBeamOffset={0.85}
+                  verticalBeamOffset={0.0}
+                />
+                <Card className="animate-scale-in relative z-10 bg-card/90 backdrop-blur-sm border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <CalcIcon className="h-6 w-6 text-primary" />
+                      Calculadora de Producto a Medida
+                      <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
+                        <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                        IA Integrada
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="group">
+                        <Label htmlFor="consumption" className="flex items-center gap-2">
+                          Consumo (W)
+                          <Zap className="h-4 w-4 text-primary/60" />
+                        </Label>
+                        <Input
+                          id="consumption"
+                          type="number"
+                          placeholder="Ej: 500"
+                          value={energyValues.consumption}
+                          onChange={(e) => setEnergyValues(prev => ({ ...prev, consumption: e.target.value }))}
+                          className="mt-2 transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
+                        />
+                      </div>
+                      <div className="group">
+                        <Label htmlFor="hours" className="flex items-center gap-2">
+                          Horas de uso diario
+                          <Battery className="h-4 w-4 text-accent/60" />
+                        </Label>
+                        <Input
+                          id="hours"
+                          type="number"
+                          placeholder="Ej: 8"
+                          value={energyValues.hours}
+                          onChange={(e) => setEnergyValues(prev => ({ ...prev, hours: e.target.value }))}
+                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <Label htmlFor="hours">Horas de uso diario</Label>
-                      <Input
-                        id="hours"
-                        type="number"
-                        placeholder="Ej: 8"
-                        value={energyValues.hours}
-                        onChange={(e) => setEnergyValues(prev => ({ ...prev, hours: e.target.value }))}
-                        className="mt-2"
-                      />
-                    </div>
-                  </div>
 
-                  <Button 
-                    onClick={calculateEnergyNeeds}
-                    className="w-full bg-gradient-primary hover:shadow-energy"
-                    size="lg"
-                  >
-                    Calcular Equipo Recomendado
-                  </Button>
+                    <Button 
+                      onClick={calculateEnergyNeeds}
+                      className="w-full bg-gradient-primary hover:shadow-energy transition-all duration-300 group"
+                      size="lg"
+                    >
+                      <Sparkles className="mr-2 h-5 w-5 group-hover:animate-spin" />
+                      Calcular Equipo Recomendado
+                    </Button>
 
-                  {energyResult && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-                      <Card className="bg-primary/10 border-primary/20">
-                        <CardContent className="p-4 text-center">
-                          <Zap className="h-8 w-8 text-primary mx-auto mb-2" />
-                          <p className="text-sm text-muted-foreground">Energía Diaria</p>
-                          <p className="text-2xl font-bold text-primary">{energyResult.totalEnergy} kWh</p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-accent/10 border-accent/20">
-                        <CardContent className="p-4 text-center">
-                          <Battery className="h-8 w-8 text-accent mx-auto mb-2" />
-                          <p className="text-sm text-muted-foreground">Capacidad Recomendada</p>
-                          <p className="text-2xl font-bold text-accent">{energyResult.recommendedCapacity} kWh</p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-accent/10 border-accent/20">
-                        <CardContent className="p-4 text-center">
-                          <Leaf className="h-8 w-8 text-accent mx-auto mb-2" />
-                          <p className="text-sm text-muted-foreground">CO2 Ahorrado</p>
-                          <p className="text-2xl font-bold text-accent">{energyResult.co2Saved} kg/mes</p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-primary/10 border-primary/20">
-                        <CardContent className="p-4 text-center">
-                          <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
-                          <p className="text-sm text-muted-foreground">Ahorro Mensual</p>
-                          <p className="text-2xl font-bold text-primary">${energyResult.monthlySaving}</p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="efficiency">
-              <Card className="animate-scale-in">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-2xl">
-                    <Lightbulb className="h-6 w-6 text-accent" />
-                    Calculadora de Eficiencia LED
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                      <Label htmlFor="lights">Cantidad de Luces</Label>
-                      <Input
-                        id="lights"
-                        type="number"
-                        placeholder="Ej: 20"
-                        value={lightValues.lights}
-                        onChange={(e) => setLightValues(prev => ({ ...prev, lights: e.target.value }))}
-                        className="mt-2"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="workHours">Horas de Trabajo</Label>
-                      <Input
-                        id="workHours"
-                        type="number"
-                        placeholder="Ej: 8"
-                        value={lightValues.workHours}
-                        onChange={(e) => setLightValues(prev => ({ ...prev, workHours: e.target.value }))}
-                        className="mt-2"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="occupancy">Ocupación Diaria (%)</Label>
-                      <Input
-                        id="occupancy"
-                        type="number"
-                        placeholder="Ej: 70"
-                        min="10"
-                        max="90"
-                        value={lightValues.occupancy}
-                        onChange={(e) => setLightValues(prev => ({ ...prev, occupancy: e.target.value }))}
-                        className="mt-2"
-                      />
-                    </div>
-                  </div>
-
-                  <Button 
-                    onClick={calculateLightEfficiency}
-                    className="w-full bg-gradient-energy hover:shadow-green"
-                    size="lg"
-                  >
-                    Calcular Ahorro Energético
-                  </Button>
-
-                  {lightResult && (
-                    <div className="space-y-6 mt-8">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <Card className="bg-accent/10 border-accent/20">
+                    {energyResult && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                        <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
                           <CardContent className="p-4 text-center">
-                            <TrendingUp className="h-8 w-8 text-accent mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">Eficiencia</p>
-                            <p className="text-3xl font-bold text-accent">{lightResult.efficiency}%</p>
+                            <Zap className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-pulse" />
+                            <p className="text-sm text-muted-foreground">Energía Diaria</p>
+                            <p className="text-2xl font-bold text-primary">{energyResult.totalEnergy} kWh</p>
                           </CardContent>
                         </Card>
-                        <Card className="bg-primary/10 border-primary/20">
+                        <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
                           <CardContent className="p-4 text-center">
-                            <Zap className="h-8 w-8 text-primary mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">Ahorro Anual</p>
-                            <p className="text-2xl font-bold text-primary">{lightResult.yearlySaving} kWh</p>
+                            <Battery className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-bounce" />
+                            <p className="text-sm text-muted-foreground">Capacidad Recomendada</p>
+                            <p className="text-2xl font-bold text-accent">{energyResult.recommendedCapacity} kWh</p>
                           </CardContent>
                         </Card>
-                        <Card className="bg-accent/10 border-accent/20">
+                        <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
                           <CardContent className="p-4 text-center">
-                            <Leaf className="h-8 w-8 text-accent mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">CO2 Reducido</p>
-                            <p className="text-2xl font-bold text-accent">{lightResult.co2Reduction} kg/año</p>
+                            <Leaf className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
+                            <p className="text-sm text-muted-foreground">CO2 Ahorrado</p>
+                            <p className="text-2xl font-bold text-accent">{energyResult.co2Saved} kg/mes</p>
+                          </CardContent>
+                        </Card>
+                        <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
+                          <CardContent className="p-4 text-center">
+                            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-bounce" />
+                            <p className="text-sm text-muted-foreground">Ahorro Mensual</p>
+                            <p className="text-2xl font-bold text-primary">${energyResult.monthlySaving}</p>
                           </CardContent>
                         </Card>
                       </div>
-                      
-                      <Card className="bg-gradient-energy/10 border-accent/30">
-                        <CardContent className="p-6 text-center">
-                          <h3 className="text-xl font-bold text-foreground mb-2">Ahorro Económico Anual</h3>
-                          <p className="text-4xl font-bold text-accent">${lightResult.costSaving}</p>
-                          <p className="text-sm text-muted-foreground mt-2">
-                            Con iluminación LED inteligente vs. iluminación tradicional
-                          </p>
-                        </CardContent>
-                      </Card>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="efficiency">
+              <div className="relative overflow-hidden">
+                <LaserFlow 
+                  color="#22C55E" 
+                  horizontalBeamOffset={0.15}
+                  verticalBeamOffset={0.0}
+                />
+                <Card className="animate-scale-in relative z-10 bg-card/90 backdrop-blur-sm border-accent/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <Lightbulb className="h-6 w-6 text-accent" />
+                      Calculadora de Eficiencia LED
+                      <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
+                        <Leaf className="h-4 w-4 text-accent animate-pulse" />
+                        Eco-Smart
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <Label htmlFor="lights" className="flex items-center gap-2">
+                          Cantidad de Luces
+                          <Lightbulb className="h-4 w-4 text-accent/60" />
+                        </Label>
+                        <Input
+                          id="lights"
+                          type="number"
+                          placeholder="Ej: 20"
+                          value={lightValues.lights}
+                          onChange={(e) => setLightValues(prev => ({ ...prev, lights: e.target.value }))}
+                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="workHours" className="flex items-center gap-2">
+                          Horas de Trabajo
+                          <Battery className="h-4 w-4 text-primary/60" />
+                        </Label>
+                        <Input
+                          id="workHours"
+                          type="number"
+                          placeholder="Ej: 8"
+                          value={lightValues.workHours}
+                          onChange={(e) => setLightValues(prev => ({ ...prev, workHours: e.target.value }))}
+                          className="mt-2 transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="occupancy" className="flex items-center gap-2">
+                          Ocupación Diaria (%)
+                          <TrendingUp className="h-4 w-4 text-accent/60" />
+                        </Label>
+                        <Input
+                          id="occupancy"
+                          type="number"
+                          placeholder="Ej: 70"
+                          min="10"
+                          max="90"
+                          value={lightValues.occupancy}
+                          onChange={(e) => setLightValues(prev => ({ ...prev, occupancy: e.target.value }))}
+                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                        />
+                      </div>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
+
+                    <Button 
+                      onClick={calculateLightEfficiency}
+                      className="w-full bg-gradient-energy hover:shadow-green group transition-all duration-300"
+                      size="lg"
+                    >
+                      <Leaf className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+                      Calcular Ahorro Energético
+                    </Button>
+
+                    {lightResult && (
+                      <div className="space-y-6 mt-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
+                            <CardContent className="p-4 text-center">
+                              <TrendingUp className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
+                              <p className="text-sm text-muted-foreground">Eficiencia</p>
+                              <p className="text-3xl font-bold text-accent">{lightResult.efficiency}%</p>
+                            </CardContent>
+                          </Card>
+                          <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
+                            <CardContent className="p-4 text-center">
+                              <Zap className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-bounce" />
+                              <p className="text-sm text-muted-foreground">Ahorro Anual</p>
+                              <p className="text-2xl font-bold text-primary">{lightResult.yearlySaving} kWh</p>
+                            </CardContent>
+                          </Card>
+                          <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
+                            <CardContent className="p-4 text-center">
+                              <Leaf className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
+                              <p className="text-sm text-muted-foreground">CO2 Reducido</p>
+                              <p className="text-2xl font-bold text-accent">{lightResult.co2Reduction} kg/año</p>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        
+                        <Card className="bg-gradient-energy/10 border-accent/30 hover:border-accent/50 transition-all duration-300">
+                          <CardContent className="p-6 text-center">
+                            <h3 className="text-xl font-bold text-foreground mb-2">Ahorro Económico Anual</h3>
+                            <p className="text-4xl font-bold text-accent">${lightResult.costSaving}</p>
+                            <p className="text-sm text-muted-foreground mt-2">
+                              Con iluminación LED inteligente vs. iluminación tradicional
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
