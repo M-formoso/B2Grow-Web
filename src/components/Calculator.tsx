@@ -70,46 +70,11 @@ const Calculator = () => {
   };
 
   return (
-    <section id="calculadora" className="py-20 bg-card/30 relative overflow-hidden">
+    <section id="calculadora" className="min-h-screen py-20 bg-card/30 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-48 -translate-y-48"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-x-48 translate-y-48"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-foreground">Calculadoras </span>
-            <span className="bg-gradient-energy bg-clip-text text-transparent">Inteligentes</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Descubre el equipo perfecto para tus necesidades y calcula tu potencial de ahorro energético.
-          </p>
-          
-          {/* Interactive Calculator Preview */}
-          <div className="relative max-w-2xl mx-auto mb-8 animate-scale-in" style={{ animationDelay: "200ms" }}>
-            <div className="relative bg-gradient-to-r from-card/50 to-card/30 backdrop-blur-sm rounded-3xl p-8 border border-primary/20 overflow-hidden">
-              <LaserFlow 
-                color="#B19EEF" 
-                horizontalBeamOffset={0.5}
-                verticalBeamOffset={0.0}
-              />
-              <div className="relative z-10 flex items-center justify-center space-x-6">
-                <div className="flex items-center space-x-3 text-primary">
-                  <Sparkles className="h-8 w-8 animate-pulse" />
-                  <span className="text-2xl font-bold">IA Avanzada</span>
-                </div>
-                <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary to-transparent"></div>
-                <div className="flex items-center space-x-3 text-accent">
-                  <Zap className="h-8 w-8 animate-bounce" />
-                  <span className="text-2xl font-bold">Cálculo Inteligente</span>
-                </div>
-              </div>
-              <div className="absolute top-4 right-4 text-xs text-muted-foreground/70">
-                Powered by B2Grow AI
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue="energy" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -124,13 +89,13 @@ const Calculator = () => {
             </TabsList>
 
             <TabsContent value="energy">
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-lg min-h-[600px]">
                 <LaserFlow 
                   color="#5227FF" 
                   horizontalBeamOffset={0.85}
                   verticalBeamOffset={0.0}
                 />
-                <Card className="animate-scale-in relative z-10 bg-card/90 backdrop-blur-sm border-primary/20">
+                <Card className="animate-scale-in relative z-20 bg-card/80 backdrop-blur-sm border-primary/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <CalcIcon className="h-6 w-6 text-primary" />
@@ -220,13 +185,13 @@ const Calculator = () => {
             </TabsContent>
 
             <TabsContent value="efficiency">
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden rounded-lg min-h-[600px]">
                 <LaserFlow 
                   color="#22C55E" 
                   horizontalBeamOffset={0.15}
                   verticalBeamOffset={0.0}
                 />
-                <Card className="animate-scale-in relative z-10 bg-card/90 backdrop-blur-sm border-accent/20">
+                <Card className="animate-scale-in relative z-20 bg-card/80 backdrop-blur-sm border-accent/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <Lightbulb className="h-6 w-6 text-accent" />
