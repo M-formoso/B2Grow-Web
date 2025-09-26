@@ -79,8 +79,12 @@ const Calculator = () => {
       <LaserFlow 
         className="absolute inset-0 z-30 pointer-events-none"
         color="#B19EEF"
-        horizontalBeamOffset={0.5}
+        horizontalBeamOffset={0.1}
         verticalBeamOffset={0.0}
+        wispDensity={1.2}
+        fogIntensity={0.6}
+        verticalSizing={2.0}
+        horizontalSizing={0.3}
       />
       
       <div className="container mx-auto px-4 relative z-10 mt-auto">
