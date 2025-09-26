@@ -1,44 +1,44 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import b2growLogo from "@/assets/b2grow-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Estaciones de Energía", href: "#energia" },
-    { name: "Paneles Solares", href: "#paneles" },
-    { name: "Calculadora", href: "#calculadora" },
-    { name: "Iluminación LED", href: "#iluminacion" },
-    { name: "Quiénes Somos", href: "#nosotros" },
-    { name: "Contacto", href: "#contacto" },
+    { name: "Inicio", href: "/" },
+    { name: "Productos", href: "/productos" },
+    { name: "Calculadora", href: "/calculadora" },
+    { name: "Quiénes Somos", href: "/nosotros" },
+    { name: "Contacto", href: "/contacto" },
   ];
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center space-x-2 animate-slide-up">
+          <Link to="/" className="flex items-center space-x-2 animate-slide-up">
             <img src={b2growLogo} alt="B2Grow" className="h-12 w-12" />
             <div>
               <h1 className="text-xl font-bold text-foreground">B2Grow</h1>
               <p className="text-sm text-accent font-medium">Línea Greenside</p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="text-foreground hover:text-primary transition-colors duration-300 relative group animate-slide-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"></span>
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -66,14 +66,14 @@ const Header = () => {
           <div className="lg:hidden py-4 border-t border-border">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground hover:text-primary transition-colors duration-300 px-4 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
               <Button 
                 variant="outline" 
