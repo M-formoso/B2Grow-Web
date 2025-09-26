@@ -44,7 +44,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #e9e9ef;
+  color: hsl(var(--foreground));
   font-weight: 500;
   line-height: 1;
   overflow: visible;
@@ -125,7 +125,7 @@
   right: 0;
   width: clamp(260px, 38vw, 420px);
   height: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: hsl(var(--background) / 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
@@ -183,7 +183,7 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--sm-accent, #5227FF);
+  color: hsl(var(--primary));
 }
 
 .sm-socials-list {
@@ -236,7 +236,7 @@
 }
 
 .sm-socials-link:hover {
-  color: var(--sm-accent, #5227FF);
+  color: hsl(var(--primary));
 }
 
 .sm-panel-title {
@@ -298,7 +298,7 @@
 }
 
 .sm-panel-item:hover {
-  color: var(--sm-accent, #5227FF);
+  color: hsl(var(--primary));
 }
 
 .sm-panel-list[data-numbering] {
@@ -313,7 +313,7 @@
   right: 2.8em;
   font-size: 18px;
   font-weight: 400;
-  color: var(--sm-accent, #5227FF);
+  color: hsl(var(--primary));
   letter-spacing: 0;
   pointer-events: none;
   user-select: none;
