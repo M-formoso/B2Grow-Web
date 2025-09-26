@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './SplashCursor.css';
 
 interface SplashCursorProps {
@@ -19,6 +19,18 @@ interface SplashCursorProps {
   TRANSPARENT?: boolean;
 }
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  color: string;
+  size: number;
+}
+
 function SplashCursor({
   SIM_RESOLUTION = 128,
   DYE_RESOLUTION = 1440,
@@ -32,76 +44,138 @@ function SplashCursor({
   SPLAT_FORCE = 6000,
   SHADING = true,
   COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.2, g: 0.1, b: 0.3 },
+  BACK_COLOR = { r: 0.02, g: 0.02, b: 0.03 },
   TRANSPARENT = true
 }: SplashCursorProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const particleIdRef = useRef(0);
+  const lastMousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Get WebGL context
-    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-    if (!gl) return;
-
-    // Simplified fluid simulation with energy theme colors
-    let mousePos = { x: 0, y: 0 };
-    let lastPos = { x: 0, y: 0 };
-
+    const colors = ['#ff4757', '#2ed573', '#ffa502', '#5352ed', '#ff3838'];
+    
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mousePos.x = (e.clientX - rect.left) / rect.width;
-      mousePos.y = 1.0 - (e.clientY - rect.top) / rect.height;
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Calculate movement velocity
+      const dx = x - lastMousePos.current.x;
+      const dy = y - lastMousePos.current.y;
+      const velocity = Math.sqrt(dx * dx + dy * dy);
+
+      // Create particles based on movement speed
+      if (velocity > 2) {
+        const numParticles = Math.min(Math.floor(velocity / 4), 8);
+        const newParticles: Particle[] = [];
+
+        for (let i = 0; i < numParticles; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 1 + Math.random() * 3;
+          const size = 2 + Math.random() * 4;
+          const life = 60 + Math.random() * 60;
+
+          newParticles.push({
+            id: particleIdRef.current++,
+            x: x + (Math.random() - 0.5) * 20,
+            y: y + (Math.random() - 0.5) * 20,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life,
+            maxLife: life,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size
+          });
+        }
+
+        setParticles(prev => [...prev, ...newParticles]);
+      }
+
+      lastMousePos.current = { x, y };
     };
 
-    const handleClick = () => {
-      // Create energy splash effect
-      const colors = [
-        [1.0, 0.2, 0.2], // Red energy
-        [0.2, 1.0, 0.2], // Green energy  
-        [1.0, 0.6, 0.2]  // Orange energy
-      ];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      
-      // Simple particle effect simulation
-      gl.clearColor(BACK_COLOR.r, BACK_COLOR.g, BACK_COLOR.b, TRANSPARENT ? 0.0 : 1.0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
+    const handleClick = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Create burst effect on click
+      const burstParticles: Particle[] = [];
+      for (let i = 0; i < 20; i++) {
+        const angle = (i / 20) * Math.PI * 2;
+        const speed = 2 + Math.random() * 6;
+        const size = 3 + Math.random() * 8;
+        const life = 80 + Math.random() * 80;
+
+        burstParticles.push({
+          id: particleIdRef.current++,
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life,
+          maxLife: life,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size
+        });
+      }
+
+      setParticles(prev => [...prev, ...burstParticles]);
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('click', handleClick);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('click', handleClick);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('click', handleClick);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('click', handleClick);
     };
   }, []);
 
+  // Update particles
+  useEffect(() => {
+    const updateParticles = () => {
+      setParticles(prev => 
+        prev
+          .map(particle => ({
+            ...particle,
+            x: particle.x + particle.vx,
+            y: particle.y + particle.vy,
+            vx: particle.vx * 0.98, // Friction
+            vy: particle.vy * 0.98 + 0.1, // Gravity
+            life: particle.life - 1,
+            size: particle.size * 0.995
+          }))
+          .filter(particle => particle.life > 0 && particle.size > 0.5)
+      );
+    };
+
+    const interval = setInterval(updateParticles, 16); // ~60fps
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <canvas
-      ref={canvasRef}
-      className="splash-cursor"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 9999,
-        opacity: 0.7
-      }}
-    />
+    <div ref={containerRef} className="splash-cursor">
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="splash-particle"
+          style={{
+            left: particle.x - particle.size / 2,
+            top: particle.y - particle.size / 2,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+            opacity: particle.life / particle.maxLife,
+            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
+          }}
+        />
+      ))}
+    </div>
   );
 }
 

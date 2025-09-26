@@ -107,36 +107,35 @@ const TextType = ({
       const currentText = textArray[currentTextIndex];
       
       if (!isDeleting && currentCharIndex <= currentText.length) {
-        setDisplayedText(currentText.substring(0, currentCharIndex));
-        setCurrentCharIndex(prev => prev + 1);
-        timeout = setTimeout(animateText, getRandomSpeed());
-        
-        if (currentCharIndex === currentText.length) {
+        if (currentCharIndex < currentText.length) {
+          setDisplayedText(currentText.substring(0, currentCharIndex));
+          setCurrentCharIndex(prev => prev + 1);
+          timeout = setTimeout(animateText, getRandomSpeed());
+        } else if (currentCharIndex === currentText.length) {
           onSentenceComplete?.();
-          if (textArray.length > 1) {
+          if (textArray.length > 1 && loop) {
             timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
           }
         }
-      } else if (isDeleting && currentCharIndex >= 0) {
-        setDisplayedText(currentText.substring(0, currentCharIndex));
+      } else if (isDeleting && currentCharIndex > 0) {
+        setDisplayedText(currentText.substring(0, currentCharIndex - 1));
         setCurrentCharIndex(prev => prev - 1);
         timeout = setTimeout(animateText, deletingSpeed);
-        
-        if (currentCharIndex === 0) {
-          setIsDeleting(false);
-          setCurrentTextIndex(prev => (prev + 1) % textArray.length);
-        }
+      } else if (isDeleting && currentCharIndex === 0) {
+        setIsDeleting(false);
+        setCurrentTextIndex(prev => (prev + 1) % textArray.length);
+        timeout = setTimeout(animateText, getRandomSpeed());
       }
     };
 
-    if (initialDelay > 0) {
+    if (initialDelay > 0 && currentCharIndex === 0 && !isDeleting) {
       timeout = setTimeout(animateText, initialDelay);
     } else {
-      animateText();
+      timeout = setTimeout(animateText, 50);
     }
 
     return () => clearTimeout(timeout);
-  }, [isVisible, currentCharIndex, isDeleting, currentTextIndex, textArray, getRandomSpeed, deletingSpeed, pauseDuration, initialDelay, onSentenceComplete]);
+  }, [isVisible, currentCharIndex, isDeleting, currentTextIndex, textArray.length, loop]);
 
   const elementProps = {
     ref: containerRef,
