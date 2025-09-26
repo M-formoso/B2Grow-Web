@@ -42,12 +42,10 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
 
     mount.appendChild(canvas);
 
-    // Vertex shader
+    // Vertex shader - using Three.js built-in attributes
     const vertexShader = `
-      precision highp float;
-      attribute vec3 position;
       void main() {
-        gl_Position = vec4(position, 1.0);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
     `;
 
@@ -82,38 +80,40 @@ const LaserFlow: React.FC<LaserFlowProps> = ({
         float beamX = uBeamX;
         float distFromBeam = abs(uv.x - beamX);
         
-        // Main beam intensity
-        float beam = 1.0 / (1.0 + distFromBeam * 200.0);
-        beam = pow(beam, 0.8);
+        // Main beam with stronger intensity
+        float beam = 1.0 / (1.0 + distFromBeam * 80.0);
+        beam = pow(beam, 0.5);
         
         // Outer glow
-        float glow = 1.0 / (1.0 + distFromBeam * 30.0);
+        float glow = 1.0 / (1.0 + distFromBeam * 20.0);
         glow = pow(glow, 0.3);
         
-        // Inner core
-        float core = 1.0 / (1.0 + distFromBeam * 1000.0);
-        core = pow(core, 0.5);
+        // Inner core - very bright
+        float core = 1.0 / (1.0 + distFromBeam * 500.0);
+        core = pow(core, 0.2);
         
-        // Animated flow effect
-        float flow1 = sin(uv.y * 8.0 - uTime * 6.0) * 0.5 + 0.5;
-        float flow2 = sin(uv.y * 12.0 - uTime * 4.0) * 0.3 + 0.7;
+        // Animated flow effect - more pronounced
+        float flow1 = sin(uv.y * 6.0 - uTime * 8.0) * 0.5 + 0.5;
+        float flow2 = sin(uv.y * 10.0 - uTime * 5.0) * 0.3 + 0.7;
         float flowPattern = flow1 * flow2;
         
         // Add noise for texture
-        float noisePattern = noise(vec2(uv.x * 50.0, uv.y * 20.0 - uTime * 2.0));
+        float noisePattern = noise(vec2(uv.x * 30.0, uv.y * 15.0 - uTime * 3.0));
         
-        // Vertical fade (stronger at top to create "falling" effect)
-        float verticalFade = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.7, uv.y);
+        // Vertical fade - stronger at top to create "falling" effect
+        float verticalFade = smoothstep(0.0, 0.4, uv.y) * smoothstep(1.0, 0.6, uv.y);
+        verticalFade = max(verticalFade, 0.2); // Ensure minimum visibility
         
-        // Combine all effects
-        float intensity = (core * 2.0 + beam * 1.5 + glow * 0.8) * flowPattern * verticalFade;
-        intensity += noisePattern * 0.1 * intensity;
+        // Combine all effects with higher base intensity
+        float intensity = (core * 3.0 + beam * 2.0 + glow * 1.0) * flowPattern * verticalFade;
+        intensity += noisePattern * 0.2 * intensity;
+        intensity = max(intensity, 0.1); // Ensure minimum visibility
         
-        // Apply color
-        vec3 finalColor = uColor * intensity;
+        // Apply color with higher intensity
+        vec3 finalColor = uColor * intensity * 2.0;
         
-        // Add some bloom
-        float bloom = intensity * 0.3;
+        // Add bloom effect
+        float bloom = intensity * 0.5;
         finalColor += uColor * bloom;
         
         gl_FragColor = vec4(finalColor, intensity);

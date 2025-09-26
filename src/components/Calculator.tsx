@@ -89,7 +89,7 @@ const Calculator = () => {
             </TabsList>
 
             <TabsContent value="energy">
-              <div className="relative overflow-hidden rounded-lg min-h-[600px]">
+              <div className="relative overflow-hidden rounded-lg min-h-[600px] bg-gradient-to-b from-background/20 to-background/5">
                 <div className="absolute inset-0 z-10">
                   <LaserFlow 
                     color="#B19EEF" 
@@ -97,7 +97,7 @@ const Calculator = () => {
                     verticalBeamOffset={0.0}
                   />
                 </div>
-                <Card className="animate-scale-in relative z-20 bg-card/60 backdrop-blur-md border-primary/20">
+                <Card className="animate-scale-in relative z-20 bg-background/40 backdrop-blur-sm border-primary/30 shadow-lg shadow-primary/10">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <CalcIcon className="h-6 w-6 text-primary" />
@@ -187,7 +187,7 @@ const Calculator = () => {
             </TabsContent>
 
             <TabsContent value="efficiency">
-              <div className="relative overflow-hidden rounded-lg min-h-[600px]">
+              <div className="relative overflow-hidden rounded-lg min-h-[600px] bg-gradient-to-b from-background/20 to-background/5">
                 <div className="absolute inset-0 z-10">
                   <LaserFlow 
                     color="#22C55E" 
@@ -195,7 +195,7 @@ const Calculator = () => {
                     verticalBeamOffset={0.0}
                   />
                 </div>
-                <Card className="animate-scale-in relative z-20 bg-card/60 backdrop-blur-md border-accent/20">
+                <Card className="animate-scale-in relative z-20 bg-background/40 backdrop-blur-sm border-accent/30 shadow-lg shadow-accent/10">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-2xl">
                       <Lightbulb className="h-6 w-6 text-accent" />
