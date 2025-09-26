@@ -1,5 +1,6 @@
 import CircularGallery from "./CircularGallery";
 import SpeedLines from "@/components/effects/SpeedLines";
+import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import powerStationHero from "@/assets/power-station-hero.png";
@@ -21,26 +22,17 @@ const galleryItems = [
 
 const ProductSection = () => {
   return (
-    <section className="py-20 bg-gradient-tech">
-      <div className="container mx-auto px-4">
-        {/* Header with Speed Lines background effect */}
+    <section className="py-20 bg-gradient-tech relative overflow-hidden">
+      {/* Hyperspeed Background Effect */}
+      <div className="absolute inset-0 w-full h-full opacity-30">
+        <Hyperspeed 
+          effectOptions={hyperspeedPresets.one}
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <div className="relative text-center mb-16 animate-slide-up overflow-hidden">
-          {/* Speed Lines background effect */}
-          <div className="absolute inset-0 w-full h-32 -top-16 opacity-40">
-            <SpeedLines 
-              color="#ff4444"
-              intensity={30}
-              speed={1.5}
-            />
-          </div>
-          <div className="absolute inset-0 w-full h-32 -top-16 opacity-20">
-            <SpeedLines 
-              color="#4444ff" 
-              intensity={20}
-              speed={2}
-            />
-          </div>
-          
           {/* Content over the effect */}
           <div className="relative z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
