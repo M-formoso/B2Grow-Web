@@ -26,12 +26,12 @@ const Header = () => {
         socialItems={socialItems}
         displaySocials={true}
         displayItemNumbering={true}
-        menuButtonColor="hsl(var(--foreground))"
-        openMenuButtonColor="hsl(var(--foreground))"
+        menuButtonColor="#ffffff"
+        openMenuButtonColor="#ffffff"
         changeMenuColorOnOpen={true}
-        colors={['hsl(var(--primary))', 'hsl(var(--primary-glow))']}
+        colors={['#B19EEF', '#5227FF']}
         logoUrl={b2growLogo}
-        accentColor="hsl(var(--primary))"
+        accentColor="#5227FF"
         onMenuOpen={() => console.log('Menu opened')}
         onMenuClose={() => console.log('Menu closed')}
         className="pointer-events-auto"
