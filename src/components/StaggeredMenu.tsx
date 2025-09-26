@@ -92,7 +92,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       }
 
       if (plusV) gsap.set(plusV, { rotateZ: 90 });
-      if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+      if (toggleBtnRef.current && menuButtonColor) {
+        gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+      }
     });
     return () => ctx.revert();
   }, [menuButtonColor, position]);
@@ -275,13 +277,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       colorTweenRef.current?.kill();
       if (changeMenuColorOnOpen) {
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        colorTweenRef.current = gsap.to(btn, {
-          color: targetColor,
-          delay: 0.18,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      } else {
+        if (targetColor) {
+          colorTweenRef.current = gsap.to(btn, {
+            color: targetColor,
+            delay: 0.18,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        }
+      } else if (menuButtonColor) {
         gsap.set(btn, { color: menuButtonColor });
       }
     },
@@ -292,8 +296,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     if (toggleBtnRef.current) {
       if (changeMenuColorOnOpen) {
         const targetColor = openRef.current ? openMenuButtonColor : menuButtonColor;
-        gsap.set(toggleBtnRef.current, { color: targetColor });
-      } else {
+        if (targetColor) {
+          gsap.set(toggleBtnRef.current, { color: targetColor });
+        }
+      } else if (menuButtonColor) {
         gsap.set(toggleBtnRef.current, { color: menuButtonColor });
       }
     }

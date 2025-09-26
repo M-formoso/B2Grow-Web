@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Battery, Sun, Lightbulb, Zap, ArrowRight } from "lucide-react";
-import Hyperspeed from "@/components/effects/Hyperspeed";
+import SpeedLines from "@/components/effects/SpeedLines";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import powerStationHero from "@/assets/power-station-hero.png";
@@ -65,33 +65,21 @@ const ProductSection = () => {
   return (
     <section className="py-20 bg-gradient-tech">
       <div className="container mx-auto px-4">
-        {/* Header with Hyperspeed background effect */}
+        {/* Header with Speed Lines background effect */}
         <div className="relative text-center mb-16 animate-slide-up overflow-hidden">
-          {/* Hyperspeed background effect */}
-          <div className="absolute inset-0 w-full h-32 -top-16 opacity-30">
-            <Hyperspeed 
-              effectOptions={{
-                distortion: 'turbulentDistortion',
-                length: 200,
-                roadWidth: 8,
-                islandWidth: 1,
-                lanesPerRoad: 2,
-                fov: 120,
-                speedUp: 1,
-                carLightsFade: 0.6,
-                totalSideLightSticks: 15,
-                lightPairsPerRoadWay: 20,
-                colors: {
-                  roadColor: 0x1a1a1a,
-                  islandColor: 0x0a0a0a,
-                  background: 0x000000,
-                  shoulderLines: 0x444444,
-                  brokenLines: 0x444444,
-                  leftCars: [0xff4444, 0xff6666, 0xff8888],
-                  rightCars: [0x4444ff, 0x6666ff, 0x8888ff],
-                  sticks: 0x666666
-                }
-              }}
+          {/* Speed Lines background effect */}
+          <div className="absolute inset-0 w-full h-32 -top-16 opacity-40">
+            <SpeedLines 
+              color="#ff4444"
+              intensity={30}
+              speed={1.5}
+            />
+          </div>
+          <div className="absolute inset-0 w-full h-32 -top-16 opacity-20">
+            <SpeedLines 
+              color="#4444ff" 
+              intensity={20}
+              speed={2}
             />
           </div>
           
