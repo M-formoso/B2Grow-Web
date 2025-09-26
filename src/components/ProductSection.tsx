@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Battery, Sun, Lightbulb, Zap, ArrowRight } from "lucide-react";
+import Hyperspeed from "@/components/effects/Hyperspeed";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import powerStationHero from "@/assets/power-station-hero.png";
@@ -64,15 +65,47 @@ const ProductSection = () => {
   return (
     <section className="py-20 bg-gradient-tech">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-foreground">Nuestros </span>
-            <span className="bg-gradient-primary bg-clip-text text-transparent">Productos</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Tecnología, eficiencia energética y sustentabilidad fusionadas en soluciones inteligentes 
-            para múltiples industrias.
-          </p>
+        {/* Header with Hyperspeed background effect */}
+        <div className="relative text-center mb-16 animate-slide-up overflow-hidden">
+          {/* Hyperspeed background effect */}
+          <div className="absolute inset-0 w-full h-32 -top-16 opacity-30">
+            <Hyperspeed 
+              effectOptions={{
+                distortion: 'turbulentDistortion',
+                length: 200,
+                roadWidth: 8,
+                islandWidth: 1,
+                lanesPerRoad: 2,
+                fov: 120,
+                speedUp: 1,
+                carLightsFade: 0.6,
+                totalSideLightSticks: 15,
+                lightPairsPerRoadWay: 20,
+                colors: {
+                  roadColor: 0x1a1a1a,
+                  islandColor: 0x0a0a0a,
+                  background: 0x000000,
+                  shoulderLines: 0x444444,
+                  brokenLines: 0x444444,
+                  leftCars: [0xff4444, 0xff6666, 0xff8888],
+                  rightCars: [0x4444ff, 0x6666ff, 0x8888ff],
+                  sticks: 0x666666
+                }
+              }}
+            />
+          </div>
+          
+          {/* Content over the effect */}
+          <div className="relative z-10">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-foreground">Nuestros </span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent">Productos</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Tecnología, eficiencia energética y sustentabilidad fusionadas en soluciones inteligentes 
+              para múltiples industrias.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
