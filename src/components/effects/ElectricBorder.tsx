@@ -1,30 +1,13 @@
-import { useEffect, useId, useRef, ReactNode } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef } from 'react';
+
 import './ElectricBorder.css';
 
-interface ElectricBorderProps {
-  children: ReactNode;
-  color?: string;
-  speed?: number;
-  chaos?: number;
-  thickness?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-const ElectricBorder = ({ 
-  children, 
-  color = '#ff4757', 
-  speed = 1, 
-  chaos = 0.5, 
-  thickness = 2, 
-  className = '', 
-  style = {} 
-}: ElectricBorderProps) => {
+const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thickness = 2, className = '', style = {} }: any) => {
   const rawId = useId().replace(/[:]/g, '');
   const filterId = `turbulent-displace-${rawId}`;
   const svgRef = useRef<SVGSVGElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const strokeRef = useRef<SVGRectElement>(null);
+  const strokeRef = useRef<HTMLDivElement>(null);
 
   const updateAnim = () => {
     const svg = svgRef.current;
@@ -38,13 +21,13 @@ const ElectricBorder = ({
     const width = Math.max(1, Math.round(host.clientWidth || host.getBoundingClientRect().width || 0));
     const height = Math.max(1, Math.round(host.clientHeight || host.getBoundingClientRect().height || 0));
 
-    const dyAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dy"]'));
+    const dyAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dy"]')) as SVGAnimateElement[];
     if (dyAnims.length >= 2) {
       dyAnims[0].setAttribute('values', `${height}; 0`);
       dyAnims[1].setAttribute('values', `0; -${height}`);
     }
 
-    const dxAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dx"]'));
+    const dxAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dx"]')) as SVGAnimateElement[];
     if (dxAnims.length >= 2) {
       dxAnims[0].setAttribute('values', `${width}; 0`);
       dxAnims[1].setAttribute('values', `0; -${width}`);
@@ -71,7 +54,7 @@ const ElectricBorder = ({
           try {
             (a as any).beginElement();
           } catch {
-            // Ignore errors
+            console.warn('ElectricBorder: beginElement failed, this may be due to a browser limitation.');
           }
         }
       });
@@ -80,40 +63,70 @@ const ElectricBorder = ({
 
   useEffect(() => {
     updateAnim();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speed, chaos]);
 
+  useLayoutEffect(() => {
+    if (!rootRef.current) return;
+    const ro = new ResizeObserver(() => updateAnim());
+    ro.observe(rootRef.current);
+    updateAnim();
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const vars = {
+    ['--electric-border-color']: color,
+    ['--eb-border-width']: `${thickness}px`
+  };
+
   return (
-    <div ref={rootRef} className={`electric-border ${className}`} style={style}>
-      <svg ref={svgRef} className="electric-border-svg">
+    <div ref={rootRef} className={`electric-border ${className ?? ''}`} style={{ ...vars, ...style }}>
+      <svg ref={svgRef} className="eb-svg" aria-hidden focusable="false">
         <defs>
-          <filter id={filterId}>
-            <feTurbulence baseFrequency="0.1" numOctaves="1" result="turb">
-              <animate attributeName="baseFrequency" values="0.1; 0.2; 0.1" dur="10s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feOffset in="turb" result="offset1">
-              <animate attributeName="dy" dur="6s" repeatCount="indefinite" />
+          <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
+            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+              <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-            <feOffset in="offset1" result="offset2">
-              <animate attributeName="dx" dur="6s" repeatCount="indefinite" />
+
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
+            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+              <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-            <feDisplacementMap in="SourceGraphic" in2="offset2" scale="30" />
+
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
+            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
+              <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
+            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
+              <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+
+            <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+            <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+            <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="combinedNoise"
+              scale="30"
+              xChannelSelector="R"
+              yChannelSelector="B"
+            />
           </filter>
         </defs>
-        <rect
-          ref={strokeRef}
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          fill="none"
-          stroke={color}
-          strokeWidth={thickness}
-          rx="8"
-        />
       </svg>
-      <div className="electric-border-content">
-        {children}
+
+      <div className="eb-layers">
+        <div ref={strokeRef} className="eb-stroke" />
+        <div className="eb-glow-1" />
+        <div className="eb-glow-2" />
+        <div className="eb-background-glow" />
       </div>
+
+      <div className="eb-content">{children}</div>
     </div>
   );
 };

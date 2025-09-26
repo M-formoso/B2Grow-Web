@@ -433,7 +433,9 @@ class App {
   }
   onWheel(e) {
     const delta = e.deltaY || e.wheelDelta || e.detail;
-    this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
+    // Reducir la velocidad de rotación cuando se hace scroll
+    const slowScrollSpeed = this.scrollSpeed * 0.5; // Hacer que gire 50% más lento
+    this.scroll.target += (delta > 0 ? slowScrollSpeed : -slowScrollSpeed) * 0.2;
     this.onCheckDebounce();
   }
   onCheck() {

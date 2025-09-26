@@ -1,6 +1,7 @@
 import CircularGallery from "./CircularGallery";
 import SpeedLines from "@/components/effects/SpeedLines";
 import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
+import ElectricBorder from "@/components/effects/ElectricBorder";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import powerStationHero from "@/assets/power-station-hero.png";
@@ -46,16 +47,32 @@ const ProductSection = () => {
           </div>
         </div>
 
-        {/* Circular Gallery Container */}
+        {/* Circular Gallery Container with Electric Border */}
         <div className="relative" style={{ height: '600px' }}>
-          <CircularGallery 
-            items={galleryItems}
-            bend={3} 
-            textColor="#ffffff" 
-            borderRadius={0.05} 
-            scrollEase={0.02}
-            font="bold 24px Arial"
-          />
+          <ElectricBorder 
+            color="#7df9ff" 
+            speed={1.5} 
+            chaos={0.8} 
+            thickness={3}
+            className=""
+            style={{ 
+              borderRadius: '20px',
+              padding: '20px',
+              background: 'rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+              <CircularGallery 
+                items={galleryItems}
+                bend={3} 
+                textColor="#ffffff" 
+                borderRadius={0.05} 
+                scrollEase={0.02}
+                font="bold 24px Arial"
+              />
+            </div>
+          </ElectricBorder>
         </div>
       </div>
     </section>

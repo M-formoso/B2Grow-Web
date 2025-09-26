@@ -37,7 +37,7 @@ const Hero = () => {
             </ScrollReveal>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-slide-up mb-8" style={{ animationDelay: "400ms" }}>
-              <ElectricBorder color="#ff4757" speed={1.5} chaos={0.3}>
+              <ElectricBorder color="#ff4757" speed={1.5} chaos={0.3} className="" style={{}}>
                 <Button 
                   size="lg" 
                   className="bg-gradient-primary hover:shadow-energy transition-all duration-300 group"
@@ -47,7 +47,7 @@ const Hero = () => {
                 </Button>
               </ElectricBorder>
               
-              <ElectricBorder color="#2ed573" speed={1.2} chaos={0.4}>
+              <ElectricBorder color="#2ed573" speed={1.2} chaos={0.4} className="" style={{}}>
                 <Button 
                   size="lg" 
                   variant="outline"
@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
 
             <div className="flex items-center justify-center lg:justify-start gap-8 animate-slide-up" style={{ animationDelay: "600ms" }}>
-              <ElectricBorder color="#ff4757" thickness={1} speed={0.8}>
+              <ElectricBorder color="#ff4757" thickness={1} speed={0.8} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
                   <Zap className="h-6 w-6 text-primary" />
                   <ScrollReveal>
@@ -68,7 +68,7 @@ const Hero = () => {
                 </div>
               </ElectricBorder>
               
-              <ElectricBorder color="#2ed573" thickness={1} speed={0.9}>
+              <ElectricBorder color="#2ed573" thickness={1} speed={0.9} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
                   <Leaf className="h-6 w-6 text-accent" />
                   <ScrollReveal>
@@ -77,7 +77,7 @@ const Hero = () => {
                 </div>
               </ElectricBorder>
               
-              <ElectricBorder color="#ffa502" thickness={1} speed={0.7}>
+              <ElectricBorder color="#ffa502" thickness={1} speed={0.7} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
                   <Globe className="h-6 w-6 text-yellow-500" />
                   <ScrollReveal>
