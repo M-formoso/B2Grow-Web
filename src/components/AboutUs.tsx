@@ -3,10 +3,10 @@ import { Users, Award, Zap, Globe } from "lucide-react";
 
 const AboutUs = () => {
   const stats = [
-    { icon: Users, label: "Años de Experiencia", value: "20+", color: "text-primary" },
-    { icon: Award, label: "Proyectos Completados", value: "500+", color: "text-accent" },
-    { icon: Zap, label: "Ahorro Energético", value: "85%", color: "text-primary" },
-    { icon: Globe, label: "Países Atendidos", value: "15+", color: "text-accent" }
+    { icon: Users, label: "Años de Experiencia", value: "20+", color: "text-white" },
+    { icon: Award, label: "Proyectos Completados", value: "500+", color: "text-white" },
+    { icon: Zap, label: "Ahorro Energético", value: "85%", color: "text-white" },
+    { icon: Globe, label: "Países Atendidos", value: "15+", color: "text-white" }
   ];
 
   return (
@@ -24,15 +24,15 @@ const AboutUs = () => {
           <Card className="bg-card/50 backdrop-blur-sm border-border">
             <CardContent className="p-8">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Somos una fusión de <span className="text-primary font-semibold">tecnología</span>, 
-                <span className="text-accent font-semibold"> eficiencia energética</span> y 
-                <span className="text-primary font-semibold"> sustentabilidad</span> con soluciones inteligentes 
+                Somos una fusión de <span className="text-white font-semibold">tecnología</span>, 
+                <span className="text-white font-semibold"> eficiencia energética</span> y 
+                <span className="text-white font-semibold"> sustentabilidad</span> con soluciones inteligentes 
                 de iluminación, movilidad e independencia energética, para múltiples clientes que exigen 
                 productos dinámicos, de gran calidad y sobre todo con un alto nivel de atención y servicio.
               </p>
               <br />
               <p className="text-lg text-muted-foreground leading-relaxed">
-                En eso trabajamos todos los días con mucho esfuerzo, con <span className="text-primary font-semibold">20 años de experiencia</span> 
+                En eso trabajamos todos los días con mucho esfuerzo, con <span className="text-white font-semibold">20 años de experiencia</span> 
                 apostando con creatividad a un futuro más eficiente y sustentable.
               </p>
             </CardContent>

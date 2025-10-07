@@ -21,7 +21,7 @@ const Hero = () => {
           <div className="text-center lg:text-left animate-slide-up">
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
               <GradientText 
-                colors={["#ff4757", "#2ed573", "#ffa502"]}
+                colors={["#FFFFFF", "#FFFFFF", "#FFFFFF"]}
                 animationSpeed={4}
                 className="block mb-4"
               >
@@ -37,7 +37,7 @@ const Hero = () => {
             </ScrollReveal>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-slide-up mb-8" style={{ animationDelay: "400ms" }}>
-              <ElectricBorder color="#ff4757" speed={1.5} chaos={0.3} className="" style={{}}>
+              <ElectricBorder color="#FFFFFF" speed={1.5} chaos={0.3} className="" style={{}}>
                 <Button 
                   size="lg" 
                   className="bg-gradient-primary hover:shadow-energy transition-all duration-300 group"
@@ -47,11 +47,11 @@ const Hero = () => {
                 </Button>
               </ElectricBorder>
               
-              <ElectricBorder color="#2ed573" speed={1.2} chaos={0.4} className="" style={{}}>
+              <ElectricBorder color="#FFFFFF" speed={1.2} chaos={0.4} className="" style={{}}>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+                  className="border-white text-white hover:bg-white hover:text-black"
                 >
                   Calculadora de Eficiencia
                 </Button>
@@ -59,27 +59,27 @@ const Hero = () => {
             </div>
 
             <div className="flex items-center justify-center lg:justify-start gap-8 animate-slide-up" style={{ animationDelay: "600ms" }}>
-              <ElectricBorder color="#ff4757" thickness={1} speed={0.8} className="" style={{}}>
+              <ElectricBorder color="#FFFFFF" thickness={1} speed={0.8} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
-                  <Zap className="h-6 w-6 text-primary" />
+                  <Zap className="h-6 w-6 text-white" />
                   <ScrollReveal>
                     <span className="text-sm font-medium">20 años de experiencia</span>
                   </ScrollReveal>
                 </div>
               </ElectricBorder>
               
-              <ElectricBorder color="#2ed573" thickness={1} speed={0.9} className="" style={{}}>
+              <ElectricBorder color="#FFFFFF" thickness={1} speed={0.9} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
-                  <Leaf className="h-6 w-6 text-accent" />
+                  <Leaf className="h-6 w-6 text-white" />
                   <ScrollReveal>
                     <span className="text-sm font-medium">100% Sustentable</span>
                   </ScrollReveal>
                 </div>
               </ElectricBorder>
               
-              <ElectricBorder color="#ffa502" thickness={1} speed={0.7} className="" style={{}}>
+              <ElectricBorder color="#FFFFFF" thickness={1} speed={0.7} className="" style={{}}>
                 <div className="flex items-center gap-2 p-3">
-                  <Globe className="h-6 w-6 text-yellow-500" />
+                  <Globe className="h-6 w-6 text-white" />
                   <ScrollReveal>
                     <span className="text-sm font-medium">Tecnología Global</span>
                   </ScrollReveal>
@@ -102,7 +102,7 @@ const Hero = () => {
                   <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">
                       <GradientText 
-                        colors={["#ff4757", "#2ed573"]}
+                        colors={["#FFFFFF", "#FFFFFF"]}
                         animationSpeed={3}
                       >
                         Energía Portátil
@@ -127,7 +127,7 @@ const Hero = () => {
                   <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">
                       <GradientText 
-                        colors={["#2ed573", "#ffa502"]}
+                        colors={["#FFFFFF", "#FFFFFF"]}
                         animationSpeed={3}
                       >
                         Paneles Solares
@@ -152,7 +152,7 @@ const Hero = () => {
                   <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">
                       <GradientText 
-                        colors={["#ffa502", "#ff4757"]}
+                        colors={["#FFFFFF", "#FFFFFF"]}
                         animationSpeed={3}
                       >
                         LED Inteligente
