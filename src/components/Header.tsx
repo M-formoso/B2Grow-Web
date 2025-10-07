@@ -72,10 +72,10 @@ const Header = () => {
           activeHref={location.pathname}
           className="pill-nav-custom"
           ease="power2.easeOut"
-          baseColor="hsl(var(--primary))"
-          pillColor="hsl(var(--secondary))"
-          hoveredPillTextColor="hsl(var(--secondary-foreground))"
-          pillTextColor="hsl(var(--foreground))"
+          baseColor="#FFFFFF"
+          pillColor="rgba(255, 255, 255, 0.1)"
+          hoveredPillTextColor="#FFFFFF"
+          pillTextColor="#FFFFFF"
           onMobileMenuClick={() => console.log('Mobile menu clicked')}
         />
       </div>
