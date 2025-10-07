@@ -51,10 +51,9 @@ const ProductSection = () => {
         <div className="relative" style={{ height: '600px' }}>
           <ElectricBorder 
             color="#FFFFFF" 
-            speed={1.5} 
-            chaos={0.8} 
-            thickness={3}
-            className=""
+            speed={0.8} 
+            chaos={0.5} 
+            thickness={2}
             style={{ 
               borderRadius: '20px',
               padding: '20px',
