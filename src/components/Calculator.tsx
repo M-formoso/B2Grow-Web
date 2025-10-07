@@ -78,7 +78,7 @@ const Calculator = () => {
       {/* Laser effect covering the entire section - falling from above */}
       <LaserFlow 
         className="absolute inset-0 z-30 pointer-events-none"
-        color="#FF4444"
+        color="#FFFFFF"
         horizontalBeamOffset={0.1}
         verticalBeamOffset={0.0}
         wispDensity={1.2}

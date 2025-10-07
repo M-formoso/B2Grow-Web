@@ -2,7 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef } from 'react';
 
 import './ElectricBorder.css';
 
-const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thickness = 2, className = '', style = {} }: any) => {
+const ElectricBorder = ({ children, color = '#FFFFFF', speed = 1, chaos = 1, thickness = 2, className = '', style = {} }: any) => {
   const rawId = useId().replace(/[:]/g, '');
   const filterId = `turbulent-displace-${rawId}`;
   const svgRef = useRef<SVGSVGElement>(null);

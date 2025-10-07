@@ -50,7 +50,7 @@ const ProductSection = () => {
         {/* Circular Gallery Container with Electric Border */}
         <div className="relative" style={{ height: '600px' }}>
           <ElectricBorder 
-            color="#7df9ff" 
+            color="#FFFFFF" 
             speed={1.5} 
             chaos={0.8} 
             thickness={3}
