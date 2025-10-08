@@ -36,7 +36,8 @@
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   border-radius: 9999px;
 }
 
@@ -44,7 +45,8 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   padding: 8px;
   display: inline-flex;
   align-items: center;
@@ -80,7 +82,8 @@
   justify-content: center;
   height: 100%;
   padding: 0 var(--pill-pad-x);
-  background: var(--pill-bg, hsl(var(--secondary)));
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
   color: var(--pill-text, hsl(var(--foreground)));
   text-decoration: none;
   border-radius: 9999px;
@@ -101,7 +104,7 @@
   left: 50%;
   bottom: 0;
   border-radius: 50%;
-  background: var(--base, rgba(255, 255, 255, 0.2));
+  background: rgba(255, 255, 255, 0.3);
   z-index: 1;
   display: block;
   pointer-events: none;
@@ -141,7 +144,7 @@
   transform: translateX(-50%);
   width: 12px;
   height: 12px;
-  background: var(--base, #FFFFFF);
+  background: #FFFFFF;
   border-radius: 50px;
   z-index: 4;
 }
@@ -168,7 +171,8 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   border: none;
   display: none;
   flex-direction: column;
@@ -189,7 +193,7 @@
 .hamburger-line {
   width: 16px;
   height: 2px;
-  background: var(--pill-bg, hsl(var(--secondary)));
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 1px;
   transition: all 0.01s ease;
   transform-origin: center;
@@ -200,7 +204,8 @@
   top: 3em;
   left: 1rem;
   right: 1rem;
-  background: var(--base, hsl(var(--background)));
+  background: rgba(20, 20, 25, 0.95);
+  backdrop-filter: blur(12px);
   border-radius: 27px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   z-index: 998;
@@ -222,7 +227,7 @@
   display: block;
   padding: 12px 16px;
   color: var(--pill-text, hsl(var(--foreground)));
-  background-color: var(--pill-bg, hsl(var(--secondary)));
+  background-color: rgba(255, 255, 255, 0.15);
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -232,6 +237,6 @@
 
 .mobile-menu-popover .mobile-menu-link:hover {
   cursor: pointer;
-  background-color: var(--base);
+  background-color: rgba(255, 255, 255, 0.25);
   color: var(--hover-text, hsl(var(--secondary-foreground)));
 }
