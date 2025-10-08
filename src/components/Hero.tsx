@@ -37,44 +37,54 @@ const Hero = () => {
             </ScrollReveal>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-slide-up mb-8" style={{ animationDelay: "400ms" }}>
-              <Button 
-                size="lg" 
-                className="bg-gradient-primary hover:shadow-energy transition-all duration-300 group"
-              >
-                Explorar Productos
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <ElectricBorder color="#FFFFFF" speed={1} chaos={0.5} thickness={2} style={{ borderRadius: 8 }}>
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-primary hover:shadow-energy transition-all duration-300 group border-0"
+                >
+                  Explorar Productos
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </ElectricBorder>
               
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black"
-              >
-                Calculadora de Eficiencia
-              </Button>
+              <ElectricBorder color="#FFFFFF" speed={1} chaos={0.5} thickness={2} style={{ borderRadius: 8 }}>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-0 text-white bg-transparent hover:bg-white hover:text-black"
+                >
+                  Calculadora de Eficiencia
+                </Button>
+              </ElectricBorder>
             </div>
 
             <div className="flex items-center justify-center lg:justify-start gap-8 animate-slide-up" style={{ animationDelay: "600ms" }}>
-              <div className="flex items-center gap-2 p-3 border border-white/20 rounded-lg backdrop-blur-sm bg-white/5">
-                <Zap className="h-6 w-6 text-white" />
-                <ScrollReveal>
-                  <span className="text-sm font-medium">20 años de experiencia</span>
-                </ScrollReveal>
-              </div>
+              <ElectricBorder color="#FFFFFF" speed={1} chaos={0.5} thickness={2} style={{ borderRadius: 8 }}>
+                <div className="flex items-center gap-2 p-3 bg-transparent">
+                  <Zap className="h-6 w-6 text-white" />
+                  <ScrollReveal>
+                    <span className="text-sm font-medium">20 años de experiencia</span>
+                  </ScrollReveal>
+                </div>
+              </ElectricBorder>
               
-              <div className="flex items-center gap-2 p-3 border border-white/20 rounded-lg backdrop-blur-sm bg-white/5">
-                <Leaf className="h-6 w-6 text-white" />
-                <ScrollReveal>
-                  <span className="text-sm font-medium">100% Sustentable</span>
-                </ScrollReveal>
-              </div>
+              <ElectricBorder color="#FFFFFF" speed={1} chaos={0.5} thickness={2} style={{ borderRadius: 8 }}>
+                <div className="flex items-center gap-2 p-3 bg-transparent">
+                  <Leaf className="h-6 w-6 text-white" />
+                  <ScrollReveal>
+                    <span className="text-sm font-medium">100% Sustentable</span>
+                  </ScrollReveal>
+                </div>
+              </ElectricBorder>
               
-              <div className="flex items-center gap-2 p-3 border border-white/20 rounded-lg backdrop-blur-sm bg-white/5">
-                <Globe className="h-6 w-6 text-white" />
-                <ScrollReveal>
-                  <span className="text-sm font-medium">Tecnología Global</span>
-                </ScrollReveal>
-              </div>
+              <ElectricBorder color="#FFFFFF" speed={1} chaos={0.5} thickness={2} style={{ borderRadius: 8 }}>
+                <div className="flex items-center gap-2 p-3 bg-transparent">
+                  <Globe className="h-6 w-6 text-white" />
+                  <ScrollReveal>
+                    <span className="text-sm font-medium">Tecnología Global</span>
+                  </ScrollReveal>
+                </div>
+              </ElectricBorder>
             </div>
           </div>
 
