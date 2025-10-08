@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, hsl(var(--primary)));
+  background: var(--base, rgba(255, 255, 255, 0.1));
   border-radius: 9999px;
 }
 
@@ -44,7 +44,7 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, hsl(var(--primary)));
+  background: var(--base, rgba(255, 255, 255, 0.1));
   padding: 8px;
   display: inline-flex;
   align-items: center;
@@ -101,7 +101,7 @@
   left: 50%;
   bottom: 0;
   border-radius: 50%;
-  background: var(--base, hsl(var(--primary)));
+  background: var(--base, rgba(255, 255, 255, 0.2));
   z-index: 1;
   display: block;
   pointer-events: none;
@@ -141,7 +141,7 @@
   transform: translateX(-50%);
   width: 12px;
   height: 12px;
-  background: var(--base, hsl(var(--primary)));
+  background: var(--base, #FFFFFF);
   border-radius: 50px;
   z-index: 4;
 }
@@ -168,7 +168,7 @@
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, hsl(var(--primary)));
+  background: var(--base, rgba(255, 255, 255, 0.1));
   border: none;
   display: none;
   flex-direction: column;
