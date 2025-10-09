@@ -1,23 +1,26 @@
-import CircularGallery from "./CircularGallery";
-import SpeedLines from "@/components/effects/SpeedLines";
+import ProductCard from "./ProductCard";
 import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
-import ElectricBorder from "@/components/effects/ElectricBorder";
-import solarPanelsHero from "@/assets/solar-panels-hero.png";
-import ledLightingHero from "@/assets/led-lighting-hero.png";
-import powerStationHero from "@/assets/power-station-hero.png";
 
-const galleryItems = [
+// Import Module Power Station images
+import mainImage1 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-01.jpg";
+import mainImage2 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-02.jpg";
+import mainImage3 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-03.jpg";
+import mainImage4 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-04.jpg";
+import mainImage5 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-05.jpg";
+import mainImage6 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-06.jpg";
+import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-07.jpg";
+
+import detailImage1 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-01.jpg";
+import detailImage2 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-02.jpg";
+import detailImage3 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-03.jpg";
+import detailImage5 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-05.jpg";
+
+const products = [
   {
-    image: powerStationHero,
-    text: "Estaciones de Energía Portátil Inteligente"
-  },
-  {
-    image: solarPanelsHero,
-    text: "Paneles Solares Flexibles"
-  },
-  {
-    image: ledLightingHero,
-    text: "Iluminación LED Inteligente"
+    name: "Estaciones de Energía Portátil Inteligente",
+    description: "Soluciones de energía portátil de alta capacidad con tecnología inteligente para múltiples aplicaciones industriales y comerciales.",
+    mainImages: [mainImage1, mainImage2, mainImage3, mainImage4, mainImage5, mainImage6, mainImage7],
+    detailImages: [detailImage1, detailImage2, detailImage3, detailImage5]
   }
 ];
 
@@ -47,31 +50,17 @@ const ProductSection = () => {
           </div>
         </div>
 
-        {/* Circular Gallery Container with Electric Border */}
-        <div className="relative" style={{ height: '600px' }}>
-          <ElectricBorder 
-            color="#FFFFFF" 
-            speed={0.8} 
-            chaos={0.5} 
-            thickness={2}
-            style={{ 
-              borderRadius: '20px',
-              padding: '20px',
-              background: 'rgba(0, 0, 0, 0.1)',
-              backdropFilter: 'blur(10px)'
-            }}
-          >
-            <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
-              <CircularGallery 
-                items={galleryItems}
-                bend={3} 
-                textColor="#ffffff" 
-                borderRadius={0.05} 
-                scrollEase={0.02}
-                font="bold 24px Arial"
-              />
-            </div>
-          </ElectricBorder>
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {products.map((product, index) => (
+            <ProductCard
+              key={index}
+              name={product.name}
+              description={product.description}
+              mainImages={product.mainImages}
+              detailImages={product.detailImages}
+            />
+          ))}
         </div>
       </div>
     </section>
