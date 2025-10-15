@@ -1,306 +1,474 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calculator as CalcIcon, Zap, Leaf, TrendingUp, Battery, Lightbulb, Sparkles } from "lucide-react";
-import LaserFlow from "@/components/effects/LaserFlow";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Zap, Sun, Leaf, Battery, Package, MessageCircle } from "lucide-react";
+import LaserFlow from "./effects/LaserFlow";
+
+// Definición de tipos de artefactos con valores típicos
+const APPLIANCES = {
+  "Lámparas": { power: 9, peakPower: 9, usage: 4 },
+  "Heladeras": { power: 150, peakPower: 300, usage: 12 },
+  "Heladera con Freezer": { power: 200, peakPower: 400, usage: 12 },
+  "Freezer": { power: 250, peakPower: 500, usage: 8 },
+  "TV": { power: 90, peakPower: 180, usage: 5 },
+  "Laptop o PC": { power: 200, peakPower: 300, usage: 6 },
+  "Cámaras de seguridad": { power: 15, peakPower: 20, usage: 24 },
+  "Alarma": { power: 10, peakPower: 15, usage: 24 },
+  "Router WiFi": { power: 12, peakPower: 15, usage: 24 },
+  "Portón": { power: 300, peakPower: 800, usage: 0.2 },
+  "Cafetera": { power: 900, peakPower: 1200, usage: 0.5 },
+  "Aire Acondicionado normal": { power: 1350, peakPower: 2200, usage: 6 },
+  "Aire Acondicionado inverter": { power: 877, peakPower: 1400, usage: 6 },
+  "Ventilador": { power: 90, peakPower: 150, usage: 10 },
+  "Cargador de Herramienta eléctrica": { power: 150, peakPower: 300, usage: 1 },
+  "Cargador de celular": { power: 5, peakPower: 10, usage: 3 },
+  "Equipo de música": { power: 60, peakPower: 120, usage: 4 },
+  "Otros 1": { power: 0, peakPower: 0, usage: 0 },
+  "Otros 2": { power: 0, peakPower: 0, usage: 0 },
+  "Otros 3": { power: 0, peakPower: 0, usage: 0 },
+};
+
+const PROJECT_TYPES = [
+  "Uso doméstico",
+  "Comercios",
+  "Consorcios",
+  "Vida al aire libre",
+  "Empresas",
+  "Otros"
+];
+
+interface ApplianceData {
+  selected: boolean;
+  power: number;
+  quantity: number;
+  peakPower: number;
+  usage: number;
+}
+
+interface CalculationResult {
+  potenciaNecesaria: number;
+  potenciaPico: number;
+  autonomiaNecesaria: number;
+  panelSolar: number;
+  cantPaneles: number;
+  necesarioBaterias: number;
+  estacionRecomendada: string;
+  cantBateriasExtra: number;
+}
 
 const Calculator = () => {
-  const [energyValues, setEnergyValues] = useState({
-    consumption: "",
-    hours: ""
-  });
+  const [projectType, setProjectType] = useState<string>("");
+  const [otherProjectType, setOtherProjectType] = useState<string>("");
+  const [needsMobileChassis, setNeedsMobileChassis] = useState<boolean>(false);
+  const [appliances, setAppliances] = useState<Record<string, ApplianceData>>(
+    Object.fromEntries(
+      Object.entries(APPLIANCES).map(([name, defaults]) => [
+        name,
+        {
+          selected: false,
+          power: defaults.power,
+          quantity: 1,
+          peakPower: defaults.peakPower,
+          usage: defaults.usage,
+        },
+      ])
+    )
+  );
+  const [result, setResult] = useState<CalculationResult | null>(null);
 
-  const [lightValues, setLightValues] = useState({
-    lights: "",
-    workHours: "",
-    occupancy: ""
-  });
-
-  const [energyResult, setEnergyResult] = useState<any>(null);
-  const [lightResult, setLightResult] = useState<any>(null);
-
-  const calculateEnergyNeeds = () => {
-    const consumption = parseFloat(energyValues.consumption);
-    const hours = parseFloat(energyValues.hours);
-    
-    if (consumption && hours) {
-      const totalEnergy = consumption * hours;
-      const recommendedCapacity = totalEnergy * 1.3; // 30% buffer
-      const co2Saved = totalEnergy * 0.45; // kg CO2 per kWh saved
-      
-      setEnergyResult({
-        totalEnergy: totalEnergy.toFixed(2),
-        recommendedCapacity: recommendedCapacity.toFixed(2),
-        co2Saved: co2Saved.toFixed(2),
-        monthlySaving: (totalEnergy * 30 * 0.12).toFixed(2) // $0.12 per kWh average
-      });
-    }
+  const handleApplianceToggle = (name: string) => {
+    setAppliances((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        selected: !prev[name].selected,
+      },
+    }));
   };
 
-  const calculateLightEfficiency = () => {
-    const lights = parseInt(lightValues.lights);
-    const workHours = parseFloat(lightValues.workHours);
-    const occupancy = parseFloat(lightValues.occupancy) / 100;
-    
-    if (lights && workHours && occupancy) {
-      const standardPower = 150; // watts per light
-      const ledPower = 45; // LED equivalent
-      
-      const dailyStandard = (lights * standardPower * workHours) / 1000;
-      const dailyLED = (lights * ledPower * workHours * occupancy) / 1000;
-      const dailySaving = dailyStandard - dailyLED;
-      
-      const monthlySaving = dailySaving * 30;
-      const yearlySaving = dailySaving * 365;
-      const co2Reduction = yearlySaving * 0.45;
-      const costSaving = yearlySaving * 0.12;
-      
-      setLightResult({
-        dailySaving: dailySaving.toFixed(2),
-        monthlySaving: monthlySaving.toFixed(2),
-        yearlySaving: yearlySaving.toFixed(2),
-        co2Reduction: co2Reduction.toFixed(2),
-        costSaving: costSaving.toFixed(2),
-        efficiency: ((dailySaving / dailyStandard) * 100).toFixed(1)
-      });
+  const handleApplianceChange = (
+    name: string,
+    field: keyof ApplianceData,
+    value: number
+  ) => {
+    setAppliances((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        [field]: value,
+      },
+    }));
+  };
+
+  const calculateResults = () => {
+    const selectedAppliances = Object.entries(appliances).filter(
+      ([_, data]) => data.selected
+    );
+
+    // 1. Potencia necesaria = Σ(Potencia_i × Cantidad_i)
+    const potenciaNecesaria = selectedAppliances.reduce(
+      (sum, [_, data]) => sum + data.power * data.quantity,
+      0
+    );
+
+    // 2. Potencia Pico = Σ(Potencia Pico_i × Cantidad_i)
+    const potenciaPico = selectedAppliances.reduce(
+      (sum, [_, data]) => sum + data.peakPower * data.quantity,
+      0
+    );
+
+    // 3. Autonomía necesaria = Σ(Uso_i × Potencia_i × Cantidad_i)
+    const autonomiaNecesaria = selectedAppliances.reduce(
+      (sum, [_, data]) => sum + data.usage * data.power * data.quantity,
+      0
+    );
+
+    // Constantes
+    const HORAS_SOL_PICO = 4;
+    const PANEL_SOLAR_CHICO = 200;
+    const DOD = 0.8;
+    const BATERIA_EXTRA = 2160;
+    const BATERIA_BASE = 1037;
+
+    // 4. Panel Solar = Redondear hacia arriba (Autonomía necesaria / Horas Sol Pico / Panel Solar Chico)
+    const panelSolar = Math.ceil(autonomiaNecesaria / HORAS_SOL_PICO / PANEL_SOLAR_CHICO);
+
+    // 5. Cantidad de paneles recomendados = si (Panel Solar ≥ 5; 5; Panel Solar)
+    const cantPaneles = panelSolar >= 5 ? 5 : panelSolar;
+
+    // 6. Necesario en Baterías = Autonomía / DOD
+    const necesarioBaterias = autonomiaNecesaria / DOD;
+
+    // 7. Cantidad de baterías extra
+    let cantBateriasExtra = 0;
+    if (needsMobileChassis) {
+      cantBateriasExtra = Math.ceil(necesarioBaterias / (BATERIA_EXTRA - BATERIA_BASE));
+    } else {
+      cantBateriasExtra = Math.ceil(necesarioBaterias / BATERIA_EXTRA);
     }
+
+    // 8. Estación de energía recomendada
+    let estacionRecomendada = "";
+    if (necesarioBaterias <= 1037) {
+      estacionRecomendada = "A1";
+    } else if (necesarioBaterias <= 2074) {
+      estacionRecomendada = "A2";
+    } else if (necesarioBaterias <= 3197) {
+      estacionRecomendada = "A3";
+    } else if (necesarioBaterias <= 4234) {
+      estacionRecomendada = "A4";
+    } else if (necesarioBaterias <= 5357) {
+      estacionRecomendada = "A5";
+    } else if (necesarioBaterias <= 6394) {
+      estacionRecomendada = "A6";
+    } else if (necesarioBaterias <= 7517) {
+      estacionRecomendada = "A7";
+    } else {
+      estacionRecomendada = "A7+";
+    }
+
+    setResult({
+      potenciaNecesaria,
+      potenciaPico,
+      autonomiaNecesaria,
+      panelSolar,
+      cantPaneles,
+      necesarioBaterias,
+      estacionRecomendada,
+      cantBateriasExtra,
+    });
   };
 
   return (
-    <section id="calculadora" className="min-h-screen flex flex-col justify-end py-8 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-48 -translate-y-48"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-x-48 translate-y-48"></div>
+    <section className="relative min-h-screen py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]" />
+      <LaserFlow />
       
-      {/* Laser effect covering the entire section - falling from above */}
-      <LaserFlow 
-        className="absolute inset-0 z-30 pointer-events-none"
-        color="#FFFFFF"
-        horizontalBeamOffset={0.1}
-        verticalBeamOffset={0.0}
-        wispDensity={1.2}
-        fogIntensity={0.6}
-        verticalSizing={2.0}
-        horizontalSizing={0.3}
-      />
-      
-      <div className="container mx-auto px-4 relative z-10 mt-auto">
-        <div className="max-w-4xl mx-auto mb-8">
-          <Tabs defaultValue="energy" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="energy" className="flex items-center gap-2">
-                <Battery className="h-4 w-4" />
-                Producto a Medida
-              </TabsTrigger>
-              <TabsTrigger value="efficiency" className="flex items-center gap-2">
-                <Lightbulb className="h-4 w-4" />
-                Eficiencia LED
-              </TabsTrigger>
-            </TabsList>
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-green-400 to-primary bg-clip-text text-transparent">
+            Calculadora Solar B2Grow
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Calculá tu sistema de energía solar ideal
+          </p>
+        </div>
 
-            <TabsContent value="energy">
-              <Card className="animate-scale-in bg-background/60 backdrop-blur-sm border-primary/30 shadow-lg shadow-primary/10">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-2xl">
-                    <CalcIcon className="h-6 w-6 text-primary" />
-                    Calculadora de Producto a Medida
-                    <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
-                      <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                      IA Integrada
+        <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+          <CardHeader>
+            <CardTitle>Configuración del Sistema</CardTitle>
+            <CardDescription>
+              Seleccioná el tipo de proyecto y los artefactos que necesitás alimentar
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Tipo de Proyecto */}
+            <div className="space-y-2">
+              <Label htmlFor="projectType">Tipo de Proyecto</Label>
+              <Select value={projectType} onValueChange={setProjectType}>
+                <SelectTrigger id="projectType">
+                  <SelectValue placeholder="Seleccioná el tipo de proyecto" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PROJECT_TYPES.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {projectType === "Otros" && (
+              <div className="space-y-2">
+                <Label htmlFor="otherType">Especificá el uso</Label>
+                <Input
+                  id="otherType"
+                  value={otherProjectType}
+                  onChange={(e) => setOtherProjectType(e.target.value)}
+                  placeholder="Describí el uso del sistema"
+                  required
+                />
+              </div>
+            )}
+
+            {/* Chasis Móvil */}
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="mobileChassis"
+                checked={needsMobileChassis}
+                onCheckedChange={(checked) => setNeedsMobileChassis(checked as boolean)}
+              />
+              <Label htmlFor="mobileChassis" className="cursor-pointer">
+                ¿Requiere chasis móvil para mover el equipo?
+              </Label>
+            </div>
+
+            {/* Artefactos */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Artefactos de Consumo</h3>
+              <div className="grid gap-6">
+                {Object.entries(APPLIANCES).map(([name, defaults]) => (
+                  <div key={name} className="space-y-3 p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id={name}
+                        checked={appliances[name].selected}
+                        onCheckedChange={() => handleApplianceToggle(name)}
+                      />
+                      <Label htmlFor={name} className="cursor-pointer font-medium">
+                        {name}
+                      </Label>
                     </div>
+
+                    {appliances[name].selected && (
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pl-6">
+                        <div className="space-y-1">
+                          <Label className="text-xs">Potencia (W)</Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            max="2200"
+                            value={appliances[name].power}
+                            onChange={(e) =>
+                              handleApplianceChange(name, "power", Number(e.target.value))
+                            }
+                            className="h-8"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs">Cantidad</Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            max="200"
+                            value={appliances[name].quantity}
+                            onChange={(e) =>
+                              handleApplianceChange(name, "quantity", Number(e.target.value))
+                            }
+                            className="h-8"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs">Potencia Pico (W)</Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            max="6000"
+                            value={appliances[name].peakPower}
+                            onChange={(e) =>
+                              handleApplianceChange(name, "peakPower", Number(e.target.value))
+                            }
+                            className="h-8"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs">Uso (hs/día)</Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            max="24"
+                            step="0.1"
+                            value={appliances[name].usage}
+                            onChange={(e) =>
+                              handleApplianceChange(name, "usage", Number(e.target.value))
+                            }
+                            className="h-8"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Button
+              onClick={calculateResults}
+              className="w-full"
+              size="lg"
+              disabled={!projectType || (projectType === "Otros" && !otherProjectType)}
+            >
+              <Zap className="mr-2" />
+              Calcular Sistema
+            </Button>
+          </CardContent>
+        </Card>
+
+        {result && (
+          <div className="mt-8 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Zap className="text-yellow-500" />
+                    Potencia Necesaria
                   </CardTitle>
                 </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="group">
-                        <Label htmlFor="consumption" className="flex items-center gap-2">
-                          Consumo (W)
-                          <Zap className="h-4 w-4 text-primary/60" />
-                        </Label>
-                        <Input
-                          id="consumption"
-                          type="number"
-                          placeholder="Ej: 500"
-                          value={energyValues.consumption}
-                          onChange={(e) => setEnergyValues(prev => ({ ...prev, consumption: e.target.value }))}
-                          className="mt-2 transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-                        />
-                      </div>
-                      <div className="group">
-                        <Label htmlFor="hours" className="flex items-center gap-2">
-                          Horas de uso diario
-                          <Battery className="h-4 w-4 text-accent/60" />
-                        </Label>
-                        <Input
-                          id="hours"
-                          type="number"
-                          placeholder="Ej: 8"
-                          value={energyValues.hours}
-                          onChange={(e) => setEnergyValues(prev => ({ ...prev, hours: e.target.value }))}
-                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                        />
-                      </div>
-                    </div>
+                <CardContent>
+                  <p className="text-3xl font-bold text-primary">
+                    {result.potenciaNecesaria.toFixed(0)} W
+                  </p>
+                </CardContent>
+              </Card>
 
-                    <Button 
-                      onClick={calculateEnergyNeeds}
-                      className="w-full bg-gradient-primary hover:shadow-energy transition-all duration-300 group"
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Zap className="text-red-500" />
+                    Potencia Pico
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-primary">
+                    {result.potenciaPico.toFixed(0)} W
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Battery className="text-green-500" />
+                    Autonomía Necesaria
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-primary">
+                    {result.autonomiaNecesaria.toFixed(0)} Wh
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sun className="text-orange-500" />
+                    Paneles Solares
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-primary">
+                    {result.cantPaneles} unidades
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Panel Plegable de 200W
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Battery className="text-blue-500" />
+                    Baterías
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-3xl font-bold text-primary">
+                    {result.necesarioBaterias.toFixed(0)} Wh
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {result.cantBateriasExtra} baterías extra
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Package className="text-purple-500" />
+                    Estación Recomendada
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-4xl font-bold text-primary">
+                    {result.estacionRecomendada}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="backdrop-blur-sm bg-gradient-to-r from-primary/10 to-green-500/10 border-primary/30">
+              <CardContent className="pt-6">
+                <div className="text-center space-y-4">
+                  <h3 className="text-2xl font-bold text-foreground">
+                    La Estación de energía B2Grow Greenside recomendada es: {result.estacionRecomendada}
+                  </h3>
+                  <p className="text-lg text-muted-foreground">
+                    No dudes en contactarnos ahora mismo para enviarte tu cotización o asesorarte
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Button
+                      onClick={() => window.open("https://wa.me/5491151857753", "_blank")}
+                      className="gap-2"
                       size="lg"
                     >
-                      <Sparkles className="mr-2 h-5 w-5 group-hover:animate-spin" />
-                      Calcular Equipo Recomendado
+                      <MessageCircle />
+                      Cotización: +54 9 11 5185-7753
                     </Button>
-
-                    {energyResult && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-                        <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
-                          <CardContent className="p-4 text-center">
-                            <Zap className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-pulse" />
-                            <p className="text-sm text-muted-foreground">Energía Diaria</p>
-                            <p className="text-2xl font-bold text-primary">{energyResult.totalEnergy} kWh</p>
-                          </CardContent>
-                        </Card>
-                        <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
-                          <CardContent className="p-4 text-center">
-                            <Battery className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-bounce" />
-                            <p className="text-sm text-muted-foreground">Capacidad Recomendada</p>
-                            <p className="text-2xl font-bold text-accent">{energyResult.recommendedCapacity} kWh</p>
-                          </CardContent>
-                        </Card>
-                        <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
-                          <CardContent className="p-4 text-center">
-                            <Leaf className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
-                            <p className="text-sm text-muted-foreground">CO2 Ahorrado</p>
-                            <p className="text-2xl font-bold text-accent">{energyResult.co2Saved} kg/mes</p>
-                          </CardContent>
-                        </Card>
-                        <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
-                          <CardContent className="p-4 text-center">
-                            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-bounce" />
-                            <p className="text-sm text-muted-foreground">Ahorro Mensual</p>
-                            <p className="text-2xl font-bold text-primary">${energyResult.monthlySaving}</p>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-            </TabsContent>
-
-            <TabsContent value="efficiency">
-              <Card className="animate-scale-in bg-background/60 backdrop-blur-sm border-accent/30 shadow-lg shadow-accent/10">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-2xl">
-                      <Lightbulb className="h-6 w-6 text-accent" />
-                      Calculadora de Eficiencia LED
-                      <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
-                        <Leaf className="h-4 w-4 text-accent animate-pulse" />
-                        Eco-Smart
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div>
-                        <Label htmlFor="lights" className="flex items-center gap-2">
-                          Cantidad de Luces
-                          <Lightbulb className="h-4 w-4 text-accent/60" />
-                        </Label>
-                        <Input
-                          id="lights"
-                          type="number"
-                          placeholder="Ej: 20"
-                          value={lightValues.lights}
-                          onChange={(e) => setLightValues(prev => ({ ...prev, lights: e.target.value }))}
-                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="workHours" className="flex items-center gap-2">
-                          Horas de Trabajo
-                          <Battery className="h-4 w-4 text-primary/60" />
-                        </Label>
-                        <Input
-                          id="workHours"
-                          type="number"
-                          placeholder="Ej: 8"
-                          value={lightValues.workHours}
-                          onChange={(e) => setLightValues(prev => ({ ...prev, workHours: e.target.value }))}
-                          className="mt-2 transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="occupancy" className="flex items-center gap-2">
-                          Ocupación Diaria (%)
-                          <TrendingUp className="h-4 w-4 text-accent/60" />
-                        </Label>
-                        <Input
-                          id="occupancy"
-                          type="number"
-                          placeholder="Ej: 70"
-                          min="10"
-                          max="90"
-                          value={lightValues.occupancy}
-                          onChange={(e) => setLightValues(prev => ({ ...prev, occupancy: e.target.value }))}
-                          className="mt-2 transition-all duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                        />
-                      </div>
-                    </div>
-
-                    <Button 
-                      onClick={calculateLightEfficiency}
-                      className="w-full bg-gradient-energy hover:shadow-green group transition-all duration-300"
+                    <Button
+                      onClick={() => window.open("https://wa.me/5491166230246", "_blank")}
+                      variant="secondary"
+                      className="gap-2"
                       size="lg"
                     >
-                      <Leaf className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                      Calcular Ahorro Energético
+                      <MessageCircle />
+                      Asesoramiento: +54 9 11 6623-0246
                     </Button>
-
-                    {lightResult && (
-                      <div className="space-y-6 mt-8">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
-                            <CardContent className="p-4 text-center">
-                              <TrendingUp className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
-                              <p className="text-sm text-muted-foreground">Eficiencia</p>
-                              <p className="text-3xl font-bold text-accent">{lightResult.efficiency}%</p>
-                            </CardContent>
-                          </Card>
-                          <Card className="bg-primary/10 border-primary/20 hover:bg-primary/15 transition-all duration-300 group">
-                            <CardContent className="p-4 text-center">
-                              <Zap className="h-8 w-8 text-primary mx-auto mb-2 group-hover:animate-bounce" />
-                              <p className="text-sm text-muted-foreground">Ahorro Anual</p>
-                              <p className="text-2xl font-bold text-primary">{lightResult.yearlySaving} kWh</p>
-                            </CardContent>
-                          </Card>
-                          <Card className="bg-accent/10 border-accent/20 hover:bg-accent/15 transition-all duration-300 group">
-                            <CardContent className="p-4 text-center">
-                              <Leaf className="h-8 w-8 text-accent mx-auto mb-2 group-hover:animate-pulse" />
-                              <p className="text-sm text-muted-foreground">CO2 Reducido</p>
-                              <p className="text-2xl font-bold text-accent">{lightResult.co2Reduction} kg/año</p>
-                            </CardContent>
-                          </Card>
-                        </div>
-                        
-                        <Card className="bg-gradient-energy/10 border-accent/30 hover:border-accent/50 transition-all duration-300">
-                          <CardContent className="p-6 text-center">
-                            <h3 className="text-xl font-bold text-foreground mb-2">Ahorro Económico Anual</h3>
-                            <p className="text-4xl font-bold text-accent">${lightResult.costSaving}</p>
-                            <p className="text-sm text-muted-foreground mt-2">
-                              Con iluminación LED inteligente vs. iluminación tradicional
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+                  </div>
+                  <p className="text-sm font-semibold text-primary mt-4">
+                    B2Grow – POWERING THE FUTURE
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </section>
   );
