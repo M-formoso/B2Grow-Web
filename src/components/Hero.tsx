@@ -4,6 +4,9 @@ import powerStationHero from "@/assets/power-station-hero.png";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
 import CardSwap, { Card } from "@/components/CardSwap";
+import GradientText from "@/components/effects/GradientText";
+import DecryptedText from "@/components/effects/DecryptedText";
+import ScrollReveal from "@/components/effects/ScrollReveal";
 
 const Hero = () => {
   return (
@@ -127,12 +130,27 @@ const Hero = () => {
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
             <div className="text-center mb-12 animate-fade-in">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
-                Conocé Nuestra Tecnología
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+                <DecryptedText 
+                  text="Conocé Nuestra Tecnología"
+                  speed={30}
+                  maxIterations={8}
+                  sequential={true}
+                  revealDirection="center"
+                  animateOn="view"
+                  className="text-white"
+                  encryptedClassName="text-white/40"
+                />
               </h2>
-              <p className="text-xl text-white/80 max-w-2xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={6}
+                textClassName="text-xl text-white/90"
+              >
                 Descubrí cómo nuestras soluciones están revolucionando el sector energético
-              </p>
+              </ScrollReveal>
             </div>
 
             {/* Video Container */}
@@ -193,21 +211,48 @@ const Hero = () => {
 
             {/* Optional: Video description or features below */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
-                <Zap className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Innovación</h3>
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
+                <Zap className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-bold mb-2">
+                  <GradientText
+                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
+                    animationSpeed={4}
+                    showBorder={false}
+                    className="text-white"
+                  >
+                    Innovación
+                  </GradientText>
+                </h3>
                 <p className="text-white/70">Tecnología de vanguardia en cada producto</p>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
-                <Leaf className="w-10 h-10 text-accent mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Sostenibilidad</h3>
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
+                <Leaf className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-bold mb-2">
+                  <GradientText
+                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
+                    animationSpeed={4}
+                    showBorder={false}
+                    className="text-white"
+                  >
+                    Sostenibilidad
+                  </GradientText>
+                </h3>
                 <p className="text-white/70">Comprometidos con el medio ambiente</p>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
-                <Globe className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Alcance Global</h3>
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
+                <Globe className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-bold mb-2">
+                  <GradientText
+                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
+                    animationSpeed={4}
+                    showBorder={false}
+                    className="text-white"
+                  >
+                    Alcance Global
+                  </GradientText>
+                </h3>
                 <p className="text-white/70">Presencia en múltiples mercados</p>
               </div>
             </div>

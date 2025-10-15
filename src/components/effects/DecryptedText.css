@@ -1,0 +1,14 @@
+.decrypted-text-wrapper {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.decrypted-text-revealed {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.decrypted-text-encrypted {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
