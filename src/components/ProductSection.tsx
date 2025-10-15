@@ -21,6 +21,36 @@ const products = [
     description: "Soluciones de energía portátil de alta capacidad con tecnología inteligente para múltiples aplicaciones industriales y comerciales.",
     mainImages: [mainImage1, mainImage2, mainImage3, mainImage4, mainImage5, mainImage6, mainImage7],
     detailImages: [detailImage1, detailImage2, detailImage3, detailImage5]
+  },
+  {
+    name: "Panel Solar Portátil 200W",
+    description: "Panel solar de alta eficiencia, plegable y portátil, ideal para cargar dispositivos en exteriores y aplicaciones móviles.",
+    mainImages: [], // AGREGA TUS IMÁGENES AQUÍ: [imagen1, imagen2, ...]
+    detailImages: [] // OPCIONAL: Agrega imágenes detalladas aquí
+  },
+  {
+    name: "Iluminación LED Grow",
+    description: "Sistema de iluminación LED especializado para cultivo indoor con espectro optimizado y control inteligente de intensidad.",
+    mainImages: [], // AGREGA TUS IMÁGENES AQUÍ: [imagen1, imagen2, ...]
+    detailImages: [] // OPCIONAL: Agrega imágenes detalladas aquí
+  },
+  {
+    name: "Sistema de Almacenamiento de Energía",
+    description: "Baterías de litio de alta capacidad para almacenamiento residencial y comercial con gestión inteligente de energía.",
+    mainImages: [], // AGREGA TUS IMÁGENES AQUÍ: [imagen1, imagen2, ...]
+    detailImages: [] // OPCIONAL: Agrega imágenes detalladas aquí
+  },
+  {
+    name: "Inversor Solar Híbrido",
+    description: "Inversor de última generación con tecnología híbrida para máxima eficiencia en sistemas solares residenciales y comerciales.",
+    mainImages: [], // AGREGA TUS IMÁGENES AQUÍ: [imagen1, imagen2, ...]
+    detailImages: [] // OPCIONAL: Agrega imágenes detalladas aquí
+  },
+  {
+    name: "Kit Solar Completo",
+    description: "Solución integral que incluye paneles, inversor, baterías y accesorios para instalación solar residencial completa.",
+    mainImages: [], // AGREGA TUS IMÁGENES AQUÍ: [imagen1, imagen2, ...]
+    detailImages: [] // OPCIONAL: Agrega imágenes detalladas aquí
   }
 ];
 
