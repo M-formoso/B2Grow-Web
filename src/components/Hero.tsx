@@ -3,6 +3,7 @@ import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
 import powerStationHero from "@/assets/power-station-hero.png";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
+import CardSwap, { Card } from "@/components/CardSwap";
 
 const Hero = () => {
   return (
@@ -60,42 +61,64 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-white">Energía Portátil</h2>
-              <img 
-                src={powerStationHero} 
-                alt="Estación de Energía Portátil B2Grow" 
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <p className="text-sm text-white/80">
-                Estaciones de energía inteligentes para un futuro sustentable.
-              </p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-white">Paneles Solares</h2>
-              <img 
-                src={solarPanelsHero} 
-                alt="Paneles Solares Flexibles B2Grow" 
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <p className="text-sm text-white/80">
-                Paneles flexibles de alta eficiencia para máxima captación.
-              </p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-white">LED Inteligente</h2>
-              <img 
-                src={ledLightingHero} 
-                alt="Iluminación LED Inteligente B2Grow" 
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <p className="text-sm text-white/80">
-                Sistemas LED IoT para máxima eficiencia energética.
-              </p>
-            </div>
+          <div className="flex items-center justify-center" style={{ height: '600px', position: 'relative' }}>
+            <CardSwap
+              width={500}
+              height={500}
+              cardDistance={60}
+              verticalDistance={70}
+              delay={4000}
+              pauseOnHover={true}
+              easing="elastic"
+            >
+              <Card>
+                <div className="bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-4 text-white">Energía Portátil</h2>
+                    <img 
+                      src={powerStationHero} 
+                      alt="Estación de Energía Portátil B2Grow" 
+                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
+                    />
+                  </div>
+                  <p className="text-lg text-white/90">
+                    Estaciones de energía inteligentes para un futuro sustentable.
+                  </p>
+                </div>
+              </Card>
+              
+              <Card>
+                <div className="bg-gradient-to-br from-accent/20 to-primary/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-4 text-white">Paneles Solares</h2>
+                    <img 
+                      src={solarPanelsHero} 
+                      alt="Paneles Solares Flexibles B2Grow" 
+                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
+                    />
+                  </div>
+                  <p className="text-lg text-white/90">
+                    Paneles flexibles de alta eficiencia para máxima captación.
+                  </p>
+                </div>
+              </Card>
+              
+              <Card>
+                <div className="bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-4 text-white">LED Inteligente</h2>
+                    <img 
+                      src={ledLightingHero} 
+                      alt="Iluminación LED Inteligente B2Grow" 
+                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
+                    />
+                  </div>
+                  <p className="text-lg text-white/90">
+                    Sistemas LED IoT para máxima eficiencia energética.
+                  </p>
+                </div>
+              </Card>
+            </CardSwap>
           </div>
         </div>
       </div>
