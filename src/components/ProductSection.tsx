@@ -1,5 +1,6 @@
 import ProductCard from "./ProductCard";
 import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
+import { motion } from "framer-motion";
 
 // Import Module Power Station images
 import mainImage1 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-01.jpg";
@@ -81,15 +82,25 @@ const ProductSection = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto perspective-1000">
           {products.map((product, index) => (
-            <ProductCard
+            <motion.div
               key={index}
-              name={product.name}
-              description={product.description}
-              mainImages={product.mainImages}
-              detailImages={product.detailImages}
-            />
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.1
+              }}
+            >
+              <ProductCard
+                name={product.name}
+                description={product.description}
+                mainImages={product.mainImages}
+                detailImages={product.detailImages}
+              />
+            </motion.div>
           ))}
         </div>
       </div>

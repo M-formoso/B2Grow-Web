@@ -26,12 +26,21 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-card rounded-2xl overflow-hidden border border-border shadow-elegant hover:shadow-glow transition-all duration-300"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ 
+        y: -10,
+        transition: { duration: 0.3 }
+      }}
+      className="bg-card rounded-2xl overflow-hidden border border-border shadow-elegant hover:shadow-glow transition-all duration-300 group relative"
     >
+      {/* Animated gradient overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+      
       {/* Main Image Display */}
-      <div className="relative aspect-square bg-muted overflow-hidden">
+      <div className="relative aspect-square bg-muted overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
         <AnimatePresence mode="wait">
           <motion.img
             key={currentImageIndex}
@@ -74,10 +83,10 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
       {/* Product Info */}
       <div className="p-6 space-y-4">
         <div>
-          <h3 className="text-2xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">
+          <h3 className="text-2xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300 inline-block">
             {name}
           </h3>
-          <p className="text-muted-foreground">{description}</p>
+          <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{description}</p>
         </div>
 
         {/* Thumbnail Gallery */}
@@ -86,9 +95,9 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-110 ${
                 currentImageIndex === index
-                  ? "border-primary shadow-glow"
+                  ? "border-primary shadow-glow scale-105"
                   : "border-border hover:border-primary/50"
               }`}
             >
@@ -108,7 +117,7 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
               setShowDetails(!showDetails);
               setCurrentImageIndex(0);
             }}
-            className="w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-3 rounded-lg transition-colors"
+            className="w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-glow"
           >
             {showDetails ? "Ver imágenes principales" : "Ver imágenes detalladas"}
           </button>
