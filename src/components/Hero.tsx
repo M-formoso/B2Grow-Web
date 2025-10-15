@@ -121,6 +121,98 @@ const Hero = () => {
             </CardSwap>
           </div>
         </div>
+
+        {/* Video Section */}
+        <div className="container mx-auto px-4 pb-20">
+          <div className="max-w-6xl mx-auto">
+            {/* Video Header */}
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+                Conocé Nuestra Tecnología
+              </h2>
+              <p className="text-xl text-white/80 max-w-2xl mx-auto">
+                Descubrí cómo nuestras soluciones están revolucionando el sector energético
+              </p>
+            </div>
+
+            {/* Video Container */}
+            <div className="relative group">
+              {/* Decorative border effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+              
+              {/* Video wrapper */}
+              <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                <div className="aspect-video w-full">
+                  {/* 
+                    INSTRUCCIONES PARA AGREGAR TU VIDEO:
+                    
+                    Opción 1 - Video local:
+                    1. Importa tu video al inicio del archivo:
+                       import miVideo from "@/assets/ruta/tu-video.mp4";
+                    
+                    2. Reemplaza el comentario de abajo con:
+                       <video 
+                         src={miVideo}
+                         controls
+                         className="w-full h-full object-cover"
+                         poster="url-de-imagen-preview-opcional"
+                       >
+                         Tu navegador no soporta el tag de video.
+                       </video>
+                    
+                    Opción 2 - Video de YouTube:
+                    Reemplaza el comentario de abajo con:
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/TU_ID_DE_VIDEO"
+                      title="Video título"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                    
+                    Opción 3 - Video de Vimeo:
+                    <iframe
+                      className="w-full h-full"
+                      src="https://player.vimeo.com/video/TU_ID_DE_VIDEO"
+                      title="Video título"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    />
+                  */}
+                  
+                  {/* AGREGA TU VIDEO AQUÍ - Reemplaza este div con tu video */}
+                  <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                    <div className="text-center text-white/60">
+                      <div className="text-6xl mb-4">▶</div>
+                      <p className="text-lg">Video placeholder - Agrega tu video aquí</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Optional: Video description or features below */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
+                <Zap className="w-10 h-10 text-primary mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">Innovación</h3>
+                <p className="text-white/70">Tecnología de vanguardia en cada producto</p>
+              </div>
+              
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
+                <Leaf className="w-10 h-10 text-accent mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">Sostenibilidad</h3>
+                <p className="text-white/70">Comprometidos con el medio ambiente</p>
+              </div>
+              
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors">
+                <Globe className="w-10 h-10 text-primary mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2">Alcance Global</h3>
+                <p className="text-white/70">Presencia en múltiples mercados</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
