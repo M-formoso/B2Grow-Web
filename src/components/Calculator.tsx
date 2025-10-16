@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Zap, Sun, Leaf, Battery, Package, MessageCircle } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Zap, Sun, Leaf, Battery, Package, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 import LaserFlow from "./effects/LaserFlow";
 
 // Definición de tipos de artefactos con valores típicos
@@ -64,6 +65,7 @@ const Calculator = () => {
   const [projectType, setProjectType] = useState<string>("");
   const [otherProjectType, setOtherProjectType] = useState<string>("");
   const [needsMobileChassis, setNeedsMobileChassis] = useState<boolean>(false);
+  const [appliancesExpanded, setAppliancesExpanded] = useState<boolean>(false);
   const [appliances, setAppliances] = useState<Record<string, ApplianceData>>(
     Object.fromEntries(
       Object.entries(APPLIANCES).map(([name, defaults]) => [
@@ -249,83 +251,105 @@ const Calculator = () => {
             </div>
 
             {/* Artefactos */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Artefactos de Consumo</h3>
-              <div className="grid gap-6">
-                {Object.entries(APPLIANCES).map(([name, defaults]) => (
-                  <div key={name} className="space-y-3 p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id={name}
-                        checked={appliances[name].selected}
-                        onCheckedChange={() => handleApplianceToggle(name)}
-                      />
-                      <Label htmlFor={name} className="cursor-pointer font-medium">
-                        {name}
-                      </Label>
-                    </div>
+            <Collapsible open={appliancesExpanded} onOpenChange={setAppliancesExpanded}>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">Artefactos de Consumo</h3>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="outline" size="sm">
+                      {appliancesExpanded ? (
+                        <>
+                          <ChevronUp className="h-4 w-4 mr-2" />
+                          Ocultar artefactos
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown className="h-4 w-4 mr-2" />
+                          Mostrar todos los artefactos
+                        </>
+                      )}
+                    </Button>
+                  </CollapsibleTrigger>
+                </div>
+                
+                <CollapsibleContent>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {Object.entries(APPLIANCES).map(([name, defaults]) => (
+                      <div key={name} className="space-y-3 p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id={name}
+                            checked={appliances[name].selected}
+                            onCheckedChange={() => handleApplianceToggle(name)}
+                          />
+                          <Label htmlFor={name} className="cursor-pointer font-medium">
+                            {name}
+                          </Label>
+                        </div>
 
-                    {appliances[name].selected && (
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pl-6">
-                        <div className="space-y-1">
-                          <Label className="text-xs">Potencia (W)</Label>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="2200"
-                            value={appliances[name].power}
-                            onChange={(e) =>
-                              handleApplianceChange(name, "power", Number(e.target.value))
-                            }
-                            className="h-8"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-xs">Cantidad</Label>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="200"
-                            value={appliances[name].quantity}
-                            onChange={(e) =>
-                              handleApplianceChange(name, "quantity", Number(e.target.value))
-                            }
-                            className="h-8"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-xs">Potencia Pico (W)</Label>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="6000"
-                            value={appliances[name].peakPower}
-                            onChange={(e) =>
-                              handleApplianceChange(name, "peakPower", Number(e.target.value))
-                            }
-                            className="h-8"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-xs">Uso (hs/día)</Label>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="24"
-                            step="0.1"
-                            value={appliances[name].usage}
-                            onChange={(e) =>
-                              handleApplianceChange(name, "usage", Number(e.target.value))
-                            }
-                            className="h-8"
-                          />
-                        </div>
+                        {appliances[name].selected && (
+                          <div className="grid grid-cols-2 gap-3 pl-6">
+                            <div className="space-y-1">
+                              <Label className="text-xs">Potencia (W)</Label>
+                              <Input
+                                type="number"
+                                min="0"
+                                max="2200"
+                                value={appliances[name].power}
+                                onChange={(e) =>
+                                  handleApplianceChange(name, "power", Number(e.target.value))
+                                }
+                                className="h-8"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <Label className="text-xs">Cantidad</Label>
+                              <Input
+                                type="number"
+                                min="0"
+                                max="200"
+                                value={appliances[name].quantity}
+                                onChange={(e) =>
+                                  handleApplianceChange(name, "quantity", Number(e.target.value))
+                                }
+                                className="h-8"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <Label className="text-xs">Potencia Pico (W)</Label>
+                              <Input
+                                type="number"
+                                min="0"
+                                max="6000"
+                                value={appliances[name].peakPower}
+                                onChange={(e) =>
+                                  handleApplianceChange(name, "peakPower", Number(e.target.value))
+                                }
+                                className="h-8"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <Label className="text-xs">Uso (hs/día)</Label>
+                              <Input
+                                type="number"
+                                min="0"
+                                max="24"
+                                step="0.1"
+                                value={appliances[name].usage}
+                                onChange={(e) =>
+                                  handleApplianceChange(name, "usage", Number(e.target.value))
+                                }
+                                className="h-8"
+                              />
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
+                    ))}
                   </div>
-                ))}
+                </CollapsibleContent>
               </div>
-            </div>
+            </Collapsible>
 
             <Button
               onClick={calculateResults}
