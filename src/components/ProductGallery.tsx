@@ -29,17 +29,17 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
   return (
     <div className="w-full max-w-7xl mx-auto">
       {/* Product Selector */}
-      <div className="mb-8 flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+      <div className="mb-8 flex justify-center gap-4 overflow-x-auto pb-4 px-4 scrollbar-hide">
         {products.map((product, index) => (
           <motion.button
             key={index}
             onClick={() => {
               setSelectedProduct(index);
             }}
-            className={`px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all duration-300 ${
+            className={`px-8 py-3 rounded-full font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
               selectedProduct === index
-                ? "bg-primary text-primary-foreground shadow-glow scale-105"
-                : "bg-card/50 backdrop-blur-sm text-foreground hover:bg-card hover:scale-105"
+                ? "bg-primary text-primary-foreground shadow-glow"
+                : "bg-card/50 backdrop-blur-sm text-foreground hover:bg-card"
             }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -95,7 +95,7 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
                 <img
                   src={image.src}
                   alt={`${currentProduct.name} - Image ${index + 1}`}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain max-h-[500px]"
                 />
                 
                 {/* Zoom overlay on hover */}
