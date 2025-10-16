@@ -13,6 +13,14 @@ import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/ma
 import detailImage1 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-01.jpg";
 import detailImage3 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-03.jpg";
 
+// Import Solar Panel 200W images
+import solarPanel01 from "@/assets/b2grow-greenside/images/solar-panel-200w/01.jpg";
+import solarPanel02 from "@/assets/b2grow-greenside/images/solar-panel-200w/02.jpg";
+import solarPanel03 from "@/assets/b2grow-greenside/images/solar-panel-200w/03.jpg";
+import solarPanel04 from "@/assets/b2grow-greenside/images/solar-panel-200w/04.jpg";
+import solarPanel05 from "@/assets/b2grow-greenside/images/solar-panel-200w/05.jpg";
+import solarPanel08 from "@/assets/b2grow-greenside/images/solar-panel-200w/08.jpg";
+
 const products = [
   {
     name: "Estaciones de Energía Portátil",
@@ -27,6 +35,18 @@ const products = [
       { src: mainImage7, category: "Principal" },
       { src: detailImage1, category: "Detalle" },
       { src: detailImage3, category: "Detalle" }
+    ]
+  },
+  {
+    name: "Panel Solar Portátil 200W",
+    description: "Panel solar plegable de alta eficiencia con certificación A+ y resistencia IP67. Diseñado para aventuras off-grid y aplicaciones móviles.",
+    images: [
+      { src: solarPanel01, category: "Principal" },
+      { src: solarPanel02, category: "Principal" },
+      { src: solarPanel03, category: "Principal" },
+      { src: solarPanel04, category: "Principal" },
+      { src: solarPanel05, category: "Principal" },
+      { src: solarPanel08, category: "Principal" }
     ]
   }
 ];
