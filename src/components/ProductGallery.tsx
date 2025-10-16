@@ -89,13 +89,13 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
                   ease: [0.25, 0.4, 0.25, 1],
                   delay: index * 0.1
                 }}
-                className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer aspect-square"
                 onClick={() => setFullscreenImage(index)}
               >
                 <img
                   src={image.src}
                   alt={`${currentProduct.name} - Image ${index + 1}`}
-                  className="w-full h-auto object-contain max-h-[500px]"
+                  className="w-full h-full object-cover"
                 />
                 
                 {/* Zoom overlay on hover */}

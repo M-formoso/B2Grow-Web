@@ -7,10 +7,39 @@ import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import { useEffect, useRef } from "react";
 
 const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
 
 const Hero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch((error) => {
+              console.log("Autoplay prevented:", error);
+            });
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="min-h-screen bg-gradient-tech relative overflow-hidden">
       {/* Animated background elements */}
@@ -164,8 +193,12 @@ const Hero = () => {
               <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
                 <div className="aspect-video w-full">
                   <video 
+                    ref={videoRef}
                     src={campaignVideo}
                     controls
+                    muted
+                    loop
+                    playsInline
                     className="w-full h-full object-cover"
                   >
                     Tu navegador no soporta el tag de video.
