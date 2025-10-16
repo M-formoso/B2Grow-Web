@@ -179,14 +179,14 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="h-fit"
+          className="space-y-4"
         >
           <h4 className="text-xl font-bold text-foreground mb-4">
             Imágenes Detalladas
           </h4>
           
           {detailImages.length > 0 ? (
-            <div className="space-y-4 h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-4 h-[calc(100vh-14rem)] overflow-y-auto pr-2 custom-scrollbar">
               {detailImages.map((image, index) => (
                 <motion.div
                   key={index}
