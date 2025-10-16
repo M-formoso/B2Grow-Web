@@ -145,10 +145,21 @@ const PillNav = ({
     const img = logoImgRef.current;
     if (!img) return;
     logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
     logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.2,
+      scale: 1.1,
+      duration: 0.3,
+      ease,
+      overwrite: 'auto'
+    });
+  };
+
+  const handleLogoLeave = () => {
+    const img = logoImgRef.current;
+    if (!img) return;
+    logoTweenRef.current?.kill();
+    logoTweenRef.current = gsap.to(img, {
+      scale: 1,
+      duration: 0.3,
       ease,
       overwrite: 'auto'
     });
@@ -231,6 +242,7 @@ const PillNav = ({
             to={items[0].href}
             aria-label="Home"
             onMouseEnter={handleLogoEnter}
+            onMouseLeave={handleLogoLeave}
             role="menuitem"
             ref={el => {
               logoRef.current = el;
@@ -244,6 +256,7 @@ const PillNav = ({
             href={items?.[0]?.href || '#'}
             aria-label="Home"
             onMouseEnter={handleLogoEnter}
+            onMouseLeave={handleLogoLeave}
             ref={el => {
               logoRef.current = el;
             }}

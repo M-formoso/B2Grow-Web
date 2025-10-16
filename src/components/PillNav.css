@@ -12,8 +12,8 @@
 }
 
 .pill-nav {
-  --nav-h: 42px;
-  --logo: 36px;
+  --nav-h: 48px;
+  --logo: 48px;
   --pill-pad-x: 18px;
   --pill-gap: 3px;
   width: max-content;
@@ -47,11 +47,13 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  padding: 8px;
+  padding: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .pill-logo img {
