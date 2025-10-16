@@ -12,8 +12,8 @@
 }
 
 .pill-nav {
-  --nav-h: 48px;
-  --logo: 48px;
+  --nav-h: 64px;
+  --logo: 64px;
   --pill-pad-x: 18px;
   --pill-gap: 3px;
   width: max-content;
