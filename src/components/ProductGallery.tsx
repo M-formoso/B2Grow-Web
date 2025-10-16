@@ -62,7 +62,7 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
       {/* Main Layout - Fixed Left, Scrollable Right */}
       <div className="grid lg:grid-cols-2 gap-6 items-start">
         {/* LEFT SIDE - FIXED */}
-        <div className="lg:sticky lg:top-24 space-y-4">
+        <div className="lg:sticky lg:top-24 space-y-4 h-fit max-h-[calc(100vh-8rem)]">
           {/* Product Info */}
           <motion.div
             key={`info-${selectedProduct}`}
@@ -186,7 +186,7 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           </h4>
           
           {detailImages.length > 0 ? (
-            <div className="space-y-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-4 max-h-[calc(100vh-16rem)] overflow-y-auto pr-2 custom-scrollbar">
               {detailImages.map((image, index) => (
                 <motion.div
                   key={index}
