@@ -186,12 +186,12 @@ const Calculator = () => {
   };
 
   return (
-    <section className="relative min-h-screen py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
+    <section className="relative min-h-screen pt-40 pb-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]" />
       <LaserFlow color="#FFFFFF" horizontalBeamOffset={0.5} verticalBeamOffset={0.35} />
       
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Calculadora Solar B2Grow
           </h1>
