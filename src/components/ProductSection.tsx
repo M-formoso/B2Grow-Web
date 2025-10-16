@@ -12,7 +12,6 @@ import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/ma
 
 import detailImage1 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-01.jpg";
 import detailImage3 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-03.jpg";
-import detailImage5 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-05.jpg";
 
 const products = [
   {
@@ -27,8 +26,7 @@ const products = [
       { src: mainImage6, category: "Principal" },
       { src: mainImage7, category: "Principal" },
       { src: detailImage1, category: "Detalle" },
-      { src: detailImage3, category: "Detalle" },
-      { src: detailImage5, category: "Detalle" }
+      { src: detailImage3, category: "Detalle" }
     ]
   }
 ];
