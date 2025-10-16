@@ -49,8 +49,8 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
         ))}
       </div>
 
-      {/* Main Layout - Both sides scrollable */}
-      <div className="grid lg:grid-cols-2 gap-6 items-start">
+      {/* Main Layout - Conditional: Two columns if detail images exist, single column otherwise */}
+      <div className={detailImages.length > 0 ? "grid lg:grid-cols-2 gap-6 items-start" : "max-w-4xl mx-auto"}>
         {/* LEFT SIDE - MAIN IMAGES SCROLLABLE */}
         <div className="space-y-4">
           {/* Product Info */}
@@ -107,19 +107,19 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           </div>
         </div>
 
-        {/* RIGHT SIDE - SCROLLABLE DETAIL IMAGES */}
-        <motion.div
-          key={`details-${selectedProduct}`}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="space-y-4 h-full flex flex-col"
-        >
-          <h4 className="text-xl font-bold text-foreground mb-4">
-            Imágenes Detalladas
-          </h4>
-          
-          {detailImages.length > 0 ? (
+        {/* RIGHT SIDE - SCROLLABLE DETAIL IMAGES (Only shown if detail images exist) */}
+        {detailImages.length > 0 && (
+          <motion.div
+            key={`details-${selectedProduct}`}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4 h-full flex flex-col"
+          >
+            <h4 className="text-xl font-bold text-foreground mb-4">
+              Imágenes Detalladas
+            </h4>
+            
             <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
               {detailImages.map((image, index) => (
                 <motion.div
@@ -143,12 +143,8 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
                 </motion.div>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              No hay imágenes detalladas disponibles
-            </div>
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </div>
 
       {/* Fullscreen Dialog */}
