@@ -188,11 +188,11 @@ const Calculator = () => {
   return (
     <section className="relative min-h-screen py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]" />
-      <LaserFlow />
+      <LaserFlow color="#FFFFFF" horizontalBeamOffset={0.5} verticalBeamOffset={0.0} />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-green-400 to-primary bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Calculadora Solar B2Grow
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -366,57 +366,57 @@ const Calculator = () => {
         {result && (
           <div className="mt-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Zap className="text-yellow-500" />
+                    <Zap className="text-foreground" />
                     Potencia Necesaria
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-primary">
+                  <p className="text-3xl font-bold text-foreground">
                     {result.potenciaNecesaria.toFixed(0)} W
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Zap className="text-red-500" />
+                    <Zap className="text-foreground" />
                     Potencia Pico
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-primary">
+                  <p className="text-3xl font-bold text-foreground">
                     {result.potenciaPico.toFixed(0)} W
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Battery className="text-green-500" />
+                    <Battery className="text-foreground" />
                     Autonomía Necesaria
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-primary">
+                  <p className="text-3xl font-bold text-foreground">
                     {result.autonomiaNecesaria.toFixed(0)} Wh
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sun className="text-orange-500" />
+                    <Sun className="text-foreground" />
                     Paneles Solares
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-primary">
+                  <p className="text-3xl font-bold text-foreground">
                     {result.cantPaneles} unidades
                   </p>
                   <p className="text-sm text-muted-foreground mt-2">
@@ -425,15 +425,15 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Battery className="text-blue-500" />
+                    <Battery className="text-foreground" />
                     Baterías
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-primary">
+                  <p className="text-3xl font-bold text-foreground">
                     {result.necesarioBaterias.toFixed(0)} Wh
                   </p>
                   <p className="text-sm text-muted-foreground mt-2">
@@ -442,10 +442,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+              <Card className="backdrop-blur-sm bg-card/90 border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Package className="text-purple-500" />
+                    <Package className="text-foreground" />
                     Estación Recomendada
                   </CardTitle>
                 </CardHeader>
