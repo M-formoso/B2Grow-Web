@@ -3,11 +3,12 @@ import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
 import powerStationHero from "@/assets/power-station-hero.png";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
-import campaignVideo from "@/assets/b2grow-greenside/videos/Video_de_Campana_B2GROWTH.mp4";
 import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+
+const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
 
 const Hero = () => {
   return (
