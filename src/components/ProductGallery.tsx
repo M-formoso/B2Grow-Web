@@ -81,9 +81,14 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
             {mainImages.map((image, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ 
+                  duration: 0.6,
+                  ease: [0.25, 0.4, 0.25, 1],
+                  delay: index * 0.1
+                }}
                 className="relative rounded-2xl overflow-hidden bg-card border border-border shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer"
                 onClick={() => setFullscreenImage(index)}
               >
