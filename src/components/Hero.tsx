@@ -126,7 +126,7 @@ const Hero = () => {
         </div>
 
         {/* Video Section */}
-        <div className="container mx-auto px-4 pb-20 pt-24">
+        <div className="container mx-auto px-4 pb-20 pt-48">
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
             <div className="text-center mb-8 animate-fade-in">
