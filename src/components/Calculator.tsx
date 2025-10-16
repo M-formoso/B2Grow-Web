@@ -188,7 +188,7 @@ const Calculator = () => {
   return (
     <section className="relative min-h-screen py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]" />
-      <LaserFlow color="#FFFFFF" horizontalBeamOffset={0.5} verticalBeamOffset={0.0} />
+      <LaserFlow color="#FFFFFF" horizontalBeamOffset={0.5} verticalBeamOffset={0.35} />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-12">
@@ -200,7 +200,7 @@ const Calculator = () => {
           </p>
         </div>
 
-        <Card className="backdrop-blur-sm bg-card/90 border-primary/20">
+        <Card className="backdrop-blur-sm bg-card/90 border-border">
           <CardHeader>
             <CardTitle>Configuración del Sistema</CardTitle>
             <CardDescription>
@@ -450,14 +450,14 @@ const Calculator = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-4xl font-bold text-primary">
+                  <p className="text-4xl font-bold text-foreground">
                     {result.estacionRecomendada}
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            <Card className="backdrop-blur-sm bg-gradient-to-r from-primary/10 to-green-500/10 border-primary/30">
+            <Card className="backdrop-blur-sm bg-card/90 border-border">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
                   <h3 className="text-2xl font-bold text-foreground">
@@ -485,7 +485,7 @@ const Calculator = () => {
                       Asesoramiento: +54 9 11 6623-0246
                     </Button>
                   </div>
-                  <p className="text-sm font-semibold text-primary mt-4">
+                  <p className="text-sm font-semibold text-foreground mt-4">
                     B2Grow – POWERING THE FUTURE
                   </p>
                 </div>
