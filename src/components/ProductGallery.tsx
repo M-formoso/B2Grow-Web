@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -22,10 +22,50 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
   const [selectedProduct, setSelectedProduct] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
   const [fullscreenImage, setFullscreenImage] = useState<number | null>(null);
+  const [visibleDetailIndex, setVisibleDetailIndex] = useState<number | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const currentProduct = products[selectedProduct];
   const mainImages = currentProduct.images.filter(img => img.category === "Principal");
   const detailImages = currentProduct.images.filter(img => img.category === "Detalle");
+
+  // Detect which detail image is in view
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollContainerRef.current) return;
+      
+      const container = scrollContainerRef.current;
+      const scrollPosition = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      
+      const detailImageElements = container.querySelectorAll('[data-detail-index]');
+      
+      detailImageElements.forEach((element, index) => {
+        const rect = element.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        // Check if image is in the center of the viewport
+        const elementCenter = rect.top + rect.height / 2;
+        const containerCenter = containerRect.top + containerRect.height / 2;
+        
+        if (Math.abs(elementCenter - containerCenter) < containerRect.height / 3) {
+          setVisibleDetailIndex(index);
+        }
+      });
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial check
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [selectedProduct, detailImages.length]);
 
   const nextImage = () => {
     setSelectedImage((prev) => (prev + 1) % mainImages.length);
@@ -89,15 +129,15 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           >
             <AnimatePresence mode="wait">
               <motion.img
-                key={selectedImage}
-                src={mainImages[selectedImage]?.src}
-                alt={`${currentProduct.name} - Image ${selectedImage + 1}`}
+                key={visibleDetailIndex !== null ? `detail-${visibleDetailIndex}` : `main-${selectedImage}`}
+                src={visibleDetailIndex !== null ? detailImages[visibleDetailIndex]?.src : mainImages[selectedImage]?.src}
+                alt={visibleDetailIndex !== null ? `${currentProduct.name} - Detail ${visibleDetailIndex + 1}` : `${currentProduct.name} - Image ${selectedImage + 1}`}
                 className="w-full h-full object-contain cursor-zoom-in"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setFullscreenImage(selectedImage)}
+                onClick={() => setFullscreenImage(visibleDetailIndex !== null ? mainImages.length + visibleDetailIndex : selectedImage)}
               />
             </AnimatePresence>
 
@@ -133,7 +173,9 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
 
             {/* Image Counter */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold">
-              {selectedImage + 1} / {mainImages.length}
+              {visibleDetailIndex !== null 
+                ? `Detalle ${visibleDetailIndex + 1}` 
+                : `${selectedImage + 1} / ${mainImages.length}`}
             </div>
           </motion.div>
 
@@ -186,10 +228,11 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           </h4>
           
           {detailImages.length > 0 ? (
-            <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+            <div ref={scrollContainerRef} className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
               {detailImages.map((image, index) => (
                 <motion.div
                   key={index}
+                  data-detail-index={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
