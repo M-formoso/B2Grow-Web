@@ -3,6 +3,7 @@ import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
 import powerStationHero from "@/assets/power-station-hero.png";
 import solarPanelsHero from "@/assets/solar-panels-hero.png";
 import ledLightingHero from "@/assets/led-lighting-hero.png";
+import campaignVideo from "@/assets/b2grow-greenside/videos/Video_de_Campana_B2GROWTH.mp4";
 import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
@@ -161,50 +162,13 @@ const Hero = () => {
               {/* Video wrapper */}
               <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
                 <div className="aspect-video w-full">
-                  {/* 
-                    INSTRUCCIONES PARA AGREGAR TU VIDEO:
-                    
-                    Opción 1 - Video local:
-                    1. Importa tu video al inicio del archivo:
-                       import miVideo from "@/assets/ruta/tu-video.mp4";
-                    
-                    2. Reemplaza el comentario de abajo con:
-                       <video 
-                         src={miVideo}
-                         controls
-                         className="w-full h-full object-cover"
-                         poster="url-de-imagen-preview-opcional"
-                       >
-                         Tu navegador no soporta el tag de video.
-                       </video>
-                    
-                    Opción 2 - Video de YouTube:
-                    Reemplaza el comentario de abajo con:
-                    <iframe
-                      className="w-full h-full"
-                      src="https://www.youtube.com/embed/TU_ID_DE_VIDEO"
-                      title="Video título"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                    
-                    Opción 3 - Video de Vimeo:
-                    <iframe
-                      className="w-full h-full"
-                      src="https://player.vimeo.com/video/TU_ID_DE_VIDEO"
-                      title="Video título"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                    />
-                  */}
-                  
-                  {/* AGREGA TU VIDEO AQUÍ - Reemplaza este div con tu video */}
-                  <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                    <div className="text-center text-white/60">
-                      <div className="text-6xl mb-4">▶</div>
-                      <p className="text-lg">Video placeholder - Agrega tu video aquí</p>
-                    </div>
-                  </div>
+                  <video 
+                    src={campaignVideo}
+                    controls
+                    className="w-full h-full object-cover"
+                  >
+                    Tu navegador no soporta el tag de video.
+                  </video>
                 </div>
               </div>
             </div>
