@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface ProductCardProps {
   name: string;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 const ProductCard = ({ name, description, mainImages, detailImages }: ProductCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
+  const [fullscreenImageIndex, setFullscreenImageIndex] = useState<number | null>(null);
   
   const displayImages = showDetails && detailImages ? detailImages : mainImages;
   const totalImages = displayImages.length;
@@ -22,6 +24,18 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
 
   const previousImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
+
+  const nextFullscreenImage = () => {
+    if (fullscreenImageIndex !== null && detailImages) {
+      setFullscreenImageIndex((prev) => prev !== null ? (prev + 1) % detailImages.length : 0);
+    }
+  };
+
+  const previousFullscreenImage = () => {
+    if (fullscreenImageIndex !== null && detailImages) {
+      setFullscreenImageIndex((prev) => prev !== null ? (prev - 1 + detailImages.length) % detailImages.length : 0);
+    }
   };
 
   return (
@@ -116,6 +130,7 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
             onClick={() => {
               setShowDetails(!showDetails);
               setCurrentImageIndex(0);
+              setFullscreenImageIndex(0);
             }}
             className="w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-glow"
           >
@@ -123,6 +138,65 @@ const ProductCard = ({ name, description, mainImages, detailImages }: ProductCar
           </button>
         )}
       </div>
+
+      {/* Fullscreen Dialog for Detail Images */}
+      <Dialog open={fullscreenImageIndex !== null} onOpenChange={(open) => !open && setFullscreenImageIndex(null)}>
+        <DialogContent className="max-w-full h-screen p-0 bg-background/95 backdrop-blur-sm border-0">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Close Button */}
+            <button
+              onClick={() => setFullscreenImageIndex(null)}
+              className="absolute top-4 right-4 z-50 bg-background/80 backdrop-blur-sm p-3 rounded-full hover:bg-background transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Navigation Arrows */}
+            {detailImages && detailImages.length > 1 && (
+              <>
+                <button
+                  onClick={previousFullscreenImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-background/80 backdrop-blur-sm p-3 rounded-full hover:bg-background transition-colors"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button
+                  onClick={nextFullscreenImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-background/80 backdrop-blur-sm p-3 rounded-full hover:bg-background transition-colors"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+              </>
+            )}
+
+            {/* Image Counter */}
+            {detailImages && fullscreenImageIndex !== null && (
+              <div className="absolute bottom-4 right-4 z-50 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full text-lg">
+                {fullscreenImageIndex + 1} / {detailImages.length}
+              </div>
+            )}
+
+            {/* Full Image Display */}
+            <AnimatePresence mode="wait">
+              {fullscreenImageIndex !== null && detailImages && (
+                <motion.img
+                  key={fullscreenImageIndex}
+                  src={detailImages[fullscreenImageIndex]}
+                  alt={`${name} - Detailed Image ${fullscreenImageIndex + 1}`}
+                  className="max-w-full max-h-full object-contain"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 };
