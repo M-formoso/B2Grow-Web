@@ -186,7 +186,7 @@ const ProductGallery = ({ products }: ProductGalleryProps) => {
           </h4>
           
           {detailImages.length > 0 ? (
-            <div className="space-y-4 max-h-[calc(100vh-14rem)] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-4 h-[600px] overflow-y-auto pr-2 custom-scrollbar">
               {detailImages.map((image, index) => (
                 <motion.div
                   key={index}
