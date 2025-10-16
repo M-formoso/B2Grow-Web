@@ -11,7 +11,6 @@ import mainImage6 from "@/assets/b2grow-greenside/images/module-power-station/ma
 import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-07.jpg";
 
 import detailImage1 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-01.jpg";
-import detailImage2 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-02.jpg";
 import detailImage3 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-03.jpg";
 import detailImage5 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-05.jpg";
 
@@ -28,7 +27,6 @@ const products = [
       { src: mainImage6, category: "Principal" },
       { src: mainImage7, category: "Principal" },
       { src: detailImage1, category: "Detalle" },
-      { src: detailImage2, category: "Detalle" },
       { src: detailImage3, category: "Detalle" },
       { src: detailImage5, category: "Detalle" }
     ]
