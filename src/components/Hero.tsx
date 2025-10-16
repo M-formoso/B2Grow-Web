@@ -16,8 +16,8 @@ const Hero = () => {
       <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-float"></div>
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
       
-      <div className="container mx-auto px-4 pt-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+      <div className="container mx-auto px-4 pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh]">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
               Energía Inteligente
@@ -126,10 +126,10 @@ const Hero = () => {
         </div>
 
         {/* Video Section */}
-        <div className="container mx-auto px-4 pb-20">
+        <div className="container mx-auto px-4 pb-20 pt-24">
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
-            <div className="text-center mb-12 animate-fade-in">
+            <div className="text-center mb-8 animate-fade-in">
               <h2 className="text-4xl lg:text-5xl font-bold mb-4">
                 <DecryptedText 
                   text="Conocé Nuestra Tecnología"
