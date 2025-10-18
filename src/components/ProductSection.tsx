@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ProductGallery from "./ProductGallery";
 import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
+import VariableProximity from "@/components/effects/VariableProximity";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Battery, Lightbulb, Calculator as CalcIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -137,6 +138,7 @@ const productLines = [
 
 const ProductSection = () => {
   const [activeModule, setActiveModule] = useState<string | null>(null);
+  const headerContainerRef = useRef<HTMLDivElement>(null);
 
   const modules = [
     {
@@ -282,16 +284,29 @@ const ProductSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="relative text-center mb-16 animate-slide-up overflow-hidden">
+        <div ref={headerContainerRef} className="relative text-center mb-16 animate-slide-up overflow-hidden">
           {/* Content over the effect */}
           <div className="relative z-10">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-foreground">Nuestros </span>
-              <span className="bg-gradient-primary bg-clip-text text-transparent">Productos</span>
+              <VariableProximity
+                label="Nuestros Productos"
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={headerContainerRef}
+                radius={150}
+                falloff="linear"
+                className="text-foreground"
+              />
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Tecnología, eficiencia energética y sustentabilidad fusionadas en soluciones inteligentes 
-              para múltiples industrias.
+              <VariableProximity
+                label="Tecnología, eficiencia energética y sustentabilidad fusionadas en soluciones inteligentes para múltiples industrias."
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 700, 'opsz' 30"
+                containerRef={headerContainerRef}
+                radius={120}
+                falloff="linear"
+              />
             </p>
           </div>
         </div>
