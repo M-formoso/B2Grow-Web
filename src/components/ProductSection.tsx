@@ -34,9 +34,6 @@ import ufoDecoBanner3 from "@/assets/b2grow-greenside/images/ufo-deco/banner-dec
 import ufoDecoProduct from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-product.png";
 
 // Import UFO INDUSTRIAL images
-import ufoIndustrial100w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-100w.png";
-import ufoIndustrial150w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-150w.png";
-import ufoIndustrial200w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-200w.png";
 import ufoIndustrialHB12_150w_1 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-150w-1.png";
 import ufoIndustrialHB12_150w_2 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-150w-2.png";
 import ufoIndustrialHB12_200w_1 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-200w-1.png";
@@ -405,23 +402,23 @@ const ProductSection = () => {
           {/* UFO INDUSTRIAL Images Gallery */}
           {activeSubcategory === "industrial" && (
             <div className="space-y-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <img 
-                  src={ufoIndustrial100w} 
-                  alt="UFO INDUSTRIAL - 100W LED Industrial Lighting" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoIndustrial150w} 
-                  alt="UFO INDUSTRIAL - 150W LED Industrial Lighting" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoIndustrial200w} 
-                  alt="UFO INDUSTRIAL - 200W LED Industrial Lighting" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
+              {/* Power Options Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
+                  <div className="text-5xl font-bold text-amber-500 mb-2">100W</div>
+                  <div className="text-sm text-muted-foreground">Potencia Baja</div>
+                </div>
+                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
+                  <div className="text-5xl font-bold text-amber-500 mb-2">150W</div>
+                  <div className="text-sm text-muted-foreground">Potencia Media</div>
+                </div>
+                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
+                  <div className="text-5xl font-bold text-amber-500 mb-2">200W</div>
+                  <div className="text-sm text-muted-foreground">Potencia Alta</div>
+                </div>
               </div>
+              
+              {/* Product Detail Images */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <img 
                   src={ufoIndustrialHB12_150w_1} 
