@@ -25,20 +25,15 @@ const AboutUs = () => {
                 <span className="bg-gradient-primary bg-clip-text text-transparent">Somos</span>
               </h2>
               
-              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              <div className="text-lg text-muted-foreground leading-relaxed">
                 <p>
                   Somos una fusión de <span className="text-primary font-semibold">tecnología</span>, 
                   <span className="text-primary font-semibold"> eficiencia energética</span> y 
                   <span className="text-primary font-semibold"> sustentabilidad</span> con soluciones inteligentes 
-                  de iluminación, movilidad e independencia energética.
-                </p>
-                <p>
-                  Trabajamos para múltiples clientes que exigen productos dinámicos, de gran calidad 
-                  y sobre todo con un alto nivel de atención y servicio.
-                </p>
-                <p>
-                  Con <span className="text-primary font-semibold">20 años de experiencia</span>, 
-                  apostamos con creatividad a un futuro más eficiente y sustentable.
+                  de iluminación, movilidad e independencia energética, para múltiples clientes que exigen 
+                  productos dinámicos, de gran calidad y sobre todo con un alto nivel de atención y servicio. 
+                  En eso trabajamos todos los días con mucho esfuerzo, con <span className="text-primary font-semibold">20 años de experiencia</span> apostando 
+                  con creatividad a un futuro más eficiente y sustentable.
                 </p>
               </div>
 
