@@ -33,6 +33,15 @@ import ufoDecoBanner2 from "@/assets/b2grow-greenside/images/ufo-deco/banner-dec
 import ufoDecoBanner3 from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-3.png";
 import ufoDecoProduct from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-product.png";
 
+// Import UFO INDUSTRIAL images
+import ufoIndustrial100w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-100w.png";
+import ufoIndustrial150w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-150w.png";
+import ufoIndustrial200w from "@/assets/b2grow-greenside/images/ufo-industrial/ufo-200w.png";
+import ufoIndustrialHB12_150w_1 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-150w-1.png";
+import ufoIndustrialHB12_150w_2 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-150w-2.png";
+import ufoIndustrialHB12_200w_1 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-200w-1.png";
+import ufoIndustrialHB12_200w_2 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-200w-2.png";
+
 const productLines = [
   {
     lineId: "greenside",
@@ -387,6 +396,53 @@ const ProductSection = () => {
                 <img 
                   src={ufoDecoProduct} 
                   alt="UFO DECO - Características del producto" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* UFO INDUSTRIAL Images Gallery */}
+          {activeSubcategory === "industrial" && (
+            <div className="space-y-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <img 
+                  src={ufoIndustrial100w} 
+                  alt="UFO INDUSTRIAL - 100W LED Industrial Lighting" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoIndustrial150w} 
+                  alt="UFO INDUSTRIAL - 150W LED Industrial Lighting" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoIndustrial200w} 
+                  alt="UFO INDUSTRIAL - 200W LED Industrial Lighting" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <img 
+                  src={ufoIndustrialHB12_150w_1} 
+                  alt="UFO INDUSTRIAL B2G-HB12 150W - Vista superior" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoIndustrialHB12_150w_2} 
+                  alt="UFO INDUSTRIAL B2G-HB12 150W - Vista lateral" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <img 
+                  src={ufoIndustrialHB12_200w_1} 
+                  alt="UFO INDUSTRIAL B2G-HB12 200W - Vista frontal" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoIndustrialHB12_200w_2} 
+                  alt="UFO INDUSTRIAL B2G-HB12 200W - Vista detalle LED" 
                   className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
                 />
               </div>
