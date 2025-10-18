@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import ProductGallery from "./ProductGallery";
-import Hyperspeed, { hyperspeedPresets } from "@/components/effects/Hyperspeed";
+import DotGrid from "@/components/effects/DotGrid";
 import VariableProximity from "@/components/effects/VariableProximity";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Battery, Lightbulb, Calculator as CalcIcon } from "lucide-react";
@@ -522,10 +522,18 @@ const ProductSection = () => {
 
   return (
     <section className="py-20 bg-gradient-tech relative overflow-hidden">
-      {/* Hyperspeed Background Effect */}
+      {/* DotGrid Background Effect */}
       <div className="absolute inset-0 w-full h-full opacity-30">
-        <Hyperspeed 
-          effectOptions={hyperspeedPresets.one}
+        <DotGrid 
+          dotSize={4}
+          gap={20}
+          baseColor="hsl(var(--primary) / 0.3)"
+          activeColor="hsl(var(--primary))"
+          proximity={120}
+          shockRadius={200}
+          shockStrength={4}
+          resistance={800}
+          returnDuration={1.2}
         />
       </div>
       
