@@ -173,12 +173,38 @@ const ProductSection = () => {
     if (activeModule === "greenside" && line) {
       return (
         <div className="space-y-8">
-          <div className="text-center space-y-4">
+          <div ref={headerContainerRef} className="relative text-center space-y-4">
             <h3 className="text-3xl lg:text-4xl font-bold">
-              <span className="text-foreground">{line.lineName}</span>
+              <VariableProximity
+                label={line.lineName}
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={headerContainerRef}
+                radius={150}
+                falloff="linear"
+                className="text-foreground"
+              />
             </h3>
-            <p className="text-xl font-semibold text-primary">{line.lineSubtitle}</p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{line.description}</p>
+            <p className="text-xl font-semibold text-primary">
+              <VariableProximity
+                label={line.lineSubtitle}
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 700, 'opsz' 30"
+                containerRef={headerContainerRef}
+                radius={120}
+                falloff="linear"
+              />
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <VariableProximity
+                label={line.description}
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 600, 'opsz' 25"
+                containerRef={headerContainerRef}
+                radius={100}
+                falloff="linear"
+              />
+            </p>
           </div>
           <ProductGallery products={line.products} />
         </div>
@@ -188,12 +214,38 @@ const ProductSection = () => {
     if (activeModule === "multiselect" && line) {
       return (
         <div className="space-y-8">
-          <div className="text-center space-y-4">
+          <div ref={headerContainerRef} className="relative text-center space-y-4">
             <h3 className="text-3xl lg:text-4xl font-bold">
-              <span className="text-foreground">{line.lineName}</span>
+              <VariableProximity
+                label={line.lineName}
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={headerContainerRef}
+                radius={150}
+                falloff="linear"
+                className="text-foreground"
+              />
             </h3>
-            <p className="text-xl font-semibold text-primary">{line.lineSubtitle}</p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{line.description}</p>
+            <p className="text-xl font-semibold text-primary">
+              <VariableProximity
+                label={line.lineSubtitle}
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 700, 'opsz' 30"
+                containerRef={headerContainerRef}
+                radius={120}
+                falloff="linear"
+              />
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <VariableProximity
+                label={line.description}
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 600, 'opsz' 25"
+                containerRef={headerContainerRef}
+                radius={100}
+                falloff="linear"
+              />
+            </p>
           </div>
           
           {line.categories && (
@@ -256,13 +308,27 @@ const ProductSection = () => {
     if (activeModule === "calculator") {
       return (
         <div className="space-y-8">
-          <div className="text-center space-y-4">
+          <div ref={headerContainerRef} className="relative text-center space-y-4">
             <h3 className="text-3xl lg:text-4xl font-bold">
-              <span className="text-foreground">Calculadora de </span>
-              <span className="bg-gradient-primary bg-clip-text text-transparent">Eficiencia Energética</span>
+              <VariableProximity
+                label="Calculadora de Eficiencia Energética"
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={headerContainerRef}
+                radius={150}
+                falloff="linear"
+                className="text-foreground"
+              />
             </h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Armá un producto a tu medida según tus necesidades
+              <VariableProximity
+                label="Armá un producto a tu medida según tus necesidades"
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 600, 'opsz' 25"
+                containerRef={headerContainerRef}
+                radius={100}
+                falloff="linear"
+              />
             </p>
           </div>
           <Calculator />
@@ -283,34 +349,6 @@ const ProductSection = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div ref={headerContainerRef} className="relative text-center mb-16 animate-slide-up overflow-hidden">
-          {/* Content over the effect */}
-          <div className="relative z-10">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <VariableProximity
-                label="Nuestros Productos"
-                fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                toFontVariationSettings="'wght' 900, 'opsz' 40"
-                containerRef={headerContainerRef}
-                radius={150}
-                falloff="linear"
-                className="text-foreground"
-              />
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              <VariableProximity
-                label="Tecnología, eficiencia energética y sustentabilidad fusionadas en soluciones inteligentes para múltiples industrias."
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 700, 'opsz' 30"
-                containerRef={headerContainerRef}
-                radius={120}
-                falloff="linear"
-              />
-            </p>
-          </div>
-        </div>
-
         {/* Back Button - Only show when a module is active */}
         {activeModule && (
           <div className="mb-8">
