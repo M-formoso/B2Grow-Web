@@ -20,7 +20,6 @@ const Header = () => {
   const navItems = [
     { label: "Inicio", href: "/", ariaLabel: "Ir al inicio" },
     { label: "Productos", href: "/productos", ariaLabel: "Ver productos" },
-    { label: "Calculadora", href: "/calculadora", ariaLabel: "Usar calculadora" },
     { label: "Nosotros", href: "/nosotros", ariaLabel: "Conocer sobre nosotros" },
     { label: "Contacto", href: "/contacto", ariaLabel: "Contactar" },
   ];
@@ -28,7 +27,6 @@ const Header = () => {
   const staggeredNavItems = [
     { label: "Inicio", link: "/", ariaLabel: "Ir al inicio" },
     { label: "Productos", link: "/productos", ariaLabel: "Ver productos" },
-    { label: "Calculadora", link: "/calculadora", ariaLabel: "Usar calculadora" },
     { label: "Nosotros", link: "/nosotros", ariaLabel: "Conocer sobre nosotros" },
     { label: "Contacto", link: "/contacto", ariaLabel: "Contactar" },
   ];
