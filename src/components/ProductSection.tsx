@@ -27,6 +27,12 @@ import solarPanel04 from "@/assets/b2grow-greenside/images/solar-panel-200w/04.j
 import solarPanel05 from "@/assets/b2grow-greenside/images/solar-panel-200w/05.jpg";
 import solarPanel08 from "@/assets/b2grow-greenside/images/solar-panel-200w/08.jpg";
 
+// Import UFO DECO images
+import ufoDecoBanner1 from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-1.png";
+import ufoDecoBanner2 from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-2.png";
+import ufoDecoBanner3 from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-3.png";
+import ufoDecoProduct from "@/assets/b2grow-greenside/images/ufo-deco/banner-deco-product.png";
+
 const productLines = [
   {
     lineId: "greenside",
@@ -138,6 +144,7 @@ const productLines = [
 
 const ProductSection = () => {
   const [activeModule, setActiveModule] = useState<string | null>(null);
+  const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
   const headerContainerRef = useRef<HTMLDivElement>(null);
 
   const modules = [
@@ -212,12 +219,130 @@ const ProductSection = () => {
     }
 
     if (activeModule === "multiselect" && line) {
+      // If no subcategory is selected, show the subcategory buttons
+      if (!activeSubcategory) {
+        return (
+          <div className="space-y-8">
+            <div ref={headerContainerRef} className="relative text-center space-y-4">
+              <h3 className="text-3xl lg:text-4xl font-bold">
+                <VariableProximity
+                  label={line.lineName}
+                  fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                  toFontVariationSettings="'wght' 900, 'opsz' 40"
+                  containerRef={headerContainerRef}
+                  radius={150}
+                  falloff="linear"
+                  className="text-foreground"
+                />
+              </h3>
+              <p className="text-xl font-semibold text-primary">
+                <VariableProximity
+                  label={line.lineSubtitle}
+                  fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                  toFontVariationSettings="'wght' 700, 'opsz' 30"
+                  containerRef={headerContainerRef}
+                  radius={120}
+                  falloff="linear"
+                />
+              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                <VariableProximity
+                  label={line.description}
+                  fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                  toFontVariationSettings="'wght' 600, 'opsz' 25"
+                  containerRef={headerContainerRef}
+                  radius={100}
+                  falloff="linear"
+                />
+              </p>
+            </div>
+
+            {/* Subcategory Selection Buttons */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card
+                className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-amber-500/60 bg-card/80 backdrop-blur-sm overflow-hidden"
+                onClick={() => setActiveSubcategory("deco")}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-yellow-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <CardHeader className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Lightbulb className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    UFO DECO
+                  </CardTitle>
+                  <CardDescription className="text-lg font-semibold text-primary/80">
+                    Luminaria Decorativa
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="relative">
+                  <p className="text-muted-foreground">
+                    Luminaria comercial, profesional y decorativa con múltiples diferenciales integrados
+                  </p>
+                  <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                    <span>Ver más</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card
+                className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-amber-500/60 bg-card/80 backdrop-blur-sm overflow-hidden"
+                onClick={() => setActiveSubcategory("industrial")}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-yellow-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                <CardHeader className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Lightbulb className="h-8 w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    UFO INDUSTRIAL
+                  </CardTitle>
+                  <CardDescription className="text-lg font-semibold text-primary/80">
+                    Luminaria Industrial
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="relative">
+                  <p className="text-muted-foreground">
+                    Luminaria industrial con múltiples diferenciales integrados en una solución competitiva
+                  </p>
+                  <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                    <span>Ver más</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        );
+      }
+
+      // Show specific subcategory content
+      const category = line.categories?.find(
+        cat => 
+          (activeSubcategory === "deco" && cat.categoryName === "UFO DECO") ||
+          (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL")
+      );
+
+      if (!category) return null;
+
       return (
         <div className="space-y-8">
-          <div ref={headerContainerRef} className="relative text-center space-y-4">
-            <h3 className="text-3xl lg:text-4xl font-bold">
+          <div className="mb-8">
+            <Button
+              variant="ghost"
+              onClick={() => setActiveSubcategory(null)}
+              className="gap-2 hover:gap-3 transition-all"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Volver a Categorías
+            </Button>
+          </div>
+
+          <div ref={headerContainerRef} className="relative text-center space-y-3">
+            <h4 className="text-2xl lg:text-3xl font-bold">
               <VariableProximity
-                label={line.lineName}
+                label={category.categoryName}
                 fromFontVariationSettings="'wght' 400, 'opsz' 9"
                 toFontVariationSettings="'wght' 900, 'opsz' 40"
                 containerRef={headerContainerRef}
@@ -225,20 +350,10 @@ const ProductSection = () => {
                 falloff="linear"
                 className="text-foreground"
               />
-            </h3>
-            <p className="text-xl font-semibold text-primary">
+            </h4>
+            <p className="text-muted-foreground max-w-xl mx-auto">
               <VariableProximity
-                label={line.lineSubtitle}
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 700, 'opsz' 30"
-                containerRef={headerContainerRef}
-                radius={120}
-                falloff="linear"
-              />
-            </p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              <VariableProximity
-                label={line.description}
+                label={category.categoryDescription}
                 fromFontVariationSettings="'wght' 300, 'opsz' 9"
                 toFontVariationSettings="'wght' 600, 'opsz' 25"
                 containerRef={headerContainerRef}
@@ -247,60 +362,73 @@ const ProductSection = () => {
               />
             </p>
           </div>
-          
-          {line.categories && (
-            <div className="space-y-16">
-              {line.categories.map((category, idx) => (
-                <div key={idx} className="space-y-6">
-                  <div className="text-center space-y-3">
-                    <h4 className="text-2xl lg:text-3xl font-bold text-foreground">
-                      {category.categoryName}
-                    </h4>
-                    <p className="text-muted-foreground max-w-xl mx-auto">
-                      {category.categoryDescription}
-                    </p>
-                  </div>
 
-                  <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-primary/20">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {category.features.map((feature, fIdx) => (
-                        <li key={fIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="text-primary mt-1">✓</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.products.map((product, pIdx) => (
-                      <div 
-                        key={pIdx}
-                        className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/40 transition-all hover:scale-105"
-                      >
-                        <h5 className="text-xl font-bold text-foreground mb-2">
-                          {product.name}
-                        </h5>
-                        <p className="text-sm text-muted-foreground mb-4">
-                          {product.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {product.specs.map((spec, sIdx) => (
-                            <span 
-                              key={sIdx}
-                              className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
-                            >
-                              {spec}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+          {/* UFO DECO Images Gallery */}
+          {activeSubcategory === "deco" && (
+            <div className="space-y-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <img 
+                  src={ufoDecoBanner1} 
+                  alt="UFO DECO - Línea Deco adaptable a todos los ambientes" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoDecoBanner2} 
+                  alt="UFO DECO - Calidad, Diseño y Confort" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <img 
+                  src={ufoDecoBanner3} 
+                  alt="UFO DECO - Grandes prestaciones para todos tus proyectos" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+                <img 
+                  src={ufoDecoProduct} 
+                  alt="UFO DECO - Características del producto" 
+                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                />
+              </div>
             </div>
           )}
+
+          <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-primary/20">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {category.features.map((feature, fIdx) => (
+                <li key={fIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <span className="text-primary mt-1">✓</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {category.products.map((product, pIdx) => (
+              <div 
+                key={pIdx}
+                className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/40 transition-all hover:scale-105"
+              >
+                <h5 className="text-xl font-bold text-foreground mb-2">
+                  {product.name}
+                </h5>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {product.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {product.specs.map((spec, sIdx) => (
+                    <span 
+                      key={sIdx}
+                      className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
+                    >
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       );
     }
@@ -349,8 +477,8 @@ const ProductSection = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Back Button - Only show when a module is active */}
-        {activeModule && (
+        {/* Back Button - Only show when a module is active and no subcategory is selected */}
+        {activeModule && !activeSubcategory && (
           <div className="mb-8">
             <Button
               variant="ghost"
