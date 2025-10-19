@@ -527,8 +527,8 @@ const ProductSection = () => {
         <DotGrid 
           dotSize={4}
           gap={20}
-          baseColor="hsl(var(--primary) / 0.3)"
-          activeColor="hsl(var(--primary))"
+          baseColor="#ffffff"
+          activeColor="#ffffff"
           proximity={120}
           shockRadius={200}
           shockStrength={4}
