@@ -564,7 +564,7 @@ const ProductSection = () => {
               return (
                 <Card
                   key={module.id}
-                  className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden"
+                  className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden min-h-[400px] flex flex-col justify-end"
                   onClick={() => setActiveModule(module.id)}
                 >
                   {/* Background Image */}
@@ -582,16 +582,7 @@ const ProductSection = () => {
                   )}
                   <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
                   
-                  <CardHeader className="relative">
-                    <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                      {module.title}
-                    </CardTitle>
-                    <CardDescription className="text-lg font-semibold text-primary/80">
-                      {module.subtitle}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent className="relative">
+                  <CardContent className="relative pb-8">
                     <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
                       <span>Ver más</span>
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
