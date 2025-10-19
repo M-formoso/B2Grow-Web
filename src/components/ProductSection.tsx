@@ -570,22 +570,19 @@ const ProductSection = () => {
                   {/* Background Image */}
                   {module.id === "greenside" && (
                     <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                      className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
                       style={{ backgroundImage: `url(${greensideBg})` }}
                     />
                   )}
                   {module.id === "multiselect" && (
                     <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                      className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
                       style={{ backgroundImage: `url(${multiselectBg})` }}
                     />
                   )}
                   <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
                   
                   <CardHeader className="relative">
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${module.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-8 w-8 text-white" />
-                    </div>
                     <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
                       {module.title}
                     </CardTitle>
@@ -595,10 +592,7 @@ const ProductSection = () => {
                   </CardHeader>
                   
                   <CardContent className="relative">
-                    <p className="text-muted-foreground">
-                      {module.description}
-                    </p>
-                    <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                    <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
                       <span>Ver más</span>
                       <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </div>
