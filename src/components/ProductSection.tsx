@@ -39,6 +39,10 @@ import ufoIndustrialHB12_150w_2 from "@/assets/b2grow-greenside/images/ufo-indus
 import ufoIndustrialHB12_200w_1 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-200w-1.png";
 import ufoIndustrialHB12_200w_2 from "@/assets/b2grow-greenside/images/ufo-industrial/hb12-200w-2.png";
 
+// Import background images for product cards
+import greensideBg from "@/assets/greenside-bg.png";
+import multiselectBg from "@/assets/multiselect-bg.png";
+
 const productLines = [
   {
     lineId: "greenside",
@@ -563,6 +567,19 @@ const ProductSection = () => {
                   className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden"
                   onClick={() => setActiveModule(module.id)}
                 >
+                  {/* Background Image */}
+                  {module.id === "greenside" && (
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                      style={{ backgroundImage: `url(${greensideBg})` }}
+                    />
+                  )}
+                  {module.id === "multiselect" && (
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                      style={{ backgroundImage: `url(${multiselectBg})` }}
+                    />
+                  )}
                   <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
                   
                   <CardHeader className="relative">
