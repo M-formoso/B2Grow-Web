@@ -8,6 +8,7 @@ import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import { useEffect, useRef } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
@@ -189,55 +190,65 @@ const Hero = () => {
               </ScrollReveal>
             </div>
 
-            {/* Videos Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-              {/* Campaign Video */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                  <div className="aspect-video w-full">
-                    <video 
-                      ref={videoRef1}
-                      src={campaignVideo}
-                      controls
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    >
-                      Tu navegador no soporta el tag de video.
-                    </video>
-                  </div>
-                  <div className="p-4 bg-black/40 backdrop-blur-sm">
-                    <h3 className="text-lg font-semibold text-white">Campaña B2GROW</h3>
-                    <p className="text-sm text-white/70">Nuestra visión de tecnología sustentable</p>
-                  </div>
-                </div>
-              </div>
+            {/* Videos Carousel */}
+            <div className="relative mb-12 px-16">
+              <Carousel className="w-full max-w-5xl mx-auto">
+                <CarouselContent>
+                  {/* Campaign Video */}
+                  <CarouselItem>
+                    <div className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                      <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                        <div className="aspect-video w-full">
+                          <video 
+                            ref={videoRef1}
+                            src={campaignVideo}
+                            controls
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover"
+                          >
+                            Tu navegador no soporta el tag de video.
+                          </video>
+                        </div>
+                        <div className="p-6 bg-black/40 backdrop-blur-sm">
+                          <h3 className="text-2xl font-semibold text-white mb-2">Campaña B2GROW</h3>
+                          <p className="text-base text-white/70">Nuestra visión de tecnología sustentable</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
 
-              {/* UFO Video */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-accent via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                  <div className="aspect-video w-full">
-                    <video 
-                      ref={videoRef2}
-                      src={ufoVideo}
-                      controls
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    >
-                      Tu navegador no soporta el tag de video.
-                    </video>
-                  </div>
-                  <div className="p-4 bg-black/40 backdrop-blur-sm">
-                    <h3 className="text-lg font-semibold text-white">Iluminación UFO</h3>
-                    <p className="text-sm text-white/70">Tecnología LED de última generación</p>
-                  </div>
-                </div>
-              </div>
+                  {/* UFO Video */}
+                  <CarouselItem>
+                    <div className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-accent via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                      <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                        <div className="aspect-video w-full">
+                          <video 
+                            ref={videoRef2}
+                            src={ufoVideo}
+                            controls
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover"
+                          >
+                            Tu navegador no soporta el tag de video.
+                          </video>
+                        </div>
+                        <div className="p-6 bg-black/40 backdrop-blur-sm">
+                          <h3 className="text-2xl font-semibold text-white mb-2">Iluminación UFO</h3>
+                          <p className="text-base text-white/70">Tecnología LED de última generación</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
+                <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
+              </Carousel>
             </div>
 
             {/* Optional: Video description or features below */}
