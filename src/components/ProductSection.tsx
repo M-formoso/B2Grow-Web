@@ -2,11 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import ProductGallery from "./ProductGallery";
 import DotGrid from "@/components/effects/DotGrid";
 import VariableProximity from "@/components/effects/VariableProximity";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Battery, Lightbulb, Calculator as CalcIcon } from "lucide-react";
+import ScrollReveal from "@/components/effects/ScrollReveal";
+import GradientText from "@/components/effects/GradientText";
+import DecryptedText from "@/components/effects/DecryptedText";
+import { ArrowLeft, Battery, Lightbulb, Calculator as CalcIcon, Zap, Sun, Sparkles, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Calculator from "./Calculator";
 import { useCursorColor } from "@/contexts/CursorColorContext";
+import { motion } from "framer-motion";
 
 // Import Module Power Station images
 import mainImage1 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-01.jpg";
@@ -220,99 +223,116 @@ const ProductSection = () => {
         const isGreenside = activeModule === "greenside";
         const subcategories = isGreenside 
           ? [
-              { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Battery },
-              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Battery }
+              { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Zap, color: "#10b981" },
+              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: "#10b981" }
             ]
           : [
-              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Lightbulb },
-              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb }
+              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: "#f59e0b" },
+              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: "#f59e0b" }
             ];
 
         return (
-          <div className="space-y-8">
-            <div ref={headerContainerRef} className="relative text-center space-y-4">
-              <h3 className="text-3xl lg:text-4xl font-bold">
-                <VariableProximity
-                  label={line.lineName}
-                  fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                  toFontVariationSettings="'wght' 900, 'opsz' 40"
-                  containerRef={headerContainerRef}
-                  radius={150}
-                  falloff="linear"
-                  className="text-foreground"
+          <div className="space-y-16">
+            <div ref={headerContainerRef} className="relative text-center space-y-6">
+              <GradientText 
+                colors={isGreenside ? ['#10b981', '#34d399', '#6ee7b7', '#10b981'] : ['#f59e0b', '#fbbf24', '#fcd34d', '#f59e0b']}
+                animationSpeed={6}
+                className="text-4xl lg:text-6xl font-black"
+              >
+                {line.lineName}
+              </GradientText>
+              <div className="text-2xl lg:text-3xl font-bold">
+                <DecryptedText 
+                  text={line.lineSubtitle}
+                  animateOn="view"
+                  speed={30}
                 />
-              </h3>
-              <p className="text-xl font-semibold text-primary">
-                <VariableProximity
-                  label={line.lineSubtitle}
-                  fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                  toFontVariationSettings="'wght' 700, 'opsz' 30"
-                  containerRef={headerContainerRef}
-                  radius={120}
-                  falloff="linear"
-                />
-              </p>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                <VariableProximity
-                  label={line.description}
-                  fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                  toFontVariationSettings="'wght' 600, 'opsz' 25"
-                  containerRef={headerContainerRef}
-                  radius={100}
-                  falloff="linear"
-                />
-              </p>
+              </div>
+              <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+                <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
+                  {line.description}
+                </ScrollReveal>
+              </div>
             </div>
 
-            {/* Subcategory Selection Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Subcategory Selection - Dynamic Layout */}
+            <div className="space-y-20 max-w-7xl mx-auto">
               {subcategories.map((subcat, index) => {
                 const Icon = subcat.icon;
-                const gradientColor = isGreenside ? "from-emerald-500 to-green-600" : "from-amber-500 to-yellow-600";
-                const hoverBorderColor = isGreenside ? "hover:border-emerald-500/60" : "hover:border-amber-500/60";
-                
-                // Get the corresponding category data to display features
                 const categoryData = line.categories[index];
+                const isEven = index % 2 === 0;
 
                 return (
-                  <div key={subcat.id} className="space-y-6">
-                    <Card
-                      className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 ${hoverBorderColor} bg-card/80 backdrop-blur-sm overflow-hidden`}
-                      onClick={() => setActiveSubcategory(subcat.id)}
-                    >
-                      <div className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                      <CardHeader className="relative">
-                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${gradientColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                          <Icon className="h-8 w-8 text-white" />
-                        </div>
-                        <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                          {subcat.name}
-                        </CardTitle>
-                        <CardDescription className="text-lg font-semibold text-primary/80">
-                          {subcat.subtitle}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="relative">
-                        <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                          <span>Ver más</span>
-                          <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </div>
-                      </CardContent>
-                    </Card>
+                  <motion.div 
+                    key={subcat.id} 
+                    className="relative"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+                      {/* Icon and Title Section */}
+                      <div className="flex-1 space-y-6">
+                        <motion.div
+                          className="inline-flex items-center gap-4 cursor-pointer group"
+                          onClick={() => setActiveSubcategory(subcat.id)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div 
+                            className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all"
+                            style={{ 
+                              background: `linear-gradient(135deg, ${subcat.color}22, ${subcat.color}44)`,
+                              border: `2px solid ${subcat.color}66`
+                            }}
+                          >
+                            <Icon className="h-10 w-10" style={{ color: subcat.color }} />
+                          </div>
+                          <div className="text-left">
+                            <h4 className="text-3xl lg:text-4xl font-black tracking-tight group-hover:text-primary transition-colors">
+                              {subcat.name}
+                            </h4>
+                            <p className="text-lg font-semibold" style={{ color: subcat.color }}>
+                              {subcat.subtitle}
+                            </p>
+                          </div>
+                        </motion.div>
 
-                    {/* Features displayed before clicking */}
-                    <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-primary/20">
-                      <h5 className="text-lg font-bold text-foreground mb-4">{categoryData.categoryDescription}</h5>
-                      <ul className="grid grid-cols-1 gap-3">
-                        {categoryData.features.map((feature, fIdx) => (
-                          <li key={fIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <span className="text-primary mt-1">✓</span>
-                            <span>{feature}</span>
-                          </li>
+                        <div className="text-base lg:text-lg text-muted-foreground leading-relaxed">
+                          <ScrollReveal baseOpacity={0.2} enableBlur={true} baseRotation={2} blurStrength={6}>
+                            {categoryData.categoryDescription}
+                          </ScrollReveal>
+                        </div>
+
+                        <Button
+                          onClick={() => setActiveSubcategory(subcat.id)}
+                          className="group gap-2"
+                          size="lg"
+                        >
+                          <span>Explorar {subcat.name}</span>
+                          <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </div>
+
+                      {/* Features Section */}
+                      <div className="flex-1 space-y-4">
+                        {categoryData.features.slice(0, 6).map((feature, fIdx) => (
+                          <motion.div
+                            key={fIdx}
+                            className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
+                            initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: fIdx * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: subcat.color }} />
+                            <span className="text-sm lg:text-base text-foreground">{feature}</span>
+                          </motion.div>
                         ))}
-                      </ul>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -333,8 +353,10 @@ const ProductSection = () => {
 
       if (!category) return null;
 
+      const categoryColor = activeModule === "greenside" ? "#10b981" : "#f59e0b";
+      
       return (
-        <div className="space-y-8">
+        <div className="space-y-12">
           <div className="mb-8">
             <Button
               variant="ghost"
@@ -346,170 +368,213 @@ const ProductSection = () => {
             </Button>
           </div>
 
-          <div ref={headerContainerRef} className="relative text-center space-y-3">
-            <h4 className="text-2xl lg:text-3xl font-bold">
-              <VariableProximity
-                label={category.categoryName}
-                fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                toFontVariationSettings="'wght' 900, 'opsz' 40"
-                containerRef={headerContainerRef}
-                radius={150}
-                falloff="linear"
-                className="text-foreground"
-              />
-            </h4>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              <VariableProximity
-                label={category.categoryDescription}
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 600, 'opsz' 25"
-                containerRef={headerContainerRef}
-                radius={100}
-                falloff="linear"
-              />
-            </p>
+          <div ref={headerContainerRef} className="relative text-center space-y-6">
+            <GradientText 
+              colors={activeModule === "greenside" ? ['#10b981', '#34d399', '#6ee7b7', '#10b981'] : ['#f59e0b', '#fbbf24', '#fcd34d', '#f59e0b']}
+              animationSpeed={6}
+              className="text-3xl lg:text-5xl font-black"
+            >
+              {category.categoryName}
+            </GradientText>
+            <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
+                {category.categoryDescription}
+              </ScrollReveal>
+            </div>
           </div>
 
           {/* Images Gallery for Greenside Products */}
           {activeModule === "greenside" && "images" in category && category.images && (
-            <div className="space-y-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.images.slice(0, 6).map((img, idx) => (
-                  <img 
+            <div className="space-y-8 mb-12">
+              <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                {category.images.map((img, idx) => (
+                  <motion.div
                     key={idx}
-                    src={img.src} 
-                    alt={`${category.categoryName} - Imagen ${idx + 1}`}
-                    className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                  />
+                    className="break-inside-avoid"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
+                  >
+                    <img 
+                      src={img.src} 
+                      alt={`${category.categoryName} - Imagen ${idx + 1}`}
+                      className="w-full h-auto rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
+                    />
+                  </motion.div>
                 ))}
               </div>
-              {category.images.length > 6 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {category.images.slice(6).map((img, idx) => (
-                    <img 
-                      key={idx + 6}
-                      src={img.src} 
-                      alt={`${category.categoryName} - Imagen detalle ${idx + 1}`}
-                      className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                    />
-                  ))}
-                </div>
-              )}
             </div>
           )}
 
           {/* Images Gallery for Multiselect Products */}
           {activeModule === "multiselect" && activeSubcategory === "deco" && (
-            <div className="space-y-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <img 
-                  src={ufoDecoBanner1} 
-                  alt="UFO DECO - Línea Deco adaptable a todos los ambientes" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoDecoBanner2} 
-                  alt="UFO DECO - Calidad, Diseño y Confort" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <img 
-                  src={ufoDecoBanner3} 
-                  alt="UFO DECO - Grandes prestaciones para todos tus proyectos" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoDecoProduct} 
-                  alt="UFO DECO - Características del producto" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
+            <div className="space-y-8 mb-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {[
+                  { src: ufoDecoBanner1, alt: "UFO DECO - Línea Deco adaptable a todos los ambientes" },
+                  { src: ufoDecoBanner2, alt: "UFO DECO - Calidad, Diseño y Confort" },
+                  { src: ufoDecoBanner3, alt: "UFO DECO - Grandes prestaciones para todos tus proyectos" },
+                  { src: ufoDecoProduct, alt: "UFO DECO - Características del producto" }
+                ].map((img, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.15 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.03 }}
+                    className="relative overflow-hidden rounded-2xl shadow-2xl"
+                  >
+                    <img 
+                      src={img.src} 
+                      alt={img.alt} 
+                      className="w-full h-auto"
+                    />
+                  </motion.div>
+                ))}
               </div>
             </div>
           )}
 
           {activeModule === "multiselect" && activeSubcategory === "industrial" && (
-            <div className="space-y-6 mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
-                  <div className="text-5xl font-bold text-amber-500 mb-2">100W</div>
-                  <div className="text-sm text-muted-foreground">Potencia Baja</div>
-                </div>
-                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
-                  <div className="text-5xl font-bold text-amber-500 mb-2">150W</div>
-                  <div className="text-sm text-muted-foreground">Potencia Media</div>
-                </div>
-                <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
-                  <div className="text-5xl font-bold text-amber-500 mb-2">200W</div>
-                  <div className="text-sm text-muted-foreground">Potencia Alta</div>
-                </div>
+            <div className="space-y-12 mb-12">
+              {/* Power Options */}
+              <div className="flex flex-wrap justify-center gap-6 mb-12">
+                {[
+                  { power: "100W", label: "Potencia Baja" },
+                  { power: "150W", label: "Potencia Media" },
+                  { power: "200W", label: "Potencia Alta" }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="relative overflow-hidden rounded-2xl p-8 text-center min-w-[160px]"
+                    style={{ 
+                      background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.2))',
+                      border: '2px solid rgba(245, 158, 11, 0.3)'
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.1, borderColor: 'rgba(245, 158, 11, 0.6)' }}
+                  >
+                    <div className="text-6xl font-black mb-2" style={{ color: '#f59e0b' }}>
+                      {item.power}
+                    </div>
+                    <div className="text-sm font-semibold text-muted-foreground">
+                      {item.label}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <img 
-                  src={ufoIndustrialHB12_150w_1} 
-                  alt="UFO INDUSTRIAL B2G-HB12 150W - Vista superior" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoIndustrialHB12_150w_2} 
-                  alt="UFO INDUSTRIAL B2G-HB12 150W - Vista lateral" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <img 
-                  src={ufoIndustrialHB12_200w_1} 
-                  alt="UFO INDUSTRIAL B2G-HB12 200W - Vista frontal" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
-                <img 
-                  src={ufoIndustrialHB12_200w_2} 
-                  alt="UFO INDUSTRIAL B2G-HB12 200W - Vista detalle LED" 
-                  className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
-                />
+              {/* Product Images */}
+              <div className="columns-1 md:columns-2 gap-8 space-y-8">
+                {[
+                  { src: ufoIndustrialHB12_150w_1, alt: "UFO INDUSTRIAL B2G-HB12 150W - Vista superior" },
+                  { src: ufoIndustrialHB12_150w_2, alt: "UFO INDUSTRIAL B2G-HB12 150W - Vista lateral" },
+                  { src: ufoIndustrialHB12_200w_1, alt: "UFO INDUSTRIAL B2G-HB12 200W - Vista frontal" },
+                  { src: ufoIndustrialHB12_200w_2, alt: "UFO INDUSTRIAL B2G-HB12 200W - Vista detalle LED" }
+                ].map((img, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="break-inside-avoid"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.15 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img 
+                      src={img.src} 
+                      alt={img.alt} 
+                      className="w-full h-auto rounded-2xl shadow-2xl"
+                    />
+                  </motion.div>
+                ))}
               </div>
             </div>
           )}
 
           {/* Features List */}
-          <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-primary/20">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="max-w-6xl mx-auto space-y-4">
+            <div className="text-center mb-8">
+              <h5 className="text-2xl font-bold">
+                <DecryptedText 
+                  text="Características Destacadas"
+                  animateOn="view"
+                  speed={20}
+                />
+              </h5>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {category.features.map((feature, fIdx) => (
-                <li key={fIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>{feature}</span>
-                </li>
+                <motion.div
+                  key={fIdx}
+                  className="flex items-start gap-3 bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-primary/20 hover:border-primary/40 transition-all"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: fIdx * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.03, borderColor: categoryColor }}
+                >
+                  <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: categoryColor }} />
+                  <span className="text-sm lg:text-base text-foreground leading-relaxed">{feature}</span>
+                </motion.div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Product Cards (only for Multiselect) */}
           {activeModule === "multiselect" && "products" in category && category.products && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.products.map((product, pIdx) => (
-                <div 
-                  key={pIdx}
-                  className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/40 transition-all hover:scale-105"
-                >
-                  <h5 className="text-xl font-bold text-foreground mb-2">
-                    {product.name}
-                  </h5>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {product.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {product.specs.map((spec, sIdx) => (
-                      <span 
-                        key={sIdx}
-                        className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className="max-w-6xl mx-auto space-y-8">
+              <div className="text-center">
+                <h5 className="text-2xl font-bold">
+                  <DecryptedText 
+                    text="Modelos Disponibles"
+                    animateOn="view"
+                    speed={20}
+                  />
+                </h5>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {category.products.map((product, pIdx) => (
+                  <motion.div 
+                    key={pIdx}
+                    className="relative overflow-hidden rounded-2xl p-6 bg-background/40 backdrop-blur-sm border-2 transition-all"
+                    style={{ borderColor: `${categoryColor}33` }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: pIdx * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05, borderColor: `${categoryColor}99` }}
+                  >
+                    <h5 className="text-2xl font-black mb-3" style={{ color: categoryColor }}>
+                      {product.name}
+                    </h5>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                      {product.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {product.specs.map((spec, sIdx) => (
+                        <span 
+                          key={sIdx}
+                          className="text-xs px-3 py-1.5 rounded-full font-semibold"
+                          style={{ 
+                            background: `${categoryColor}22`,
+                            color: categoryColor,
+                            border: `1px solid ${categoryColor}44`
+                          }}
+                        >
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -519,29 +584,20 @@ const ProductSection = () => {
 
     if (activeModule === "calculator") {
       return (
-        <div className="space-y-8">
-          <div ref={headerContainerRef} className="relative text-center space-y-4">
-            <h3 className="text-3xl lg:text-4xl font-bold">
-              <VariableProximity
-                label="Calculadora de Eficiencia Energética"
-                fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                toFontVariationSettings="'wght' 900, 'opsz' 40"
-                containerRef={headerContainerRef}
-                radius={150}
-                falloff="linear"
-                className="text-foreground"
-              />
-            </h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              <VariableProximity
-                label="Armá un producto a tu medida según tus necesidades"
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 600, 'opsz' 25"
-                containerRef={headerContainerRef}
-                radius={100}
-                falloff="linear"
-              />
-            </p>
+        <div className="space-y-12">
+          <div ref={headerContainerRef} className="relative text-center space-y-6">
+            <GradientText 
+              colors={['#3b82f6', '#06b6d4', '#8b5cf6', '#3b82f6']}
+              animationSpeed={6}
+              className="text-3xl lg:text-5xl font-black"
+            >
+              Calculadora de Eficiencia Energética
+            </GradientText>
+            <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
+                Armá un producto a tu medida según tus necesidades
+              </ScrollReveal>
+            </div>
           </div>
           <Calculator />
         </div>
@@ -583,68 +639,70 @@ const ProductSection = () => {
           </div>
         )}
 
-        {/* Dashboard Cards or Module Content */}
+        {/* Dashboard or Module Content */}
         {!activeModule ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-              {modules.filter(m => m.id !== 'calculator').map((module) => {
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+              {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
                 const Icon = module.icon;
+                const bgImage = module.id === "greenside" ? greensideBg : multiselectBg;
+                
                 return (
-                  <Card
+                  <motion.div
                     key={module.id}
-                    className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden min-h-[400px] flex flex-col justify-end"
+                    className="group cursor-pointer relative overflow-hidden rounded-3xl min-h-[500px] flex flex-col justify-end p-8"
                     onClick={() => setActiveModule(module.id)}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.2 }}
+                    whileHover={{ scale: 1.03 }}
                   >
                     {/* Background Image */}
-                    {module.id === "greenside" && (
-                      <div 
-                        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
-                        style={{ backgroundImage: `url(${greensideBg})` }}
-                      />
-                    )}
-                    {module.id === "multiselect" && (
-                      <div 
-                        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
-                        style={{ backgroundImage: `url(${multiselectBg})` }}
-                      />
-                    )}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:opacity-70 transition-opacity duration-500"
+                      style={{ backgroundImage: `url(${bgImage})` }}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                     
-                    <CardContent className="relative pb-8">
-                      <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                        <span>Ver más</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    <div className="relative z-10 space-y-4">
+                      <Icon className="h-16 w-16 text-primary group-hover:scale-110 transition-transform" />
+                      <h3 className="text-3xl lg:text-4xl font-black tracking-tight">
+                        {module.title}
+                      </h3>
+                      <p className="text-lg font-semibold text-primary">
+                        {module.subtitle}
+                      </p>
+                      <div className="text-muted-foreground leading-relaxed">
+                        <ScrollReveal baseOpacity={0.3} enableBlur={false} baseRotation={0}>
+                          {module.description}
+                        </ScrollReveal>
                       </div>
-                    </CardContent>
-                  </Card>
+                      <div className="flex items-center text-primary font-bold group-hover:gap-2 transition-all pt-4">
+                        <span>Explorar</span>
+                        <ArrowLeft className="h-5 w-5 rotate-180 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </motion.div>
                 );
               })}
             </div>
             
             {/* Calculator Section */}
-            <div className="space-y-8">
-              <div ref={headerContainerRef} className="relative text-center space-y-4">
-                <h3 className="text-3xl lg:text-4xl font-bold">
-                  <VariableProximity
-                    label="Calculadora de Eficiencia Energética"
-                    fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                    toFontVariationSettings="'wght' 900, 'opsz' 40"
-                    containerRef={headerContainerRef}
-                    radius={150}
-                    falloff="linear"
-                    className="text-foreground"
-                  />
-                </h3>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  <VariableProximity
-                    label="Armá un producto a tu medida según tus necesidades"
-                    fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                    toFontVariationSettings="'wght' 600, 'opsz' 25"
-                    containerRef={headerContainerRef}
-                    radius={100}
-                    falloff="linear"
-                  />
-                </p>
+            <div className="space-y-12">
+              <div ref={headerContainerRef} className="relative text-center space-y-6">
+                <GradientText 
+                  colors={['#3b82f6', '#06b6d4', '#8b5cf6', '#3b82f6']}
+                  animationSpeed={6}
+                  className="text-3xl lg:text-5xl font-black"
+                >
+                  Calculadora de Eficiencia Energética
+                </GradientText>
+                <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+                  <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
+                    Armá un producto a tu medida según tus necesidades
+                  </ScrollReveal>
+                </div>
               </div>
               <Calculator />
             </div>
