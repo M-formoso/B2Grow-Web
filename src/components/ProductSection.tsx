@@ -49,15 +49,21 @@ const productLines = [
     lineName: "LÍNEA GREENSIDE",
     lineSubtitle: "ESTACIONES DE ENERGÍA",
     description: "Soluciones inteligentes de energía portátil y solar para independencia energética",
-    products: [
+    categories: [
       {
-        name: "Estación de Energía Inteligente",
-        description: "Estación de energía inteligente escalable y transportable. Anti cortes de energía, UPS profesional con 3 configuraciones. Sin mantenimiento, sin ruidos, sin combustibles. A tu medida, escalable a tu necesidad, fácil de trasladar y transportar.",
+        categoryName: "ESTACIÓN DE ENERGÍA",
+        categoryDescription: "Estación de energía inteligente escalable y transportable",
         features: [
-          "3 Garantía en baterías",
-          "5 años en Base principal e inversores",
+          "Anti cortes de energía",
+          "UPS profesional con 3 configuraciones",
+          "Sin mantenimiento",
+          "Sin ruidos",
+          "Sin combustibles, sin humo",
+          "A tu medida, escalable a tu necesidad",
+          "Fácil de trasladar y transportar",
+          "Múltiples usos y aplicaciones",
           "Aplicación móvil con excelente experiencia de usuario",
-          "Múltiples usos y aplicaciones"
+          "3 Garantía en baterías / 5 años en Base principal e inversores"
         ],
         images: [
           { src: mainImage1, category: "Principal" },
@@ -72,14 +78,22 @@ const productLines = [
         ]
       },
       {
-        name: "Panel Solar Plegable Portátil 200W",
-        description: "Panel solar plegable de alta eficiencia con certificación A+ y resistencia IP67. Diseñado para exploradores, probado por la naturaleza.",
+        categoryName: "PANEL SOLAR 200W",
+        categoryDescription: "Panel Solar Plegable Portátil 200W",
         features: [
           "Alta eficiencia 23%",
+          "Celdas solares 10% más largas",
           "Salida Máxima 220W",
           "Tipo Monocristalino avanzado - Grado A+",
-          "Resistente a la intemperie - IP67",
-          "Kit de soporte ajustable (35º-45º-55º)"
+          "Soportes",
+          "Diseño desmontable",
+          "Kit de soporte ajustable, con estacas de seguridad",
+          "Angulos ajustables 35º-45º-55º",
+          "Resistente a la intemperie y duradero - IP67",
+          "Energía portátil que te sigue el ritmo",
+          "Resiste lo que otros no",
+          "Plegalo. Guardalo. Llevá tu energía.",
+          "Carga rápida, sin excusas"
         ],
         images: [
           { src: solarPanel01, category: "Principal" },
@@ -187,50 +201,20 @@ const ProductSection = () => {
   const renderModuleContent = () => {
     const line = productLines.find(l => l.lineId === activeModule);
     
-    if (activeModule === "greenside" && line) {
-      return (
-        <div className="space-y-8">
-          <div ref={headerContainerRef} className="relative text-center space-y-4">
-            <h3 className="text-3xl lg:text-4xl font-bold">
-              <VariableProximity
-                label={line.lineName}
-                fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                toFontVariationSettings="'wght' 900, 'opsz' 40"
-                containerRef={headerContainerRef}
-                radius={150}
-                falloff="linear"
-                className="text-foreground"
-              />
-            </h3>
-            <p className="text-xl font-semibold text-primary">
-              <VariableProximity
-                label={line.lineSubtitle}
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 700, 'opsz' 30"
-                containerRef={headerContainerRef}
-                radius={120}
-                falloff="linear"
-              />
-            </p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              <VariableProximity
-                label={line.description}
-                fromFontVariationSettings="'wght' 300, 'opsz' 9"
-                toFontVariationSettings="'wght' 600, 'opsz' 25"
-                containerRef={headerContainerRef}
-                radius={100}
-                falloff="linear"
-              />
-            </p>
-          </div>
-          <ProductGallery products={line.products} />
-        </div>
-      );
-    }
-
-    if (activeModule === "multiselect" && line) {
-      // If no subcategory is selected, show the subcategory buttons
+    if ((activeModule === "greenside" || activeModule === "multiselect") && line) {
+      // If no subcategory is selected, show the subcategory selection
       if (!activeSubcategory) {
+        const isGreenside = activeModule === "greenside";
+        const subcategories = isGreenside 
+          ? [
+              { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Battery },
+              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Battery }
+            ]
+          : [
+              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Lightbulb },
+              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb }
+            ];
+
         return (
           <div className="space-y-8">
             <div ref={headerContainerRef} className="relative text-center space-y-4">
@@ -267,72 +251,55 @@ const ProductSection = () => {
               </p>
             </div>
 
-            {/* Subcategory Selection Buttons */}
+            {/* Subcategory Selection Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <Card
-                className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-amber-500/60 bg-card/80 backdrop-blur-sm overflow-hidden"
-                onClick={() => setActiveSubcategory("deco")}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-yellow-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                <CardHeader className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Lightbulb className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                    UFO DECO
-                  </CardTitle>
-                  <CardDescription className="text-lg font-semibold text-primary/80">
-                    Luminaria Decorativa
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative">
-                  <p className="text-muted-foreground">
-                    Luminaria comercial, profesional y decorativa con múltiples diferenciales integrados
-                  </p>
-                  <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                    <span>Ver más</span>
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </div>
-                </CardContent>
-              </Card>
+              {subcategories.map((subcat) => {
+                const Icon = subcat.icon;
+                const gradientColor = isGreenside ? "from-emerald-500 to-green-600" : "from-amber-500 to-yellow-600";
+                const hoverBorderColor = isGreenside ? "hover:border-emerald-500/60" : "hover:border-amber-500/60";
 
-              <Card
-                className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-amber-500/60 bg-card/80 backdrop-blur-sm overflow-hidden"
-                onClick={() => setActiveSubcategory("industrial")}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-yellow-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                <CardHeader className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Lightbulb className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                    UFO INDUSTRIAL
-                  </CardTitle>
-                  <CardDescription className="text-lg font-semibold text-primary/80">
-                    Luminaria Industrial
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative">
-                  <p className="text-muted-foreground">
-                    Luminaria industrial con múltiples diferenciales integrados en una solución competitiva
-                  </p>
-                  <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                    <span>Ver más</span>
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </div>
-                </CardContent>
-              </Card>
+                return (
+                  <Card
+                    key={subcat.id}
+                    className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 ${hoverBorderColor} bg-card/80 backdrop-blur-sm overflow-hidden`}
+                    onClick={() => setActiveSubcategory(subcat.id)}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                    <CardHeader className="relative">
+                      <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${gradientColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <Icon className="h-8 w-8 text-white" />
+                      </div>
+                      <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                        {subcat.name}
+                      </CardTitle>
+                      <CardDescription className="text-lg font-semibold text-primary/80">
+                        {subcat.subtitle}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative">
+                      <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                        <span>Ver más</span>
+                        <span className="group-hover:translate-x-1 transition-transform">→</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         );
       }
 
       // Show specific subcategory content
-      const category = line.categories?.find(
-        cat => 
-          (activeSubcategory === "deco" && cat.categoryName === "UFO DECO") ||
-          (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL")
-      );
+      const category = line.categories?.find(cat => {
+        if (activeModule === "greenside") {
+          return (activeSubcategory === "power-station" && cat.categoryName === "ESTACIÓN DE ENERGÍA") ||
+                 (activeSubcategory === "solar-panel" && cat.categoryName === "PANEL SOLAR 200W");
+        } else {
+          return (activeSubcategory === "deco" && cat.categoryName === "UFO DECO") ||
+                 (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL");
+        }
+      });
 
       if (!category) return null;
 
@@ -373,8 +340,36 @@ const ProductSection = () => {
             </p>
           </div>
 
-          {/* UFO DECO Images Gallery */}
-          {activeSubcategory === "deco" && (
+          {/* Images Gallery for Greenside Products */}
+          {activeModule === "greenside" && "images" in category && category.images && (
+            <div className="space-y-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {category.images.slice(0, 6).map((img, idx) => (
+                  <img 
+                    key={idx}
+                    src={img.src} 
+                    alt={`${category.categoryName} - Imagen ${idx + 1}`}
+                    className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                  />
+                ))}
+              </div>
+              {category.images.length > 6 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {category.images.slice(6).map((img, idx) => (
+                    <img 
+                      key={idx + 6}
+                      src={img.src} 
+                      alt={`${category.categoryName} - Imagen detalle ${idx + 1}`}
+                      className="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Images Gallery for Multiselect Products */}
+          {activeModule === "multiselect" && activeSubcategory === "deco" && (
             <div className="space-y-6 mb-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <img 
@@ -403,10 +398,8 @@ const ProductSection = () => {
             </div>
           )}
 
-          {/* UFO INDUSTRIAL Images Gallery */}
-          {activeSubcategory === "industrial" && (
+          {activeModule === "multiselect" && activeSubcategory === "industrial" && (
             <div className="space-y-6 mb-8">
-              {/* Power Options Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div className="bg-gradient-to-br from-amber-500/20 to-yellow-600/20 backdrop-blur-sm rounded-lg p-6 border-2 border-amber-500/40 hover:border-amber-500/60 transition-all hover:scale-105 text-center">
                   <div className="text-5xl font-bold text-amber-500 mb-2">100W</div>
@@ -422,7 +415,6 @@ const ProductSection = () => {
                 </div>
               </div>
               
-              {/* Product Detail Images */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <img 
                   src={ufoIndustrialHB12_150w_1} 
@@ -450,6 +442,7 @@ const ProductSection = () => {
             </div>
           )}
 
+          {/* Features List */}
           <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-primary/20">
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {category.features.map((feature, fIdx) => (
@@ -461,34 +454,38 @@ const ProductSection = () => {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {category.products.map((product, pIdx) => (
-              <div 
-                key={pIdx}
-                className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/40 transition-all hover:scale-105"
-              >
-                <h5 className="text-xl font-bold text-foreground mb-2">
-                  {product.name}
-                </h5>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {product.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {product.specs.map((spec, sIdx) => (
-                    <span 
-                      key={sIdx}
-                      className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
-                    >
-                      {spec}
-                    </span>
-                  ))}
+          {/* Product Cards (only for Multiselect) */}
+          {activeModule === "multiselect" && "products" in category && category.products && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {category.products.map((product, pIdx) => (
+                <div 
+                  key={pIdx}
+                  className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-primary/20 hover:border-primary/40 transition-all hover:scale-105"
+                >
+                  <h5 className="text-xl font-bold text-foreground mb-2">
+                    {product.name}
+                  </h5>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {product.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.specs.map((spec, sIdx) => (
+                      <span 
+                        key={sIdx}
+                        className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
+                      >
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       );
     }
+
 
     if (activeModule === "calculator") {
       return (
