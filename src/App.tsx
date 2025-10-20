@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplashCursor from "@/components/effects/SplashCursor";
+import { CursorColorProvider } from "@/contexts/CursorColorContext";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Calculator from "./pages/Calculator";
@@ -16,23 +17,25 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <SplashCursor />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Products />} />
-          <Route path="/calculadora" element={<Calculator />} />
-          <Route path="/nosotros" element={<AboutUs />} />
-          <Route path="/contacto" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <CursorColorProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <SplashCursor />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Products />} />
+            <Route path="/calculadora" element={<Calculator />} />
+            <Route path="/nosotros" element={<AboutUs />} />
+            <Route path="/contacto" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </CursorColorProvider>
   </QueryClientProvider>
 );
 
