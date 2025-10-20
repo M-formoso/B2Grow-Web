@@ -10,17 +10,21 @@ import ScrollReveal from "@/components/effects/ScrollReveal";
 import { useEffect, useRef } from "react";
 
 const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
+const ufoVideo = "/videos/ufo-video.mp4";
 
 const Hero = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const video1 = videoRef1.current;
+    const video2 = videoRef2.current;
+    if (!video1 || !video2) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
           if (entry.isIntersecting) {
             video.play().catch((error) => {
               console.log("Autoplay prevented:", error);
@@ -33,7 +37,8 @@ const Hero = () => {
       { threshold: 0.5 }
     );
 
-    observer.observe(video);
+    observer.observe(video1);
+    observer.observe(video2);
 
     return () => {
       observer.disconnect();
@@ -160,7 +165,7 @@ const Hero = () => {
         <div className="container mx-auto px-4 pb-20 pt-48">
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
-            <div className="text-center mb-8 animate-fade-in">
+            <div className="text-center mb-12 animate-fade-in">
               <h2 className="text-4xl lg:text-5xl font-bold mb-4">
                 <DecryptedText 
                   text="Conocé Nuestra Tecnología"
@@ -184,25 +189,53 @@ const Hero = () => {
               </ScrollReveal>
             </div>
 
-            {/* Video Container */}
-            <div className="relative group">
-              {/* Decorative border effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-              
-              {/* Video wrapper */}
-              <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                <div className="aspect-video w-full">
-                  <video 
-                    ref={videoRef}
-                    src={campaignVideo}
-                    controls
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                  >
-                    Tu navegador no soporta el tag de video.
-                  </video>
+            {/* Videos Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              {/* Campaign Video */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                  <div className="aspect-video w-full">
+                    <video 
+                      ref={videoRef1}
+                      src={campaignVideo}
+                      controls
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    >
+                      Tu navegador no soporta el tag de video.
+                    </video>
+                  </div>
+                  <div className="p-4 bg-black/40 backdrop-blur-sm">
+                    <h3 className="text-lg font-semibold text-white">Campaña B2GROW</h3>
+                    <p className="text-sm text-white/70">Nuestra visión de tecnología sustentable</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* UFO Video */}
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                  <div className="aspect-video w-full">
+                    <video 
+                      ref={videoRef2}
+                      src={ufoVideo}
+                      controls
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    >
+                      Tu navegador no soporta el tag de video.
+                    </video>
+                  </div>
+                  <div className="p-4 bg-black/40 backdrop-blur-sm">
+                    <h3 className="text-lg font-semibold text-white">Iluminación UFO</h3>
+                    <p className="text-sm text-white/70">Tecnología LED de última generación</p>
+                  </div>
                 </div>
               </div>
             </div>
