@@ -558,40 +558,70 @@ const ProductSection = () => {
 
         {/* Dashboard Cards or Module Content */}
         {!activeModule ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {modules.map((module) => {
-              const Icon = module.icon;
-              return (
-                <Card
-                  key={module.id}
-                  className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden min-h-[400px] flex flex-col justify-end"
-                  onClick={() => setActiveModule(module.id)}
-                >
-                  {/* Background Image */}
-                  {module.id === "greenside" && (
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
-                      style={{ backgroundImage: `url(${greensideBg})` }}
-                    />
-                  )}
-                  {module.id === "multiselect" && (
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
-                      style={{ backgroundImage: `url(${multiselectBg})` }}
-                    />
-                  )}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                  
-                  <CardContent className="relative pb-8">
-                    <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                      <span>Ver más</span>
-                      <span className="group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              {modules.filter(m => m.id !== 'calculator').map((module) => {
+                const Icon = module.icon;
+                return (
+                  <Card
+                    key={module.id}
+                    className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 hover:border-primary/60 bg-card/80 backdrop-blur-sm overflow-hidden min-h-[400px] flex flex-col justify-end"
+                    onClick={() => setActiveModule(module.id)}
+                  >
+                    {/* Background Image */}
+                    {module.id === "greenside" && (
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
+                        style={{ backgroundImage: `url(${greensideBg})` }}
+                      />
+                    )}
+                    {module.id === "multiselect" && (
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-300"
+                        style={{ backgroundImage: `url(${multiselectBg})` }}
+                      />
+                    )}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                    
+                    <CardContent className="relative pb-8">
+                      <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                        <span>Ver más</span>
+                        <span className="group-hover:translate-x-1 transition-transform">→</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+            
+            {/* Calculator Section */}
+            <div className="space-y-8">
+              <div ref={headerContainerRef} className="relative text-center space-y-4">
+                <h3 className="text-3xl lg:text-4xl font-bold">
+                  <VariableProximity
+                    label="Calculadora de Eficiencia Energética"
+                    fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                    toFontVariationSettings="'wght' 900, 'opsz' 40"
+                    containerRef={headerContainerRef}
+                    radius={150}
+                    falloff="linear"
+                    className="text-foreground"
+                  />
+                </h3>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  <VariableProximity
+                    label="Armá un producto a tu medida según tus necesidades"
+                    fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                    toFontVariationSettings="'wght' 600, 'opsz' 25"
+                    containerRef={headerContainerRef}
+                    radius={100}
+                    falloff="linear"
+                  />
+                </p>
+              </div>
+              <Calculator />
+            </div>
+          </>
         ) : (
           <div className="animate-fade-in">
             {renderModuleContent()}
