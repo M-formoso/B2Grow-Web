@@ -860,9 +860,9 @@ function SplashCursor({
 
       const saturation = color === 'white' ? 0 : 1.0;
       let c = HSVtoRGB(baseHue, saturation, 1.0);
-      c.r *= 0.15;
-      c.g *= 0.15;
-      c.b *= 0.15;
+      c.r *= 0.5;
+      c.g *= 0.5;
+      c.b *= 0.5;
       return c;
     }
 
