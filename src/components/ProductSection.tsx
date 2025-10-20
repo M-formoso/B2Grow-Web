@@ -252,37 +252,54 @@ const ProductSection = () => {
             </div>
 
             {/* Subcategory Selection Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {subcategories.map((subcat) => {
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {subcategories.map((subcat, index) => {
                 const Icon = subcat.icon;
                 const gradientColor = isGreenside ? "from-emerald-500 to-green-600" : "from-amber-500 to-yellow-600";
                 const hoverBorderColor = isGreenside ? "hover:border-emerald-500/60" : "hover:border-amber-500/60";
+                
+                // Get the corresponding category data to display features
+                const categoryData = line.categories[index];
 
                 return (
-                  <Card
-                    key={subcat.id}
-                    className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 ${hoverBorderColor} bg-card/80 backdrop-blur-sm overflow-hidden`}
-                    onClick={() => setActiveSubcategory(subcat.id)}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                    <CardHeader className="relative">
-                      <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${gradientColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-8 w-8 text-white" />
-                      </div>
-                      <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                        {subcat.name}
-                      </CardTitle>
-                      <CardDescription className="text-lg font-semibold text-primary/80">
-                        {subcat.subtitle}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="relative">
-                      <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
-                        <span>Ver más</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <div key={subcat.id} className="space-y-6">
+                    <Card
+                      className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-primary/20 ${hoverBorderColor} bg-card/80 backdrop-blur-sm overflow-hidden`}
+                      onClick={() => setActiveSubcategory(subcat.id)}
+                    >
+                      <div className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                      <CardHeader className="relative">
+                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${gradientColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                          <Icon className="h-8 w-8 text-white" />
+                        </div>
+                        <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                          {subcat.name}
+                        </CardTitle>
+                        <CardDescription className="text-lg font-semibold text-primary/80">
+                          {subcat.subtitle}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="relative">
+                        <div className="mt-4 flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
+                          <span>Ver más</span>
+                          <span className="group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Features displayed before clicking */}
+                    <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-primary/20">
+                      <h5 className="text-lg font-bold text-foreground mb-4">{categoryData.categoryDescription}</h5>
+                      <ul className="grid grid-cols-1 gap-3">
+                        {categoryData.features.map((feature, fIdx) => (
+                          <li key={fIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <span className="text-primary mt-1">✓</span>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 );
               })}
             </div>
