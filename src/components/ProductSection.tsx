@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ProductGallery from "./ProductGallery";
 import DotGrid from "@/components/effects/DotGrid";
 import VariableProximity from "@/components/effects/VariableProximity";
@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowLeft, Battery, Lightbulb, Calculator as CalcIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Calculator from "./Calculator";
+import { useCursorColor } from "@/contexts/CursorColorContext";
 
 // Import Module Power Station images
 import mainImage1 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-01.jpg";
@@ -170,6 +171,18 @@ const ProductSection = () => {
   const [activeModule, setActiveModule] = useState<string | null>(null);
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
   const headerContainerRef = useRef<HTMLDivElement>(null);
+  const { setColor } = useCursorColor();
+
+  // Update cursor color based on active module
+  useEffect(() => {
+    if (activeModule === 'greenside') {
+      setColor('green');
+    } else if (activeModule === 'multiselect') {
+      setColor('yellow');
+    } else {
+      setColor('white');
+    }
+  }, [activeModule, setColor]);
 
   const modules = [
     {
