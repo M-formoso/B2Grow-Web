@@ -15,6 +15,7 @@
 .scroll-stack-inner {
   padding: 10vh 2rem 50rem;
   min-height: 100vh;
+  position: relative;
 }
 
 .scroll-stack-card-wrapper {
@@ -22,6 +23,8 @@
 }
 
 .scroll-stack-card {
+  position: sticky;
+  top: 20vh;
   transform-origin: top center;
   will-change: transform, filter;
   backface-visibility: hidden;
@@ -35,20 +38,26 @@
   box-sizing: border-box;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  position: relative;
 }
 
 /* Custom styles for values cards */
+.values-scroll-stack {
+  min-height: 200vh;
+}
+
 .values-scroll-stack .scroll-stack-inner {
-  padding: 10vh 2rem 50rem;
-  min-height: 100vh;
+  padding: 10vh 2rem 100vh;
+  min-height: 200vh;
 }
 
 .values-scroll-stack .scroll-stack-card.values-card {
+  position: sticky;
+  top: 10vh;
   height: 22rem;
   padding: 0;
   background: transparent;
   box-shadow: none;
+  margin-bottom: 2rem;
 }
 
 .scroll-stack-card img {
