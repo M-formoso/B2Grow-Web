@@ -191,7 +191,7 @@ const Calculator = () => {
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Calculadora Solar B2Grow
+            Calculadora de Eficiencia Energética
           </h1>
           <p className="text-lg text-muted-foreground">
             Calculá tu sistema de energía solar ideal
