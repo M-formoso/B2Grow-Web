@@ -39,33 +39,42 @@ const AboutUs = () => {
               </div>
 
               {/* Stats Stack */}
-              <div className="pt-8">
+              <div className="pt-8 min-h-[800px]">
                 <ScrollStack
-                  itemDistance={80}
-                  itemScale={0.02}
-                  itemStackDistance={25}
-                  stackPosition="15%"
-                  baseScale={0.9}
+                  itemDistance={120}
+                  itemScale={0.015}
+                  itemStackDistance={20}
+                  stackPosition="30%"
+                  baseScale={0.95}
                   useWindowScroll={true}
+                  className="stats-scroll-stack"
                 >
-                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
-                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
-                    <p className="text-base text-muted-foreground">Años de Experiencia</p>
+                  <ScrollStackItem itemClassName="stats-stack-card">
+                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
+                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
+                      <p className="text-base text-muted-foreground">Años de Experiencia</p>
+                    </div>
                   </ScrollStackItem>
                   
-                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
-                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
-                    <p className="text-base text-muted-foreground">Proyectos Completados</p>
+                  <ScrollStackItem itemClassName="stats-stack-card">
+                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
+                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
+                      <p className="text-base text-muted-foreground">Proyectos Completados</p>
+                    </div>
                   </ScrollStackItem>
                   
-                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
-                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
-                    <p className="text-base text-muted-foreground">Ahorro Energético</p>
+                  <ScrollStackItem itemClassName="stats-stack-card">
+                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
+                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
+                      <p className="text-base text-muted-foreground">Ahorro Energético</p>
+                    </div>
                   </ScrollStackItem>
                   
-                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
-                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
-                    <p className="text-base text-muted-foreground">Países Atendidos</p>
+                  <ScrollStackItem itemClassName="stats-stack-card">
+                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
+                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
+                      <p className="text-base text-muted-foreground">Países Atendidos</p>
+                    </div>
                   </ScrollStackItem>
                 </ScrollStack>
               </div>
