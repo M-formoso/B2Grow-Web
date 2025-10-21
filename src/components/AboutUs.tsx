@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import aboutHeroImage from "@/assets/about-us-hero.png";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 
 const AboutUs = () => {
   return (
@@ -37,39 +38,36 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-6 pt-8">
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
+              {/* Stats Stack */}
+              <div className="pt-8">
+                <ScrollStack
+                  itemDistance={80}
+                  itemScale={0.02}
+                  itemStackDistance={25}
+                  stackPosition="15%"
+                  baseScale={0.9}
+                  useWindowScroll={true}
                 >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
-                  <p className="text-sm text-muted-foreground">Años de Experiencia</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
-                  <p className="text-sm text-muted-foreground">Proyectos Completados</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
-                  <p className="text-sm text-muted-foreground">Ahorro Energético</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
-                  <p className="text-sm text-muted-foreground">Países Atendidos</p>
-                </motion.div>
+                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
+                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
+                    <p className="text-base text-muted-foreground">Años de Experiencia</p>
+                  </ScrollStackItem>
+                  
+                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
+                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
+                    <p className="text-base text-muted-foreground">Proyectos Completados</p>
+                  </ScrollStackItem>
+                  
+                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
+                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
+                    <p className="text-base text-muted-foreground">Ahorro Energético</p>
+                  </ScrollStackItem>
+                  
+                  <ScrollStackItem itemClassName="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8">
+                    <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
+                    <p className="text-base text-muted-foreground">Países Atendidos</p>
+                  </ScrollStackItem>
+                </ScrollStack>
               </div>
             </div>
 
