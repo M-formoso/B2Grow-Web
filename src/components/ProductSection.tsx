@@ -735,7 +735,7 @@ const ProductSection = () => {
         {/* Dashboard or Module Content */}
         {!activeModule ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+            <div className="grid grid-cols-1 gap-12 mb-20">
               {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
                 const Icon = module.icon;
                 const bgImage = module.id === "greenside" ? greensideBg : multiselectBg;
