@@ -62,20 +62,37 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 w-full z-50 pointer-events-none">
-      <div className="w-full flex justify-center pointer-events-auto">
-        <PillNav
-          logo={b2growLogo}
-          logoAlt="B2Grow Logo"
-          items={navItems}
-          activeHref={location.pathname}
-          className="pill-nav-custom"
-          ease="power2.easeOut"
-          baseColor="#FFFFFF"
-          pillColor="rgba(255, 255, 255, 0.1)"
-          hoveredPillTextColor="#FFFFFF"
-          pillTextColor="#FFFFFF"
-          onMobileMenuClick={() => console.log('Mobile menu clicked')}
-        />
+      <div className="w-full flex items-center justify-between px-8 pt-4 pointer-events-auto">
+        {/* Logo separado */}
+        <Link 
+          to="/" 
+          className="transition-transform hover:scale-110 duration-300"
+          aria-label="Ir al inicio"
+        >
+          <img 
+            src={b2growLogo} 
+            alt="B2Grow Logo" 
+            className="h-12 w-auto"
+          />
+        </Link>
+
+        {/* Nav Pills */}
+        <div className="flex justify-center flex-1">
+          <PillNav
+            items={navItems}
+            activeHref={location.pathname}
+            className="pill-nav-custom"
+            ease="power2.easeOut"
+            baseColor="#FFFFFF"
+            pillColor="rgba(255, 255, 255, 0.1)"
+            hoveredPillTextColor="#FFFFFF"
+            pillTextColor="#FFFFFF"
+            onMobileMenuClick={() => console.log('Mobile menu clicked')}
+          />
+        </div>
+        
+        {/* Espacio para balance visual */}
+        <div className="w-12 h-12" />
       </div>
     </div>
   );
