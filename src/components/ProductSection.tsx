@@ -383,27 +383,118 @@ const ProductSection = () => {
             </div>
           </div>
 
-          {/* Images Gallery for Greenside Products */}
+          {/* Images Gallery for Greenside Products - NEW LAYOUT */}
           {activeModule === "greenside" && "images" in category && category.images && (
-            <div className="space-y-8 mb-12">
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                {category.images.map((img, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="break-inside-avoid"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.05, zIndex: 10 }}
-                  >
-                    <img 
-                      src={img.src} 
-                      alt={`${category.categoryName} - Imagen ${idx + 1}`}
-                      className="w-full h-auto rounded-2xl shadow-xl hover:shadow-2xl transition-shadow"
-                    />
-                  </motion.div>
-                ))}
+            <div className="relative">
+              <div className="flex flex-col lg:flex-row gap-12">
+                {/* Left Column - Alternating Images and Features */}
+                <div className="flex-1 space-y-16">
+                  {(() => {
+                    const mainImages = category.images.filter(img => img.category === "Principal");
+                    const features = category.features;
+                    const items = [];
+                    
+                    // Intercalate images and features
+                    const maxItems = Math.max(mainImages.length, Math.ceil(features.length / 3));
+                    for (let i = 0; i < maxItems; i++) {
+                      // Add image if available
+                      if (mainImages[i]) {
+                        items.push({
+                          type: 'image',
+                          data: mainImages[i],
+                          index: i
+                        });
+                      }
+                      
+                      // Add 2-3 features as a text block
+                      const featureStart = i * 3;
+                      const featureSlice = features.slice(featureStart, featureStart + 3);
+                      if (featureSlice.length > 0) {
+                        items.push({
+                          type: 'features',
+                          data: featureSlice,
+                          index: i
+                        });
+                      }
+                    }
+                    
+                    return items.map((item, idx) => {
+                      if (item.type === 'image') {
+                        return (
+                          <motion.div
+                            key={`img-${idx}`}
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.03 }}
+                            className="relative overflow-hidden rounded-2xl shadow-2xl"
+                          >
+                            <img 
+                              src={item.data.src} 
+                              alt={`${category.categoryName} - Imagen ${item.index + 1}`}
+                              className="w-full h-auto"
+                            />
+                          </motion.div>
+                        );
+                      } else {
+                        return (
+                          <motion.div
+                            key={`features-${idx}`}
+                            className="space-y-4"
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            viewport={{ once: true }}
+                          >
+                            {item.data.map((feature, fIdx) => (
+                              <div 
+                                key={fIdx}
+                                className="bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-primary/20"
+                              >
+                                <ScrollReveal 
+                                  baseOpacity={0.3} 
+                                  enableBlur={true} 
+                                  baseRotation={2} 
+                                  blurStrength={6}
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: categoryColor }} />
+                                    <span className="text-sm lg:text-base leading-relaxed">{feature}</span>
+                                  </div>
+                                </ScrollReveal>
+                              </div>
+                            ))}
+                          </motion.div>
+                        );
+                      }
+                    });
+                  })()}
+                </div>
+
+                {/* Right Column - Fixed Long Images */}
+                <div className="lg:w-2/5 space-y-6">
+                  <div className="lg:sticky lg:top-24 space-y-6">
+                    {category.images
+                      .filter(img => img.category === "Detalle")
+                      .map((img, idx) => (
+                        <motion.div
+                          key={`detail-${idx}`}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.6, delay: idx * 0.2 }}
+                          viewport={{ once: true }}
+                          className="relative overflow-hidden rounded-2xl shadow-2xl"
+                        >
+                          <img 
+                            src={img.src} 
+                            alt={`${category.categoryName} - Vista detallada ${idx + 1}`}
+                            className="w-full h-auto"
+                          />
+                        </motion.div>
+                      ))}
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -498,34 +589,36 @@ const ProductSection = () => {
             </div>
           )}
 
-          {/* Features List */}
-          <div className="max-w-6xl mx-auto space-y-4">
-            <div className="text-center mb-8">
-              <h5 className="text-2xl font-bold">
-                <DecryptedText 
-                  text="Características Destacadas"
-                  animateOn="view"
-                  speed={20}
-                />
-              </h5>
+          {/* Features List - Only for Multiselect or if no images */}
+          {(activeModule === "multiselect" || !("images" in category)) && (
+            <div className="max-w-6xl mx-auto space-y-4">
+              <div className="text-center mb-8">
+                <h5 className="text-2xl font-bold">
+                  <DecryptedText 
+                    text="Características Destacadas"
+                    animateOn="view"
+                    speed={20}
+                  />
+                </h5>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {category.features.map((feature, fIdx) => (
+                  <motion.div
+                    key={fIdx}
+                    className="flex items-start gap-3 bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-primary/20 hover:border-primary/40 transition-all"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: fIdx * 0.05 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.03, borderColor: categoryColor }}
+                  >
+                    <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: categoryColor }} />
+                    <span className="text-sm lg:text-base text-foreground leading-relaxed">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {category.features.map((feature, fIdx) => (
-                <motion.div
-                  key={fIdx}
-                  className="flex items-start gap-3 bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-primary/20 hover:border-primary/40 transition-all"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: fIdx * 0.05 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.03, borderColor: categoryColor }}
-                >
-                  <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: categoryColor }} />
-                  <span className="text-sm lg:text-base text-foreground leading-relaxed">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          )}
 
           {/* Product Cards (only for Multiselect) */}
           {activeModule === "multiselect" && "products" in category && category.products && (
