@@ -66,7 +66,7 @@ const Header = () => {
         {/* Logo separado */}
         <Link 
           to="/" 
-          className="transition-transform hover:scale-110 duration-300"
+          className="transition-transform hover:scale-110 duration-300 ml-12"
           aria-label="Ir al inicio"
         >
           <img 
