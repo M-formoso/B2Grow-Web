@@ -38,45 +38,39 @@ const AboutUs = () => {
                 </p>
               </div>
 
-              {/* Stats Stack */}
-              <div className="pt-8 min-h-[800px]">
-                <ScrollStack
-                  itemDistance={120}
-                  itemScale={0.015}
-                  itemStackDistance={20}
-                  stackPosition="30%"
-                  baseScale={0.95}
-                  useWindowScroll={true}
-                  className="stats-scroll-stack"
+              {/* Stats Grid - Volviendo al diseño original por ahora */}
+              <div className="grid grid-cols-2 gap-6 pt-8">
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
                 >
-                  <ScrollStackItem itemClassName="stats-stack-card">
-                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
-                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
-                      <p className="text-base text-muted-foreground">Años de Experiencia</p>
-                    </div>
-                  </ScrollStackItem>
-                  
-                  <ScrollStackItem itemClassName="stats-stack-card">
-                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
-                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
-                      <p className="text-base text-muted-foreground">Proyectos Completados</p>
-                    </div>
-                  </ScrollStackItem>
-                  
-                  <ScrollStackItem itemClassName="stats-stack-card">
-                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
-                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
-                      <p className="text-base text-muted-foreground">Ahorro Energético</p>
-                    </div>
-                  </ScrollStackItem>
-                  
-                  <ScrollStackItem itemClassName="stats-stack-card">
-                    <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 w-full">
-                      <h3 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
-                      <p className="text-base text-muted-foreground">Países Atendidos</p>
-                    </div>
-                  </ScrollStackItem>
-                </ScrollStack>
+                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
+                  <p className="text-sm text-muted-foreground">Años de Experiencia</p>
+                </motion.div>
+                
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
+                >
+                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
+                  <p className="text-sm text-muted-foreground">Proyectos Completados</p>
+                </motion.div>
+                
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
+                >
+                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
+                  <p className="text-sm text-muted-foreground">Ahorro Energético</p>
+                </motion.div>
+                
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
+                >
+                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
+                  <p className="text-sm text-muted-foreground">Países Atendidos</p>
+                </motion.div>
               </div>
             </div>
 
@@ -112,65 +106,47 @@ const AboutUs = () => {
           </div>
         </motion.div>
 
-        {/* Values Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
-        >
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
+        {/* Values Section con ScrollStack */}
+        <div className="w-full max-w-6xl mx-auto">
+          <ScrollStack
+            itemDistance={150}
+            itemScale={0.03}
+            itemStackDistance={30}
+            stackPosition="20%"
+            baseScale={0.85}
+            useWindowScroll={true}
           >
-            <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
+            <ScrollStackItem>
+              <div className="bg-card/30 backdrop-blur-sm border-border rounded-2xl p-12 text-center space-y-4">
                 <div className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">01</div>
-                <h3 className="text-2xl font-bold text-foreground">Innovación</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-3xl font-bold text-foreground">Innovación</h3>
+                <p className="text-lg text-muted-foreground">
                   Desarrollamos tecnología de vanguardia para soluciones energéticas del futuro.
                 </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+            </ScrollStackItem>
 
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
-          >
-            <div className="absolute inset-0 bg-gradient-energy opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
+            <ScrollStackItem>
+              <div className="bg-card/30 backdrop-blur-sm border-border rounded-2xl p-12 text-center space-y-4">
                 <div className="text-6xl font-bold bg-gradient-energy bg-clip-text text-transparent">02</div>
-                <h3 className="text-2xl font-bold text-foreground">Sustentabilidad</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-3xl font-bold text-foreground">Sustentabilidad</h3>
+                <p className="text-lg text-muted-foreground">
                   Comprometidos con el medio ambiente y un futuro más verde para todos.
                 </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+            </ScrollStackItem>
 
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
-          >
-            <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
+            <ScrollStackItem>
+              <div className="bg-card/30 backdrop-blur-sm border-border rounded-2xl p-12 text-center space-y-4">
                 <div className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">03</div>
-                <h3 className="text-2xl font-bold text-foreground">Calidad</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-3xl font-bold text-foreground">Calidad</h3>
+                <p className="text-lg text-muted-foreground">
                   Productos de la más alta calidad con atención y servicio excepcional.
                 </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </motion.div>
+              </div>
+            </ScrollStackItem>
+          </ScrollStack>
+        </div>
       </div>
     </section>
   );
