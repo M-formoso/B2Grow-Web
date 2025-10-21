@@ -42,6 +42,17 @@
   justify-content: center;
 }
 
+/* Custom styles for stats cards */
+.stats-scroll-stack .scroll-stack-card {
+  height: auto;
+  min-height: 120px;
+  margin: 15px 0;
+}
+
+.stats-scroll-stack .scroll-stack-inner {
+  padding: 2rem;
+}
+
 .scroll-stack-card img {
   width: 100%;
   height: 100%;
