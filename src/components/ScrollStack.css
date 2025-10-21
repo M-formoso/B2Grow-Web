@@ -27,30 +27,28 @@
   backface-visibility: hidden;
   transform-style: preserve-3d;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  height: 80vh;
+  height: 20rem;
   width: 100%;
   margin: 30px 0;
-  border-radius: 20px;
+  padding: 3rem;
+  border-radius: 40px;
   box-sizing: border-box;
-  /* Improve mobile performance */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Custom styles for stats cards */
-.stats-scroll-stack .scroll-stack-card {
-  height: auto;
-  min-height: 120px;
-  margin: 15px 0;
+/* Custom styles for values cards */
+.values-scroll-stack .scroll-stack-inner {
+  padding: 10vh 2rem 50rem;
+  min-height: 100vh;
 }
 
-.stats-scroll-stack .scroll-stack-inner {
-  padding: 2rem;
+.values-scroll-stack .scroll-stack-card.values-card {
+  height: 22rem;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .scroll-stack-card img {
