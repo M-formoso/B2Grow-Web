@@ -689,23 +689,7 @@ const ProductSection = () => {
             </div>
             
             {/* Calculator Section */}
-            <div className="space-y-12">
-              <div ref={headerContainerRef} className="relative text-center space-y-6">
-                <GradientText 
-                  colors={['#3b82f6', '#06b6d4', '#8b5cf6', '#3b82f6']}
-                  animationSpeed={6}
-                  className="text-3xl lg:text-5xl font-black"
-                >
-                  Calculadora de Eficiencia Energética
-                </GradientText>
-                <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-                  <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
-                    Armá un producto a tu medida según tus necesidades
-                  </ScrollReveal>
-                </div>
-              </div>
-              <Calculator />
-            </div>
+            <Calculator />
           </>
         ) : (
           <div className="animate-fade-in">
