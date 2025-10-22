@@ -9,6 +9,7 @@ import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import { useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
@@ -195,7 +196,15 @@ const Hero = () => {
 
             {/* Videos Carousel */}
             <div className="relative mb-12 px-16">
-              <Carousel className="w-full max-w-5xl mx-auto">
+              <Carousel 
+                className="w-full max-w-5xl mx-auto"
+                plugins={[
+                  Autoplay({
+                    delay: 5000,
+                    stopOnInteraction: false,
+                  }),
+                ]}
+              >
                 <CarouselContent>
                   {/* Campaign Video */}
                   <CarouselItem>
