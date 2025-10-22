@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
-import powerStationHero from "@/assets/power-station-hero.png";
-import solarPanelsHero from "@/assets/solar-panels-hero.png";
-import ledLightingHero from "@/assets/led-lighting-hero.png";
+import powerStationHero from "@/assets/power-station-new.png";
+import solarPanelsHero from "@/assets/solar-panel-new.png";
+import ledLightingHero from "@/assets/led-light-new.png";
 import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
@@ -112,50 +112,53 @@ const Hero = () => {
               easing="elastic"
             >
               <Card>
-                <div className="bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-4 text-white">Energía Portátil</h2>
-                    <img 
-                      src={powerStationHero} 
-                      alt="Estación de Energía Portátil B2Grow" 
-                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
-                    />
+                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src={powerStationHero} 
+                    alt="Estación de Energía Portátil B2Grow" 
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h2 className="text-3xl font-bold mb-2 text-white">Energía Portátil</h2>
+                    <p className="text-lg text-white/90">
+                      Estaciones de energía inteligentes para un futuro sustentable.
+                    </p>
                   </div>
-                  <p className="text-lg text-white/90">
-                    Estaciones de energía inteligentes para un futuro sustentable.
-                  </p>
                 </div>
               </Card>
               
               <Card>
-                <div className="bg-gradient-to-br from-accent/20 to-primary/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-4 text-white">Paneles Solares</h2>
-                    <img 
-                      src={solarPanelsHero} 
-                      alt="Paneles Solares Flexibles B2Grow" 
-                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
-                    />
+                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src={solarPanelsHero} 
+                    alt="Paneles Solares Flexibles B2Grow" 
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h2 className="text-3xl font-bold mb-2 text-white">Paneles Solares</h2>
+                    <p className="text-lg text-white/90">
+                      Paneles flexibles de alta eficiencia para máxima captación.
+                    </p>
                   </div>
-                  <p className="text-lg text-white/90">
-                    Paneles flexibles de alta eficiencia para máxima captación.
-                  </p>
                 </div>
               </Card>
               
               <Card>
-                <div className="bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between border border-white/10 shadow-2xl">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-4 text-white">LED Inteligente</h2>
-                    <img 
-                      src={ledLightingHero} 
-                      alt="Iluminación LED Inteligente B2Grow" 
-                      className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
-                    />
+                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                  <img 
+                    src={ledLightingHero} 
+                    alt="Iluminación LED Inteligente B2Grow" 
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <h2 className="text-3xl font-bold mb-2 text-white">LED Inteligente</h2>
+                    <p className="text-lg text-white/90">
+                      Sistemas LED IoT para máxima eficiencia energética.
+                    </p>
                   </div>
-                  <p className="text-lg text-white/90">
-                    Sistemas LED IoT para máxima eficiencia energética.
-                  </p>
                 </div>
               </Card>
             </CardSwap>
