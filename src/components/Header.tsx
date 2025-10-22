@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import b2growLogo from "@/assets/b2grow-logo.png";
+import b2growLogo from "@/assets/b2grow-logo-new.png";
 import StaggeredMenu from "./StaggeredMenu";
 import PillNav from "./PillNav";
 
@@ -72,7 +72,7 @@ const Header = () => {
           <img 
             src={b2growLogo} 
             alt="B2Grow Logo" 
-            className="h-12 w-auto"
+            className="h-20 w-auto"
           />
         </Link>
 

@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
-import b2growLogo from "@/assets/b2grow-logo.png";
+import b2growLogo from "@/assets/b2grow-logo-new.png";
 import poweringFuture from "@/assets/powering-future.png";
 import mundoMovimiento from "@/assets/mundo-movimiento.png";
 
@@ -66,7 +66,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="animate-slide-up">
             <div className="flex items-center space-x-2 mb-6">
-              <img src={b2growLogo} alt="B2Grow" className="h-12 w-12" />
+              <img src={b2growLogo} alt="B2Grow" className="h-20 w-auto" />
               <div>
                 <h3 className="text-xl font-bold text-foreground">B2Grow</h3>
                 <p className="text-sm text-accent font-medium">Línea Greenside</p>
