@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,15 +24,8 @@ const ChatButton = () => {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="fixed bottom-24 right-6 top-auto left-auto w-[400px] h-[600px] m-0 p-0 flex flex-col translate-x-0 translate-y-0 sm:rounded-lg">
           {/* Chat Header */}
-          <div className="p-4 border-b flex items-center justify-between">
+          <div className="p-4 border-b">
             <h2 className="text-lg font-semibold">Chat</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
           </div>
           
           {/* Chat Content Area */}
