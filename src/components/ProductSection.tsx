@@ -224,7 +224,8 @@ const ProductSection = () => {
         const subcategories = isGreenside 
           ? [
               { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Zap, color: "#10b981" },
-              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: "#10b981" }
+              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: "#10b981" },
+              { id: "calculator", name: "CALCULADORA", subtitle: "Armá tu Solución", icon: CalcIcon, color: "#10b981" }
             ]
           : [
               { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: "#f59e0b" },
@@ -336,6 +337,40 @@ const ProductSection = () => {
                 );
               })}
             </div>
+          </div>
+        );
+      }
+
+      // Handle calculator subcategory for Greenside
+      if (activeModule === "greenside" && activeSubcategory === "calculator") {
+        return (
+          <div className="space-y-12">
+            <div className="mb-8">
+              <Button
+                variant="ghost"
+                onClick={() => setActiveSubcategory(null)}
+                className="gap-2 hover:gap-3 transition-all"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Volver a Categorías
+              </Button>
+            </div>
+
+            <div ref={headerContainerRef} className="relative text-center space-y-6">
+              <GradientText 
+                colors={['#10b981', '#34d399', '#6ee7b7', '#10b981']}
+                animationSpeed={6}
+                className="text-3xl lg:text-5xl font-black"
+              >
+                Calculadora de Eficiencia Energética
+              </GradientText>
+              <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+                <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
+                  Armá un producto a tu medida según tus necesidades
+                </ScrollReveal>
+              </div>
+            </div>
+            <Calculator />
           </div>
         );
       }
@@ -675,28 +710,6 @@ const ProductSection = () => {
     }
 
 
-    if (activeModule === "calculator") {
-      return (
-        <div className="space-y-12">
-          <div ref={headerContainerRef} className="relative text-center space-y-6">
-            <GradientText 
-              colors={['#3b82f6', '#06b6d4', '#8b5cf6', '#3b82f6']}
-              animationSpeed={6}
-              className="text-3xl lg:text-5xl font-black"
-            >
-              Calculadora de Eficiencia Energética
-            </GradientText>
-            <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-              <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
-                Armá un producto a tu medida según tus necesidades
-              </ScrollReveal>
-            </div>
-          </div>
-          <Calculator />
-        </div>
-      );
-    }
-
     return null;
   };
 
@@ -735,7 +748,7 @@ const ProductSection = () => {
         {/* Dashboard or Module Content */}
         {!activeModule ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
                 const Icon = module.icon;
                 const bgImage = module.id === "greenside" ? greensideBg : multiselectBg;
@@ -780,9 +793,6 @@ const ProductSection = () => {
                 );
               })}
             </div>
-            
-            {/* Calculator Section */}
-            <Calculator />
           </>
         ) : (
           <div className="animate-fade-in">
