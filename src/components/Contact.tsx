@@ -65,26 +65,6 @@ const Contact = () => {
 
           {/* Contact Options */}
           <div className="space-y-6 animate-slide-up" style={{ animationDelay: "200ms" }}>
-            {/* Chat with AI */}
-            <Card className="group hover:shadow-energy transition-all duration-500 bg-card/50 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-gradient-primary p-3 rounded-lg group-hover:scale-110 transition-transform">
-                    <MessageSquare className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-foreground mb-2">Chat con IA</h3>
-                    <p className="text-muted-foreground mb-4">
-                      En nuestro chat podés encontrar la información y respuestas frecuentes que estás necesitando.
-                    </p>
-                    <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                      Iniciar Chat
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Distributors */}
             <Card className="group hover:shadow-green transition-all duration-500 bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
@@ -99,7 +79,7 @@ const Contact = () => {
                         <img 
                           src={ledsceneLogo} 
                           alt="Ledscene" 
-                          className="h-8 object-contain"
+                          className="h-12 object-contain"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
@@ -109,7 +89,7 @@ const Contact = () => {
                         <img 
                           src={growthledLogo} 
                           alt="Growthled" 
-                          className="h-8 object-contain"
+                          className="h-6 object-contain"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
