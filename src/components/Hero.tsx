@@ -267,12 +267,12 @@ const Hero = () => {
             {/* Optional: Video description or features below - NOW WITH SCROLL STACK EFFECT */}
             <ScrollStack 
               className="mt-12 max-w-4xl mx-auto"
-              itemDistance={150}
-              itemScale={0.05}
-              itemStackDistance={40}
-              stackPosition="30%"
-              scaleEndPosition="20%"
-              baseScale={0.9}
+              itemDistance={50}
+              itemScale={0.02}
+              itemStackDistance={20}
+              stackPosition="50%"
+              scaleEndPosition="30%"
+              baseScale={0.92}
               useWindowScroll={false}
             >
               <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
