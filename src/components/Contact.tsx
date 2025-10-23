@@ -79,7 +79,7 @@ const Contact = () => {
                         <img 
                           src={ledsceneLogo} 
                           alt="Ledscene" 
-                          className="h-12 object-contain"
+                          className="h-6 object-contain"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
@@ -89,7 +89,7 @@ const Contact = () => {
                         <img 
                           src={growthledLogo} 
                           alt="Growthled" 
-                          className="h-6 object-contain"
+                          className="h-12 object-contain"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
