@@ -7,6 +7,7 @@ import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import { useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -263,53 +264,47 @@ const Hero = () => {
               </Carousel>
             </div>
 
-            {/* Optional: Video description or features below */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
-                <Zap className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold mb-2">
-                  <GradientText
-                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
-                    animationSpeed={4}
-                    showBorder={false}
-                    className="text-white"
-                  >
+            {/* Optional: Video description or features below - NOW WITH SCROLL STACK EFFECT */}
+            <ScrollStack 
+              className="mt-12 max-w-4xl mx-auto"
+              itemDistance={150}
+              itemScale={0.05}
+              itemStackDistance={40}
+              stackPosition="30%"
+              scaleEndPosition="20%"
+              baseScale={0.9}
+              useWindowScroll={false}
+            >
+              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
+                <div className="flex flex-col items-center text-center">
+                  <Zap className="w-12 h-12 text-white mb-4" />
+                  <h3 className="text-2xl font-bold mb-3 text-white">
                     Innovación
-                  </GradientText>
-                </h3>
-                <p className="text-white/70">Tecnología de vanguardia en cada producto</p>
-              </div>
+                  </h3>
+                  <p className="text-white/70 text-lg">Tecnología de vanguardia en cada producto</p>
+                </div>
+              </ScrollStackItem>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
-                <Leaf className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold mb-2">
-                  <GradientText
-                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
-                    animationSpeed={4}
-                    showBorder={false}
-                    className="text-white"
-                  >
+              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
+                <div className="flex flex-col items-center text-center">
+                  <Leaf className="w-12 h-12 text-white mb-4" />
+                  <h3 className="text-2xl font-bold mb-3 text-white">
                     Sostenibilidad
-                  </GradientText>
-                </h3>
-                <p className="text-white/70">Comprometidos con el medio ambiente</p>
-              </div>
+                  </h3>
+                  <p className="text-white/70 text-lg">Comprometidos con el medio ambiente</p>
+                </div>
+              </ScrollStackItem>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
-                <Globe className="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold mb-2">
-                  <GradientText
-                    colors={["#ffffff", "#e0e0e0", "#ffffff"]}
-                    animationSpeed={4}
-                    showBorder={false}
-                    className="text-white"
-                  >
+              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
+                <div className="flex flex-col items-center text-center">
+                  <Globe className="w-12 h-12 text-white mb-4" />
+                  <h3 className="text-2xl font-bold mb-3 text-white">
                     Alcance Global
-                  </GradientText>
-                </h3>
-                <p className="text-white/70">Presencia en múltiples mercados</p>
-              </div>
-            </div>
+                  </h3>
+                  <p className="text-white/70 text-lg">Presencia en múltiples mercados</p>
+                </div>
+              </ScrollStackItem>
+            </ScrollStack>
           </div>
         </div>
       </div>
