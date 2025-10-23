@@ -2,11 +2,9 @@ import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
 
 const ChatButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,21 +20,20 @@ const ChatButton = () => {
         <MessageCircle className="h-6 w-6" />
       </Button>
 
-      {/* Chat Sheet */}
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="right" className="w-full sm:max-w-md p-0 flex flex-col">
-          <SheetHeader className="p-4 border-b">
-            <div className="flex items-center justify-between">
-              <SheetTitle>Chat</SheetTitle>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsOpen(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-          </SheetHeader>
+      {/* Floating Chat Window */}
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="fixed bottom-24 right-6 top-auto left-auto w-[400px] h-[600px] m-0 p-0 flex flex-col translate-x-0 translate-y-0 sm:rounded-lg">
+          {/* Chat Header */}
+          <div className="p-4 border-b flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Chat</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
           
           {/* Chat Content Area */}
           <div className="flex-1 overflow-y-auto p-4">
@@ -57,8 +54,8 @@ const ChatButton = () => {
               <Button disabled>Enviar</Button>
             </div>
           </div>
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
