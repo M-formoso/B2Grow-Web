@@ -1,203 +1,249 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import aboutHeroImage from "@/assets/about-us-hero.png";
 import facility1 from "@/assets/about-us/facility-1.jpg";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import DecryptedText from "@/components/effects/DecryptedText";
+import ScrollReveal from "@/components/effects/ScrollReveal";
+import VariableProximity from "@/components/effects/VariableProximity";
+import { useRef } from "react";
 
 const AboutUs = () => {
+  const containerRef = useRef(null);
+
   return (
-    <section id="nosotros" className="py-20 bg-gradient-tech relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-48 -translate-y-48"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl translate-x-48 translate-y-48"></div>
+    <section 
+      id="nosotros" 
+      ref={containerRef}
+      className="min-h-screen bg-gradient-tech relative overflow-hidden"
+    >
+      {/* Background Effects */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Hero Section with Image */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-7xl mx-auto mb-20"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Text Content */}
-            <div className="space-y-6">
-              <h2 className="text-5xl lg:text-6xl font-bold">
-                <span className="text-foreground">Quiénes </span>
-                <span className="bg-gradient-primary bg-clip-text text-transparent">Somos</span>
-              </h2>
-              
-              <div className="text-lg text-muted-foreground leading-relaxed">
-                <p>
-                  Somos una fusión de <span className="text-primary font-semibold">tecnología</span>, 
-                  <span className="text-primary font-semibold"> eficiencia energética</span> y 
-                  <span className="text-primary font-semibold"> sustentabilidad</span> con soluciones inteligentes 
-                  de iluminación, movilidad e independencia energética, para múltiples clientes que exigen 
-                  productos dinámicos, de gran calidad y sobre todo con un alto nivel de atención y servicio. 
-                  En eso trabajamos todos los días con mucho esfuerzo, con <span className="text-primary font-semibold">20 años de experiencia</span> apostando 
-                  con creatividad a un futuro más eficiente y sustentable.
-                </p>
-              </div>
-
-              {/* Stats Grid - Volviendo al diseño original por ahora */}
-              <div className="grid grid-cols-2 gap-6 pt-8">
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">20+</h3>
-                  <p className="text-sm text-muted-foreground">Años de Experiencia</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">500+</h3>
-                  <p className="text-sm text-muted-foreground">Proyectos Completados</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">85%</h3>
-                  <p className="text-sm text-muted-foreground">Ahorro Energético</p>
-                </motion.div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-6"
-                >
-                  <h3 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">15+</h3>
-                  <p className="text-sm text-muted-foreground">Países Atendidos</p>
-                </motion.div>
-              </div>
+        {/* Hero Section with Decrypted Text Effect */}
+        <div className="min-h-screen flex flex-col justify-center py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-5xl mx-auto text-center mb-16"
+          >
+            <h1 className="text-6xl lg:text-8xl font-bold mb-8">
+              <DecryptedText
+                text="B2GROW"
+                speed={50}
+                maxIterations={15}
+                animateOn="view"
+                className="bg-gradient-primary bg-clip-text text-transparent inline-block"
+              />
+            </h1>
+            
+            <div className="text-2xl lg:text-3xl font-light text-foreground/80 mb-12">
+              <VariableProximity
+                label="Tecnología • Eficiencia • Sustentabilidad"
+                fromFontVariationSettings="'wght' 300"
+                toFontVariationSettings="'wght' 700"
+                containerRef={containerRef}
+                radius={150}
+                falloff="linear"
+                className="text-primary"
+              />
             </div>
+          </motion.div>
 
-            {/* Image Carousel */}
+          {/* Main Description with Scroll Reveal */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="max-w-4xl mx-auto mb-20"
+          >
+            <div className="text-xl lg:text-2xl leading-relaxed text-foreground/90">
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={6}
+              >
+                Somos una fusión de tecnología, eficiencia energética y sustentabilidad. 
+                Creamos soluciones inteligentes de iluminación, movilidad e independencia energética 
+                para clientes que exigen productos dinámicos y de gran calidad. Con 20 años de experiencia, 
+                apostamos con creatividad a un futuro más eficiente y sustentable.
+              </ScrollReveal>
+            </div>
+          </motion.div>
+
+          {/* Image Grid with Parallax Effect */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative group"
+            >
+              <div className="relative overflow-hidden rounded-2xl">
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                  src={aboutHeroImage}
+                  alt="B2Grow Technology"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    <DecryptedText
+                      text="Innovación Constante"
+                      speed={30}
+                      animateOn="hover"
+                      className="text-white"
+                    />
+                  </h3>
+                  <p className="text-white/80">Tecnología de vanguardia</p>
+                </div>
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+              transition={{ duration: 0.8 }}
+              className="relative group"
             >
-              <Carousel
-                plugins={[
-                  Autoplay({
-                    delay: 4000,
-                    stopOnInteraction: false,
-                  }),
-                ]}
-                className="w-full"
-              >
-                <CarouselContent>
-                  <CarouselItem>
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                      <img 
-                        src={aboutHeroImage} 
-                        alt="B2Grow - Calidad, Diseño y Confort" 
-                        className="w-full h-auto object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                      <img 
-                        src={facility1} 
-                        alt="B2Grow - Instalaciones de Producción" 
-                        className="w-full h-auto object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-                    </div>
-                  </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
-              </Carousel>
-              
-              {/* Floating Elements */}
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-8 -right-8 w-32 h-32 bg-primary/20 rounded-full blur-2xl"
-              />
-              <motion.div
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-8 -left-8 w-40 h-40 bg-accent/20 rounded-full blur-2xl"
-              />
+              <div className="relative overflow-hidden rounded-2xl">
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                  src={facility1}
+                  alt="B2Grow Facilities"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    <DecryptedText
+                      text="Calidad Superior"
+                      speed={30}
+                      animateOn="hover"
+                      className="text-white"
+                    />
+                  </h3>
+                  <p className="text-white/80">Producción de excelencia</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Stats Section with Dynamic Numbers */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="py-20 max-w-6xl mx-auto"
+        >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent backdrop-blur-sm border border-primary/20"
+            >
+              <div className="text-5xl lg:text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
+                20+
+              </div>
+              <div className="text-sm lg:text-base text-foreground/70">
+                <ScrollReveal baseOpacity={0.4} enableBlur={false}>
+                  Años de Experiencia
+                </ScrollReveal>
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="text-center p-8 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent backdrop-blur-sm border border-accent/20"
+            >
+              <div className="text-5xl lg:text-6xl font-bold bg-gradient-energy bg-clip-text text-transparent mb-3">
+                500+
+              </div>
+              <div className="text-sm lg:text-base text-foreground/70">
+                <ScrollReveal baseOpacity={0.4} enableBlur={false}>
+                  Proyectos Completados
+                </ScrollReveal>
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent backdrop-blur-sm border border-primary/20"
+            >
+              <div className="text-5xl lg:text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
+                85%
+              </div>
+              <div className="text-sm lg:text-base text-foreground/70">
+                <ScrollReveal baseOpacity={0.4} enableBlur={false}>
+                  Ahorro Energético
+                </ScrollReveal>
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="text-center p-8 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent backdrop-blur-sm border border-accent/20"
+            >
+              <div className="text-5xl lg:text-6xl font-bold bg-gradient-energy bg-clip-text text-transparent mb-3">
+                15+
+              </div>
+              <div className="text-sm lg:text-base text-foreground/70">
+                <ScrollReveal baseOpacity={0.4} enableBlur={false}>
+                  Países Atendidos
+                </ScrollReveal>
+              </div>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Values Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        {/* Mission Statement with Scroll Effects */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          transition={{ duration: 1 }}
+          className="py-20 max-w-4xl mx-auto"
         >
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
-          >
-            <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">01</div>
-                <h3 className="text-2xl font-bold text-foreground">Innovación</h3>
-                <p className="text-muted-foreground">
-                  Desarrollamos tecnología de vanguardia para soluciones energéticas del futuro.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
-          >
-            <div className="absolute inset-0 bg-gradient-energy opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="text-6xl font-bold bg-gradient-energy bg-clip-text text-transparent">02</div>
-                <h3 className="text-2xl font-bold text-foreground">Sustentabilidad</h3>
-                <p className="text-muted-foreground">
-                  Comprometidos con el medio ambiente y un futuro más verde para todos.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="group relative"
-          >
-            <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300"></div>
-            <Card className="bg-card/30 backdrop-blur-sm border-border h-full">
-              <CardContent className="p-8 text-center space-y-4">
-                <div className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">03</div>
-                <h3 className="text-2xl font-bold text-foreground">Calidad</h3>
-                <p className="text-muted-foreground">
-                  Productos de la más alta calidad con atención y servicio excepcional.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-center mb-12">
+            <VariableProximity
+              label="Nuestro Compromiso"
+              fromFontVariationSettings="'wght' 400"
+              toFontVariationSettings="'wght' 900"
+              containerRef={containerRef}
+              radius={120}
+              falloff="linear"
+              className="bg-gradient-primary bg-clip-text text-transparent"
+            />
+          </h2>
+          
+          <div className="space-y-8 text-lg lg:text-xl leading-relaxed text-foreground/80">
+            <ScrollReveal baseOpacity={0.2} enableBlur={true} blurStrength={8}>
+              Desarrollamos tecnología de vanguardia para soluciones energéticas del futuro, 
+              comprometidos con el medio ambiente y un futuro más verde para todos.
+            </ScrollReveal>
+            
+            <ScrollReveal baseOpacity={0.2} enableBlur={true} blurStrength={8}>
+              Cada producto que creamos es resultado de años de investigación, desarrollo 
+              y un profundo entendimiento de las necesidades de nuestros clientes.
+            </ScrollReveal>
+            
+            <ScrollReveal baseOpacity={0.2} enableBlur={true} blurStrength={8}>
+              Nuestra misión es hacer que la energía eficiente y sustentable sea accesible 
+              para todos, transformando la manera en que el mundo consume y produce energía.
+            </ScrollReveal>
+          </div>
         </motion.div>
       </div>
     </section>
