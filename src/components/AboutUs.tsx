@@ -1,13 +1,29 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import aboutHeroImage from "@/assets/about-us-hero.png";
 import facility1 from "@/assets/about-us/facility-1.jpg";
+import greensideLogo from "@/assets/b2grow-greenside-logo.png";
+import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import VariableProximity from "@/components/effects/VariableProximity";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const AboutUs = () => {
   const containerRef = useRef(null);
+  const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
+  
+  const logos = [
+    { src: greensideLogo, alt: "B2Grow Línea Greenside" },
+    { src: multiselectLogo, alt: "B2Grow Línea Multiselect" }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLogoIndex((prev) => (prev + 1) % logos.length);
+    }, 3000); // Cambiar cada 3 segundos
+
+    return () => clearInterval(interval);
+  }, [logos.length]);
 
   return (
     <section 
@@ -31,15 +47,21 @@ const AboutUs = () => {
             transition={{ duration: 0.8 }}
             className="max-w-5xl mx-auto text-center mb-16"
           >
-            <h1 className="text-6xl lg:text-8xl font-bold mb-8">
-              <DecryptedText
-                text="B2GROW"
-                speed={50}
-                maxIterations={15}
-                animateOn="view"
-                className="bg-gradient-primary bg-clip-text text-transparent inline-block"
-              />
-            </h1>
+            {/* Logo Carousel */}
+            <div className="relative h-32 lg:h-48 mb-12 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentLogoIndex}
+                  src={logos[currentLogoIndex].src}
+                  alt={logos[currentLogoIndex].alt}
+                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                  transition={{ duration: 0.6 }}
+                  className="max-h-full w-auto object-contain"
+                />
+              </AnimatePresence>
+            </div>
             
             <div className="text-2xl lg:text-3xl font-light text-foreground/80 mb-12">
               <VariableProximity
