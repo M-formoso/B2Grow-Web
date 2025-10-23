@@ -6,6 +6,7 @@ import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import VariableProximity from "@/components/effects/VariableProximity";
+import Lightning from "@/components/effects/Lightning";
 import { useRef, useState, useEffect } from "react";
 
 const AboutUs = () => {
@@ -29,13 +30,21 @@ const AboutUs = () => {
     <section 
       id="nosotros" 
       ref={containerRef}
-      className="min-h-screen bg-gradient-tech relative overflow-hidden"
+      className="min-h-screen bg-background relative overflow-hidden"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {/* Lightning Background Effect */}
+      <div className="absolute inset-0 opacity-40">
+        <Lightning
+          hue={0}
+          xOffset={0}
+          speed={0.5}
+          intensity={1.5}
+          size={1}
+        />
       </div>
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/60"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Section with Decrypted Text Effect */}
@@ -48,7 +57,7 @@ const AboutUs = () => {
             className="max-w-5xl mx-auto text-center mb-16"
           >
             {/* Logo Carousel */}
-            <div className="relative h-32 lg:h-48 mb-12 flex items-center justify-center">
+            <div className="relative h-64 lg:h-80 mb-12 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentLogoIndex}
