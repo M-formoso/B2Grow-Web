@@ -1,6 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import aboutHeroImage from "@/assets/about-us-hero.png";
+import facility1 from "@/assets/about-us/facility-1.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const AboutUs = () => {
   return (
@@ -73,7 +82,7 @@ const AboutUs = () => {
               </div>
             </div>
 
-            {/* Image */}
+            {/* Image Carousel */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -81,14 +90,40 @@ const AboutUs = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src={aboutHeroImage} 
-                  alt="B2Grow - Calidad, Diseño y Confort" 
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-              </div>
+              <Carousel
+                plugins={[
+                  Autoplay({
+                    delay: 4000,
+                    stopOnInteraction: false,
+                  }),
+                ]}
+                className="w-full"
+              >
+                <CarouselContent>
+                  <CarouselItem>
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={aboutHeroImage} 
+                        alt="B2Grow - Calidad, Diseño y Confort" 
+                        className="w-full h-auto object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem>
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={facility1} 
+                        alt="B2Grow - Instalaciones de Producción" 
+                        className="w-full h-auto object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
               
               {/* Floating Elements */}
               <motion.div
