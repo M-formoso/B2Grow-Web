@@ -274,43 +274,7 @@ const ProductSection = () => {
                       transition={{ duration: 0.6, delay: index * 0.2 }}
                       viewport={{ once: true }}
                     >
-                      <div className="flex flex-col items-center gap-8 text-center">
-                        <motion.div
-                          className="inline-flex flex-col items-center gap-4"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6 }}
-                          viewport={{ once: true }}
-                        >
-                          <div 
-                            className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-lg"
-                            style={{ 
-                              background: `linear-gradient(135deg, ${subcat.color}22, ${subcat.color}44)`,
-                              border: `2px solid ${subcat.color}66`
-                            }}
-                          >
-                            <Icon className="h-12 w-12" style={{ color: subcat.color }} />
-                          </div>
-                          <div>
-                            <h4 className="text-3xl lg:text-4xl font-black tracking-tight">
-                              {subcat.name}
-                            </h4>
-                            <p className="text-lg font-semibold" style={{ color: subcat.color }}>
-                              {subcat.subtitle}
-                            </p>
-                          </div>
-                        </motion.div>
-
-                        <div className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                          <ScrollReveal baseOpacity={0.2} enableBlur={true} baseRotation={2} blurStrength={6}>
-                            Diseñá tu solución energética personalizada según tus necesidades específicas de potencia y autonomía
-                          </ScrollReveal>
-                        </div>
-
-                        <div className="w-full mt-8">
-                          <Calculator />
-                        </div>
-                      </div>
+                      <Calculator />
                     </motion.div>
                   );
                 }
