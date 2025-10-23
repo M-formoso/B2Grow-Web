@@ -67,9 +67,10 @@ const ScrollStack = ({
       };
     } else {
       const scroller = scrollerRef.current;
+      if (!scroller) return { scrollTop: 0, containerHeight: 0, scrollContainer: null };
       return {
-        scrollTop: scroller?.scrollTop || 0,
-        containerHeight: scroller?.clientHeight || 0,
+        scrollTop: scroller.scrollTop,
+        containerHeight: scroller.clientHeight,
         scrollContainer: scroller
       };
     }
@@ -92,7 +93,7 @@ const ScrollStack = ({
 
     isUpdatingRef.current = true;
 
-    const { scrollTop, containerHeight, scrollContainer } = getScrollData();
+    const { scrollTop, containerHeight } = getScrollData();
     const stackPositionPx = parsePercentage(stackPosition, containerHeight);
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
 
@@ -203,7 +204,7 @@ const ScrollStack = ({
     if (useWindowScroll) {
       const lenis = new Lenis({
         duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
         touchMultiplier: 2,
         infinite: false,
@@ -227,11 +228,14 @@ const ScrollStack = ({
       const scroller = scrollerRef.current;
       if (!scroller) return;
 
+      const innerContent = scroller.querySelector('.scroll-stack-inner') as HTMLElement;
+      if (!innerContent) return;
+
       const lenis = new Lenis({
         wrapper: scroller,
-        content: scroller.querySelector('.scroll-stack-inner') as HTMLElement,
+        content: innerContent,
         duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
         touchMultiplier: 2,
         infinite: false,
@@ -275,9 +279,7 @@ const ScrollStack = ({
       card.style.transformOrigin = 'top center';
       card.style.backfaceVisibility = 'hidden';
       card.style.transform = 'translateZ(0)';
-      card.style.webkitTransform = 'translateZ(0)';
       card.style.perspective = '1000px';
-      card.style.webkitPerspective = '1000px';
     });
 
     setupLenis();
