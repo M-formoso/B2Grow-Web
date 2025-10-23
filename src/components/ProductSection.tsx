@@ -263,26 +263,27 @@ const ProductSection = () => {
                 const categoryData = line.categories[index];
                 const isEven = index % 2 === 0;
 
-                // Skip rendering if categoryData doesn't exist (e.g., calculator)
+                // Render calculator directly if categoryData doesn't exist
                 if (!categoryData) {
                   return (
                     <motion.div 
                       key={subcat.id} 
-                      className="relative"
+                      className="relative w-full"
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.2 }}
                       viewport={{ once: true }}
                     >
-                      <div className="flex flex-col items-center gap-12 text-center">
+                      <div className="flex flex-col items-center gap-8 text-center">
                         <motion.div
-                          className="inline-flex flex-col items-center gap-4 cursor-pointer group"
-                          onClick={() => setActiveSubcategory(subcat.id)}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex flex-col items-center gap-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6 }}
+                          viewport={{ once: true }}
                         >
                           <div 
-                            className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all"
+                            className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-lg"
                             style={{ 
                               background: `linear-gradient(135deg, ${subcat.color}22, ${subcat.color}44)`,
                               border: `2px solid ${subcat.color}66`
@@ -291,7 +292,7 @@ const ProductSection = () => {
                             <Icon className="h-12 w-12" style={{ color: subcat.color }} />
                           </div>
                           <div>
-                            <h4 className="text-3xl lg:text-4xl font-black tracking-tight group-hover:text-primary transition-colors">
+                            <h4 className="text-3xl lg:text-4xl font-black tracking-tight">
                               {subcat.name}
                             </h4>
                             <p className="text-lg font-semibold" style={{ color: subcat.color }}>
@@ -306,14 +307,9 @@ const ProductSection = () => {
                           </ScrollReveal>
                         </div>
 
-                        <Button
-                          onClick={() => setActiveSubcategory(subcat.id)}
-                          className="group gap-2"
-                          size="lg"
-                        >
-                          <span>Explorar {subcat.name}</span>
-                          <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        <div className="w-full mt-8">
+                          <Calculator />
+                        </div>
                       </div>
                     </motion.div>
                   );
