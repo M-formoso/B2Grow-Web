@@ -7,7 +7,6 @@ import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import { useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -264,47 +263,38 @@ const Hero = () => {
               </Carousel>
             </div>
 
-            {/* Optional: Video description or features below - NOW WITH SCROLL STACK EFFECT */}
-            <ScrollStack 
-              className="mt-12 max-w-4xl mx-auto"
-              itemDistance={0}
-              itemScale={0.95}
-              itemStackDistance={0}
-              stackPosition="0%"
-              scaleEndPosition="100%"
-              baseScale={1}
-              useWindowScroll={false}
-            >
-              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
-                <div className="flex flex-col items-center text-center">
-                  <Zap className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-2xl font-bold mb-3 text-white">
-                    Innovación
-                  </h3>
-                  <p className="text-white/70 text-lg">Tecnología de vanguardia en cada producto</p>
+            {/* Features Grid */}
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                  <Zap className="w-8 h-8 text-primary" />
                 </div>
-              </ScrollStackItem>
-              
-              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
-                <div className="flex flex-col items-center text-center">
-                  <Leaf className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-2xl font-bold mb-3 text-white">
-                    Sostenibilidad
-                  </h3>
-                  <p className="text-white/70 text-lg">Comprometidos con el medio ambiente</p>
+                <h3 className="text-xl font-semibold mb-2 text-white">Innovación</h3>
+                <p className="text-white/70 text-sm">
+                  Tecnología LED de última generación
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                  <Leaf className="w-8 h-8 text-primary" />
                 </div>
-              </ScrollStackItem>
-              
-              <ScrollStackItem itemClassName="bg-white/5 backdrop-blur-sm p-8 border border-white/10">
-                <div className="flex flex-col items-center text-center">
-                  <Globe className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-2xl font-bold mb-3 text-white">
-                    Alcance Global
-                  </h3>
-                  <p className="text-white/70 text-lg">Presencia en múltiples mercados</p>
+                <h3 className="text-xl font-semibold mb-2 text-white">Sustentabilidad</h3>
+                <p className="text-white/70 text-sm">
+                  Soluciones energéticamente eficientes
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                  <Globe className="w-8 h-8 text-primary" />
                 </div>
-              </ScrollStackItem>
-            </ScrollStack>
+                <h3 className="text-xl font-semibold mb-2 text-white">Alcance Global</h3>
+                <p className="text-white/70 text-sm">
+                  Presencia en múltiples mercados
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
