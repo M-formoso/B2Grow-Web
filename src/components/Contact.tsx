@@ -105,12 +105,9 @@ const Contact = () => {
             <Card className="group hover:shadow-energy transition-all duration-500 bg-gradient-primary/10 border-primary/30">
               <CardContent className="p-6 text-center">
                 <h3 className="text-xl font-bold text-foreground mb-2">¿Te interesa ser distribuidor?</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="text-muted-foreground">
                   Contáctanos y sumate a nuestra red de distribuidores
                 </p>
-                <Button className="bg-gradient-primary hover:shadow-energy">
-                  Quiero ser Distribuidor
-                </Button>
               </CardContent>
             </Card>
 
