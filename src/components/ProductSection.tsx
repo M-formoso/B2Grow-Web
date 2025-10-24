@@ -46,6 +46,7 @@ import ufoIndustrialHB12_200w_2 from "@/assets/b2grow-greenside/images/ufo-indus
 // Import background images for product cards
 import greensideBg from "@/assets/greenside-bg.png";
 import multiselectBg from "@/assets/multiselect-bg.png";
+import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
 
 const productLines = [
   {
@@ -585,9 +586,9 @@ const ProductSection = () => {
               {/* Power Options */}
               <div className="flex flex-wrap justify-center gap-6 mb-12">
                 {[
-                  { power: "100W", label: "Potencia Baja" },
-                  { power: "150W", label: "Potencia Media" },
-                  { power: "200W", label: "Potencia Alta" }
+                  { power: "100W" },
+                  { power: "150W" },
+                  { power: "200W" }
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -602,11 +603,8 @@ const ProductSection = () => {
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.1, borderColor: 'rgba(245, 158, 11, 0.6)' }}
                   >
-                    <div className="text-6xl font-black mb-2" style={{ color: '#f59e0b' }}>
+                    <div className="text-6xl font-black" style={{ color: '#f59e0b' }}>
                       {item.power}
-                    </div>
-                    <div className="text-sm font-semibold text-muted-foreground">
-                      {item.label}
                     </div>
                   </motion.div>
                 ))}
@@ -788,7 +786,11 @@ const ProductSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                     
                     <div className="relative z-10 space-y-4">
-                      <Icon className="h-16 w-16 text-primary group-hover:scale-110 transition-transform" />
+                      {module.id === "multiselect" ? (
+                        <img src={multiselectLogo} alt="Multiselect Logo" className="h-16 w-auto group-hover:scale-110 transition-transform" />
+                      ) : (
+                        <Icon className="h-16 w-16 text-primary group-hover:scale-110 transition-transform" />
+                      )}
                       <h3 className="text-3xl lg:text-4xl font-black tracking-tight">
                         {module.title}
                       </h3>
