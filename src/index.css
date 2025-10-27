@@ -9,7 +9,7 @@ All colors MUST be HSL. Futuristic red-tech aesthetic with energy themes.
 @layer base {
   :root {
     /* Base Theme - Dark tech background */
-    --background: 0 0% 0%;
+    --background: 0 0% 10%;
     --foreground: 0 0% 95%;
 
     /* Cards with subtle tech glow */
@@ -80,7 +80,7 @@ All colors MUST be HSL. Futuristic red-tech aesthetic with energy themes.
 
   .dark {
     /* Dark mode uses same colors - monochrome theme */
-    --background: 0 0% 0%;
+    --background: 0 0% 10%;
     --foreground: 0 0% 98%;
 
     --card: 220 15% 10%;
