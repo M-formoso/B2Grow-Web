@@ -15,6 +15,8 @@ import { motion } from "framer-motion";
 
 const campaignVideo = "/videos/Copia de Video intro web 1.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
+const greensideVideo = "/videos/B2Grow Greenside Institucional IG (2).mp4";
+
 
 const Hero = () => {
   const videoRef1 = useRef<HTMLVideoElement>(null);
@@ -50,14 +52,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen bg-gradient-tech relative overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Animated background elements */}
-      <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
-      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-float"></div>
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
+      <div className="absolute inset-0 bg-gradient-tech opacity-100 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-float pointer-events-none"></div>
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float pointer-events-none" style={{ animationDelay: "2s" }}></div>
       
       {/* Video Banner Section - FULL WIDTH */}
-      <div className="relative w-full">
+      <div className="relative w-full z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -65,7 +68,7 @@ const Hero = () => {
           className="relative w-full"
         >
           {/* Video Container - Full Width with limited height */}
-          <div className="relative w-full max-h-[70vh] overflow-hidden">
+          <div className="relative w-full max-h-[75vh] overflow-hidden">
             <div className="relative w-full">
               <video 
                 src={campaignVideo}
@@ -73,7 +76,7 @@ const Hero = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover max-h-[70vh]"
+                className="w-full h-full object-cover max-h-[75vh]"
               >
                 Tu navegador no soporta el tag de video.
               </video>
@@ -141,21 +144,148 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Threads Effect Section - AFTER VIDEO */}
-      <div className="container mx-auto px-4">
-        <div className="relative min-h-[85vh] w-full">
+      {/* Threads Effect Section - COMPACT VERSION */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="relative h-[40vh] w-full overflow-hidden">
+          {/* Floating Products Animation - Above Threads */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+            {/* Product 1 - Left side, slow fall */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-20%', left: '10%', opacity: 0, rotate: -15, scale: 0.6 }}
+              animate={{ 
+                top: '110%', 
+                left: '5%',
+                opacity: [0, 0.7, 0.7, 0],
+                rotate: -25,
+                scale: [0.6, 0.8, 0.8, 0.6]
+              }}
+              transition={{ 
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 0
+              }}
+            >
+              <img 
+                src={powerStationHero} 
+                alt="Power Station" 
+                className="w-32 md:w-48 lg:w-64 filter drop-shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Product 2 - Right side, medium speed */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-25%', right: '15%', opacity: 0, rotate: 20, scale: 0.5 }}
+              animate={{ 
+                top: '110%', 
+                right: '10%',
+                opacity: [0, 0.6, 0.6, 0],
+                rotate: 30,
+                scale: [0.5, 0.7, 0.7, 0.5]
+              }}
+              transition={{ 
+                duration: 12,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 5
+              }}
+            >
+              <img 
+                src={powerStationHero} 
+                alt="Power Station" 
+                className="w-28 md:w-40 lg:w-56 filter drop-shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Product 3 - Center, slow with blur effect */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-30%', left: '50%', x: '-50%', opacity: 0, rotate: 5, scale: 0.7 }}
+              animate={{ 
+                top: '110%', 
+                opacity: [0, 0.5, 0.5, 0],
+                rotate: 15,
+                scale: [0.7, 0.9, 0.9, 0.7]
+              }}
+              transition={{ 
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 8
+              }}
+            >
+              <img 
+                src={powerStationHero} 
+                alt="Power Station" 
+                className="w-36 md:w-52 lg:w-72 filter drop-shadow-2xl blur-[1px]"
+              />
+            </motion.div>
+
+            {/* Product 4 - Left center, fast fall */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-15%', left: '25%', opacity: 0, rotate: -10, scale: 0.4 }}
+              animate={{ 
+                top: '110%', 
+                left: '20%',
+                opacity: [0, 0.8, 0.8, 0],
+                rotate: -20,
+                scale: [0.4, 0.6, 0.6, 0.4]
+              }}
+              transition={{ 
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 3
+              }}
+            >
+              <img 
+                src={powerStationHero} 
+                alt="Power Station" 
+                className="w-24 md:w-36 lg:w-48 filter drop-shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Product 5 - Right center, medium-slow */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-20%', right: '30%', opacity: 0, rotate: 12, scale: 0.55 }}
+              animate={{ 
+                top: '110%', 
+                right: '25%',
+                opacity: [0, 0.65, 0.65, 0],
+                rotate: 22,
+                scale: [0.55, 0.75, 0.75, 0.55]
+              }}
+              transition={{ 
+                duration: 14,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 6
+              }}
+            >
+              <img 
+                src={powerStationHero} 
+                alt="Power Station" 
+                className="w-30 md:w-44 lg:w-60 filter drop-shadow-2xl"
+              />
+            </motion.div>
+          </div>
+
           {/* Threads Background */}
           <div className="absolute inset-0 w-full h-full">
             <Threads
-              amplitude={1}
-              distance={0}
+              amplitude={3}
+              distance={0.5}
               enableMouseInteraction={true}
             />
           </div>
         </div>
 
         {/* Video Section */}
-        <div className="pb-20 pt-48">
+        <div className="pb-32 pt-12 relative z-20">
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
             <div className="text-center mb-12 animate-fade-in">
@@ -202,7 +332,7 @@ const Hero = () => {
                         <div className="aspect-video w-full">
                           <video 
                             ref={videoRef1}
-                            src={campaignVideo}
+                            src={greensideVideo}
                             controls
                             muted
                             loop
@@ -251,41 +381,77 @@ const Hero = () => {
               </Carousel>
             </div>
 
-            {/* Features Grid */}
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                  <Zap className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Innovación</h3>
-                <p className="text-white/70 text-sm">
-                  Tecnología LED de última generación
-                </p>
+            {/* Product Cards with Features Grid beside them */}
+            <div className="mt-12 flex flex-col lg:flex-row items-start lg:items-start justify-between gap-12">
+              {/* Features Grid - LEFT SIDE */}
+              <div className="flex-shrink-0 w-full lg:w-80 space-y-8 lg:pt-0">
+                {/* Innovación - Primera card */}
+                <motion.div 
+                  className="text-left"
+                  initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                >
+                  <motion.div 
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Zap className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Innovación</h3>
+                  <p className="text-white/70 text-sm">
+                    Tecnología LED de última generación
+                  </p>
+                </motion.div>
+
+                {/* Sustentabilidad - Segunda card */}
+                <motion.div 
+                  className="text-left"
+                  initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                >
+                  <motion.div 
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Leaf className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Sustentabilidad</h3>
+                  <p className="text-white/70 text-sm">
+                    Soluciones energéticamente eficientes
+                  </p>
+                </motion.div>
+
+                {/* Alcance Global - Tercera card */}
+                <motion.div 
+                  className="text-left"
+                  initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                >
+                  <motion.div 
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Globe className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Alcance Global</h3>
+                  <p className="text-white/70 text-sm">
+                    Presencia en múltiples mercados
+                  </p>
+                </motion.div>
               </div>
 
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                  <Leaf className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Sustentabilidad</h3>
-                <p className="text-white/70 text-sm">
-                  Soluciones energéticamente eficientes
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                  <Globe className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-white">Alcance Global</h3>
-                <p className="text-white/70 text-sm">
-                  Presencia en múltiples mercados
-                </p>
-              </div>
-            </div>
-
-            {/* Product Cards below video */}
-            <div className="mt-24 flex items-center justify-center" style={{ minHeight: '600px', position: 'relative' }}>
+              {/* CardSwap - RIGHT SIDE */}
+              <div className="flex-1 flex items-start justify-center -mt-20 lg:-mt-62">
+              <div style={{ paddingTop: '0' }}>
               <CardSwap
                 width={500}
                 height={500}
@@ -304,9 +470,9 @@ const Hero = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white">Energía Portátil</h2>
+                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        Estaciones de energía inteligentes para un futuro sustentable.
+                        
                       </p>
                     </div>
                   </div>
@@ -321,9 +487,9 @@ const Hero = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white">Paneles Solares</h2>
+                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        Paneles flexibles de alta eficiencia para máxima captación.
+                        
                       </p>
                     </div>
                   </div>
@@ -338,14 +504,16 @@ const Hero = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white">LED Inteligente</h2>
+                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        Sistemas LED IoT para máxima eficiencia energética.
+                        
                       </p>
                     </div>
                   </div>
                 </Card>
               </CardSwap>
+              </div>
+              </div>
             </div>
           </div>
         </div>
