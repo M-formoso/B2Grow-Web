@@ -68,7 +68,7 @@ const Hero = () => {
           </div>
 
           {/* Content Overlay - Empty for now */}
-          <div className="relative z-10 flex items-center justify-center min-h-[85vh] px-4">
+          <div className="relative z-10 flex items-center justify-center min-h-[85vh] px-4 pointer-events-none">
           </div>
         </div>
 
