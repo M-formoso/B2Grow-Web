@@ -48,6 +48,10 @@ import greensideBg from "@/assets/greenside-bg.png";
 import multiselectBg from "@/assets/multiselect-bg.png";
 import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
 
+// COLORES OFICIALES - ESTOS SON LOS CORRECTOS
+const GREENSIDE_COLOR = "#84cc16"; // lime-500
+const MULTISELECT_COLOR = "#eab308"; // yellow-500
+
 const productLines = [
   {
     lineId: "greenside",
@@ -195,7 +199,7 @@ const ProductSection = () => {
       subtitle: "Estaciones de Energía",
       description: "Soluciones inteligentes de energía portátil y solar para independencia energética",
       icon: Battery,
-      color: "from-emerald-500 to-green-600"
+      color: "from-lime-500 to-lime-600"
     },
     {
       id: "multiselect",
@@ -203,7 +207,7 @@ const ProductSection = () => {
       subtitle: "Luminarias",
       description: "Luminarias inteligentes con tecnología multiselect para máxima eficiencia",
       icon: Lightbulb,
-      color: "from-amber-500 to-yellow-600"
+      color: "from-yellow-500 to-yellow-600"
     },
     {
       id: "calculator",
@@ -224,38 +228,87 @@ const ProductSection = () => {
         const isGreenside = activeModule === "greenside";
         const subcategories = isGreenside 
           ? [
-              { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Zap, color: "#10b981" },
-              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: "#10b981" },
-              { id: "calculator", name: "CALCULADORA", subtitle: "Armá tu Solución", icon: CalcIcon, color: "#10b981" }
+              { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Zap, color: GREENSIDE_COLOR },
+              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: GREENSIDE_COLOR },
+              { id: "calculator", name: "CALCULADORA", subtitle: "Armá tu Solución", icon: CalcIcon, color: GREENSIDE_COLOR }
             ]
           : [
-              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: "#f59e0b" },
-              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: "#f59e0b" }
+              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: MULTISELECT_COLOR },
+              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: MULTISELECT_COLOR }
             ];
+
+        const bgImage = isGreenside ? greensideBg : multiselectBg;
+        const logoImage = isGreenside ? null : multiselectLogo;
 
         return (
           <div className="space-y-16">
-            <div ref={headerContainerRef} className="relative text-center space-y-6">
-              <GradientText 
-                colors={isGreenside ? ['#10b981', '#34d399', '#6ee7b7', '#10b981'] : ['#f59e0b', '#fbbf24', '#fcd34d', '#f59e0b']}
-                animationSpeed={6}
-                className="text-4xl lg:text-6xl font-black"
-              >
-                {line.lineName}
-              </GradientText>
-              <div className="text-2xl lg:text-3xl font-bold">
-                <DecryptedText 
-                  text={line.lineSubtitle}
-                  animateOn="view"
-                  speed={30}
-                />
+            {/* Banner Hero con imagen de fondo */}
+            <motion.div 
+              ref={headerContainerRef}
+              className="relative w-full h-[50vh] min-h-[400px] overflow-hidden rounded-3xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${bgImage})` }}
+              />
+              
+              {/* Gradient Overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${isGreenside ? 'from-lime-500/30 to-lime-600/30' : 'from-yellow-500/30 to-yellow-600/30'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+              
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-8 lg:p-16">
+                <div className="max-w-4xl">
+                  {logoImage ? (
+                    <motion.img 
+                      src={logoImage} 
+                      alt={line.lineName}
+                      className="h-24 lg:h-32 w-auto mb-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    />
+                  ) : (
+                    <motion.h1 
+                      className="text-4xl lg:text-6xl font-black mb-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <GradientText 
+                        colors={['#ffffff', '#f0f0f0', '#e0e0e0', '#ffffff']}
+                        animationSpeed={4}
+                        className="text-4xl lg:text-6xl font-black"
+                      >
+                        {line.lineName}
+                      </GradientText>
+                    </motion.h1>
+                  )}
+                  
+                  <motion.div 
+                    className="text-2xl lg:text-3xl font-bold text-white mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >
+                    {line.lineSubtitle}
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="text-lg lg:text-xl text-white/90 max-w-2xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    {line.description}
+                  </motion.div>
+                </div>
               </div>
-              <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-                <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
-                  {line.description}
-                </ScrollReveal>
-              </div>
-            </div>
+            </motion.div>
 
             {/* Subcategory Selection - Dynamic Layout */}
             <div className="space-y-20 max-w-7xl mx-auto">
@@ -375,7 +428,7 @@ const ProductSection = () => {
 
             <div ref={headerContainerRef} className="relative text-center space-y-6">
               <GradientText 
-                colors={['#10b981', '#34d399', '#6ee7b7', '#10b981']}
+                colors={['#84cc16', '#a3e635', '#bef264', '#84cc16']}
                 animationSpeed={6}
                 className="text-3xl lg:text-5xl font-black"
               >
@@ -405,7 +458,7 @@ const ProductSection = () => {
 
       if (!category) return null;
 
-      const categoryColor = activeModule === "greenside" ? "#10b981" : "#f59e0b";
+      const categoryColor = activeModule === "greenside" ? GREENSIDE_COLOR : MULTISELECT_COLOR;
       
       return (
         <div className="space-y-12">
@@ -422,7 +475,7 @@ const ProductSection = () => {
 
           <div ref={headerContainerRef} className="relative text-center space-y-6">
             <GradientText 
-              colors={activeModule === "greenside" ? ['#10b981', '#34d399', '#6ee7b7', '#10b981'] : ['#f59e0b', '#fbbf24', '#fcd34d', '#f59e0b']}
+              colors={activeModule === "greenside" ? ['#84cc16', '#a3e635', '#bef264', '#84cc16'] : ['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
               animationSpeed={6}
               className="text-3xl lg:text-5xl font-black"
             >
@@ -594,16 +647,16 @@ const ProductSection = () => {
                     key={idx}
                     className="relative overflow-hidden rounded-2xl p-8 text-center min-w-[160px]"
                     style={{ 
-                      background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.2))',
-                      border: '2px solid rgba(245, 158, 11, 0.3)'
+                      background: `linear-gradient(135deg, ${MULTISELECT_COLOR}1a, ${MULTISELECT_COLOR}33)`,
+                      border: `2px solid ${MULTISELECT_COLOR}4d`
                     }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.1, borderColor: 'rgba(245, 158, 11, 0.6)' }}
+                    whileHover={{ scale: 1.1, borderColor: `${MULTISELECT_COLOR}99` }}
                   >
-                    <div className="text-6xl font-black" style={{ color: '#f59e0b' }}>
+                    <div className="text-6xl font-black" style={{ color: MULTISELECT_COLOR }}>
                       {item.power}
                     </div>
                   </motion.div>
@@ -723,12 +776,11 @@ const ProductSection = () => {
       );
     }
 
-
     return null;
   };
 
   return (
-    <section className="py-20 bg-gradient-tech relative overflow-hidden">
+    <section className="pt-20 pb-20 bg-gradient-tech relative overflow-hidden">
       {/* DotGrid Background Effect */}
       <div className="absolute inset-0 w-full h-full opacity-30">
         <DotGrid 
