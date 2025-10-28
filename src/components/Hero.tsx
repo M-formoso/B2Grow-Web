@@ -67,53 +67,8 @@ const Hero = () => {
             />
           </div>
 
-          {/* Content Overlay */}
+          {/* Content Overlay - Empty for now */}
           <div className="relative z-10 flex items-center justify-center min-h-[85vh] px-4">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
-                Energía Inteligente
-              </h1>
-              
-              <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                Soluciones innovadoras de energía portátil, paneles solares flexibles e iluminación LED inteligente 
-                para un futuro más eficiente y sustentable.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-white text-black hover:bg-white/90"
-                >
-                  Explorar Productos
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black"
-                >
-                  Calculadora de Eficiencia
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                <div className="flex items-center gap-2 p-3">
-                  <Zap className="h-6 w-6 text-white" />
-                  <span className="text-sm font-medium text-white">20 años de experiencia</span>
-                </div>
-                
-                <div className="flex items-center gap-2 p-3">
-                  <Leaf className="h-6 w-6 text-white" />
-                  <span className="text-sm font-medium text-white">100% Sustentable</span>
-                </div>
-                
-                <div className="flex items-center gap-2 p-3">
-                  <Globe className="h-6 w-6 text-white" />
-                  <span className="text-sm font-medium text-white">Tecnología Global</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
