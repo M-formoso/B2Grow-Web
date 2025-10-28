@@ -6,9 +6,8 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <div className="pt-20">
-        <ProductSection />
-      </div>
+      {/* ELIMINADO pt-20 para que los banners empiecen desde arriba */}
+      <ProductSection />
       <Footer />
     </div>
   );

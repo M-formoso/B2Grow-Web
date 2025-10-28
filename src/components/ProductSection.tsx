@@ -46,7 +46,6 @@ import ufoIndustrialHB12_200w_2 from "@/assets/b2grow-greenside/images/ufo-indus
 // Import background images for product cards
 import greensideBg from "@/assets/greenside-bg.png";
 import multiselectBg from "@/assets/multiselect-bg.png";
-import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
 
 // COLORES OFICIALES - ESTOS SON LOS CORRECTOS
 const GREENSIDE_COLOR = "#84cc16"; // lime-500
@@ -78,7 +77,6 @@ const productLines = [
           { src: mainImage1, category: "Principal" },
           { src: mainImage2, category: "Principal" },
           { src: mainImage3, category: "Principal" },
-          { src: mainImage4, category: "Principal" },
           { src: mainImage5, category: "Principal" },
           { src: mainImage6, category: "Principal" },
           { src: mainImage7, category: "Principal" },
@@ -168,6 +166,16 @@ const productLines = [
             name: "B2GDECO12-100W",
             description: "Luminaria LED Colgante Decorativa - 100W",
             specs: ["100W", "Control deslumbramiento", "5 años garantía"]
+          },
+          {
+            name: "B2GDECO12-150W",
+            description: "Luminaria LED Colgante Decorativa - 150W",
+            specs: ["150W", "Control deslumbramiento", "5 años garantía"]
+          },
+          {
+            name: "B2GDECO12-200W",
+            description: "Luminaria LED Colgante Decorativa - 200W",
+            specs: ["200W", "Control deslumbramiento", "5 años garantía"]
           }
         ]
       }
@@ -233,19 +241,18 @@ const ProductSection = () => {
               { id: "calculator", name: "CALCULADORA", subtitle: "Armá tu Solución", icon: CalcIcon, color: GREENSIDE_COLOR }
             ]
           : [
-              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: MULTISELECT_COLOR },
-              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: MULTISELECT_COLOR }
+              { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: MULTISELECT_COLOR },
+              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: MULTISELECT_COLOR }
             ];
 
         const bgImage = isGreenside ? greensideBg : multiselectBg;
-        const logoImage = isGreenside ? null : multiselectLogo;
-
+        const logoImage = isGreenside ? null : null; // Eliminado multiselectLogo
         return (
-          <div className="space-y-16">
-            {/* Banner Hero con imagen de fondo */}
+          <div className="relative">
+            {/* Banner Hero FULLWIDTH - Altura aumentada */}
             <motion.div 
               ref={headerContainerRef}
-              className="relative w-full h-[50vh] min-h-[400px] overflow-hidden rounded-3xl"
+              className="relative w-full min-h-[70vh] overflow-hidden"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
@@ -261,8 +268,8 @@ const ProductSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
               
               {/* Content */}
-              <div className="relative h-full flex flex-col justify-end p-8 lg:p-16">
-                <div className="max-w-4xl">
+              <div className="relative h-full min-h-[70vh] flex flex-col justify-end p-8 lg:p-16 container mx-auto">
+                <div className="max-w-4xl mb-16">
                   {logoImage ? (
                     <motion.img 
                       src={logoImage} 
@@ -299,7 +306,7 @@ const ProductSection = () => {
                   </motion.div>
                   
                   <motion.div 
-                    className="text-lg lg:text-xl text-white/90 max-w-2xl"
+                    className="text-lg lg:text-xl text-white/90 max-w-2xl mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -310,102 +317,122 @@ const ProductSection = () => {
               </div>
             </motion.div>
 
-            {/* Subcategory Selection - Dynamic Layout */}
-            <div className="space-y-20 max-w-7xl mx-auto">
-              {subcategories.map((subcat, index) => {
-                const Icon = subcat.icon;
-                const categoryData = line.categories[index];
-                const isEven = index % 2 === 0;
+            {/* Botón Ver Todas las Líneas - DEBAJO del banner */}
+            <div className="container mx-auto px-8 lg:px-16 py-6 relative z-20">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => setActiveModule(null)}
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  Ver Todas las Líneas
+                </Button>
+              </motion.div>
+            </div>
 
-                // Render calculator directly if categoryData doesn't exist
-                if (!categoryData) {
+            {/* Subcategory Selection */}
+            <div className="container mx-auto px-4 pb-20 relative z-10">
+              <div className="space-y-20 max-w-7xl mx-auto">
+                {subcategories.map((subcat, index) => {
+                  const Icon = subcat.icon;
+                  const categoryData = line.categories[index];
+                  const isEven = index % 2 === 0;
+
+                  // Render calculator directly if categoryData doesn't exist
+                  if (!categoryData) {
+                    return (
+                      <motion.div 
+                        key={subcat.id} 
+                        className="relative w-full"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        viewport={{ once: true }}
+                      >
+                        <Calculator />
+                      </motion.div>
+                    );
+                  }
+
                   return (
                     <motion.div 
                       key={subcat.id} 
-                      className="relative w-full"
+                      className="relative"
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.2 }}
                       viewport={{ once: true }}
                     >
-                      <Calculator />
-                    </motion.div>
-                  );
-                }
-
-                return (
-                  <motion.div 
-                    key={subcat.id} 
-                    className="relative"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
-                      {/* Icon and Title Section */}
-                      <div className="flex-1 space-y-6">
-                        <motion.div
-                          className="inline-flex items-center gap-4 cursor-pointer group"
-                          onClick={() => setActiveSubcategory(subcat.id)}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <div 
-                            className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all"
-                            style={{ 
-                              background: `linear-gradient(135deg, ${subcat.color}22, ${subcat.color}44)`,
-                              border: `2px solid ${subcat.color}66`
-                            }}
+                      <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+                        {/* Icon and Title Section */}
+                        <div className="flex-1 space-y-6">
+                          <motion.div
+                            className="inline-flex items-center gap-4 cursor-pointer group"
+                            onClick={() => setActiveSubcategory(subcat.id)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                           >
-                            <Icon className="h-10 w-10" style={{ color: subcat.color }} />
-                          </div>
-                          <div className="text-left">
-                            <h4 className="text-3xl lg:text-4xl font-black tracking-tight group-hover:text-primary transition-colors">
-                              {subcat.name}
-                            </h4>
-                            <p className="text-lg font-semibold" style={{ color: subcat.color }}>
-                              {subcat.subtitle}
-                            </p>
-                          </div>
-                        </motion.div>
+                            <div 
+                              className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all"
+                              style={{ 
+                                background: `linear-gradient(135deg, ${subcat.color}22, ${subcat.color}44)`,
+                                border: `2px solid ${subcat.color}66`
+                              }}
+                            >
+                              <Icon className="h-10 w-10" style={{ color: subcat.color }} />
+                            </div>
+                            <div className="text-left">
+                              <h4 className="text-3xl lg:text-4xl font-black tracking-tight group-hover:text-primary transition-colors">
+                                {subcat.name}
+                              </h4>
+                              <p className="text-lg font-semibold" style={{ color: subcat.color }}>
+                                {subcat.subtitle}
+                              </p>
+                            </div>
+                          </motion.div>
 
-                        <div className="text-base lg:text-lg text-muted-foreground leading-relaxed">
-                          <ScrollReveal baseOpacity={0.2} enableBlur={true} baseRotation={2} blurStrength={6}>
-                            {categoryData.categoryDescription}
-                          </ScrollReveal>
+                          <div className="text-base lg:text-lg text-muted-foreground leading-relaxed">
+                            <ScrollReveal baseOpacity={0.2} enableBlur={true} baseRotation={2} blurStrength={6}>
+                              {categoryData.categoryDescription}
+                            </ScrollReveal>
+                          </div>
+
+                          <Button
+                            onClick={() => setActiveSubcategory(subcat.id)}
+                            className="group gap-2"
+                            size="lg"
+                          >
+                            <span>Explorar {subcat.name}</span>
+                            <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+                          </Button>
                         </div>
 
-                        <Button
-                          onClick={() => setActiveSubcategory(subcat.id)}
-                          className="group gap-2"
-                          size="lg"
-                        >
-                          <span>Explorar {subcat.name}</span>
-                          <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        {/* Features Section */}
+                        <div className="flex-1 space-y-4">
+                          {categoryData.features.slice(0, 6).map((feature, fIdx) => (
+                            <motion.div
+                              key={fIdx}
+                              className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
+                              initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.4, delay: fIdx * 0.1 }}
+                              viewport={{ once: true }}
+                            >
+                              <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: subcat.color }} />
+                              <span className="text-sm lg:text-base text-foreground">{feature}</span>
+                            </motion.div>
+                          ))}
+                        </div>
                       </div>
-
-                      {/* Features Section */}
-                      <div className="flex-1 space-y-4">
-                        {categoryData.features.slice(0, 6).map((feature, fIdx) => (
-                          <motion.div
-                            key={fIdx}
-                            className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
-                            initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: fIdx * 0.1 }}
-                            viewport={{ once: true }}
-                          >
-                            <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: subcat.color }} />
-                            <span className="text-sm lg:text-base text-foreground">{feature}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );
@@ -415,18 +442,19 @@ const ProductSection = () => {
       if (activeModule === "greenside" && activeSubcategory === "calculator") {
         return (
           <div className="space-y-12">
-            <div className="mb-8">
+            <div className="container mx-auto px-4 pt-24 pb-8">
               <Button
                 variant="ghost"
                 onClick={() => setActiveSubcategory(null)}
-                className="gap-2 hover:gap-3 transition-all"
+                className="gap-2 hover:gap-3 transition-all text-base"
+                size="lg"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-5 w-5" />
                 Volver a Categorías
               </Button>
             </div>
 
-            <div ref={headerContainerRef} className="relative text-center space-y-6">
+            <div ref={headerContainerRef} className="relative text-center space-y-6 container mx-auto px-4">
               <GradientText 
                 colors={['#84cc16', '#a3e635', '#bef264', '#84cc16']}
                 animationSpeed={6}
@@ -451,8 +479,8 @@ const ProductSection = () => {
           return (activeSubcategory === "power-station" && cat.categoryName === "ESTACIÓN DE ENERGÍA") ||
                  (activeSubcategory === "solar-panel" && cat.categoryName === "PANEL SOLAR 200W");
         } else {
-          return (activeSubcategory === "deco" && cat.categoryName === "UFO DECO") ||
-                 (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL");
+          return (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL") ||
+                 (activeSubcategory === "deco" && cat.categoryName === "UFO DECO");
         }
       });
 
@@ -462,25 +490,34 @@ const ProductSection = () => {
       
       return (
         <div className="space-y-12">
-          <div className="mb-8">
+          {/* Botón Volver - Mejor posicionado y funcional */}
+          <div className="container mx-auto px-4 pt-24 pb-8">
             <Button
               variant="ghost"
               onClick={() => setActiveSubcategory(null)}
-              className="gap-2 hover:gap-3 transition-all"
+              className="gap-2 hover:gap-3 transition-all text-base"
+              size="lg"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-5 w-5" />
               Volver a Categorías
             </Button>
           </div>
 
-          <div ref={headerContainerRef} className="relative text-center space-y-6">
-            <GradientText 
-              colors={activeModule === "greenside" ? ['#84cc16', '#a3e635', '#bef264', '#84cc16'] : ['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
-              animationSpeed={6}
-              className="text-3xl lg:text-5xl font-black"
-            >
-              {category.categoryName}
-            </GradientText>
+          {/* Título y descripción */}
+          <div ref={headerContainerRef} className="relative text-center space-y-6 container mx-auto px-4 pb-8">
+            {activeModule === "greenside" && activeSubcategory === "solar-panel" ? (
+              <h2 className="text-3xl lg:text-5xl font-black text-white">
+                {category.categoryName}
+              </h2>
+            ) : (
+              <GradientText 
+                colors={activeModule === "greenside" ? ['#84cc16', '#a3e635', '#bef264', '#84cc16'] : ['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
+                animationSpeed={6}
+                className="text-3xl lg:text-5xl font-black"
+              >
+                {category.categoryName}
+              </GradientText>
+            )}
             <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
               <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
                 {category.categoryDescription}
@@ -488,10 +525,93 @@ const ProductSection = () => {
             </div>
           </div>
 
-          {/* Images Gallery for Greenside Products - NEW LAYOUT */}
+          {/* Images Gallery for Greenside Products */}
           {activeModule === "greenside" && "images" in category && category.images && (
-            <div className="relative">
-              <div className="flex flex-col lg:flex-row gap-12">
+            <>
+              {activeSubcategory === "solar-panel" ? (
+                /* Layout especial para Panel Solar - Fullwidth con intercalación */
+                <div className="w-screen relative left-[50%] right-[50%] -mx-[50vw] space-y-12">
+                  {(() => {
+                    const mainImages = category.images.filter(img => img.category === "Principal");
+                    const features = category.features;
+                    const items = [];
+                    
+                    // Intercalar: 2 imágenes, luego 4-6 features, repetir
+                    let imgIndex = 0;
+                    let featureIndex = 0;
+                    
+                    while (imgIndex < mainImages.length || featureIndex < features.length) {
+                      // Agregar 2 imágenes
+                      const imagePair = [];
+                      if (imgIndex < mainImages.length) {
+                        imagePair.push(mainImages[imgIndex]);
+                        imgIndex++;
+                      }
+                      if (imgIndex < mainImages.length) {
+                        imagePair.push(mainImages[imgIndex]);
+                        imgIndex++;
+                      }
+                      if (imagePair.length > 0) {
+                        items.push({ type: 'images', data: imagePair });
+                      }
+                      
+                      // Agregar 4-6 features
+                      const featureSlice = features.slice(featureIndex, featureIndex + 6);
+                      if (featureSlice.length > 0) {
+                        items.push({ type: 'features', data: featureSlice });
+                        featureIndex += 6;
+                      }
+                    }
+                    
+                    return items.map((item, idx) => {
+                      if (item.type === 'images') {
+                        return (
+                          <div key={`images-${idx}`} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {item.data.map((img, imgIdx) => (
+                              <motion.div
+                                key={`img-${idx}-${imgIdx}`}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: imgIdx * 0.15 }}
+                                viewport={{ once: true }}
+                                whileHover={{ scale: 1.02 }}
+                                className="relative overflow-hidden h-[500px]"
+                              >
+                                <img 
+                                  src={img.src} 
+                                  alt={`${category.categoryName} - Imagen ${imgIdx + 1}`}
+                                  className="w-full h-full object-cover"
+                                />
+                              </motion.div>
+                            ))}
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={`features-${idx}`} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 lg:px-8">
+                            {item.data.map((feature, fIdx) => (
+                              <motion.div
+                                key={fIdx}
+                                className="flex items-start gap-3 bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-primary/20"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: fIdx * 0.05 }}
+                                viewport={{ once: true }}
+                              >
+                                <Check className="h-5 w-5 mt-0.5 flex-shrink-0 text-lime-500" />
+                                <span className="text-sm lg:text-base leading-relaxed">{feature}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        );
+                      }
+                    });
+                  })()}
+                </div>
+              ) : (
+                /* Layout normal para Estación de Energía */
+                <div className="relative container mx-auto px-4">
+                  <div className="flex flex-col lg:flex-row gap-12">
                 {/* Left Column - Alternating Images and Features */}
                 <div className="flex-1 space-y-16">
                   {(() => {
@@ -499,29 +619,36 @@ const ProductSection = () => {
                     const features = category.features;
                     const items = [];
                     
-                    // Intercalate images and features
-                    const maxItems = Math.max(mainImages.length, Math.ceil(features.length / 3));
-                    for (let i = 0; i < maxItems; i++) {
-                      // Add image if available
-                      if (mainImages[i]) {
-                        items.push({
-                          type: 'image',
-                          data: mainImages[i],
-                          index: i
-                        });
-                      }
+                    // Mostrar las primeras 5 imágenes en columna izquierda
+                    const leftImages = mainImages.slice(0, 5);
+                    // La última imagen va a la derecha
+                    
+                    // Distribuir features: primeras 8 a la izquierda, últimas 2 a la derecha
+                    const leftFeatures = features.slice(0, 8);
+                    
+                    // Intercalar: imagen, 2 features en la columna izquierda
+                    let featureIndex = 0;
+                    leftImages.forEach((img, i) => {
+                      // Add image
+                      items.push({
+                        type: 'image',
+                        data: img,
+                        index: i
+                      });
                       
-                      // Add 2-3 features as a text block
-                      const featureStart = i * 3;
-                      const featureSlice = features.slice(featureStart, featureStart + 3);
-                      if (featureSlice.length > 0) {
-                        items.push({
-                          type: 'features',
-                          data: featureSlice,
-                          index: i
-                        });
+                      // Add 2 features después de cada imagen (excepto después de la última)
+                      if (featureIndex < leftFeatures.length && i < leftImages.length - 1) {
+                        const featureSlice = leftFeatures.slice(featureIndex, featureIndex + 2);
+                        if (featureSlice.length > 0) {
+                          items.push({
+                            type: 'features',
+                            data: featureSlice,
+                            index: i
+                          });
+                          featureIndex += 2;
+                        }
                       }
-                    }
+                    });
                     
                     return items.map((item, idx) => {
                       if (item.type === 'image') {
@@ -577,31 +704,99 @@ const ProductSection = () => {
                   })()}
                 </div>
 
-                {/* Right Column - Fixed Long Images */}
+                {/* Right Column - Detail images + última imagen + últimas 2 features */}
                 <div className="lg:w-2/5 space-y-6">
                   <div className="lg:sticky lg:top-24 space-y-6">
-                    {category.images
-                      .filter(img => img.category === "Detalle")
-                      .map((img, idx) => (
-                        <motion.div
-                          key={`detail-${idx}`}
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.6, delay: idx * 0.2 }}
-                          viewport={{ once: true }}
-                          className="relative overflow-hidden rounded-2xl shadow-2xl"
-                        >
-                          <img 
-                            src={img.src} 
-                            alt={`${category.categoryName} - Vista detallada ${idx + 1}`}
-                            className="w-full h-auto"
-                          />
-                        </motion.div>
-                      ))}
+                    {(() => {
+                      const mainImages = category.images.filter(img => img.category === "Principal");
+                      const detailImages = category.images.filter(img => img.category === "Detalle");
+                      const lastImage = mainImages[5]; // Última imagen principal (índice 5)
+                      const rightFeatures = category.features.slice(8); // Últimas 2 features
+                      const rightItems = [];
+                      
+                      // Agregar imágenes de detalle primero
+                      detailImages.forEach((img, idx) => {
+                        rightItems.push({ type: 'detailImage', data: img, index: idx });
+                      });
+                      
+                      // Agregar última imagen principal
+                      if (lastImage) {
+                        rightItems.push({ type: 'mainImage', data: lastImage, index: 5 });
+                      }
+                      
+                      // Agregar últimas 2 features
+                      rightFeatures.forEach((feature, idx) => {
+                        rightItems.push({ type: 'feature', data: feature, index: idx });
+                      });
+                      
+                      return rightItems.map((item, idx) => {
+                        if (item.type === 'detailImage') {
+                          return (
+                            <motion.div
+                              key={`detail-${idx}`}
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.6, delay: idx * 0.2 }}
+                              viewport={{ once: true }}
+                              className="relative overflow-hidden rounded-2xl shadow-2xl"
+                            >
+                              <img 
+                                src={item.data.src} 
+                                alt={`${category.categoryName} - Vista detallada ${item.index + 1}`}
+                                className="w-full h-auto"
+                              />
+                            </motion.div>
+                          );
+                        } else if (item.type === 'mainImage') {
+                          return (
+                            <motion.div
+                              key={`main-${item.index}`}
+                              initial={{ opacity: 0, x: 50 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.6 }}
+                              viewport={{ once: true }}
+                              whileHover={{ scale: 1.03 }}
+                              className="relative overflow-hidden rounded-2xl shadow-2xl"
+                            >
+                              <img 
+                                src={item.data.src} 
+                                alt={`${category.categoryName} - Imagen ${item.index + 1}`}
+                                className="w-full h-auto"
+                              />
+                            </motion.div>
+                          );
+                        } else {
+                          return (
+                            <motion.div
+                              key={`feature-${item.index}`}
+                              className="bg-background/60 backdrop-blur-sm rounded-xl p-6 border border-primary/20"
+                              initial={{ opacity: 0, x: 50 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.4, delay: item.index * 0.1 }}
+                              viewport={{ once: true }}
+                            >
+                              <ScrollReveal 
+                                baseOpacity={0.3} 
+                                enableBlur={true} 
+                                baseRotation={2} 
+                                blurStrength={6}
+                              >
+                                <div className="flex items-start gap-3">
+                                  <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: categoryColor }} />
+                                  <span className="text-sm lg:text-base leading-relaxed">{item.data}</span>
+                                </div>
+                              </ScrollReveal>
+                            </motion.div>
+                          );
+                        }
+                      });
+                    })()}
                   </div>
                 </div>
               </div>
             </div>
+              )}
+            </>
           )}
 
           {/* Images Gallery for Multiselect Products */}
@@ -780,9 +975,9 @@ const ProductSection = () => {
   };
 
   return (
-    <section className="pt-20 pb-20 bg-gradient-tech relative overflow-hidden">
+    <section className="bg-gradient-tech relative overflow-hidden">
       {/* DotGrid Background Effect */}
-      <div className="absolute inset-0 w-full h-full opacity-30">
+      <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0">
         <DotGrid 
           dotSize={4}
           gap={20}
@@ -796,80 +991,60 @@ const ProductSection = () => {
         />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Back Button - Only show when a module is active and no subcategory is selected */}
-        {activeModule && !activeSubcategory && (
-          <div className="mb-8">
-            <Button
-              variant="ghost"
-              onClick={() => setActiveModule(null)}
-              className="gap-2 hover:gap-3 transition-all"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Volver al Dashboard
-            </Button>
-          </div>
-        )}
-
-        {/* Dashboard or Module Content */}
-        {!activeModule ? (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
-                const Icon = module.icon;
-                const bgImage = module.id === "greenside" ? greensideBg : multiselectBg;
-                
-                return (
-                  <motion.div
-                    key={module.id}
-                    className="group cursor-pointer relative overflow-hidden rounded-3xl min-h-[500px] flex flex-col justify-end p-8"
-                    onClick={() => setActiveModule(module.id)}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: idx * 0.2 }}
-                    whileHover={{ scale: 1.03 }}
-                  >
-                    {/* Background Image */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:opacity-70 transition-opacity duration-500"
-                      style={{ backgroundImage: `url(${bgImage})` }}
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                    
-                    <div className="relative z-10 space-y-4">
-                      {module.id === "multiselect" ? (
-                        <img src={multiselectLogo} alt="Multiselect Logo" className="h-16 w-auto group-hover:scale-110 transition-transform" />
-                      ) : (
-                        <Icon className="h-16 w-16 text-primary group-hover:scale-110 transition-transform" />
-                      )}
-                      <h3 className="text-3xl lg:text-4xl font-black tracking-tight">
-                        {module.title}
-                      </h3>
-                      <p className="text-lg font-semibold text-primary">
-                        {module.subtitle}
-                      </p>
-                      <div className="text-muted-foreground leading-relaxed">
-                        <ScrollReveal baseOpacity={0.3} enableBlur={false} baseRotation={0}>
-                          {module.description}
-                        </ScrollReveal>
-                      </div>
-                      <div className="flex items-center text-primary font-bold group-hover:gap-2 transition-all pt-4">
-                        <span>Explorar</span>
-                        <ArrowLeft className="h-5 w-5 rotate-180 group-hover:translate-x-1 transition-transform" />
-                      </div>
+      {/* Dashboard or Module Content */}
+      {!activeModule ? (
+        <div className="relative z-10 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
+              const Icon = module.icon;
+              const bgImage = module.id === "greenside" ? greensideBg : multiselectBg;
+              
+              return (
+                <motion.div
+                  key={module.id}
+                  className="group cursor-pointer relative overflow-hidden min-h-[600px] flex flex-col justify-end p-12 lg:p-16"
+                  onClick={() => setActiveModule(module.id)}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.2 }}
+                  whileHover={{ scale: 1.01 }}
+                >
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:opacity-70 transition-opacity duration-500"
+                    style={{ backgroundImage: `url(${bgImage})` }}
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                  
+                  <div className="relative z-10 space-y-3 max-w-xl">
+                    <Icon className="h-12 w-12 text-primary group-hover:scale-110 transition-transform" />
+                    <h3 className="text-2xl lg:text-3xl font-black tracking-tight">
+                      {module.title}
+                    </h3>
+                    <p className="text-base lg:text-lg font-semibold text-primary">
+                      {module.subtitle}
+                    </p>
+                    <div className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                      <ScrollReveal baseOpacity={0.3} enableBlur={false} baseRotation={0}>
+                        {module.description}
+                      </ScrollReveal>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </>
-        ) : (
-          <div className="animate-fade-in">
-            {renderModuleContent()}
+                    <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary hover:text-background text-primary rounded-full font-bold transition-all duration-300 group/btn border border-primary/30 hover:border-primary hover:shadow-lg hover:shadow-primary/20 mt-2">
+                      <span>Explorar</span>
+                      <ArrowLeft className="h-4 w-4 rotate-180 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="animate-fade-in">
+          {renderModuleContent()}
+        </div>
+      )}
     </section>
   );
 };

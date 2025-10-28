@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 const campaignVideo = "/videos/Copia de Video intro web 1.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
 const greensideVideo = "/videos/B2Grow Greenside Institucional IG (2).mp4";
+const multiselectVideo = "/videos/VIDEO ORIGINAL B2GROW (1).MP4";
 
 
 const Hero = () => {
@@ -358,7 +359,7 @@ const Hero = () => {
                         <div className="aspect-video w-full">
                           <video 
                             ref={videoRef2}
-                            src={ufoVideo}
+                            src={multiselectVideo}
                             controls
                             muted
                             loop
