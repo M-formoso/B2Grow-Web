@@ -7,6 +7,7 @@ import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import Threads from "@/components/effects/Threads";
 import { useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -55,6 +56,7 @@ const Hero = () => {
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
       
       <div className="container mx-auto px-4 pt-24">
+        {/* Threads Effect as First View */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[85vh]">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
@@ -102,72 +104,18 @@ const Hero = () => {
             </div>
           </div>
 
+          {/* Threads Effect */}
           <div className="flex items-center justify-center" style={{ height: '600px', position: 'relative' }}>
-            <CardSwap
-              width={500}
-              height={500}
-              cardDistance={60}
-              verticalDistance={70}
-              delay={4000}
-              pauseOnHover={true}
-              easing="elastic"
-            >
-              <Card>
-                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                  <img 
-                    src={powerStationHero} 
-                    alt="Estación de Energía Portátil B2Grow" 
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h2 className="text-3xl font-bold mb-2 text-white">Energía Portátil</h2>
-                    <p className="text-lg text-white/90">
-                      Estaciones de energía inteligentes para un futuro sustentable.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-              
-              <Card>
-                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                  <img 
-                    src={solarPanelsHero} 
-                    alt="Paneles Solares Flexibles B2Grow" 
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h2 className="text-3xl font-bold mb-2 text-white">Paneles Solares</h2>
-                    <p className="text-lg text-white/90">
-                      Paneles flexibles de alta eficiencia para máxima captación.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-              
-              <Card>
-                <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                  <img 
-                    src={ledLightingHero} 
-                    alt="Iluminación LED Inteligente B2Grow" 
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <h2 className="text-3xl font-bold mb-2 text-white">LED Inteligente</h2>
-                    <p className="text-lg text-white/90">
-                      Sistemas LED IoT para máxima eficiencia energética.
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </CardSwap>
+            <Threads
+              amplitude={1}
+              distance={0}
+              enableMouseInteraction={true}
+            />
           </div>
         </div>
 
         {/* Video Section */}
-        <div className="container mx-auto px-4 pb-20 pt-48">
+        <div className="pb-20 pt-48">
           <div className="max-w-6xl mx-auto">
             {/* Video Header */}
             <div className="text-center mb-12 animate-fade-in">
@@ -294,6 +242,70 @@ const Hero = () => {
                   Presencia en múltiples mercados
                 </p>
               </div>
+            </div>
+
+            {/* Product Cards below video */}
+            <div className="mt-24 flex items-center justify-center" style={{ minHeight: '600px', position: 'relative' }}>
+              <CardSwap
+                width={500}
+                height={500}
+                cardDistance={60}
+                verticalDistance={70}
+                delay={4000}
+                pauseOnHover={true}
+                easing="elastic"
+              >
+                <Card>
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                    <img 
+                      src={powerStationHero} 
+                      alt="Estación de Energía Portátil B2Grow" 
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h2 className="text-3xl font-bold mb-2 text-white">Energía Portátil</h2>
+                      <p className="text-lg text-white/90">
+                        Estaciones de energía inteligentes para un futuro sustentable.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card>
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                    <img 
+                      src={solarPanelsHero} 
+                      alt="Paneles Solares Flexibles B2Grow" 
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h2 className="text-3xl font-bold mb-2 text-white">Paneles Solares</h2>
+                      <p className="text-lg text-white/90">
+                        Paneles flexibles de alta eficiencia para máxima captación.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card>
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
+                    <img 
+                      src={ledLightingHero} 
+                      alt="Iluminación LED Inteligente B2Grow" 
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h2 className="text-3xl font-bold mb-2 text-white">LED Inteligente</h2>
+                      <p className="text-lg text-white/90">
+                        Sistemas LED IoT para máxima eficiencia energética.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </CardSwap>
             </div>
           </div>
         </div>
