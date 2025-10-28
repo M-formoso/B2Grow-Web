@@ -11,8 +11,9 @@ import Threads from "@/components/effects/Threads";
 import { useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
 
-const campaignVideo = "https://ahcwuywqoxbelvtyucrq.supabase.co/storage/v1/object/public/videos/video-b2grow-1760627822221.mp4";
+const campaignVideo = "/videos/Copia de Video intro web 1.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
 
 const Hero = () => {
@@ -55,20 +56,101 @@ const Hero = () => {
       <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-float"></div>
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-xl animate-float" style={{ animationDelay: "2s" }}></div>
       
-      <div className="container mx-auto px-4 pt-24">
-        {/* Threads Effect as Full Background */}
+      {/* Video Banner Section - FULL WIDTH */}
+      <div className="relative w-full">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative w-full"
+        >
+          {/* Video Container - Full Width with limited height */}
+          <div className="relative w-full max-h-[70vh] overflow-hidden">
+            <div className="relative w-full">
+              <video 
+                src={campaignVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover max-h-[70vh]"
+              >
+                Tu navegador no soporta el tag de video.
+              </video>
+              
+              {/* Overlay with gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
+              
+              {/* Text Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                <div className="container mx-auto">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="max-w-4xl"
+                  >
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-3 tracking-tight">
+                      <GradientText 
+                        colors={['#ffffff', '#f0f0f0', '#e0e0e0', '#ffffff']}
+                        animationSpeed={4}
+                        className="text-3xl md:text-5xl lg:text-6xl font-black"
+                      >
+                        POWERING THE FUTURE
+                      </GradientText>
+                    </h1>
+                    <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-6">
+                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={1} blurStrength={4}>
+                        Tecnología inteligente de energía para un mundo sustentable
+                      </ScrollReveal>
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action Buttons */}
+          <div className="absolute bottom-6 left-0 right-0 z-20">
+            <div className="container mx-auto px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-wrap gap-4 justify-start max-w-4xl"
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-energy"
+                  onClick={() => window.location.href = '/productos'}
+                >
+                  Ver Productos
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-6 py-5 text-base"
+                  onClick={() => window.location.href = '/calculadora'}
+                >
+                  Calculadora Energética
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Threads Effect Section - AFTER VIDEO */}
+      <div className="container mx-auto px-4">
         <div className="relative min-h-[85vh] w-full">
-          {/* Threads Background - Full Width */}
+          {/* Threads Background */}
           <div className="absolute inset-0 w-full h-full">
             <Threads
               amplitude={1}
               distance={0}
               enableMouseInteraction={true}
             />
-          </div>
-
-          {/* Content Overlay - Empty for now */}
-          <div className="relative z-10 flex items-center justify-center min-h-[85vh] px-4 pointer-events-none">
           </div>
         </div>
 
