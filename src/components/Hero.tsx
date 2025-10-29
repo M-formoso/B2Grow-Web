@@ -313,10 +313,10 @@ const Hero = () => {
               </ScrollReveal>
             </div>
 
-            {/* Videos Carousel */}
-            <div className="relative mb-12 px-16">
+            {/* Videos Carousel - FULL WIDTH */}
+            <div className="relative w-screen left-[50%] right-[50%] -mx-[50vw] mb-12">
               <Carousel 
-                className="w-full max-w-5xl mx-auto"
+                className="w-full"
                 plugins={[
                   Autoplay({
                     delay: 5000,
@@ -327,25 +327,28 @@ const Hero = () => {
                 <CarouselContent>
                   {/* Campaign Video */}
                   <CarouselItem>
-                    <div className="relative group">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                      <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                        <div className="aspect-video w-full">
-                          <video 
-                            ref={videoRef1}
-                            src={greensideVideo}
-                            controls
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-full object-cover"
-                          >
-                            Tu navegador no soporta el tag de video.
-                          </video>
-                        </div>
-                        <div className="p-6 bg-black/40 backdrop-blur-sm">
-                          <h3 className="text-2xl font-semibold text-white mb-2">Campaña B2GROW</h3>
-                          <p className="text-base text-white/70">Nuestra visión de tecnología sustentable</p>
+                    <div className="relative">
+                      <div className="relative w-full">
+                        <video 
+                          ref={videoRef1}
+                          src={greensideVideo}
+                          controls
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-auto max-h-[75vh] object-cover"
+                        >
+                          Tu navegador no soporta el tag de video.
+                        </video>
+                        {/* Overlay with gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
+                        
+                        {/* Text Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                          <div className="container mx-auto">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Campaña B2GROW</h3>
+                            <p className="text-base md:text-lg text-white/80">Nuestra visión de tecnología sustentable</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -353,32 +356,35 @@ const Hero = () => {
 
                   {/* UFO Video */}
                   <CarouselItem>
-                    <div className="relative group">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-accent via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                      <div className="relative bg-background/40 backdrop-blur-md rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                        <div className="aspect-video w-full">
-                          <video 
-                            ref={videoRef2}
-                            src={multiselectVideo}
-                            controls
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-full object-cover"
-                          >
-                            Tu navegador no soporta el tag de video.
-                          </video>
-                        </div>
-                        <div className="p-6 bg-black/40 backdrop-blur-sm">
-                          <h3 className="text-2xl font-semibold text-white mb-2">Iluminación UFO</h3>
-                          <p className="text-base text-white/70">Tecnología LED de última generación</p>
+                    <div className="relative">
+                      <div className="relative w-full">
+                        <video 
+                          ref={videoRef2}
+                          src={multiselectVideo}
+                          controls
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-auto max-h-[75vh] object-cover"
+                        >
+                          Tu navegador no soporta el tag de video.
+                        </video>
+                        {/* Overlay with gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
+                        
+                        {/* Text Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                          <div className="container mx-auto">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Iluminación UFO</h3>
+                            <p className="text-base md:text-lg text-white/80">Tecnología LED de última generación</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </CarouselItem>
                 </CarouselContent>
-                <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
-                <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
+                <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20 ml-4" />
+                <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20 mr-4" />
               </Carousel>
             </div>
 
