@@ -10,26 +10,26 @@ import { Zap, Sun, Leaf, Battery, Package, MessageCircle, ChevronDown, ChevronUp
 
 // Definición de tipos de artefactos con valores típicos
 const APPLIANCES = {
-  "Lámparas": { power: 9, peakPower: 9, usage: 4 },
-  "Heladeras": { power: 150, peakPower: 300, usage: 12 },
-  "Heladera con Freezer": { power: 200, peakPower: 400, usage: 12 },
-  "Freezer": { power: 250, peakPower: 500, usage: 8 },
-  "TV": { power: 90, peakPower: 180, usage: 5 },
-  "Laptop o PC": { power: 200, peakPower: 300, usage: 6 },
+  "Lámparas": { power: 9, peakPower: 9, usage: 1 },
+  "Heladeras": { power: 150, peakPower: 300, usage: 1 },
+  "Heladera con Freezer": { power: 200, peakPower: 400, usage: 1 },
+  "Freezer": { power: 250, peakPower: 500, usage: 1 },
+  "TV": { power: 90, peakPower: 180, usage: 1 },
+  "Laptop o PC": { power: 40, peakPower: 50, usage: 1 },
   "Cámaras de seguridad": { power: 15, peakPower: 20, usage: 24 },
   "Alarma": { power: 10, peakPower: 15, usage: 24 },
   "Router WiFi": { power: 12, peakPower: 15, usage: 24 },
   "Portón": { power: 300, peakPower: 800, usage: 0.2 },
-  "Cafetera": { power: 900, peakPower: 1200, usage: 0.5 },
-  "Aire Acondicionado normal": { power: 1350, peakPower: 2200, usage: 6 },
-  "Aire Acondicionado inverter": { power: 877, peakPower: 1400, usage: 6 },
-  "Ventilador": { power: 90, peakPower: 150, usage: 10 },
+  "Cafetera": { power: 600, peakPower: 1200, usage: 0.5 },
+  "Aire Acondicionado normal": { power: 1350, peakPower: 2200, usage: 1 },
+  "Aire Acondicionado inverter": { power: 877, peakPower: 1400, usage: 1 },
+  "Ventilador": { power: 90, peakPower: 150, usage: 1 },
   "Cargador de Herramienta eléctrica": { power: 150, peakPower: 300, usage: 1 },
-  "Cargador de celular": { power: 5, peakPower: 10, usage: 3 },
-  "Equipo de música": { power: 60, peakPower: 120, usage: 4 },
-  "Otros 1": { power: 0, peakPower: 0, usage: 0 },
-  "Otros 2": { power: 0, peakPower: 0, usage: 0 },
-  "Otros 3": { power: 0, peakPower: 0, usage: 0 },
+  "Cargador de celular": { power: 5, peakPower: 10, usage: 1 },
+  "Equipo de música": { power: 60, peakPower: 120, usage: 1 },
+  "Otros 1": { power: 0, peakPower: 0, usage: 1 },
+  "Otros 2": { power: 0, peakPower: 0, usage: 1 },
+  "Otros 3": { power: 0, peakPower: 0, usage: 1 },
 };
 
 const PROJECT_TYPES = [
@@ -197,6 +197,40 @@ const Calculator = () => {
             Calculá tu sistema de energía solar ideal
           </p>
         </div>
+
+        {/* Instrucciones de uso */}
+        <Card className="backdrop-blur-sm bg-lime-500/10 border-lime-500/30 mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lime-500">
+              <Leaf className="w-6 h-6" />
+              Instrucciones de Uso
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ol className="space-y-3 text-foreground">
+              <li className="flex gap-3">
+                <span className="font-bold text-lime-500 flex-shrink-0">1)</span>
+                <span>Elegí el tipo de proyecto sobre el que querés consultar.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-lime-500 flex-shrink-0">2)</span>
+                <span>Tildá la casilla si necesitás movilizar el equipo con el módulo chasis con rueditas (eso agrega una batería de 1037Wh al equipo).</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-lime-500 flex-shrink-0">3)</span>
+                <span>Clickeá en "Mostrar todos los artefactos" para que se te despliegue la lista de artefactos (al final podés agregar otros 3 equipos que no estén en la lista, en caso que lo necesites).</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-lime-500 flex-shrink-0">4)</span>
+                <span>Tildá el equipo que te interese. Los parámetros que podés elegir son: <strong>Potencia del artefacto</strong>, <strong>Potencia Pico</strong> (se refiere a que hay artefactos que en el arranque necesitan por ejemplo el doble de potencia), la <strong>cantidad necesaria de equipos</strong> y el <strong>uso en horas por día</strong> que le vas a dar.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-lime-500 flex-shrink-0">5)</span>
+                <span>Deslizate hasta el final de los equipos, presioná "Calcular Sistema" y vas a obtener el resultado del equipo necesario para tu aplicación. Solicitá cotización o asesoramiento a nuestro contacto de whatsapp.</span>
+              </li>
+            </ol>
+          </CardContent>
+        </Card>
 
         <Card className="backdrop-blur-sm bg-card/90 border-border">
           <CardHeader>
@@ -426,23 +460,6 @@ const Calculator = () => {
               <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Battery className="text-lime-500" />
-                    Baterías
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold text-foreground">
-                    {result.necesarioBaterias.toFixed(0)} Wh
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {result.cantBateriasExtra} baterías extra
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
                     <Package className="text-lime-500" />
                     Estación Recomendada
                   </CardTitle>
@@ -462,25 +479,16 @@ const Calculator = () => {
                     La Estación de energía B2Grow Greenside recomendada es: {result.estacionRecomendada}
                   </h3>
                   <p className="text-lg text-muted-foreground">
-                    No dudes en contactarnos ahora mismo para enviarte tu cotización o asesorarte
+                    No dudes en contactarnos ahora mismo para asesoramiento técnico y ventas
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <div className="flex justify-center">
                     <Button
                       onClick={() => window.open("https://wa.me/5491151857753", "_blank")}
                       className="gap-2"
                       size="lg"
                     >
                       <MessageCircle />
-                      Cotización: +54 9 11 5185-7753
-                    </Button>
-                    <Button
-                      onClick={() => window.open("https://wa.me/5491166230246", "_blank")}
-                      variant="secondary"
-                      className="gap-2"
-                      size="lg"
-                    >
-                      <MessageCircle />
-                      Asesoramiento: +54 9 11 6623-0246
+                      Asesoramiento Técnico y Ventas: +54 9 11 5185-7753
                     </Button>
                   </div>
                   <p className="text-sm font-semibold text-foreground mt-4">
