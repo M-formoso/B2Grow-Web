@@ -87,14 +87,18 @@ const Footer = () => {
       </div>
 
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Brand */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+          {/* Brand - LOGO TAMAÑO ORIGINAL */}
           <div className="animate-slide-up">
-            <div className="flex items-center mb-1">
-              <img src={greensideLogo} alt="B2Grow Greenside" className="h-44 lg:h-48 w-auto" />
+            <div>
+              <img 
+                src={greensideLogo} 
+                alt="B2Grow Greenside" 
+                className="h-36 lg:h-40 w-auto object-contain"
+              />
             </div>
-            <p className="text-muted-foreground mb-1 leading-relaxed">
+            <p className="text-muted-foreground mb-4 leading-relaxed text-sm -mt-12">
               Tecnología, eficiencia energética y sustentabilidad para un futuro más inteligente.
             </p>
             <div className="flex space-x-2">
@@ -104,8 +108,11 @@ const Footer = () => {
                   variant="outline"
                   size="icon"
                   className="border-border hover:bg-primary hover:border-primary group"
+                  asChild
                 >
-                  <social.icon className="h-4 w-4 group-hover:text-primary-foreground" />
+                  <a href={social.href} target="_blank" rel="noopener noreferrer">
+                    <social.icon className="h-4 w-4 group-hover:text-primary-foreground" />
+                  </a>
                 </Button>
               ))}
             </div>
@@ -119,7 +126,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
                     {link.name}
                   </a>
@@ -128,7 +135,7 @@ const Footer = () => {
               <li>
                 <a 
                   href="#nosotros"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                 >
                   Quiénes Somos
                 </a>
@@ -141,16 +148,16 @@ const Footer = () => {
             <h4 className="text-lg font-bold text-foreground mb-4">Contacto</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <Phone className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">+54 11 1234-5678</span>
+                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
+                <span className="text-muted-foreground text-sm">+54 11 1234-5678</span>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">info@b2grow.com</span>
+                <Mail className="h-4 w-4 text-primary flex-shrink-0" />
+                <span className="text-muted-foreground text-sm">info@b2grow.com</span>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-primary mt-1" />
-                <span className="text-muted-foreground">Buenos Aires, Argentina</span>
+                <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                <span className="text-muted-foreground text-sm">Buenos Aires, Argentina</span>
               </div>
             </div>
           </div>
@@ -158,14 +165,14 @@ const Footer = () => {
           {/* Newsletter */}
           <div className="animate-slide-up" style={{ animationDelay: "300ms" }}>
             <h4 className="text-lg font-bold text-foreground mb-4">Newsletter</h4>
-            <p className="text-muted-foreground mb-3">
+            <p className="text-muted-foreground mb-3 text-sm">
               Suscríbete para recibir las últimas novedades en tecnología energética.
             </p>
             <div className="space-y-2">
               <input 
                 type="email" 
                 placeholder="tu@email.com"
-                className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors text-sm"
               />
               <Button className="w-full bg-gradient-primary hover:shadow-energy">
                 Suscribirse
@@ -175,11 +182,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-6 pt-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-muted-foreground text-sm mb-4 md:mb-0">
+        <div className="border-t border-border mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-muted-foreground text-sm text-center md:text-left">
             © 2024 B2Grow - Línea Greenside. Todos los derechos reservados.
           </div>
-          <div className="flex space-x-6 text-sm">
+          <div className="flex flex-wrap justify-center md:justify-end gap-6 text-sm">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Aviso Legal
             </a>
