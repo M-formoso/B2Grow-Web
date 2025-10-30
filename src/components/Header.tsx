@@ -62,17 +62,17 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 w-full z-50 pointer-events-none">
-      <div className="w-full flex items-center justify-between px-8 pt-4 pointer-events-auto">
+      <div className="w-full flex items-center justify-between px-8 py-0.05 pointer-events-auto min-h-[120px]">
         {/* Logo separado */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="transition-transform hover:scale-110 duration-300 ml-12"
           aria-label="Ir al inicio"
         >
-          <img 
-            src={b2growLogo} 
-            alt="B2Grow Logo" 
-            className="h-20 w-auto"
+          <img
+            src={b2growLogo}
+            alt="B2Grow Logo"
+            className="h-32 lg:h-36 w-auto"
           />
         </Link>
 
@@ -90,7 +90,7 @@ const Header = () => {
             onMobileMenuClick={() => console.log('Mobile menu clicked')}
           />
         </div>
-        
+
         {/* Espacio para balance visual */}
         <div className="w-12 h-12" />
       </div>

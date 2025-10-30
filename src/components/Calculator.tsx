@@ -186,7 +186,7 @@ const Calculator = () => {
 
   return (
     <section className="relative min-h-screen pt-40 pb-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(132,204,22,0.1),transparent_50%)]" />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
@@ -364,10 +364,10 @@ const Calculator = () => {
         {result && (
           <div className="mt-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Zap className="text-foreground" />
+                    <Zap className="text-lime-500" />
                     Potencia Necesaria
                   </CardTitle>
                 </CardHeader>
@@ -378,10 +378,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Zap className="text-foreground" />
+                    <Zap className="text-lime-500" />
                     Potencia Pico
                   </CardTitle>
                 </CardHeader>
@@ -392,10 +392,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Battery className="text-foreground" />
+                    <Battery className="text-lime-500" />
                     Autonomía Necesaria
                   </CardTitle>
                 </CardHeader>
@@ -406,10 +406,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sun className="text-foreground" />
+                    <Sun className="text-lime-500" />
                     Paneles Solares
                   </CardTitle>
                 </CardHeader>
@@ -423,10 +423,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Battery className="text-foreground" />
+                    <Battery className="text-lime-500" />
                     Baterías
                   </CardTitle>
                 </CardHeader>
@@ -440,10 +440,10 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-card/90 border-border">
+              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Package className="text-foreground" />
+                    <Package className="text-lime-500" />
                     Estación Recomendada
                   </CardTitle>
                 </CardHeader>

@@ -8,10 +8,11 @@ import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import Threads from "@/components/effects/Threads";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 const campaignVideo = "/videos/Copia de Video intro web 1.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
@@ -22,6 +23,22 @@ const multiselectVideo = "/videos/VIDEO ORIGINAL B2GROW (1).MP4";
 const Hero = () => {
   const videoRef1 = useRef<HTMLVideoElement>(null);
   const videoRef2 = useRef<HTMLVideoElement>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+
+    setCount(carouselApi.scrollSnapList().length);
+    setCurrent(carouselApi.selectedScrollSnap());
+
+    carouselApi.on("select", () => {
+      setCurrent(carouselApi.selectedScrollSnap());
+    });
+  }, [carouselApi]);
 
   useEffect(() => {
     const video1 = videoRef1.current;
@@ -285,42 +302,34 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Video Section */}
-        <div className="pb-32 pt-12 relative z-20">
-          <div className="max-w-6xl mx-auto">
-            {/* Video Header */}
-            <div className="text-center mb-12 animate-fade-in">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-                <DecryptedText 
-                  text="Conocé Nuestra Tecnología"
-                  speed={30}
-                  maxIterations={8}
-                  sequential={true}
-                  revealDirection="center"
-                  animateOn="view"
-                  className="text-white"
-                  encryptedClassName="text-white/40"
-                />
+        {/* Title Section - Outside video */}
+        <div className="pb-4 pt-2 relative z-20">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-4 animate-fade-in">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-3 text-white">
+                Conocé Nuestra Tecnología
               </h2>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={2}
-                blurStrength={6}
-                textClassName="text-xl text-white/90"
-              >
+              <p className="text-xl text-white/90">
                 Descubrí cómo nuestras soluciones están revolucionando el sector energético
-              </ScrollReveal>
+              </p>
             </div>
+          </div>
+        </div>
+
+        {/* Video Section */}
+        <div className="pb-32 relative z-20">
+          <div className="max-w-6xl mx-auto px-4">
 
             {/* Videos Carousel - FULL WIDTH */}
             <div className="relative w-screen left-[50%] right-[50%] -mx-[50vw] mb-12">
-              <Carousel 
+              <Carousel
+                setApi={setCarouselApi}
                 className="w-full"
                 plugins={[
                   Autoplay({
                     delay: 5000,
-                    stopOnInteraction: false,
+                    stopOnInteraction: true,
+                    stopOnMouseEnter: true,
                   }),
                 ]}
               >
@@ -386,79 +395,100 @@ const Hero = () => {
                 <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20 ml-4" />
                 <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20 mr-4" />
               </Carousel>
+
+              {/* Carousel Indicators */}
+              <div className="flex justify-center gap-2 mt-6">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => carouselApi?.scrollTo(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === current
+                        ? 'w-8 bg-primary'
+                        : 'w-2 bg-white/30 hover:bg-white/50'
+                    }`}
+                    aria-label={`Ir al video ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Product Cards with Features Grid beside them */}
-            <div className="mt-12 flex flex-col lg:flex-row items-start lg:items-start justify-between gap-12">
+            <div className="mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-start gap-8 lg:gap-16 max-w-7xl mx-auto pl-0 lg:pl-8">
               {/* Features Grid - LEFT SIDE */}
-              <div className="flex-shrink-0 w-full lg:w-80 space-y-8 lg:pt-0">
+              <div className="flex-shrink-0 w-full lg:w-96 space-y-8 lg:pt-12">
                 {/* Innovación - Primera card */}
-                <motion.div 
-                  className="text-left"
+                <motion.div
+                  className="flex items-center gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
                 >
-                  <motion.div 
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                  <motion.div
+                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Zap className="w-8 h-8 text-primary" />
+                    <Zap className="w-10 h-10 text-green-500" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-2 text-white">Innovación</h3>
-                  <p className="text-white/70 text-sm">
-                    Tecnología LED de última generación
-                  </p>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-1 text-white">Innovación</h3>
+                    <p className="text-white/70 text-sm">
+                      Tecnología LED de última generación
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Sustentabilidad - Segunda card */}
-                <motion.div 
-                  className="text-left"
+                <motion.div
+                  className="flex items-center gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                 >
-                  <motion.div 
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                  <motion.div
+                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Leaf className="w-8 h-8 text-primary" />
+                    <Leaf className="w-10 h-10 text-green-500" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-2 text-white">Sustentabilidad</h3>
-                  <p className="text-white/70 text-sm">
-                    Soluciones energéticamente eficientes
-                  </p>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-1 text-white">Sustentabilidad</h3>
+                    <p className="text-white/70 text-sm">
+                      Soluciones energéticamente eficientes
+                    </p>
+                  </div>
                 </motion.div>
 
                 {/* Alcance Global - Tercera card */}
-                <motion.div 
-                  className="text-left"
+                <motion.div
+                  className="flex items-center gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                 >
-                  <motion.div 
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
+                  <motion.div
+                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Globe className="w-8 h-8 text-primary" />
+                    <Globe className="w-10 h-10 text-green-500" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-2 text-white">Alcance Global</h3>
-                  <p className="text-white/70 text-sm">
-                    Presencia en múltiples mercados
-                  </p>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-1 text-white">Alcance Global</h3>
+                    <p className="text-white/70 text-sm">
+                      Presencia en múltiples mercados
+                    </p>
+                  </div>
                 </motion.div>
               </div>
 
               {/* CardSwap - RIGHT SIDE */}
-              <div className="flex-1 flex items-start justify-center -mt-20 lg:-mt-62">
-              <div style={{ paddingTop: '0' }}>
+              <div className="flex-shrink-0 w-full lg:w-auto flex items-center justify-center">
               <CardSwap
                 width={500}
                 height={500}
@@ -469,57 +499,53 @@ const Hero = () => {
                 easing="elastic"
               >
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                    <img 
-                      src={powerStationHero} 
-                      alt="Estación de Energía Portátil B2Grow" 
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
+                    <img
+                      src={powerStationHero}
+                      alt="Estación de Energía Portátil B2Grow"
                       className="absolute inset-0 w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        
+
                       </p>
                     </div>
                   </div>
                 </Card>
-                
+
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                    <img 
-                      src={solarPanelsHero} 
-                      alt="Paneles Solares Flexibles B2Grow" 
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
+                    <img
+                      src={solarPanelsHero}
+                      alt="Paneles Solares Flexibles B2Grow"
                       className="absolute inset-0 w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        
+
                       </p>
                     </div>
                   </div>
                 </Card>
-                
+
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl">
-                    <img 
-                      src={ledLightingHero} 
-                      alt="Iluminación LED Inteligente B2Grow" 
+                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
+                    <img
+                      src={ledLightingHero}
+                      alt="Iluminación LED Inteligente B2Grow"
                       className="absolute inset-0 w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <h2 className="text-3xl font-bold mb-2 text-white"></h2>
                       <p className="text-lg text-white/90">
-                        
+
                       </p>
                     </div>
                   </div>
                 </Card>
               </CardSwap>
-              </div>
               </div>
             </div>
           </div>
