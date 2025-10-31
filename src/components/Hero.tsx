@@ -385,7 +385,7 @@ const Hero = () => {
                         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
                           <div className="container mx-auto">
                             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Iluminación UFO</h3>
-                            <p className="text-base md:text-lg text-white/80">Tecnología LED de última generación</p>
+                            <p className="text-base md:text-lg text-white/80">Tecnología de última generación</p>
                           </div>
                         </div>
                       </div>
