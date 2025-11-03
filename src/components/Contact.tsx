@@ -8,7 +8,7 @@ import { MessageSquare, Mail, Users, ExternalLink, Phone } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import ledsceneLogo from "@/assets/logo-ledscene.png";
-import growthledLogo from "@/assets/logo-growthled.jpg";
+const growthledLogo = "/logo-growthled.png";
 
 const Contact = () => {
   const [showDistributorForm, setShowDistributorForm] = useState(false);
@@ -178,26 +178,36 @@ const Contact = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-foreground mb-4">Distribuidores Mayoristas Exclusivos</h3>
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg hover:bg-background/70 transition-colors group/item">
-                        <img 
-                          src={ledsceneLogo} 
-                          alt="Ledscene" 
-                          className="h-6 object-contain"
+                      <a
+                        href="https://www.ledscene.com.ar/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-4 bg-background/50 rounded-lg hover:bg-background/70 transition-colors group/item cursor-pointer"
+                      >
+                        <img
+                          src={ledsceneLogo}
+                          alt="Ledscene"
+                          className="h-6 object-contain transition-transform duration-300 group-hover/item:scale-110"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
                         </Button>
-                      </div>
-                      <div className="flex items-center justify-between p-4 bg-background/50 rounded-lg hover:bg-background/70 transition-colors group/item">
-                        <img 
-                          src={growthledLogo} 
-                          alt="Growthled" 
-                          className="h-12 object-contain"
+                      </a>
+                      <a
+                        href="https://growthled.com.ar/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-4 bg-background/50 rounded-lg hover:bg-background/70 transition-colors group/item cursor-pointer"
+                      >
+                        <img
+                          src={growthledLogo}
+                          alt="Growthled"
+                          className="h-12 object-contain transition-transform duration-300 group-hover/item:scale-110"
                         />
                         <Button variant="ghost" size="sm" className="group-hover/item:text-primary">
                           <ExternalLink className="h-4 w-4" />
                         </Button>
-                      </div>
+                      </a>
                     </div>
                   </div>
                 </div>

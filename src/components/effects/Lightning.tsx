@@ -3,13 +3,14 @@ import './Lightning.css';
 
 interface LightningProps {
   hue?: number;
+  saturation?: number;
   xOffset?: number;
   speed?: number;
   intensity?: number;
   size?: number;
 }
 
-const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 }: LightningProps) => {
+const Lightning = ({ hue = 230, saturation = 0.7, xOffset = 0, speed = 1, intensity = 1, size = 1 }: LightningProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 
       uniform vec2 iResolution;
       uniform float iTime;
       uniform float uHue;
+      uniform float uSaturation;
       uniform float uXOffset;
       uniform float uSpeed;
       uniform float uIntensity;
@@ -105,7 +107,7 @@ const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 
           uv += 2.0 * fbm(uv * uSize + 0.8 * iTime * uSpeed) - 1.0;
           
           float dist = abs(uv.x);
-          vec3 baseColor = hsv2rgb(vec3(uHue / 360.0, 0.7, 0.8));
+          vec3 baseColor = hsv2rgb(vec3(uHue / 360.0, uSaturation, 0.8));
           vec3 col = baseColor * pow(mix(0.0, 0.07, hash11(iTime * uSpeed)) / dist, 1.0) * uIntensity;
           col = pow(col, vec3(1.0));
           fragColor = vec4(col, 1.0);
@@ -156,6 +158,7 @@ const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 
     const iResolutionLocation = gl.getUniformLocation(program, 'iResolution');
     const iTimeLocation = gl.getUniformLocation(program, 'iTime');
     const uHueLocation = gl.getUniformLocation(program, 'uHue');
+    const uSaturationLocation = gl.getUniformLocation(program, 'uSaturation');
     const uXOffsetLocation = gl.getUniformLocation(program, 'uXOffset');
     const uSpeedLocation = gl.getUniformLocation(program, 'uSpeed');
     const uIntensityLocation = gl.getUniformLocation(program, 'uIntensity');
@@ -169,6 +172,7 @@ const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 
       const currentTime = performance.now();
       gl.uniform1f(iTimeLocation, (currentTime - startTime) / 1000.0);
       gl.uniform1f(uHueLocation, hue);
+      gl.uniform1f(uSaturationLocation, saturation);
       gl.uniform1f(uXOffsetLocation, xOffset);
       gl.uniform1f(uSpeedLocation, speed);
       gl.uniform1f(uIntensityLocation, intensity);
@@ -181,7 +185,7 @@ const Lightning = ({ hue = 230, xOffset = 0, speed = 1, intensity = 1, size = 1 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [hue, xOffset, speed, intensity, size]);
+  }, [hue, saturation, xOffset, speed, intensity, size]);
 
   return <canvas ref={canvasRef} className="lightning-container" />;
 };

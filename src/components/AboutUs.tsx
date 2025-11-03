@@ -36,6 +36,7 @@ const AboutUs = () => {
       <div className="absolute inset-0 opacity-40">
         <Lightning
           hue={0}
+          saturation={0}
           xOffset={0}
           speed={0.5}
           intensity={1.5}
@@ -48,7 +49,7 @@ const AboutUs = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Section with Decrypted Text Effect */}
-        <div className="min-h-screen flex flex-col justify-center py-20">
+        <div className="min-h-screen flex flex-col justify-center py-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +58,7 @@ const AboutUs = () => {
             className="max-w-5xl mx-auto text-center mb-16"
           >
             {/* Logo Carousel */}
-            <div className="relative h-64 lg:h-80 mb-12 flex items-center justify-center">
+            <div className="relative h-96 lg:h-[28rem] mb-12 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentLogoIndex}

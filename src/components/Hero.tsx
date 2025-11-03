@@ -196,23 +196,23 @@ const Hero = () => {
             <motion.div
               className="absolute"
               initial={{ top: '-25%', right: '15%', opacity: 0, rotate: 20, scale: 0.5 }}
-              animate={{ 
-                top: '110%', 
+              animate={{
+                top: '110%',
                 right: '10%',
                 opacity: [0, 0.6, 0.6, 0],
                 rotate: 30,
                 scale: [0.5, 0.7, 0.7, 0.5]
               }}
-              transition={{ 
+              transition={{
                 duration: 12,
                 repeat: Infinity,
                 ease: "linear",
                 delay: 5
               }}
             >
-              <img 
-                src={powerStationHero} 
-                alt="Power Station" 
+              <img
+                src={ledLightingHero}
+                alt="LED Lighting"
                 className="w-28 md:w-40 lg:w-56 filter drop-shadow-2xl"
               />
             </motion.div>
@@ -245,23 +245,23 @@ const Hero = () => {
             <motion.div
               className="absolute"
               initial={{ top: '-15%', left: '25%', opacity: 0, rotate: -10, scale: 0.4 }}
-              animate={{ 
-                top: '110%', 
+              animate={{
+                top: '110%',
                 left: '20%',
                 opacity: [0, 0.8, 0.8, 0],
                 rotate: -20,
                 scale: [0.4, 0.6, 0.6, 0.4]
               }}
-              transition={{ 
+              transition={{
                 duration: 10,
                 repeat: Infinity,
                 ease: "linear",
                 delay: 3
               }}
             >
-              <img 
-                src={powerStationHero} 
-                alt="Power Station" 
+              <img
+                src={solarPanelsHero}
+                alt="Solar Panel"
                 className="w-24 md:w-36 lg:w-48 filter drop-shadow-2xl"
               />
             </motion.div>
@@ -270,24 +270,49 @@ const Hero = () => {
             <motion.div
               className="absolute"
               initial={{ top: '-20%', right: '30%', opacity: 0, rotate: 12, scale: 0.55 }}
-              animate={{ 
-                top: '110%', 
+              animate={{
+                top: '110%',
                 right: '25%',
                 opacity: [0, 0.65, 0.65, 0],
                 rotate: 22,
                 scale: [0.55, 0.75, 0.75, 0.55]
               }}
-              transition={{ 
+              transition={{
                 duration: 14,
                 repeat: Infinity,
                 ease: "linear",
                 delay: 6
               }}
             >
-              <img 
-                src={powerStationHero} 
-                alt="Power Station" 
+              <img
+                src={ledLightingHero}
+                alt="LED Lighting"
                 className="w-30 md:w-44 lg:w-60 filter drop-shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Product 6 - Left side, medium speed - Solar Panel */}
+            <motion.div
+              className="absolute"
+              initial={{ top: '-18%', left: '40%', opacity: 0, rotate: -8, scale: 0.5 }}
+              animate={{
+                top: '110%',
+                left: '35%',
+                opacity: [0, 0.7, 0.7, 0],
+                rotate: -18,
+                scale: [0.5, 0.7, 0.7, 0.5]
+              }}
+              transition={{
+                duration: 13,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 9
+              }}
+            >
+              <img
+                src={solarPanelsHero}
+                alt="Solar Panel"
+                className="w-26 md:w-38 lg:w-52 filter drop-shadow-2xl"
               />
             </motion.div>
           </div>

@@ -71,7 +71,10 @@ const productLines = [
           "Fácil de trasladar y transportar",
           "Múltiples usos y aplicaciones",
           "Aplicación móvil con excelente experiencia de usuario",
-          "3 Garantía en baterías / 5 años en Base principal e inversores"
+          "3 Garantía en baterías / 5 años en Base principal e inversores",
+          "Conectable al tablero de tu casa y listo para transportar a donde quieras",
+          "Un mismo equipo en múltiples lugares y para usos diversos",
+          "Podes usar la energía almacenada en el equipo para alimentar parte o toda la instalación eléctrica de tu casa"
         ],
         images: [
           { src: mainImage1, category: "Principal" },
@@ -85,8 +88,8 @@ const productLines = [
         ]
       },
       {
-        categoryName: "PANEL SOLAR 200W",
-        categoryDescription: "Panel Solar Plegable Portátil 200W",
+        categoryName: "PANEL SOLAR",
+        categoryDescription: "Panel Solar Plegable Portátil",
         features: [
           "Alta eficiencia 23%",
           "Celdas solares 10% más largas",
@@ -234,10 +237,10 @@ const ProductSection = () => {
       // If no subcategory is selected, show the subcategory selection
       if (!activeSubcategory) {
         const isGreenside = activeModule === "greenside";
-        const subcategories = isGreenside 
+        const subcategories = isGreenside
           ? [
               { id: "power-station", name: "ESTACIÓN DE ENERGÍA", subtitle: "Energía Inteligente", icon: Zap, color: GREENSIDE_COLOR },
-              { id: "solar-panel", name: "PANEL SOLAR 200W", subtitle: "Energía Solar Portátil", icon: Sun, color: GREENSIDE_COLOR },
+              { id: "solar-panel", name: "PANEL SOLAR", subtitle: "Energía Solar Portátil", icon: Sun, color: GREENSIDE_COLOR },
               { id: "calculator", name: "CALCULADORA", subtitle: "Armá tu Solución", icon: CalcIcon, color: GREENSIDE_COLOR }
             ]
           : [
@@ -414,7 +417,7 @@ const ProductSection = () => {
 
                         {/* Features Section */}
                         <div className="flex-1 space-y-4">
-                          {categoryData.features.slice(0, 6).map((feature, fIdx) => (
+                          {categoryData.features.slice(0, 9).map((feature, fIdx) => (
                             <motion.div
                               key={fIdx}
                               className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
@@ -477,7 +480,7 @@ const ProductSection = () => {
       const category = line.categories?.find(cat => {
         if (activeModule === "greenside") {
           return (activeSubcategory === "power-station" && cat.categoryName === "ESTACIÓN DE ENERGÍA") ||
-                 (activeSubcategory === "solar-panel" && cat.categoryName === "PANEL SOLAR 200W");
+                 (activeSubcategory === "solar-panel" && cat.categoryName === "PANEL SOLAR");
         } else {
           return (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL") ||
                  (activeSubcategory === "deco" && cat.categoryName === "UFO DECO");
@@ -510,7 +513,7 @@ const ProductSection = () => {
                 {category.categoryName}
               </h2>
             ) : (
-              <GradientText 
+              <GradientText
                 colors={activeModule === "greenside" ? ['#84cc16', '#a3e635', '#bef264', '#84cc16'] : ['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
                 animationSpeed={6}
                 className="text-3xl lg:text-5xl font-black"
@@ -524,6 +527,34 @@ const ProductSection = () => {
               </ScrollReveal>
             </div>
           </div>
+
+          {/* Power Options for Solar Panel */}
+          {activeModule === "greenside" && activeSubcategory === "solar-panel" && (
+            <div className="flex flex-wrap justify-center gap-6 mb-12">
+              {[
+                { power: "200W" },
+                { power: "400W" }
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="relative overflow-hidden rounded-2xl p-8 text-center min-w-[160px]"
+                  style={{
+                    background: `linear-gradient(135deg, ${GREENSIDE_COLOR}1a, ${GREENSIDE_COLOR}33)`,
+                    border: `2px solid ${GREENSIDE_COLOR}4d`
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.1, borderColor: `${GREENSIDE_COLOR}99` }}
+                >
+                  <div className="text-6xl font-black" style={{ color: GREENSIDE_COLOR }}>
+                    {item.power}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           {/* Images Gallery for Greenside Products */}
           {activeModule === "greenside" && "images" in category && category.images && (
@@ -575,12 +606,12 @@ const ProductSection = () => {
                                 transition={{ duration: 0.6, delay: imgIdx * 0.15 }}
                                 viewport={{ once: true }}
                                 whileHover={{ scale: 1.02 }}
-                                className="relative overflow-hidden h-[500px]"
+                                className="relative overflow-hidden"
                               >
-                                <img 
-                                  src={img.src} 
+                                <img
+                                  src={img.src}
                                   alt={`${category.categoryName} - Imagen ${imgIdx + 1}`}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-auto object-contain"
                                 />
                               </motion.div>
                             ))}
@@ -978,11 +1009,11 @@ const ProductSection = () => {
     <section className="bg-gradient-tech relative overflow-hidden">
       {/* DotGrid Background Effect */}
       <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0">
-        <DotGrid 
+        <DotGrid
           dotSize={4}
           gap={20}
-          baseColor="#ffffff"
-          activeColor="#ffffff"
+          baseColor="#4a5261"
+          activeColor="#5f6575"
           proximity={120}
           shockRadius={200}
           shockStrength={4}
@@ -1041,7 +1072,7 @@ const ProductSection = () => {
           </div>
         </div>
       ) : (
-        <div className="animate-fade-in">
+        <div className="animate-fade-in relative z-10">
           {renderModuleContent()}
         </div>
       )}
