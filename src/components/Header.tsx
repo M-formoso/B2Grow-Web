@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import b2growLogo from "@/assets/b2grow-logo-new.png";
 import StaggeredMenu from "./StaggeredMenu";
 import PillNav from "./PillNav";
+
+const b2growLogo = "/Marca B2Grow png.png";
 
 const Header = () => {
   const location = useLocation();
@@ -77,22 +78,24 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 w-full z-50 pointer-events-none">
-      <div className="w-full flex items-center justify-between px-8 py-0.05 pointer-events-auto min-h-[120px]">
-        {/* Logo separado */}
-        <Link
-          to="/"
-          className="transition-transform hover:scale-110 duration-300 ml-12"
-          aria-label="Ir al inicio"
-        >
-          <img
-            src={b2growLogo}
-            alt="B2Grow Logo"
-            className="h-32 lg:h-36 w-auto"
-          />
-        </Link>
+      <div className="w-full grid grid-cols-3 items-center px-8 py-0.05 pointer-events-auto min-h-[120px]">
+        {/* Logo - Columna izquierda */}
+        <div className="flex justify-start">
+          <Link
+            to="/"
+            className="transition-transform hover:scale-110 duration-300"
+            aria-label="Ir al inicio"
+          >
+            <img
+              src={b2growLogo}
+              alt="B2Grow Logo"
+              className="h-24 lg:h-28 w-auto"
+            />
+          </Link>
+        </div>
 
-        {/* Nav Pills */}
-        <div className="flex justify-center flex-1">
+        {/* Nav Pills - Columna central (perfectamente centrado) */}
+        <div className="flex justify-center">
           <PillNav
             items={navItems}
             activeHref={location.pathname}
@@ -106,8 +109,8 @@ const Header = () => {
           />
         </div>
 
-        {/* Espacio para balance visual */}
-        <div className="w-12 h-12" />
+        {/* Espacio vacío - Columna derecha para balance */}
+        <div></div>
       </div>
     </div>
   );

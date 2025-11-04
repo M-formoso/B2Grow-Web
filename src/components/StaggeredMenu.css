@@ -36,6 +36,16 @@
   object-fit: contain;
 }
 
+@media (max-width: 768px) {
+  .sm-logo-img {
+    height: 60px;
+  }
+
+  .staggered-menu-header {
+    padding: 1.5em 2em;
+  }
+}
+
 .sm-toggle {
   position: relative;
   display: inline-flex;
