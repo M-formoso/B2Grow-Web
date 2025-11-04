@@ -7,6 +7,7 @@ import PillNav from "./PillNav";
 const Header = () => {
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,24 +40,38 @@ const Header = () => {
 
   if (isMobile) {
     return (
-      <div className="fixed top-0 w-full z-50" style={{ height: '100vh', pointerEvents: 'none' }}>
+      <>
+        {/* Backdrop cuando el menú está abierto */}
+        {menuOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
+
+        {/* StaggeredMenu se renderiza directamente, maneja su propio posicionamiento */}
         <StaggeredMenu
           position="right"
           items={staggeredNavItems}
           socialItems={socialItems}
           displaySocials={true}
           displayItemNumbering={true}
-          menuButtonColor="hsl(var(--foreground))"
-          openMenuButtonColor="hsl(var(--foreground))"
-          changeMenuColorOnOpen={true}
-          colors={['hsl(var(--primary))', 'hsl(var(--accent))']}
+          menuButtonColor="#FFFFFF"
+          openMenuButtonColor="#FFFFFF"
+          changeMenuColorOnOpen={false}
+          colors={['#FFFFFF', '#F0F0F0']}
           logoUrl={b2growLogo}
-          accentColor="hsl(var(--primary))"
-          onMenuOpen={() => console.log('Menu opened')}
-          onMenuClose={() => console.log('Menu closed')}
-          className="pointer-events-auto"
+          accentColor="#FFFFFF"
+          onMenuOpen={() => {
+            console.log('Menu opened');
+            setMenuOpen(true);
+          }}
+          onMenuClose={() => {
+            console.log('Menu closed');
+            setMenuOpen(false);
+          }}
         />
-      </div>
+      </>
     );
   }
 

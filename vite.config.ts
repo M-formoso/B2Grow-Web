@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/B2Grow-Web/' : '/',
+  base: '/', // Cambiado para despliegue en raíz del hosting
   server: {
     host: "::",
     port: 8080,

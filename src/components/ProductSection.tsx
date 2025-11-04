@@ -194,6 +194,7 @@ const ProductSection = () => {
 
   // Update cursor color based on active module
   useEffect(() => {
+    console.log("activeModule cambió a:", activeModule);
     if (activeModule === 'greenside') {
       setColor('green');
     } else if (activeModule === 'multiselect') {
@@ -202,6 +203,11 @@ const ProductSection = () => {
       setColor('white');
     }
   }, [activeModule, setColor]);
+
+  // Debug: Monitor activeSubcategory changes
+  useEffect(() => {
+    console.log("activeSubcategory cambió a:", activeSubcategory);
+  }, [activeSubcategory]);
 
   const modules = [
     {
@@ -445,11 +451,15 @@ const ProductSection = () => {
       if (activeModule === "greenside" && activeSubcategory === "calculator") {
         return (
           <div className="space-y-12">
-            <div className="container mx-auto px-4 pt-24 pb-8">
+            <div className="container mx-auto px-4 pt-40 pb-8">
               <Button
+                type="button"
                 variant="ghost"
-                onClick={() => setActiveSubcategory(null)}
-                className="gap-2 hover:gap-3 transition-all text-base"
+                onClick={() => {
+                  console.log("Volver a Categorías clickeado");
+                  setActiveSubcategory(null);
+                }}
+                className="gap-2 hover:gap-3 transition-all text-base cursor-pointer"
                 size="lg"
               >
                 <ArrowLeft className="h-5 w-5" />
@@ -494,11 +504,15 @@ const ProductSection = () => {
       return (
         <div className="space-y-12">
           {/* Botón Volver - Mejor posicionado y funcional */}
-          <div className="container mx-auto px-4 pt-24 pb-8">
+          <div className="container mx-auto px-4 pt-40 pb-8">
             <Button
+              type="button"
               variant="ghost"
-              onClick={() => setActiveSubcategory(null)}
-              className="gap-2 hover:gap-3 transition-all text-base"
+              onClick={() => {
+                console.log("Volver a Categorías clickeado");
+                setActiveSubcategory(null);
+              }}
+              className="gap-2 hover:gap-3 transition-all text-base cursor-pointer"
               size="lg"
             >
               <ArrowLeft className="h-5 w-5" />
@@ -1024,7 +1038,7 @@ const ProductSection = () => {
       
       {/* Dashboard or Module Content */}
       {!activeModule ? (
-        <div className="relative z-10 w-full">
+        <div className="relative z-20 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {modules.filter(m => m.id !== 'calculator').map((module, idx) => {
               const Icon = module.icon;
@@ -1033,37 +1047,50 @@ const ProductSection = () => {
               return (
                 <motion.div
                   key={module.id}
-                  className="group cursor-pointer relative overflow-hidden min-h-[600px] flex flex-col justify-end p-12 lg:p-16"
-                  onClick={() => setActiveModule(module.id)}
+                  className="group relative overflow-hidden min-h-[600px] flex flex-col justify-end p-8 md:p-12 lg:p-16"
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: idx * 0.2 }}
-                  whileHover={{ scale: 1.01 }}
                 >
                   {/* Background Image */}
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:opacity-70 transition-opacity duration-500"
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-50 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
                     style={{ backgroundImage: `url(${bgImage})` }}
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  
-                  <div className="relative z-10 space-y-3 max-w-xl">
-                    <Icon className="h-12 w-12 text-primary group-hover:scale-110 transition-transform" />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-20 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none" />
+
+                  <div className="relative z-[100] space-y-3 max-w-xl">
+                    <Icon className="h-12 w-12 text-primary" />
                     <h3 className="text-2xl lg:text-3xl font-black tracking-tight">
                       {module.title}
                     </h3>
                     <p className="text-base lg:text-lg font-semibold text-primary">
                       {module.subtitle}
                     </p>
-                    <div className="text-sm lg:text-base text-muted-foreground leading-relaxed">
-                      <ScrollReveal baseOpacity={0.3} enableBlur={false} baseRotation={0}>
-                        {module.description}
-                      </ScrollReveal>
-                    </div>
-                    <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary hover:text-background text-primary rounded-full font-bold transition-all duration-300 group/btn border border-primary/30 hover:border-primary hover:shadow-lg hover:shadow-primary/20 mt-2">
-                      <span>Explorar</span>
-                      <ArrowLeft className="h-4 w-4 rotate-180 group-hover/btn:translate-x-1 transition-transform" />
+                    <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                      {module.description}
+                    </p>
+
+                    {/* Botón simplificado sin wrappers */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        console.log("✅ CLICK - Módulo:", module.id);
+                        setActiveModule(module.id);
+                      }}
+                      onTouchStart={() => {
+                        console.log("👆 TOUCH START - Módulo:", module.id);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        console.log("👆 TOUCH END - Módulo:", module.id);
+                        setActiveModule(module.id);
+                      }}
+                      className="relative z-[101] inline-flex items-center gap-2 px-5 py-3 bg-primary text-background rounded-full font-bold border-2 border-primary shadow-xl cursor-pointer touch-manipulation text-base min-h-[48px] active:scale-95 transition-transform"
+                    >
+                      <span>Explorar {module.title.includes("GREENSIDE") ? "Greenside" : "Multiselect"}</span>
+                      <ArrowLeft className="h-5 w-5 rotate-180" />
                     </button>
                   </div>
                 </motion.div>

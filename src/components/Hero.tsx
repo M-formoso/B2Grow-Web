@@ -26,6 +26,19 @@ const Hero = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detectar si es móvil para optimizar animaciones
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!carouselApi) {
@@ -88,12 +101,13 @@ const Hero = () => {
           {/* Video Container - Full Width with limited height */}
           <div className="relative w-full max-h-[75vh] overflow-hidden">
             <div className="relative w-full">
-              <video 
+              <video
                 src={campaignVideo}
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload={isMobile ? "metadata" : "auto"}
                 className="w-full h-full object-cover max-h-[75vh]"
               >
                 Tu navegador no soporta el tag de video.
@@ -120,41 +134,41 @@ const Hero = () => {
                         POWERING THE FUTURE
                       </GradientText>
                     </h1>
-                    <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-6">
+                    <div className="text-lg md:text-xl text-white/90 max-w-2xl mb-6">
                       <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={1} blurStrength={4}>
                         Tecnología inteligente de energía para un mundo sustentable
                       </ScrollReveal>
-                    </p>
+                    </div>
                   </motion.div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Call to Action Buttons */}
-          <div className="absolute bottom-6 left-0 right-0 z-20">
-            <div className="container mx-auto px-8">
+          {/* Call to Action Buttons - Más pequeños y responsivos */}
+          <div className="absolute bottom-4 md:bottom-6 left-0 right-0 z-20">
+            <div className="container mx-auto px-4 md:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-wrap gap-4 justify-start max-w-4xl"
+                className="flex flex-wrap gap-2 md:gap-4 justify-start max-w-4xl"
               >
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-energy"
+                <Button
+                  size="sm"
+                  className="bg-primary hover:bg-primary/90 text-background font-bold px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm shadow-energy"
                   onClick={() => window.location.href = '/productos'}
                 >
                   Ver Productos
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="sm"
                   variant="outline"
-                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-6 py-5 text-base"
+                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm"
                   onClick={() => window.location.href = '/calculadora'}
                 >
-                  Calculadora Energética
+                  Calculadora
                 </Button>
               </motion.div>
             </div>
@@ -165,7 +179,8 @@ const Hero = () => {
       {/* Threads Effect Section - COMPACT VERSION */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="relative h-[40vh] w-full overflow-hidden">
-          {/* Floating Products Animation - Above Threads */}
+          {/* Floating Products Animation - Above Threads - Solo en Desktop */}
+          {!isMobile && (
           <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
             {/* Product 1 - Left side, slow fall */}
             <motion.div
@@ -316,13 +331,14 @@ const Hero = () => {
               />
             </motion.div>
           </div>
+          )}
 
-          {/* Threads Background */}
+          {/* Threads Background - Simplificado en móvil */}
           <div className="absolute inset-0 w-full h-full">
             <Threads
-              amplitude={3}
-              distance={0.5}
-              enableMouseInteraction={true}
+              amplitude={isMobile ? 2 : 3}
+              distance={isMobile ? 0.3 : 0.5}
+              enableMouseInteraction={!isMobile}
             />
           </div>
         </div>
@@ -363,13 +379,14 @@ const Hero = () => {
                   <CarouselItem>
                     <div className="relative">
                       <div className="relative w-full">
-                        <video 
+                        <video
                           ref={videoRef1}
                           src={greensideVideo}
                           controls
                           muted
                           loop
                           playsInline
+                          preload={isMobile ? "metadata" : "auto"}
                           className="w-full h-auto max-h-[75vh] object-cover"
                         >
                           Tu navegador no soporta el tag de video.
@@ -392,13 +409,14 @@ const Hero = () => {
                   <CarouselItem>
                     <div className="relative">
                       <div className="relative w-full">
-                        <video 
+                        <video
                           ref={videoRef2}
                           src={multiselectVideo}
                           controls
                           muted
                           loop
                           playsInline
+                          preload={isMobile ? "metadata" : "auto"}
                           className="w-full h-auto max-h-[75vh] object-cover"
                         >
                           Tu navegador no soporta el tag de video.

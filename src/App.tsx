@@ -13,32 +13,50 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <CursorColorProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <SplashCursor />
-        <ChatButton />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<Products />} />
-            <Route path="/calculadora" element={<Calculator />} />
-            <Route path="/nosotros" element={<AboutUs />} />
-            <Route path="/contacto" element={<Contact />} />
-            <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </CursorColorProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detectar si es móvil o tablet
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CursorColorProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          {/* TEMPORALMENTE DESHABILITADO PARA DEBUG */}
+          {/* {!isMobile && <SplashCursor />} */}
+          <ChatButton />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<Products />} />
+              <Route path="/calculadora" element={<Calculator />} />
+              <Route path="/nosotros" element={<AboutUs />} />
+              <Route path="/contacto" element={<Contact />} />
+              <Route path="/admin" element={<Admin />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </CursorColorProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
