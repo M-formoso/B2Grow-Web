@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Inicializar OpenAI
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY1
 });
 
 // Endpoint para el chatbot
@@ -306,12 +306,12 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    openai_configured: !!process.env.OPENAI_API_KEY
+    openai_configured: !!process.env.OPENAI_API_KEY1
   });
 });
 
 app.listen(PORT, () => {
   console.log(`\n🤖 Servidor de chatbot corriendo en http://localhost:${PORT}`);
   console.log(`📡 Endpoint: http://localhost:${PORT}/api/chat`);
-  console.log(`🔑 OpenAI API Key configurada: ${process.env.OPENAI_API_KEY ? '✅ Sí' : '❌ No'}\n`);
+  console.log(`🔑 OpenAI API Key configurada: ${process.env.OPENAI_API_KEY1 ? '✅ Sí' : '❌ No'}\n`);
 });
