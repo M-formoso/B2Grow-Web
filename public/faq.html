@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preguntas Frecuentes - Bitu | B2Grow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #121212;
+      color: #e5e5e5;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    header img {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem 100px 1rem;
+    }
+
+    .faq {
+      background: #1b1b1b;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      border: 1px solid #2c2c2c;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      padding: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: #2a2a2a;
+      color: #fff;
+      list-style: none;
+      transition: background 0.3s;
+    }
+
+    .faq summary:hover {
+      background: #3b3b3b;
+    }
+
+    .faq p {
+      padding: 1rem 1.2rem;
+      line-height: 1.6;
+      color: #ccc;
+      background-color: #1b1b1b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #1f1f1f;
+      color: #888;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #2c2c2c;
+    }
+
+    /* Chatbot */
+    #chatbot-bubble {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #2f2f2f;
+      color: #fff;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s, background-color 0.3s;
+      z-index: 9999;
+      border: none;
+    }
+
+    #chatbot-bubble:hover {
+      transform: scale(1.1);
+      background-color: #444;
+    }
+
+    #chatbot-bubble:active {
+      transform: scale(0.95);
+    }
+
+    #chat-container {
+      position: fixed;
+      bottom: 100px;
+      right: 25px;
+      width: 340px;
+      height: 480px;
+      background: #1c1c1c;
+      border-radius: 18px;
+      border: 1px solid #2e2e2e;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+    }
+
+    #chat-container.show {
+      display: flex;
+    }
+
+    #chat-header {
+      background-color: #2f2f2f;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: 1px solid #3b3b3b;
+    }
+
+    #chat-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      font-size: 0.95rem;
+    }
+
+    .message {
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+      display: block;
+      clear: both;
+    }
+
+    .message.bot {
+      background-color: #2f2f2f;
+      padding: 0.7rem;
+      border-radius: 10px;
+      color: #fff;
+      width: fit-content;
+      max-width: 80%;
+      float: left;
+    }
+
+    .message.user {
+      background-color: #4a9b6f;
+      padding: 0.7rem;
+      border-radius: 10px;
+      color: #fff;
+      width: fit-content;
+      max-width: 80%;
+      float: right;
+    }
+
+    #chat-input {
+      display: flex;
+      border-top: 1px solid #333;
+      background-color: #1b1b1b;
+      padding: 0.5rem;
+    }
+
+    #chat-input input {
+      flex: 1;
+      border: none;
+      background: #2a2a2a;
+      color: #fff;
+      padding: 0.8rem;
+      font-size: 1rem;
+      outline: none;
+      border-radius: 8px;
+      margin-right: 0.5rem;
+    }
+
+    #chat-input input::placeholder {
+      color: #777;
+    }
+
+    #chat-input button {
+      background-color: #4a9b6f;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    #chat-input button:hover {
+      background-color: #66b589;
+    }
+
+    #chat-input button:active {
+      background-color: #3a8b5f;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="https://i.imgur.com/4x7bMZl.png" alt="Logo B2Grow" />
+    <h1>Preguntas Frecuentes</h1>
+  </header>
+
+  <main>
+    <details class="faq">
+      <summary>¿Qué es B2Grow?</summary>
+      <p>B2Grow es una organización enfocada en impulsar el crecimiento de empresas a través de tecnología, innovación y estrategias digitales.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Qué es Bitu?</summary>
+      <p>Bitu es nuestro asistente virtual diseñado para responder tus consultas y acompañarte en todo momento con información sobre productos y servicios.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Cómo puedo comunicarme con el equipo?</summary>
+      <p>Podés escribirnos por WhatsApp al <strong>+54 9 11 5185-7753</strong> o hablar directamente con Bitu desde la burbuja de chat en esta página.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Qué productos ofrecen?</summary>
+      <p>Disponemos de estaciones de energía portátiles, sistemas modulares, inversores, paneles solares y accesorios complementarios.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Cómo puedo saber cuál modelo me conviene?</summary>
+      <p>Bitu puede ayudarte a identificar el modelo ideal según tus necesidades de energía. También podés contactar al equipo técnico para asesoramiento personalizado.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿El chatbot funciona 24/7?</summary>
+      <p>Sí, Bitu está disponible las 24 horas, todos los días del año.</p>
+    </details>
+  </main>
+
+  <footer>
+    ©️ 2025 B2Grow | Todos los derechos reservados
+  </footer>
+
+  <!-- Chatbot -->
+  <div id="chatbot-bubble">💬</div>
+  <div id="chat-container">
+    <div id="chat-header">Bitu 🤖</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input">
+      <input type="text" id="user-input" placeholder="Escribí tu mensaje..." />
+      <button id="send-btn">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    console.log('=== CHATBOT SCRIPT INICIADO ===');
+
+    var bubble = document.getElementById('chatbot-bubble');
+    var chatContainer = document.getElementById('chat-container');
+    var messagesDiv = document.getElementById('chat-messages');
+    var userInput = document.getElementById('user-input');
+    var sendBtn = document.getElementById('send-btn');
+
+    console.log('Elementos:', { bubble: bubble, chatContainer: chatContainer });
+
+    var hasGreeted = false;
+
+    function addMessage(content, sender) {
+      var div = document.createElement('div');
+      div.className = 'message ' + sender;
+      div.textContent = content;
+      messagesDiv.appendChild(div);
+
+      // Limpiar floats
+      var clearDiv = document.createElement('div');
+      clearDiv.style.clear = 'both';
+      messagesDiv.appendChild(clearDiv);
+
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function sendMessage() {
+      var message = userInput.value.trim();
+      if (!message) return;
+
+      console.log('Enviando mensaje:', message);
+      addMessage(message, 'user');
+      userInput.value = '';
+
+      var userId = localStorage.getItem('bitu_user');
+      if (!userId) {
+        userId = 'user_' + Math.random().toString(36).substring(2, 9);
+        localStorage.setItem('bitu_user', userId);
+      }
+
+      fetch('https://chatbot-bitu.onrender.com/message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message, user_id: userId })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var reply = data.reply || 'Nuestro equipo de IA no tiene respuesta por ahora. Podés escribirnos al +54 9 11 5185-7753.';
+        addMessage(reply, 'bot');
+      })
+      .catch(function() {
+        addMessage('No se pudo conectar con el servidor. Intentalo más tarde.', 'bot');
+      });
+    }
+
+    bubble.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('CLICK EN BUBBLE!');
+
+      if (chatContainer.classList.contains('show')) {
+        chatContainer.classList.remove('show');
+        console.log('Cerrando chat');
+      } else {
+        chatContainer.classList.add('show');
+        console.log('Abriendo chat');
+
+        if (!hasGreeted) {
+          addMessage('¡Hola! Soy Bitu, ¿cómo estás? 💬', 'bot');
+          hasGreeted = true;
+        }
+      }
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    userInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    console.log('=== EVENT LISTENERS CONFIGURADOS ===');
+  </script>
+</body>
+</html>

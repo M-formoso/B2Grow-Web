@@ -1,0 +1,42 @@
+╔══════════════════════════════════════════════════════════════╗
+║          🤖 INICIO RÁPIDO - CHATBOT B2GROW                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+PASO 1: Configura tu API Key de OpenAI
+---------------------------------------
+1. Abre el archivo: .env
+2. Reemplaza: OPENAI_API_KEY=tu-api-key-de-openai-aqui
+   Con tu key: OPENAI_API_KEY=sk-tu-clave-real-aqui
+3. Guarda el archivo
+
+
+PASO 2: Inicia el servidor del chatbot
+---------------------------------------
+Terminal 1:
+  cd server
+  npm start
+
+Verás: 🤖 Servidor de chatbot corriendo en http://localhost:3001
+
+
+PASO 3: Inicia el frontend (si no está corriendo)
+--------------------------------------------------
+Terminal 2:
+  npm run dev
+
+Verás: ➜  Local:   http://localhost:8080/
+
+
+PASO 4: ¡Prueba el chatbot!
+----------------------------
+1. Abre: http://localhost:8080
+2. Click en la burbuja 💬
+3. Escribe: "Hola"
+4. ¡Deberías recibir respuesta!
+
+
+═══════════════════════════════════════════════════════════════
+
+¿Problemas? Lee: CHATBOT_SETUP.md
+
+═══════════════════════════════════════════════════════════════

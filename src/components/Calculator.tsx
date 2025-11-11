@@ -8,25 +8,25 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Zap, Sun, Leaf, Battery, Package, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 
-// Definición de tipos de artefactos con valores típicos
+// Definición de tipos de artefactos con valores típicos (Consumo típico)
 const APPLIANCES = {
-  "Lámparas": { power: 9, peakPower: 9, usage: 1 },
-  "Heladeras": { power: 150, peakPower: 300, usage: 1 },
-  "Heladera con Freezer": { power: 200, peakPower: 400, usage: 1 },
-  "Freezer": { power: 250, peakPower: 500, usage: 1 },
-  "TV": { power: 90, peakPower: 180, usage: 1 },
-  "Laptop o PC": { power: 40, peakPower: 50, usage: 1 },
+  "Lámparas": { power: 9, peakPower: 9, usage: 4 },
+  "Heladeras": { power: 150, peakPower: 300, usage: 12 },
+  "Heladera con Freezer": { power: 200, peakPower: 400, usage: 12 },
+  "Freezer": { power: 250, peakPower: 500, usage: 8 },
+  "TV": { power: 90, peakPower: 180, usage: 5 },
+  "Laptop o PC": { power: 200, peakPower: 300, usage: 6 },
   "Cámaras de seguridad": { power: 15, peakPower: 20, usage: 24 },
   "Alarma": { power: 10, peakPower: 15, usage: 24 },
   "Router WiFi": { power: 12, peakPower: 15, usage: 24 },
   "Portón": { power: 300, peakPower: 800, usage: 0.2 },
-  "Cafetera": { power: 600, peakPower: 1200, usage: 0.5 },
-  "Aire Acondicionado normal": { power: 1350, peakPower: 2200, usage: 1 },
-  "Aire Acondicionado inverter": { power: 877, peakPower: 1400, usage: 1 },
-  "Ventilador": { power: 90, peakPower: 150, usage: 1 },
+  "Cafetera": { power: 900, peakPower: 1200, usage: 0.5 },
+  "Aire Acondicionado normal": { power: 1350, peakPower: 2200, usage: 6 },
+  "Aire Acondicionado inverter": { power: 877, peakPower: 1400, usage: 6 },
+  "Ventilador": { power: 90, peakPower: 150, usage: 10 },
   "Cargador de Herramienta eléctrica": { power: 150, peakPower: 300, usage: 1 },
-  "Cargador de celular": { power: 5, peakPower: 10, usage: 1 },
-  "Equipo de música": { power: 60, peakPower: 120, usage: 1 },
+  "Cargador de celular": { power: 5, peakPower: 10, usage: 3 },
+  "Equipo de música": { power: 60, peakPower: 120, usage: 4 },
   "Otros 1": { power: 0, peakPower: 0, usage: 1 },
   "Otros 2": { power: 0, peakPower: 0, usage: 1 },
   "Otros 3": { power: 0, peakPower: 0, usage: 1 },
@@ -152,24 +152,87 @@ const Calculator = () => {
       cantBateriasExtra = Math.ceil(necesarioBaterias / BATERIA_EXTRA);
     }
 
-    // 8. Estación de energía recomendada
+    // 8. Estación de energía recomendada (lógica completa según batería y potencia)
     let estacionRecomendada = "";
+
     if (necesarioBaterias <= 1037) {
-      estacionRecomendada = "A1";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A1";
+      } else {
+        estacionRecomendada = "A1P4";
+      }
     } else if (necesarioBaterias <= 2074) {
-      estacionRecomendada = "A2";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A2 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A2";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A2P6";
+      } else {
+        estacionRecomendada = "A2P8";
+      }
     } else if (necesarioBaterias <= 3197) {
-      estacionRecomendada = "A3";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A3 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A3";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A3P6";
+      } else {
+        estacionRecomendada = "A3P8";
+      }
     } else if (necesarioBaterias <= 4234) {
-      estacionRecomendada = "A4";
-    } else if (necesarioBaterias <= 5357) {
-      estacionRecomendada = "A5";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A4 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A4P4";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A4P6";
+      } else {
+        estacionRecomendada = "A4P8";
+      }
+    } else if (necesarioBaterias <= 5397) {
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A5 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A5";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A5P6";
+      } else {
+        estacionRecomendada = "A5P8";
+      }
     } else if (necesarioBaterias <= 6394) {
-      estacionRecomendada = "A6";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A6 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A6";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A6P6";
+      } else {
+        estacionRecomendada = "A6P8";
+      }
     } else if (necesarioBaterias <= 7517) {
-      estacionRecomendada = "A7";
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A7 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A7";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A7P6";
+      } else {
+        estacionRecomendada = "A7P8";
+      }
+    } else if (necesarioBaterias <= 8554) {
+      if (potenciaNecesaria <= 2200) {
+        estacionRecomendada = "A8 Lite";
+      } else if (potenciaNecesaria <= 4400) {
+        estacionRecomendada = "A8";
+      } else if (potenciaNecesaria <= 6600) {
+        estacionRecomendada = "A8P6";
+      } else {
+        estacionRecomendada = "A8P8";
+      }
     } else {
-      estacionRecomendada = "A7+";
+      estacionRecomendada = "A8P8+"; // Excede los límites
     }
 
     setResult({
@@ -479,16 +542,25 @@ const Calculator = () => {
                     La Estación de energía B2Grow Greenside recomendada es: {result.estacionRecomendada}
                   </h3>
                   <p className="text-lg text-muted-foreground">
-                    No dudes en contactarnos ahora mismo para asesoramiento técnico y ventas
+                    No dudes en contactarnos ahora mismo por WhatsApp para enviarte tu cotización o asesorarte
                   </p>
-                  <div className="flex justify-center">
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                     <Button
                       onClick={() => window.open("https://wa.me/5491151857753", "_blank")}
                       className="gap-2"
                       size="lg"
                     >
                       <MessageCircle />
-                      Asesoramiento Técnico y Ventas: +54 9 11 5185-7753
+                      Cotización: +54 9 11 5185-7753
+                    </Button>
+                    <Button
+                      onClick={() => window.open("https://wa.me/5491166230246", "_blank")}
+                      className="gap-2"
+                      size="lg"
+                      variant="outline"
+                    >
+                      <MessageCircle />
+                      Asesoramiento: +54 9 11 6623-0246
                     </Button>
                   </div>
                   <p className="text-sm font-semibold text-foreground mt-4">

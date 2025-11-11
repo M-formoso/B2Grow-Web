@@ -16,6 +16,24 @@ const projects = [
     title: "Taller Mecánico",
     testimonial: "La verdad que estoy re contento con el equipo chicos, pruebo herramientas en el taller y se la re banca!",
     author: "Taller Mecánico"
+  },
+  {
+    image: "/proyectos/Proyectos realizados camioneta.png",
+    title: "Aventura en Familia",
+    testimonial: "Un equipo maravilloso, preparándome para salir de campamento con mi Familia.",
+    author: "Juan"
+  },
+  {
+    image: "/proyectos/Proyectos realizados nave industrial.png",
+    title: "Nave Industrial",
+    testimonial: "Instalamos los equipos en nuestra planta industrial y funcionan impecables. Mantienen la producción activa incluso durante interrupciones del suministro eléctrico, evitando pérdidas significativas.",
+    author: "Responsable de Planta Industrial"
+  },
+  {
+    image: "/proyectos/Proyectos realizados pileta.png",
+    title: "Hogar en City Bell",
+    testimonial: "Debido a los continuos cortes de energía compré este equipo que me da soluciones a todas las necesidades de mi hogar",
+    author: "Jorgelina de City Bell"
   }
 ];
 

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Leaf, Globe } from "lucide-react";
 import powerStationHero from "@/assets/power-station-new.png";
+const powerStationCard = "/central-electrica-modular-card-home.png";
 import solarPanelsHero from "@/assets/solar-panel-new.png";
 import ledLightingHero from "@/assets/led-light-new.png";
 import CardSwap, { Card } from "@/components/CardSwap";
@@ -99,8 +100,8 @@ const Hero = () => {
           className="relative w-full"
         >
           {/* Video Container - Full Width with limited height */}
-          <div className="relative w-full max-h-[75vh] overflow-hidden">
-            <div className="relative w-full">
+          <div className="relative w-full h-[85vh] overflow-hidden">
+            <div className="relative w-full h-full">
               <video
                 src={campaignVideo}
                 autoPlay
@@ -108,16 +109,16 @@ const Hero = () => {
                 loop
                 playsInline
                 preload={isMobile ? "metadata" : "auto"}
-                className="w-full h-full object-cover max-h-[75vh]"
+                className="w-full h-full object-cover"
               >
                 Tu navegador no soporta el tag de video.
               </video>
               
               {/* Overlay with gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
-              
+
               {/* Text Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+              <div className="absolute bottom-12 md:bottom-0 left-0 right-0 p-4 md:p-12 lg:p-16 pointer-events-none">
                 <div className="container mx-auto">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -125,16 +126,16 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="max-w-4xl"
                   >
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-3 tracking-tight">
-                      <GradientText 
+                    <h1 className="text-2xl md:text-5xl lg:text-6xl font-black text-white mb-2 md:mb-3 tracking-tight">
+                      <GradientText
                         colors={['#ffffff', '#f0f0f0', '#e0e0e0', '#ffffff']}
                         animationSpeed={4}
-                        className="text-3xl md:text-5xl lg:text-6xl font-black"
+                        className="text-2xl md:text-5xl lg:text-6xl font-black"
                       >
                         POWERING THE FUTURE
                       </GradientText>
                     </h1>
-                    <div className="text-lg md:text-xl text-white/90 max-w-2xl mb-6">
+                    <div className="text-sm md:text-xl text-white/90 max-w-2xl mb-3 md:mb-6">
                       <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={1} blurStrength={4}>
                         Tecnología inteligente de energía para un mundo sustentable
                       </ScrollReveal>
@@ -146,7 +147,7 @@ const Hero = () => {
           </div>
 
           {/* Call to Action Buttons - Más pequeños y responsivos */}
-          <div className="absolute bottom-4 md:bottom-6 left-0 right-0 z-20">
+          <div className="absolute bottom-2 md:bottom-6 left-0 right-0 z-20">
             <div className="container mx-auto px-4 md:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -156,7 +157,7 @@ const Hero = () => {
               >
                 <Button
                   size="sm"
-                  className="bg-primary hover:bg-primary/90 text-background font-bold px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm shadow-energy"
+                  className="bg-primary hover:bg-primary/90 text-background font-bold px-2 py-1.5 md:px-4 md:py-3 text-xs md:text-sm shadow-energy"
                   onClick={() => window.location.href = '/productos'}
                 >
                   Ver Productos
@@ -165,7 +166,7 @@ const Hero = () => {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm"
+                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-2 py-1.5 md:px-4 md:py-3 text-xs md:text-sm"
                   onClick={() => window.location.href = '/calculadora'}
                 >
                   Calculadora
@@ -184,25 +185,25 @@ const Hero = () => {
           <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
             {/* Product 1 - Left side, slow fall */}
             <motion.div
-              className="absolute"
+              className="absolute z-10"
               initial={{ top: '-20%', left: '10%', opacity: 0, rotate: -15, scale: 0.6 }}
-              animate={{ 
-                top: '110%', 
+              animate={{
+                top: '110%',
                 left: '5%',
-                opacity: [0, 0.7, 0.7, 0],
+                opacity: [0, 0.9, 0.9, 0],
                 rotate: -25,
                 scale: [0.6, 0.8, 0.8, 0.6]
               }}
-              transition={{ 
+              transition={{
                 duration: 15,
                 repeat: Infinity,
                 ease: "linear",
                 delay: 0
               }}
             >
-              <img 
-                src={powerStationHero} 
-                alt="Power Station" 
+              <img
+                src={powerStationHero}
+                alt="Power Station"
                 className="w-32 md:w-48 lg:w-64 filter drop-shadow-2xl"
               />
             </motion.div>
@@ -234,24 +235,24 @@ const Hero = () => {
 
             {/* Product 3 - Center, slow with blur effect */}
             <motion.div
-              className="absolute"
+              className="absolute z-10"
               initial={{ top: '-30%', left: '50%', x: '-50%', opacity: 0, rotate: 5, scale: 0.7 }}
-              animate={{ 
-                top: '110%', 
-                opacity: [0, 0.5, 0.5, 0],
+              animate={{
+                top: '110%',
+                opacity: [0, 0.8, 0.8, 0],
                 rotate: 15,
                 scale: [0.7, 0.9, 0.9, 0.7]
               }}
-              transition={{ 
+              transition={{
                 duration: 18,
                 repeat: Infinity,
                 ease: "linear",
-                delay: 8
+                delay: 4
               }}
             >
-              <img 
-                src={powerStationHero} 
-                alt="Power Station" 
+              <img
+                src={powerStationHero}
+                alt="Power Station"
                 className="w-36 md:w-52 lg:w-72 filter drop-shadow-2xl blur-[1px]"
               />
             </motion.div>
@@ -378,7 +379,7 @@ const Hero = () => {
                   {/* Campaign Video */}
                   <CarouselItem>
                     <div className="relative">
-                      <div className="relative w-full">
+                      <div className="relative w-full h-[75vh] overflow-hidden">
                         <video
                           ref={videoRef1}
                           src={greensideVideo}
@@ -387,15 +388,15 @@ const Hero = () => {
                           loop
                           playsInline
                           preload={isMobile ? "metadata" : "auto"}
-                          className="w-full h-auto max-h-[75vh] object-cover"
+                          className="w-full h-full object-cover"
                         >
                           Tu navegador no soporta el tag de video.
                         </video>
                         {/* Overlay with gradient */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
-                        
+
                         {/* Text Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 pointer-events-none">
                           <div className="container mx-auto">
                             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Campaña B2GROW</h3>
                             <p className="text-base md:text-lg text-white/80">Nuestra visión de tecnología sustentable</p>
@@ -408,7 +409,7 @@ const Hero = () => {
                   {/* UFO Video */}
                   <CarouselItem>
                     <div className="relative">
-                      <div className="relative w-full">
+                      <div className="relative w-full h-[75vh] overflow-hidden">
                         <video
                           ref={videoRef2}
                           src={multiselectVideo}
@@ -417,15 +418,15 @@ const Hero = () => {
                           loop
                           playsInline
                           preload={isMobile ? "metadata" : "auto"}
-                          className="w-full h-auto max-h-[75vh] object-cover"
+                          className="w-full h-full object-cover"
                         >
                           Tu navegador no soporta el tag de video.
                         </video>
                         {/* Overlay with gradient */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
-                        
+
                         {/* Text Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
+                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 pointer-events-none">
                           <div className="container mx-auto">
                             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Iluminación UFO</h3>
                             <p className="text-base md:text-lg text-white/80">Tecnología de última generación</p>
@@ -457,27 +458,27 @@ const Hero = () => {
             </div>
 
             {/* Product Cards with Features Grid beside them */}
-            <div className="mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-start gap-8 lg:gap-16 max-w-7xl mx-auto pl-0 lg:pl-8">
+            <div className="-mt-12 lg:mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-start gap-8 lg:gap-16 max-w-7xl mx-auto pl-0 lg:pl-8">
               {/* Features Grid - LEFT SIDE */}
-              <div className="flex-shrink-0 w-full lg:w-96 space-y-8 lg:pt-12">
+              <div className="flex-shrink-0 w-full lg:w-96 space-y-4 lg:space-y-8 lg:pt-12 mb-20 lg:mb-0">
                 {/* Innovación - Primera card */}
                 <motion.div
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-4 md:gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
                 >
                   <motion.div
-                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
+                    className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Zap className="w-10 h-10 text-green-500" />
+                    <Zap className="w-7 h-7 md:w-10 md:h-10 text-green-500" />
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-1 text-white">Innovación</h3>
-                    <p className="text-white/70 text-sm">
+                    <h3 className="text-xl md:text-2xl font-semibold mb-1 text-white">Innovación</h3>
+                    <p className="text-white/70 text-xs md:text-sm">
                       Tecnología LED de última generación
                     </p>
                   </div>
@@ -485,22 +486,22 @@ const Hero = () => {
 
                 {/* Sustentabilidad - Segunda card */}
                 <motion.div
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-4 md:gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                 >
                   <motion.div
-                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
+                    className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Leaf className="w-10 h-10 text-green-500" />
+                    <Leaf className="w-7 h-7 md:w-10 md:h-10 text-green-500" />
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-1 text-white">Sustentabilidad</h3>
-                    <p className="text-white/70 text-sm">
+                    <h3 className="text-xl md:text-2xl font-semibold mb-1 text-white">Sustentabilidad</h3>
+                    <p className="text-white/70 text-xs md:text-sm">
                       Soluciones energéticamente eficientes
                     </p>
                   </div>
@@ -508,22 +509,22 @@ const Hero = () => {
 
                 {/* Alcance Global - Tercera card */}
                 <motion.div
-                  className="flex items-center gap-6"
+                  className="flex items-center gap-4 md:gap-6"
                   initial={{ opacity: 0, x: -50, scale: 0.9 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                 >
                   <motion.div
-                    className="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 flex-shrink-0"
+                    className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-full bg-green-500/10 flex-shrink-0"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <Globe className="w-10 h-10 text-green-500" />
+                    <Globe className="w-7 h-7 md:w-10 md:h-10 text-green-500" />
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-1 text-white">Alcance Global</h3>
-                    <p className="text-white/70 text-sm">
+                    <h3 className="text-xl md:text-2xl font-semibold mb-1 text-white">Alcance Global</h3>
+                    <p className="text-white/70 text-xs md:text-sm">
                       Presencia en múltiples mercados
                     </p>
                   </div>
@@ -544,7 +545,7 @@ const Hero = () => {
                 <Card>
                   <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
                     <img
-                      src={powerStationHero}
+                      src={powerStationCard}
                       alt="Estación de Energía Portátil B2Grow"
                       className="absolute inset-0 w-full h-full object-contain"
                     />

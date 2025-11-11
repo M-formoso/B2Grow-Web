@@ -18,7 +18,7 @@ import mainImage3 from "@/assets/b2grow-greenside/images/module-power-station/ma
 import mainImage4 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-04.jpg";
 import mainImage5 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-05.jpg";
 import mainImage6 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-06.jpg";
-import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4_-07.jpg";
+import mainImage7 from "@/assets/b2grow-greenside/images/module-power-station/main-images-800x800/A4-07-2.0.png";
 
 import detailImage1 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-01.jpg";
 import detailImage3 from "@/assets/b2grow-greenside/images/module-power-station/detailed-images/long_picture-03.jpg";
@@ -131,7 +131,7 @@ const productLines = [
           "Ángulo dinámico en el producto (60-90-120°)",
           "Sensor opcional de movimiento y luz día, con hasta 20 mts de alcance",
           "Dimerizable 1-10V",
-          "Temperatura de funcionamiento: -20 a + 45ºC",
+          "Temperatura de funcionamiento: -25 a + 45ºC",
           "5 años de garantía"
         ],
         products: [
@@ -141,12 +141,12 @@ const productLines = [
             specs: ["100W", "IP65", "5 años garantía"]
           },
           {
-            name: "B2G-HB12-150W",
+            name: "B2GHB12-150W",
             description: "Luminaria LED Colgante o de fijar - 150W",
             specs: ["150W", "IP65", "5 años garantía"]
           },
           {
-            name: "B2G-HB12-200W",
+            name: "B2GHB12-200W",
             description: "Luminaria LED Colgante o de fijar - 200W",
             specs: ["200W", "IP65", "5 años garantía"]
           }
@@ -179,6 +179,22 @@ const productLines = [
             name: "B2GDECO12-200W",
             description: "Luminaria LED Colgante Decorativa - 200W",
             specs: ["200W", "Control deslumbramiento", "5 años garantía"]
+          }
+        ]
+      },
+      {
+        categoryName: "ACCESORIOS",
+        categoryDescription: "Accesorios inteligentes para maximizar el control y eficiencia de tus luminarias",
+        accessories: [
+          {
+            name: "Control Remoto",
+            image: "/Control remoto.png",
+            description: "Programá niveles de dimerización, sensibilidad, tiempo de encendido y apagado, escenas y mucho más"
+          },
+          {
+            name: "Sensor de Movimiento",
+            image: "/sensor-movimiento.png",
+            description: "Convertí tu luminaria a smart y optimizá el consumo y programá los escenarios que quieras"
           }
         ]
       }
@@ -251,7 +267,8 @@ const ProductSection = () => {
             ]
           : [
               { id: "industrial", name: "UFO INDUSTRIAL", subtitle: "Luminaria Industrial", icon: Lightbulb, color: MULTISELECT_COLOR },
-              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: MULTISELECT_COLOR }
+              { id: "deco", name: "UFO DECO", subtitle: "Luminaria Decorativa", icon: Sparkles, color: MULTISELECT_COLOR },
+              { id: "accesorios", name: "ACCESORIOS", subtitle: "Control Inteligente", icon: Zap, color: MULTISELECT_COLOR }
             ];
 
         const bgImage = isGreenside ? greensideBg : multiselectBg;
@@ -333,13 +350,13 @@ const ProductSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-lg hover:shadow-xl transition-all"
                   onClick={() => setActiveModule(null)}
                 >
                   <ArrowLeft className="mr-2 h-5 w-5" />
-                  Ver Todas las Líneas
+                  Volver Atrás
                 </Button>
               </motion.div>
             </div>
@@ -377,9 +394,9 @@ const ProductSection = () => {
                       transition={{ duration: 0.6, delay: index * 0.2 }}
                       viewport={{ once: true }}
                     >
-                      <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+                      <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-start`}>
                         {/* Icon and Title Section */}
-                        <div className="flex-1 space-y-6">
+                        <div className="flex-1 space-y-6 lg:mt-16">
                           <motion.div
                             className="inline-flex items-center gap-4 cursor-pointer group"
                             onClick={() => setActiveSubcategory(subcat.id)}
@@ -411,32 +428,65 @@ const ProductSection = () => {
                             </ScrollReveal>
                           </div>
 
-                          <Button
-                            onClick={() => setActiveSubcategory(subcat.id)}
-                            className="group gap-2"
-                            size="lg"
-                          >
-                            <span>Explorar {subcat.name}</span>
-                            <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
-                          </Button>
+                          {!categoryData.accessories && (
+                            <Button
+                              onClick={() => setActiveSubcategory(subcat.id)}
+                              className="group gap-2"
+                              size="lg"
+                            >
+                              <span>Explorar {subcat.name}</span>
+                              <ArrowLeft className="h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                          )}
                         </div>
 
                         {/* Features Section */}
-                        <div className="flex-1 space-y-4">
-                          {categoryData.features.slice(0, 9).map((feature, fIdx) => (
-                            <motion.div
-                              key={fIdx}
-                              className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
-                              initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.4, delay: fIdx * 0.1 }}
-                              viewport={{ once: true }}
-                            >
-                              <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: subcat.color }} />
-                              <span className="text-sm lg:text-base text-foreground">{feature}</span>
-                            </motion.div>
-                          ))}
-                        </div>
+                        {categoryData.features && (
+                          <div className="flex-1 space-y-4">
+                            {categoryData.features.slice(0, 9).map((feature, fIdx) => (
+                              <motion.div
+                                key={fIdx}
+                                className="flex items-start gap-3 bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all"
+                                initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.4, delay: fIdx * 0.1 }}
+                                viewport={{ once: true }}
+                              >
+                                <Check className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: subcat.color }} />
+                                <span className="text-sm lg:text-base text-foreground">{feature}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Accessories Preview for ACCESORIOS */}
+                        {categoryData.accessories && (
+                          <div className="flex-1 space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                              {categoryData.accessories.map((accessory, aIdx) => (
+                                <motion.div
+                                  key={aIdx}
+                                  className="bg-background/40 backdrop-blur-sm rounded-lg p-4 border border-primary/10 hover:border-primary/30 transition-all text-center"
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.4, delay: aIdx * 0.1 }}
+                                  viewport={{ once: true }}
+                                >
+                                  <div className="h-24 flex items-center justify-center mb-2">
+                                    <img
+                                      src={accessory.image}
+                                      alt={accessory.name}
+                                      className="max-h-full w-auto object-contain"
+                                    />
+                                  </div>
+                                  <p className="text-sm font-semibold" style={{ color: subcat.color }}>
+                                    {accessory.name}
+                                  </p>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   );
@@ -493,7 +543,8 @@ const ProductSection = () => {
                  (activeSubcategory === "solar-panel" && cat.categoryName === "PANEL SOLAR");
         } else {
           return (activeSubcategory === "industrial" && cat.categoryName === "UFO INDUSTRIAL") ||
-                 (activeSubcategory === "deco" && cat.categoryName === "UFO DECO");
+                 (activeSubcategory === "deco" && cat.categoryName === "UFO DECO") ||
+                 (activeSubcategory === "accesorios" && cat.categoryName === "ACCESORIOS");
         }
       });
 
@@ -541,6 +592,75 @@ const ProductSection = () => {
               </ScrollReveal>
             </div>
           </div>
+
+          {/* Modelos for Power Station */}
+          {activeModule === "greenside" && activeSubcategory === "power-station" && (
+            <div className="mb-16">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl lg:text-4xl font-black" style={{ color: GREENSIDE_COLOR }}>
+                  Modelos
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 max-w-[1400px] mx-auto">
+                {[
+                  { name: "A1", power: "2200W", autonomy: "1037 Wh" },
+                  { name: "A1P4", power: "4400W", autonomy: "1037 Wh" },
+                  { name: "A2 lite", power: "2200W", autonomy: "2074 Wh" },
+                  { name: "A2", power: "4400W", autonomy: "2074 Wh" },
+                  { name: "A2 P6", power: "6600W", autonomy: "2074 Wh" },
+                  { name: "A2 P8", power: "8800W", autonomy: "2074 Wh" },
+                  { name: "A3 lite", power: "2200W", autonomy: "3197Wh" },
+                  { name: "A3", power: "4400W", autonomy: "3197Wh" },
+                  { name: "A3 P6", power: "6600W", autonomy: "3197Wh" },
+                  { name: "A3 P8", power: "8800W", autonomy: "3197Wh" },
+                  { name: "A4 Lite", power: "2200W", autonomy: "4234Wh" },
+                  { name: "A4 P4", power: "4400W", autonomy: "4234Wh" },
+                  { name: "A4 P6", power: "6600W", autonomy: "4234Wh" },
+                  { name: "A4 P8", power: "8800W", autonomy: "4234Wh" },
+                  { name: "A5 Lite", power: "2200W", autonomy: "5357Wh" },
+                  { name: "A5", power: "4400W", autonomy: "5357Wh" },
+                  { name: "A5 P6", power: "6600W", autonomy: "5357Wh" },
+                  { name: "A5 P8", power: "8800W", autonomy: "5357Wh" },
+                  { name: "A6 Lite", power: "2200W", autonomy: "6394Wh" },
+                  { name: "A6", power: "4400W", autonomy: "6394Wh" },
+                  { name: "A6 P6", power: "6600W", autonomy: "6394Wh" },
+                  { name: "A6 P8", power: "8800W", autonomy: "6394Wh" },
+                  { name: "A7 Lite", power: "2200W", autonomy: "7517Wh" },
+                  { name: "A7", power: "4400W", autonomy: "7517Wh" },
+                  { name: "A7 P6", power: "6600W", autonomy: "7517Wh" },
+                  { name: "A7 P8", power: "8800W", autonomy: "7517Wh" },
+                  { name: "A8 Lite", power: "2200W", autonomy: "8554Wh" },
+                  { name: "A8", power: "4400W", autonomy: "8554Wh" },
+                  { name: "A8 P6", power: "6600W", autonomy: "8554Wh" },
+                  { name: "A8 P8", power: "8800W", autonomy: "8554Wh" }
+                ].map((model, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="relative overflow-hidden rounded-xl p-3 text-center min-h-[120px] flex flex-col justify-center"
+                    style={{
+                      background: `linear-gradient(135deg, ${GREENSIDE_COLOR}1a, ${GREENSIDE_COLOR}33)`,
+                      border: `2px solid ${GREENSIDE_COLOR}4d`
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: (idx % 10) * 0.05 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05, borderColor: `${GREENSIDE_COLOR}99` }}
+                  >
+                    <div className="text-lg sm:text-xl font-black mb-1" style={{ color: GREENSIDE_COLOR }}>
+                      {model.name}
+                    </div>
+                    <div className="text-xs sm:text-sm font-semibold text-white/90">
+                      {model.power}
+                    </div>
+                    <div className="text-xs text-white/70 mt-1">
+                      {model.autonomy}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Power Options for Solar Panel */}
           {activeModule === "greenside" && activeSubcategory === "solar-panel" && (
@@ -874,6 +994,46 @@ const ProductSection = () => {
             </div>
           )}
 
+          {activeModule === "multiselect" && activeSubcategory === "accesorios" && category.accessories && (
+            <div className="space-y-12 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                {category.accessories.map((accessory, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="space-y-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    {/* Accessory Image */}
+                    <motion.div
+                      className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-background/50 to-background/30 p-8"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img
+                        src={accessory.image}
+                        alt={accessory.name}
+                        className="w-full h-auto object-contain max-h-[300px]"
+                      />
+                    </motion.div>
+
+                    {/* Accessory Name */}
+                    <h3 className="text-2xl lg:text-3xl font-bold text-center" style={{ color: MULTISELECT_COLOR }}>
+                      {accessory.name}
+                    </h3>
+
+                    {/* Accessory Description */}
+                    <p className="text-base lg:text-lg text-muted-foreground text-center leading-relaxed px-4">
+                      {accessory.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {activeModule === "multiselect" && activeSubcategory === "industrial" && (
             <div className="space-y-12 mb-12">
               {/* Power Options */}
@@ -906,10 +1066,10 @@ const ProductSection = () => {
               {/* Product Images */}
               <div className="columns-1 md:columns-2 gap-8 space-y-8">
                 {[
-                  { src: ufoIndustrialHB12_150w_1, alt: "UFO INDUSTRIAL B2G-HB12 150W - Vista superior" },
-                  { src: ufoIndustrialHB12_150w_2, alt: "UFO INDUSTRIAL B2G-HB12 150W - Vista lateral" },
-                  { src: ufoIndustrialHB12_200w_1, alt: "UFO INDUSTRIAL B2G-HB12 200W - Vista frontal" },
-                  { src: ufoIndustrialHB12_200w_2, alt: "UFO INDUSTRIAL B2G-HB12 200W - Vista detalle LED" }
+                  { src: ufoIndustrialHB12_150w_1, alt: "UFO INDUSTRIAL B2GHB12-150W - Vista superior" },
+                  { src: ufoIndustrialHB12_150w_2, alt: "UFO INDUSTRIAL B2GHB12-150W - Vista lateral" },
+                  { src: ufoIndustrialHB12_200w_1, alt: "UFO INDUSTRIAL B2GHB12-200W - Vista frontal" },
+                  { src: ufoIndustrialHB12_200w_2, alt: "UFO INDUSTRIAL B2GHB12-200W - Vista detalle LED" }
                 ].map((img, idx) => (
                   <motion.div
                     key={idx}

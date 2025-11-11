@@ -1,0 +1,11 @@
+{
+  "name": "b2grow-chatbot-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Servidor backend para chatbot con OpenAI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  }
+}

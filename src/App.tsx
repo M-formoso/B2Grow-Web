@@ -5,7 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplashCursor from "@/components/effects/SplashCursor";
 import { CursorColorProvider } from "@/contexts/CursorColorContext";
-import ChatButton from "@/components/ChatButton";
+import ChatBot from "@/components/ChatBot";
+import ScrollToTop from "@/components/ScrollToTop";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Calculator from "./pages/Calculator";
@@ -40,8 +41,9 @@ const App = () => {
           <Sonner />
           {/* TEMPORALMENTE DESHABILITADO PARA DEBUG */}
           {/* {!isMobile && <SplashCursor />} */}
-          <ChatButton />
+          <ChatBot />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Products />} />

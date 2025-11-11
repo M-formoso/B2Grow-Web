@@ -23,6 +23,21 @@ const Footer = () => {
       image: "/proyectos/mundo-movimiento.png",
       title: "Eventos y Festivales",
       testimonial: "Presentes en las mejores producciones, festivales y eventos con tecnología de vanguardia que garantiza energía confiable en cualquier situación"
+    },
+    {
+      image: "/proyectos/Proyectos realizados camioneta.png",
+      title: "Aventura en Familia",
+      testimonial: "Un equipo maravilloso, preparándome para salir de campamento con mi Familia."
+    },
+    {
+      image: "/proyectos/Proyectos realizados nave industrial.png",
+      title: "Nave Industrial",
+      testimonial: "Instalamos los equipos en nuestra planta industrial y funcionan impecables. Mantienen la producción activa incluso durante interrupciones del suministro eléctrico, evitando pérdidas significativas."
+    },
+    {
+      image: "/proyectos/Proyectos realizados pileta.png",
+      title: "Hogar en City Bell",
+      testimonial: "Debido a los continuos cortes de energía compré este equipo que me da soluciones a todas las necesidades de mi hogar"
     }
   ];
 
