@@ -156,83 +156,106 @@ const Calculator = () => {
     let estacionRecomendada = "";
 
     if (necesarioBaterias <= 1037) {
+      // Rango A1
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A1";
       } else {
         estacionRecomendada = "A1P4";
       }
     } else if (necesarioBaterias <= 2074) {
+      // Rango A2
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A2 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A2";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A2P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A2P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 3197) {
+      // Rango A3
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A3 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A3";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A3P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A3P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 4234) {
+      // Rango A4
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A4 Lite";
       } else if (potenciaNecesaria <= 4400) {
-        estacionRecomendada = "A4P4";
+        estacionRecomendada = "A4";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A4P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A4P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 5397) {
+      // Rango A5
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A5 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A5";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A5P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A5P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 6394) {
+      // Rango A6
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A6 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A6";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A6P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A6P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 7517) {
+      // Rango A7
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A7 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A7";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A7P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A7P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else if (necesarioBaterias <= 8554) {
+      // Rango A8
       if (potenciaNecesaria <= 2200) {
         estacionRecomendada = "A8 Lite";
       } else if (potenciaNecesaria <= 4400) {
         estacionRecomendada = "A8";
       } else if (potenciaNecesaria <= 6600) {
         estacionRecomendada = "A8P6";
-      } else {
+      } else if (potenciaNecesaria <= 8800) {
         estacionRecomendada = "A8P8";
+      } else {
+        estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
       }
     } else {
-      estacionRecomendada = "A8P8+"; // Excede los límites
+      // Supera todos los rangos
+      estacionRecomendada = "Su equipo requiere un asesoramiento a medida ó pruebe otra vez achicando sus requisitos de potencia y/o autonomía";
     }
 
     setResult({
@@ -389,7 +412,7 @@ const Calculator = () => {
                               <Input
                                 type="number"
                                 min="0"
-                                max="2200"
+                                max="8800"
                                 value={appliances[name].power}
                                 onChange={(e) =>
                                   handleApplianceChange(name, "power", Number(e.target.value))
@@ -415,7 +438,7 @@ const Calculator = () => {
                               <Input
                                 type="number"
                                 min="0"
-                                max="6000"
+                                max="17600"
                                 value={appliances[name].peakPower}
                                 onChange={(e) =>
                                   handleApplianceChange(name, "peakPower", Number(e.target.value))
@@ -498,7 +521,7 @@ const Calculator = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold text-foreground">
-                    {result.autonomiaNecesaria.toFixed(0)} Wh
+                    {result.necesarioBaterias.toFixed(0)} Wh
                   </p>
                 </CardContent>
               </Card>
