@@ -15,7 +15,7 @@ const APPLIANCES = {
   "Heladera con Freezer": { power: 200, peakPower: 400, usage: 12 },
   "Freezer": { power: 250, peakPower: 500, usage: 8 },
   "TV": { power: 90, peakPower: 180, usage: 5 },
-  "Laptop o PC": { power: 200, peakPower: 300, usage: 6 },
+  "Laptop o PC": { power: 10, peakPower: 80, usage: 6 },
   "Cámaras de seguridad": { power: 15, peakPower: 20, usage: 24 },
   "Alarma": { power: 10, peakPower: 15, usage: 24 },
   "Router WiFi": { power: 12, peakPower: 15, usage: 24 },
