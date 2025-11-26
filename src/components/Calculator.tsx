@@ -314,6 +314,12 @@ const Calculator = () => {
                 <span className="font-bold text-lime-500 flex-shrink-0">5)</span>
                 <span>Deslizate hasta el final de los equipos, presioná "Calcular Sistema" y vas a obtener el resultado del equipo necesario para tu aplicación. Solicitá cotización o asesoramiento a nuestro contacto de whatsapp.</span>
               </li>
+              <li className="flex gap-3 mt-4 pt-4 border-t border-lime-500/30">
+                <Zap className="w-5 h-5 text-lime-500 flex-shrink-0 mt-0.5" />
+                <span className="italic">
+                  Tené en cuenta que <strong>potencia</strong> es lo que consume el artefacto para el cual requieras energía, y con <strong>autonomía</strong> nos referimos a la cantidad de horas que querés suministrarle energía, lo que implica mayor capacidad de baterías.
+                </span>
+              </li>
             </ol>
           </CardContent>
         </Card>

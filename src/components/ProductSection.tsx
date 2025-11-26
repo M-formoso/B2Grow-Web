@@ -361,6 +361,96 @@ const ProductSection = () => {
               </motion.div>
             </div>
 
+            {/* Who are our clients section - Only for Greenside */}
+            {isGreenside && (
+              <div className="container mx-auto px-8 lg:px-16 py-12 relative z-20">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="max-w-5xl mx-auto bg-gradient-to-br from-lime-500/10 to-lime-600/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-lime-500/20"
+                >
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-8 text-lime-400 text-center">
+                    ¿Quiénes son nuestros clientes?
+                  </h3>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Para vida al aire libre,</span> como camping y off road o aventura. Llevá tu estación de energía de forma práctica a todos lados y utilizá energía solar o de red para mantener energía siempre disponible.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Para comercios,</span> como apoyo para cortes de energía. Ante imprevistos, seguí trabajando y mantené tu negocio en marcha sin preocupaciones.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Para empresas,</span> como unidad de apoyo para cortes de energía para mantener a los sistemas vitales de tu empresa siempre funcionando ante imprevistos, con la primera Estación de energía UPS con switcheo instantáneo ante cortes de energía.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Para uso doméstico,</span> ya sea en casas o departamentos. Mantené tus consumos esenciales siempre activos, con un sistema modular y escalable de gran practicidad para usarlo cuando y donde necesites.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Para consorcios,</span> donde siempre es vital y necesario mantener iluminación, seguridad, wifi y accesos con energía ante cualquier imprevisto.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">En general</span> para cualquier aplicación que requiera seguir demandando energía con independencia de la red o del lugar físico donde la necesites. Dimensioná tu equipo en base a las necesidades y escalá casi sin límites.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+
+            {/* Who are our clients section - Only for Multiselect */}
+            {!isGreenside && (
+              <div className="container mx-auto px-8 lg:px-16 py-12 relative z-20">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="max-w-5xl mx-auto bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-yellow-500/20"
+                >
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-8 text-yellow-400 text-center">
+                    ¿Quiénes son nuestros clientes?
+                  </h3>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Naves logísticas e industriales,</span> galpones, fábricas o empresas, uso deportivo y grandes áreas.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        <span className="font-semibold text-white">Comercios, oficinas y viviendas.</span>
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
+                      <p className="text-base lg:text-lg text-white/90 leading-relaxed">
+                        También realizamos <span className="font-semibold text-white">diseños y proyectos de iluminación</span> que maximicen la eficiencia energética en iluminación, acorde a las normas y requerimientos funcionales, operativos y estéticos del cliente.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+
             {/* Subcategory Selection */}
             <div className="container mx-auto px-4 pb-20 relative z-10">
               <div className="space-y-20 max-w-7xl mx-auto">
@@ -423,9 +513,7 @@ const ProductSection = () => {
                           </motion.div>
 
                           <div className="text-base lg:text-lg text-muted-foreground leading-relaxed">
-                            <ScrollReveal baseOpacity={0.2} enableBlur={true} baseRotation={2} blurStrength={6}>
-                              {categoryData.categoryDescription}
-                            </ScrollReveal>
+                            {categoryData.categoryDescription}
                           </div>
 
                           {!categoryData.accessories && (
@@ -526,9 +614,7 @@ const ProductSection = () => {
                 Calculadora de Eficiencia Energética
               </GradientText>
               <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-                <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
-                  Armá un producto a tu medida según tus necesidades
-                </ScrollReveal>
+                Armá un producto a tu medida según tus necesidades
               </div>
             </div>
             <Calculator />
@@ -587,21 +673,19 @@ const ProductSection = () => {
               </GradientText>
             )}
             <div className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-              <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={3} blurStrength={8}>
-                {category.categoryDescription}
-              </ScrollReveal>
+              {category.categoryDescription}
             </div>
           </div>
 
           {/* Modelos for Power Station */}
           {activeModule === "greenside" && activeSubcategory === "power-station" && (
             <div className="mb-16">
-              <div className="text-center mb-8">
-                <h3 className="text-3xl lg:text-4xl font-black" style={{ color: GREENSIDE_COLOR }}>
+              <div className="text-center mb-6">
+                <h3 className="text-2xl lg:text-3xl font-black" style={{ color: GREENSIDE_COLOR }}>
                   Modelos
                 </h3>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 max-w-[1400px] mx-auto">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 max-w-[1400px] mx-auto px-2">
                 {[
                   { name: "A1", power: "2200W", autonomy: "1037 Wh" },
                   { name: "A1P4", power: "4400W", autonomy: "1037 Wh" },
@@ -636,10 +720,10 @@ const ProductSection = () => {
                 ].map((model, idx) => (
                   <motion.div
                     key={idx}
-                    className="relative overflow-hidden rounded-xl p-3 text-center min-h-[120px] flex flex-col justify-center"
+                    className="relative overflow-hidden rounded-lg p-1.5 sm:p-2 text-center min-h-[70px] sm:min-h-[85px] flex flex-col justify-center"
                     style={{
                       background: `linear-gradient(135deg, ${GREENSIDE_COLOR}1a, ${GREENSIDE_COLOR}33)`,
-                      border: `2px solid ${GREENSIDE_COLOR}4d`
+                      border: `1.5px solid ${GREENSIDE_COLOR}4d`
                     }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -647,14 +731,14 @@ const ProductSection = () => {
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.05, borderColor: `${GREENSIDE_COLOR}99` }}
                   >
-                    <div className="text-lg sm:text-xl font-black mb-1" style={{ color: GREENSIDE_COLOR }}>
+                    <div className="text-sm sm:text-base font-black mb-0.5 leading-tight" style={{ color: GREENSIDE_COLOR }}>
                       {model.name}
                     </div>
-                    <div className="text-xs sm:text-sm font-semibold text-white/90">
-                      {model.power}
+                    <div className="text-[9px] sm:text-[10px] font-semibold text-white/90 leading-tight">
+                      <div className="truncate">P: {model.power}</div>
                     </div>
-                    <div className="text-xs text-white/70 mt-1">
-                      {model.autonomy}
+                    <div className="text-[9px] sm:text-[10px] text-white/70 leading-tight">
+                      <div className="truncate">A: {model.autonomy}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -1096,11 +1180,7 @@ const ProductSection = () => {
             <div className="max-w-6xl mx-auto space-y-4">
               <div className="text-center mb-8">
                 <h5 className="text-2xl font-bold">
-                  <DecryptedText 
-                    text="Características Destacadas"
-                    animateOn="view"
-                    speed={20}
-                  />
+                  Características Destacadas
                 </h5>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1127,11 +1207,7 @@ const ProductSection = () => {
             <div className="max-w-6xl mx-auto space-y-8">
               <div className="text-center">
                 <h5 className="text-2xl font-bold">
-                  <DecryptedText 
-                    text="Modelos Disponibles"
-                    animateOn="view"
-                    speed={20}
-                  />
+                  Modelos Disponibles
                 </h5>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

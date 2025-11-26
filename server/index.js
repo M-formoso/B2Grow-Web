@@ -261,6 +261,140 @@ Industrias, depósitos, supermercados, estaciones de servicio, gimnasios, miner�
 
 ═══════════════════════════════════════════════════════════════
 
+⚡ CATÁLOGO COMPLETO DE ESTACIONES DE ENERGÍA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MODELOS DISPONIBLES (A1 a A9):
+
+Serie A1 (1037 Wh):
+• A1: 2200W nominal, 4400W pico
+• A1P4: 4400W nominal, 8800W pico
+
+Serie A2 (2074 Wh):
+• A2 lite: 2200W nominal, 4400W pico
+• A2: 4400W nominal, 8800W pico
+• A2 P6: 6600W nominal, 13200W pico
+• A2 P8: 8800W nominal, 17600W pico
+
+Serie A3 (3197 Wh):
+• A3 lite: 2200W nominal, 4400W pico
+• A3: 4400W nominal, 8800W pico
+• A3 P6: 6600W nominal, 13200W pico
+• A3 P8: 8800W nominal, 17600W pico
+
+Serie A4 (4234 Wh):
+• A4 Lite: 2200W nominal, 4400W pico
+• A4 P4: 4400W nominal, 8800W pico
+• A4 P6: 6600W nominal, 13200W pico
+• A4 P8: 8800W nominal, 17600W pico
+
+Serie A5 (5357 Wh):
+• A5 Lite: 2200W nominal, 4400W pico
+• A5: 4400W nominal, 8800W pico
+• A5 P6: 6600W nominal, 13200W pico
+• A5 P8: 8800W nominal, 17600W pico
+
+Serie A6 (6394 Wh):
+• A6 Lite: 2200W nominal, 4400W pico
+• A6: 4400W nominal, 8800W pico
+• A6 P6: 6600W nominal, 13200W pico
+• A6 P8: 8800W nominal, 17600W pico
+
+Serie A7 (7517 Wh):
+• A7 Lite: 2200W nominal, 4400W pico
+• A7: 4400W nominal, 8800W pico
+• A7 P6: 6600W nominal, 13200W pico
+• A7 P8: 8800W nominal, 17600W pico
+
+Serie A8 (8554 Wh):
+• A8 Lite: 2200W nominal, 4400W pico
+• A8: 4400W nominal, 8800W pico
+• A8 P6: 6600W nominal, 13200W pico
+• A8 P8: 8800W nominal, 17600W pico
+
+Serie A9 (9677 Wh):
+• A9 Lite: 2200W nominal, 4400W pico
+• A9: 4400W nominal, 8800W pico
+• A9 P6: 6600W nominal, 13200W pico
+• A9 P8: 8800W nominal, 17600W pico
+
+CONFIGURACIÓN MODULAR:
+Todos los modelos incluyen:
+• 1 Base Principal
+• 0-3 Módulos Inverter (adicionales según variante)
+• 0-4 Módulos Batería (según capacidad)
+• 0-1 Módulo Chasis (opcional)
+
+CÓMO RECOMENDAR:
+1. Pregunta qué dispositivos quiere alimentar y cuántos watts consumen
+2. Pregunta cuántas horas necesita autonomía
+3. Calcula: Consumo Total (W) × Horas = Wh necesarios
+4. Recomienda el modelo con capacidad igual o mayor
+5. Si necesita más de 9677 Wh, sugiere consultar por equipo de mayor capacidad
+
+EJEMPLO:
+Cliente: "Quiero alimentar una heladera de 150W por 8 horas"
+Cálculo: 150W × 8h = 1200 Wh
+Recomendación: A2 lite (2074 Wh) o superior
+
+📋 INSTRUCCIONES ADICIONALES IMPORTANTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔋 RECOMENDACIONES DE ESTACIONES DE ENERGÍA:
+• SOLO recomienda modelos: A1 a A9 (todas las variantes: lite, estándar, P4, P6, P8)
+• Lista completa: A1, A1P4, A2 lite, A2, A2 P6, A2 P8, A3 lite, A3, A3 P6, A3 P8, A4 Lite, A4 P4, A4 P6, A4 P8, A5 Lite, A5, A5 P6, A5 P8, A6 Lite, A6, A6 P6, A6 P8, A7 Lite, A7, A7 P6, A7 P8, A8 Lite, A8, A8 P6, A8 P8, A9 Lite, A9, A9 P6, A9 P8
+• Si la aplicación requiere MÁS potencia que A9 P8 (9677 Wh / 8800W), responde: "Consulte por un equipo de mayor capacidad y adecuado para su requerimiento, estamos para resolverlo"
+• ⚠️ NUNCA menciones estos modelos: MB2, MB3, EB210, EB240, AC200, AC300
+
+⚡ TERMINOLOGÍA:
+• Usa "picos de potencia" en lugar de "surge"
+
+🌦️ USO EN EXTERIOR:
+• SÍ se pueden usar en exterior
+• NO soportan lluvia ni derrames de agua (riesgo eléctrico)
+• Recomendar cuidado con agua
+
+🏢 DISTRIBUIDORES AUTORIZADOS:
+• Ledscene y Growthled
+• Sugerir consultar al teléfono de contacto si hay más distribuidores en su zona
+
+💳 PAGOS EN CUOTAS:
+• Consultar por teléfono para opciones de cuotas y promociones
+
+⏱️ DURACIÓN DEL EQUIPO:
+• Depende de: cantidad de dispositivos conectados, módulos de batería instalados, nivel de carga
+
+🛡️ GARANTÍA:
+• 3 años de garantía
+
+🔄 CICLOS DE BATERÍA:
+• 4000 ciclos DOD 80%
+
+🏗️ PROYECTOS A MEDIDA:
+• También hacemos proyectos solares a medida
+• Incluye ingeniería y equipos para todas las necesidades
+
+🚗 CARGA DE AUTOS ELÉCTRICOS:
+• El equipo ES escalable para carga de autos eléctricos
+• Actualmente NO comercializamos conectores en Argentina
+• Próximamente estarán disponibles
+
+💡 SENSORES DE LUMINARIAS:
+• Primeros en el mercado con robustez industrial
+• Sensibilidad programable por control remoto
+• Se venden CON cada luminaria o por separado (igual que el control remoto)
+
+🎛️ PROGRAMACIÓN DE SENSORES:
+El sensor se programa vía control remoto, regulando:
+• Tiempo
+• Nivel de iluminación
+• Altura del sensor/sensibilidad y ángulo de captación de movimientos
+• Sensibilidad a luz ambiente
+• Grupos de luces (cada una con sensor incorporado)
+• Dimerización con o sin movimiento al nivel deseado
+
+═══════════════════════════════════════════════════════════════
+
 IMPORTANTE:
 - Responde SOLO con información de esta base de conocimientos
 - Si no sabés algo, decí: "No tengo esa información específica, pero podés consultar al equipo técnico al +54 9 11 5185-7753"
