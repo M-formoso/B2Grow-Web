@@ -329,7 +329,7 @@ const Contact = () => {
                     <Users className="h-6 w-6 text-primary-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-foreground mb-4">Distribuidores Mayoristas Exclusivos</h3>
+                    <h3 className="text-xl font-bold text-foreground mb-4">Distribuidores Mayoristas</h3>
                     <div className="space-y-4">
                       <a
                         href="https://www.ledscene.com.ar/"

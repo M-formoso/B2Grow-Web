@@ -10,10 +10,12 @@ import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import Threads from "@/components/effects/Threads";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import type { CarouselApi } from "@/components/ui/carousel";
+import VariableProximity from "@/components/VariableProximity";
 
 const campaignVideo = "/videos/Copia de Video intro web 1.mp4";
 const ufoVideo = "/videos/ufo-video.mp4";
@@ -24,10 +26,18 @@ const multiselectVideo = "/videos/VIDEO ORIGINAL B2GROW (1).MP4";
 const Hero = () => {
   const videoRef1 = useRef<HTMLVideoElement>(null);
   const videoRef2 = useRef<HTMLVideoElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const threadsTextContainerRef = useRef<HTMLDivElement>(null);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentPhrase, setCurrentPhrase] = useState(0);
+
+  const phrases = [
+    "Generá, acumulá y disponé de energía de forma portátil y escalable.",
+    "Iluminá tus proyectos de forma\neficiente y versátil"
+  ];
 
   useEffect(() => {
     // Detectar si es móvil para optimizar animaciones
@@ -40,6 +50,15 @@ const Hero = () => {
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    // Intercalar frases cada 4 segundos
+    const interval = setInterval(() => {
+      setCurrentPhrase((prev) => (prev + 1) % phrases.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [phrases.length]);
 
   useEffect(() => {
     if (!carouselApi) {
@@ -126,19 +145,30 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="max-w-4xl"
                   >
-                    <h1 className="text-2xl md:text-5xl lg:text-6xl font-black text-white mb-2 md:mb-3 tracking-tight">
-                      <GradientText
-                        colors={['#ffffff', '#f0f0f0', '#e0e0e0', '#ffffff']}
-                        animationSpeed={4}
-                        className="text-2xl md:text-5xl lg:text-6xl font-black"
-                      >
-                        POWERING THE FUTURE
-                      </GradientText>
-                    </h1>
-                    <div className="text-sm md:text-xl text-white/90 max-w-2xl mb-3 md:mb-6">
-                      <ScrollReveal baseOpacity={0.4} enableBlur={true} baseRotation={1} blurStrength={4}>
-                        Tecnología inteligente de energía para un mundo sustentable
-                      </ScrollReveal>
+                    <div ref={textContainerRef} className="relative h-32 md:h-40 flex items-center w-full" style={{ position: 'relative' }}>
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentPhrase}
+                          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                          transition={{ duration: 0.8, ease: "easeInOut" }}
+                          className="absolute inset-0 flex items-center"
+                        >
+                          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-white max-w-3xl leading-relaxed whitespace-pre-line">
+                            <VariableProximity
+                              label={phrases[currentPhrase]}
+                              className="variable-proximity-hero"
+                              fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                              toFontVariationSettings="'wght' 900, 'opsz' 40"
+                              containerRef={textContainerRef}
+                              radius={150}
+                              falloff="gaussian"
+                              style={{ color: 'white', fontSize: 'inherit', fontWeight: 'inherit', whiteSpace: 'pre-line' }}
+                            />
+                          </h2>
+                        </motion.div>
+                      </AnimatePresence>
                     </div>
                   </motion.div>
                 </div>
@@ -179,7 +209,7 @@ const Hero = () => {
 
       {/* Threads Effect Section - COMPACT VERSION */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="relative h-[40vh] w-full overflow-hidden">
+        <div className="relative h-[40vh] w-full overflow-hidden flex items-center justify-center">
           {/* Floating Products Animation - Above Threads - Solo en Desktop */}
           {!isMobile && (
           <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
@@ -342,10 +372,194 @@ const Hero = () => {
               enableMouseInteraction={!isMobile}
             />
           </div>
+
+          {/* Text with VariableProximity Effect - Over Threads */}
+          <div ref={threadsTextContainerRef} className="relative z-10 flex items-center justify-center px-4 -mt-20 md:-mt-32" style={{ position: 'relative' }}>
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white text-center max-w-3xl leading-relaxed">
+              <VariableProximity
+                label="Convertimos en realidad tus proyectos de iluminación e independencia energética"
+                className="variable-proximity-threads"
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={threadsTextContainerRef}
+                radius={150}
+                falloff="gaussian"
+                style={{ color: 'white', fontSize: 'inherit', fontWeight: 'inherit' }}
+              />
+            </h2>
+          </div>
         </div>
 
-        {/* Title Section - Outside video */}
-        <div className="pb-4 pt-2 relative z-20">
+        {/* What We Offer Section - FULLWIDTH */}
+        <div className="my-20 relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="space-y-16"
+          >
+            {/* Main Title */}
+            <div className="text-center px-4 mb-8">
+              <motion.h2
+                className="text-4xl lg:text-6xl font-black mb-4 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true }}
+              >
+                ¿Qué ofrecemos?
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-lg lg:text-xl text-white/80 max-w-3xl mx-auto"
+              >
+                Eficiencia, tecnología y sustentabilidad a través de nuestras líneas de productos
+              </motion.p>
+            </div>
+
+            {/* Línea Greenside - FULLWIDTH */}
+            <motion.div
+              initial={{ opacity: 0, x: -100, rotateY: -15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative group w-screen left-[50%] right-[50%] -mx-[50vw]"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-lime-500 to-lime-600 blur opacity-10 group-hover:opacity-25 transition duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-lime-500/[0.01] to-lime-600/[0.01] backdrop-blur-[2px] border-y-2 border-lime-500/50 group-hover:border-lime-500/70 transition-all duration-500"></div>
+              <div className="relative py-12 lg:py-16 px-8 lg:px-16 max-w-7xl mx-auto">
+                <motion.div
+                  className="text-center mb-6"
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="py-3">
+                    <h3 className="text-3xl lg:text-4xl font-bold">
+                      <GradientText
+                        colors={['#84cc16', '#a3e635', '#bef264', '#84cc16']}
+                        animationSpeed={4}
+                        className="text-3xl lg:text-4xl font-bold"
+                      >
+                        Línea Greenside
+                      </GradientText>
+                    </h3>
+                  </div>
+                </motion.div>
+                <motion.p
+                  className="text-lg text-white mb-6 font-semibold"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  Soluciones inteligentes de energía mediante:
+                </motion.p>
+                <div className="space-y-4">
+                  {[
+                    { icon: Zap, title: "Estaciones de Energía", text: "solares híbridas (alimentación solar, desde la red ó desde la batería de un vehículo) portátiles y escalables para independencia energética.", delay: 0.4 },
+                    { icon: Sun, title: "Paneles solares:", text: "Contamos con paneles solares portátiles así como convencionales, con la mejor tecnología y confiabilidad para convertir tu independencia energética en una realidad.", delay: 0.5 },
+                    { icon: Leaf, title: "Proyectos de energía solar", text: "según tus necesidades, ya sea para pequeñas o grandes demandas energéticas con múltiples sistemas o equipos según los requerimientos.", delay: 0.6 }
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="flex items-start gap-3 group/item"
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: item.delay }}
+                      viewport={{ once: true }}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.2, rotate: 10 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <item.icon className="w-6 h-6 text-lime-400 flex-shrink-0 mt-1" />
+                      </motion.div>
+                      <p className="text-base lg:text-lg leading-relaxed text-white/90 group-hover/item:text-white transition-colors">
+                        <span className="font-semibold text-white">{item.title}</span> {item.text}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Línea Multiselect - FULLWIDTH */}
+            <motion.div
+              initial={{ opacity: 0, x: 100, rotateY: 15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative group w-screen left-[50%] right-[50%] -mx-[50vw]"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 blur opacity-10 group-hover:opacity-25 transition duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/[0.01] to-yellow-600/[0.01] backdrop-blur-[2px] border-y-2 border-yellow-500/50 group-hover:border-yellow-500/70 transition-all duration-500"></div>
+              <div className="relative py-12 lg:py-16 px-8 lg:px-16 max-w-7xl mx-auto">
+                <motion.div
+                  className="text-center mb-6"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="py-3">
+                    <h3 className="text-3xl lg:text-4xl font-bold">
+                      <GradientText
+                        colors={['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
+                        animationSpeed={4}
+                        className="text-3xl lg:text-4xl font-bold"
+                      >
+                        Línea Multiselect
+                      </GradientText>
+                    </h3>
+                  </div>
+                </motion.div>
+                <motion.p
+                  className="text-lg text-white mb-6 font-semibold"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  Soluciones inteligentes de iluminación mediante:
+                </motion.p>
+                <div className="space-y-4">
+                  {[
+                    { title: "Luminarias UFO Multiselect/Línea industrial:", text: "cambiá el color de la luz, el ángulo de emisión, la potencia y el control de encendido en una misma luminaria, para lograr una máxima eficiencia para tu aplicación, con una robustez y confiabilidad únicas en el mercado.", delay: 0.4 },
+                    { title: "Luminarias UFO DECO/Línea decorativa de interior:", text: "Dinamizá tus ambientes cambiando el color de la luz, el ángulo de iluminación, la dimerización o escenarios de encendido según la dinámica, funcionalidad y estilo del lugar.", delay: 0.5 }
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="flex items-start gap-3 group/item"
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: item.delay }}
+                      viewport={{ once: true }}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.2, rotate: -10 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <Lightbulb className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
+                      </motion.div>
+                      <p className="text-base lg:text-lg leading-relaxed text-white/90 group-hover/item:text-white transition-colors">
+                        <span className="font-semibold text-white">{item.title}</span> {item.text}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Title Section - Before Videos */}
+        <div className="pb-8 pt-2 relative z-20">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-4 animate-fade-in">
               <h2 className="text-4xl lg:text-5xl font-bold mb-3 text-white">
@@ -360,10 +574,8 @@ const Hero = () => {
 
         {/* Video Section */}
         <div className="pb-32 relative z-20">
-          <div className="max-w-6xl mx-auto px-4">
-
-            {/* Videos Carousel - FULL WIDTH */}
-            <div className="relative w-screen left-[50%] right-[50%] -mx-[50vw] mb-12">
+          {/* Videos Carousel - WIDER */}
+          <div className="relative mb-12 px-2 md:px-4 lg:px-8 max-w-[95vw] mx-auto">
               <Carousel
                 setApi={setCarouselApi}
                 className="w-full"
@@ -379,7 +591,7 @@ const Hero = () => {
                   {/* Campaign Video */}
                   <CarouselItem>
                     <div className="relative">
-                      <div className="relative w-full h-[75vh] overflow-hidden">
+                      <div className="relative w-full h-[80vh] overflow-hidden rounded-2xl">
                         <video
                           ref={videoRef1}
                           src={greensideVideo}
@@ -388,7 +600,7 @@ const Hero = () => {
                           loop
                           playsInline
                           preload={isMobile ? "metadata" : "auto"}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain bg-black"
                         >
                           Tu navegador no soporta el tag de video.
                         </video>
@@ -409,7 +621,7 @@ const Hero = () => {
                   {/* UFO Video */}
                   <CarouselItem>
                     <div className="relative">
-                      <div className="relative w-full h-[75vh] overflow-hidden">
+                      <div className="relative w-full h-[80vh] overflow-hidden rounded-2xl">
                         <video
                           ref={videoRef2}
                           src={multiselectVideo}
@@ -418,7 +630,7 @@ const Hero = () => {
                           loop
                           playsInline
                           preload={isMobile ? "metadata" : "auto"}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain bg-black"
                         >
                           Tu navegador no soporta el tag de video.
                         </video>
@@ -456,178 +668,9 @@ const Hero = () => {
                 ))}
               </div>
             </div>
+          </div>
 
-            {/* What We Offer Section - BEFORE FEATURES */}
-            <div className="my-20 max-w-6xl mx-auto px-4">
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                viewport={{ once: true }}
-                className="space-y-16"
-              >
-                {/* Main Title */}
-                <div className="text-center">
-                  <motion.h2
-                    className="text-4xl lg:text-5xl font-bold mb-6 text-white py-2"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    viewport={{ once: true }}
-                    style={{ overflow: 'visible' }}
-                  >
-                    <GradientText
-                      colors={['#ffffff', '#84cc16', '#eab308', '#ffffff']}
-                      animationSpeed={5}
-                      className="text-4xl lg:text-5xl font-bold inline-block"
-                    >
-                      ¿Qué ofrecemos?
-                    </GradientText>
-                  </motion.h2>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="text-xl lg:text-2xl text-white/90"
-                  >
-                    <ScrollReveal baseOpacity={0.3} enableBlur={true} baseRotation={1} blurStrength={4}>
-                      Eficiencia, tecnología y sustentabilidad a través de nuestras líneas de productos
-                    </ScrollReveal>
-                  </motion.div>
-                </div>
-
-                {/* Línea Greenside */}
-                <motion.div
-                  initial={{ opacity: 0, x: -100, rotateY: -15 }}
-                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-lime-500 to-lime-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-lime-500/10 to-lime-600/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-lime-500/20 hover:border-lime-500/40 transition-all duration-500">
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, x: -30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      viewport={{ once: true }}
-                    >
-                      <h3 className="text-3xl lg:text-4xl font-bold mb-6 py-2 inline-block" style={{ overflow: 'visible' }}>
-                        <GradientText
-                          colors={['#84cc16', '#a3e635', '#bef264', '#84cc16']}
-                          animationSpeed={4}
-                          className="text-3xl lg:text-4xl font-bold"
-                        >
-                          Línea Greenside
-                        </GradientText>
-                      </h3>
-                    </motion.div>
-                    <motion.p
-                      className="text-lg text-white/90 mb-6 font-semibold"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.3 }}
-                      viewport={{ once: true }}
-                    >
-                      Soluciones inteligentes de energía mediante:
-                    </motion.p>
-                    <div className="space-y-4">
-                      {[
-                        { icon: Zap, title: "Estaciones de Energía", text: "solares híbridas (alimentación solar, desde la red ó desde la batería de un vehículo) portátiles y escalables para independencia energética.", delay: 0.4 },
-                        { icon: Sun, title: "Paneles solares:", text: "Contamos con paneles solares portátiles así como convencionales, con la mejor tecnología y confiabilidad para convertir tu independencia energética en una realidad.", delay: 0.5 },
-                        { icon: Leaf, title: "Proyectos de energía solar", text: "según tus necesidades, ya sea para pequeñas o grandes demandas energéticas con múltiples sistemas o equipos según los requerimientos.", delay: 0.6 }
-                      ].map((item, idx) => (
-                        <motion.div
-                          key={idx}
-                          className="flex items-start gap-3 group/item"
-                          initial={{ opacity: 0, x: -30 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: item.delay }}
-                          viewport={{ once: true }}
-                        >
-                          <motion.div
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                            transition={{ type: "spring", stiffness: 400 }}
-                          >
-                            <item.icon className="w-6 h-6 text-lime-400 flex-shrink-0 mt-1" />
-                          </motion.div>
-                          <p className="text-base lg:text-lg leading-relaxed text-white/80 group-hover/item:text-white/95 transition-colors">
-                            <span className="font-semibold text-white">{item.title}</span> {item.text}
-                          </p>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Línea Multiselect */}
-                <motion.div
-                  initial={{ opacity: 0, x: 100, rotateY: 15 }}
-                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-500">
-                    <motion.div
-                      className="text-center"
-                      initial={{ opacity: 0, x: 30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      viewport={{ once: true }}
-                    >
-                      <h3 className="text-3xl lg:text-4xl font-bold mb-6 py-2 inline-block" style={{ overflow: 'visible' }}>
-                        <GradientText
-                          colors={['#eab308', '#fbbf24', '#fcd34d', '#eab308']}
-                          animationSpeed={4}
-                          className="text-3xl lg:text-4xl font-bold"
-                        >
-                          Línea Multiselect
-                        </GradientText>
-                      </h3>
-                    </motion.div>
-                    <motion.p
-                      className="text-lg text-white/90 mb-6 font-semibold"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.3 }}
-                      viewport={{ once: true }}
-                    >
-                      Soluciones inteligentes de iluminación mediante:
-                    </motion.p>
-                    <div className="space-y-4">
-                      {[
-                        { title: "Luminarias UFO Multiselect/Línea industrial:", text: "cambiá el color de la luz, el ángulo de emisión, la potencia y el control de encendido en una misma luminaria, para lograr una máxima eficiencia para tu aplicación, con una robustez y confiabilidad únicas en el mercado.", delay: 0.4 },
-                        { title: "Luminarias UFO DECO/Línea decorativa de interior:", text: "Dinamizá tus ambientes cambiando el color de la luz, el ángulo de iluminación, la dimerización o escenarios de encendido según la dinámica, funcionalidad y estilo del lugar.", delay: 0.5 }
-                      ].map((item, idx) => (
-                        <motion.div
-                          key={idx}
-                          className="flex items-start gap-3 group/item"
-                          initial={{ opacity: 0, x: 30 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: item.delay }}
-                          viewport={{ once: true }}
-                        >
-                          <motion.div
-                            whileHover={{ scale: 1.2, rotate: -10 }}
-                            transition={{ type: "spring", stiffness: 400 }}
-                          >
-                            <Lightbulb className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
-                          </motion.div>
-                          <p className="text-base lg:text-lg leading-relaxed text-white/80 group-hover/item:text-white/95 transition-colors">
-                            <span className="font-semibold text-white">{item.title}</span> {item.text}
-                          </p>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
-
+          <div className="max-w-6xl mx-auto px-4">
             {/* Product Cards with Features Grid beside them */}
             <div className="-mt-12 lg:mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-start gap-8 lg:gap-16 max-w-7xl mx-auto pl-0 lg:pl-8">
               {/* Features Grid - LEFT SIDE */}
@@ -710,62 +753,61 @@ const Hero = () => {
                 cardDistance={60}
                 verticalDistance={70}
                 delay={4000}
-                pauseOnHover={true}
+                pauseOnHover={false}
                 easing="elastic"
               >
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
-                    <img
+                  <motion.div
+                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.img
                       src={powerStationCard}
                       alt="Estación de Energía Portátil B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain"
+                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
+                      initial={{ opacity: 1 }}
+                      whileHover={{ opacity: 0.7 }}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
-                      <p className="text-lg text-white/90">
-
-                      </p>
-                    </div>
-                  </div>
+                  </motion.div>
                 </Card>
 
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
-                    <img
+                  <motion.div
+                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.img
                       src={solarPanelsHero}
                       alt="Paneles Solares Flexibles B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain"
+                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
+                      initial={{ opacity: 1 }}
+                      whileHover={{ opacity: 0.7 }}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
-                      <p className="text-lg text-white/90">
-
-                      </p>
-                    </div>
-                  </div>
+                  </motion.div>
                 </Card>
 
                 <Card>
-                  <div className="relative rounded-2xl h-full overflow-hidden border border-white/10 shadow-2xl bg-transparent">
-                    <img
+                  <motion.div
+                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.img
                       src={ledLightingHero}
                       alt="Iluminación LED Inteligente B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain"
+                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
+                      initial={{ opacity: 1 }}
+                      whileHover={{ opacity: 0.7 }}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <h2 className="text-3xl font-bold mb-2 text-white"></h2>
-                      <p className="text-lg text-white/90">
-
-                      </p>
-                    </div>
-                  </div>
+                  </motion.div>
                 </Card>
               </CardSwap>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };

@@ -60,7 +60,7 @@ const productLines = [
     categories: [
       {
         categoryName: "ESTACIÓN DE ENERGÍA",
-        categoryDescription: "Estación de energía inteligente escalable y transportable",
+        categoryDescription: "Sistema modular de energía, que permite cargarse desde paneles solares, la red ó desde los 12V de la batería de un vehículo para acumular energía en sus baterías y devolvértela para que utilices cuando quieras, para los dispositivos eléctricos/electrónicos que elijas y disponible en cualquier momento. Además, es escalable en potencia y capacidad de la batería para resolver múltiples situaciones; fácil de transportar con un carrito para que te acompañe a donde quieras",
         features: [
           "Anti cortes de energía",
           "UPS profesional con 3 configuraciones",
@@ -77,9 +77,9 @@ const productLines = [
           "Podes usar la energía almacenada en el equipo para alimentar parte o toda la instalación eléctrica de tu casa"
         ],
         images: [
-          { src: mainImage1, category: "Principal" },
-          { src: mainImage2, category: "Principal" },
           { src: mainImage3, category: "Principal" },
+          { src: mainImage2, category: "Principal" },
+          { src: mainImage1, category: "Principal" },
           { src: mainImage5, category: "Principal" },
           { src: mainImage6, category: "Principal" },
           { src: mainImage7, category: "Principal" },
@@ -377,31 +377,31 @@ const ProductSection = () => {
                     <div className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
                       <p className="text-base lg:text-lg text-white/90 leading-relaxed">
-                        <span className="font-semibold text-white">Para vida al aire libre,</span> como camping y off road o aventura. Llevá tu estación de energía de forma práctica a todos lados y utilizá energía solar o de red para mantener energía siempre disponible.
+                        <span className="font-semibold text-white">Vida al aire libre,</span> como camping y off road o aventura. Llevá tu estación de energía de forma práctica a todos lados y utilizá energía solar o de red para mantener energía siempre disponible.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
                       <p className="text-base lg:text-lg text-white/90 leading-relaxed">
-                        <span className="font-semibold text-white">Para comercios,</span> como apoyo para cortes de energía. Ante imprevistos, seguí trabajando y mantené tu negocio en marcha sin preocupaciones.
+                        <span className="font-semibold text-white">Comercios,</span> como apoyo para cortes de energía. Ante imprevistos, seguí trabajando y mantené tu negocio en marcha sin preocupaciones.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
                       <p className="text-base lg:text-lg text-white/90 leading-relaxed">
-                        <span className="font-semibold text-white">Para empresas,</span> como unidad de apoyo para cortes de energía para mantener a los sistemas vitales de tu empresa siempre funcionando ante imprevistos, con la primera Estación de energía UPS con switcheo instantáneo ante cortes de energía.
+                        <span className="font-semibold text-white">Empresas,</span> como unidad de apoyo para cortes de energía para mantener a los sistemas vitales de tu empresa siempre funcionando ante imprevistos, con la primera Estación de energía UPS con switcheo instantáneo ante cortes de energía.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
                       <p className="text-base lg:text-lg text-white/90 leading-relaxed">
-                        <span className="font-semibold text-white">Para uso doméstico,</span> ya sea en casas o departamentos. Mantené tus consumos esenciales siempre activos, con un sistema modular y escalable de gran practicidad para usarlo cuando y donde necesites.
+                        <span className="font-semibold text-white">Uso doméstico,</span> ya sea en casas o departamentos. Mantené tus consumos esenciales siempre activos, con un sistema modular y escalable de gran practicidad para usarlo cuando y donde necesites.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-lime-400 flex-shrink-0 mt-1" />
                       <p className="text-base lg:text-lg text-white/90 leading-relaxed">
-                        <span className="font-semibold text-white">Para consorcios,</span> donde siempre es vital y necesario mantener iluminación, seguridad, wifi y accesos con energía ante cualquier imprevisto.
+                        <span className="font-semibold text-white">Consorcios,</span> donde siempre es vital y necesario mantener iluminación, seguridad, wifi y accesos con energía ante cualquier imprevisto.
                       </p>
                     </div>
                     <div className="flex items-start gap-3">
@@ -735,13 +735,20 @@ const ProductSection = () => {
                       {model.name}
                     </div>
                     <div className="text-[9px] sm:text-[10px] font-semibold text-white/90 leading-tight">
-                      <div className="truncate">P: {model.power}</div>
+                      <div className="truncate">Potencia: {model.power}</div>
                     </div>
                     <div className="text-[9px] sm:text-[10px] text-white/70 leading-tight">
-                      <div className="truncate">A: {model.autonomy}</div>
+                      <div className="truncate">Autonomía: {model.autonomy}</div>
                     </div>
                   </motion.div>
                 ))}
+              </div>
+
+              {/* Aclaraciones */}
+              <div className="mt-6 text-xs text-white/70 max-w-4xl mx-auto space-y-1 px-4">
+                <p><strong className="text-white/80">*Potencia:</strong> es el consumo eléctrico del artefacto al que querés suministrarle energía.</p>
+                <p><strong className="text-white/80">*Autonomía:</strong> es la cantidad de potencia en el tiempo específico al cual querés suministrarle energía a un artefacto (por ejemplo, 1KW durante una hora = 1KWh).</p>
+                <p><strong className="text-white/80">**Potencia pico:</strong> no está aquí especificado pero es el doble de la potencia, es un parámetro importante a tener en cuenta para algunos artefactos que requieren más energía que su potencia normal en el arranque.</p>
               </div>
             </div>
           )}

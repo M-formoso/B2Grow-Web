@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import StaggeredMenu from "./StaggeredMenu";
 import PillNav from "./PillNav";
 
@@ -7,6 +7,7 @@ const b2growLogo = "/Marca B2Grow png.png";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -18,6 +19,24 @@ const Header = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    // Interceptar clicks en el nav de productos para siempre ir al dashboard principal
+    const handleProductsClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href="/productos"]');
+
+      if (link) {
+        e.preventDefault();
+        e.stopPropagation();
+        navigate('/productos', { replace: true });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    document.addEventListener('click', handleProductsClick, true);
+    return () => document.removeEventListener('click', handleProductsClick, true);
+  }, [navigate]);
 
   const navItems = [
     { label: "Inicio", href: "/", ariaLabel: "Ir al inicio" },
@@ -83,7 +102,7 @@ const Header = () => {
         <div className="flex justify-start">
           <Link
             to="/"
-            className="transition-transform hover:scale-110 duration-300"
+            className="transition-transform hover:scale-110 duration-300 flex flex-col items-start gap-1"
             aria-label="Ir al inicio"
           >
             <img
@@ -91,6 +110,9 @@ const Header = () => {
               alt="B2Grow Logo"
               className="h-24 lg:h-28 w-auto"
             />
+            <p className="text-white/90 text-xs lg:text-sm font-medium tracking-wide">
+              Energía inteligente para un mundo sustentable
+            </p>
           </Link>
         </div>
 
