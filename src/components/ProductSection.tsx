@@ -78,10 +78,9 @@ const productLines = [
         ],
         images: [
           { src: mainImage3, category: "Principal" },
-          { src: mainImage2, category: "Principal" },
-          { src: mainImage1, category: "Principal" },
-          { src: mainImage5, category: "Principal" },
           { src: mainImage6, category: "Principal" },
+          { src: mainImage2, category: "Principal" },
+          { src: mainImage5, category: "Principal" },
           { src: mainImage7, category: "Principal" },
           { src: detailImage1, category: "Detalle" },
           { src: detailImage3, category: "Detalle" }
