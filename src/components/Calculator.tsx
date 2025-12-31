@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Zap, Sun, Leaf, Battery, Package, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
@@ -80,6 +79,12 @@ const Calculator = () => {
     )
   );
   const [result, setResult] = useState<CalculationResult | null>(null);
+
+  // Prevenir problemas de redirección en carga inicial
+  useEffect(() => {
+    // Forzar scroll al inicio en dispositivos móviles
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleApplianceToggle = (name: string) => {
     setAppliances((prev) => ({
@@ -271,8 +276,8 @@ const Calculator = () => {
   };
 
   return (
-    <section className="relative min-h-screen pt-40 pb-20 px-4 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(132,204,22,0.1),transparent_50%)]" />
+    <section className="relative min-h-screen pt-40 pb-20 px-4 overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(132,204,22,0.1),transparent_50%)] will-change-auto" />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
@@ -285,7 +290,7 @@ const Calculator = () => {
         </div>
 
         {/* Instrucciones de uso */}
-        <Card className="backdrop-blur-sm bg-lime-500/10 border-lime-500/30 mb-8">
+        <Card className="bg-lime-500/10 border-lime-500/30 mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lime-500">
               <Leaf className="w-6 h-6" />
@@ -324,7 +329,7 @@ const Calculator = () => {
           </CardContent>
         </Card>
 
-        <Card className="backdrop-blur-sm bg-card/90 border-border">
+        <Card className="bg-card border-border">
           <CardHeader>
             <CardTitle>Configuración del Sistema</CardTitle>
             <CardDescription>
@@ -335,18 +340,26 @@ const Calculator = () => {
             {/* Tipo de Proyecto */}
             <div className="space-y-2">
               <Label htmlFor="projectType">Tipo de Proyecto</Label>
-              <Select value={projectType} onValueChange={setProjectType}>
-                <SelectTrigger id="projectType">
-                  <SelectValue placeholder="Seleccioná el tipo de proyecto" />
-                </SelectTrigger>
-                <SelectContent>
-                  {PROJECT_TYPES.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <select
+                id="projectType"
+                value={projectType}
+                onChange={(e) => setProjectType(e.target.value)}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-auto"
+                style={{
+                  WebkitAppearance: 'menulist',
+                  MozAppearance: 'menulist',
+                  touchAction: 'manipulation'
+                }}
+              >
+                <option value="" disabled>
+                  Seleccioná el tipo de proyecto
+                </option>
+                {PROJECT_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {projectType === "Otros" && (
@@ -398,7 +411,7 @@ const Calculator = () => {
                 
                 <CollapsibleContent>
                   <div className="grid md:grid-cols-2 gap-4">
-                    {Object.entries(APPLIANCES).map(([name, defaults]) => (
+                    {Object.entries(APPLIANCES).map(([name]) => (
                       <div key={name} className="space-y-3 p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors">
                         <div className="flex items-center space-x-2">
                           <Checkbox
@@ -490,7 +503,7 @@ const Calculator = () => {
         {result && (
           <div className="mt-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
+              <Card className="bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Zap className="text-lime-500" />
@@ -504,7 +517,7 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
+              <Card className="bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Zap className="text-lime-500" />
@@ -518,7 +531,7 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
+              <Card className="bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Battery className="text-lime-500" />
@@ -532,7 +545,7 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
+              <Card className="bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Sun className="text-lime-500" />
@@ -549,7 +562,7 @@ const Calculator = () => {
                 </CardContent>
               </Card>
 
-              <Card className="backdrop-blur-sm bg-lime-500/20 border-lime-500/30">
+              <Card className="bg-lime-500/20 border-lime-500/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Package className="text-lime-500" />
@@ -564,7 +577,7 @@ const Calculator = () => {
               </Card>
             </div>
 
-            <Card className="backdrop-blur-sm bg-card/90 border-border">
+            <Card className="bg-card border-border">
               <CardContent className="pt-6">
                 <div className="text-center space-y-4">
                   <h3 className="text-2xl font-bold text-foreground">
@@ -575,7 +588,10 @@ const Calculator = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                     <Button
-                      onClick={() => window.open("https://wa.me/5491151857753", "_blank")}
+                      onClick={() => {
+                        const url = "https://wa.me/5491151857753";
+                        window.location.href = url;
+                      }}
                       className="gap-2"
                       size="lg"
                     >
@@ -583,7 +599,10 @@ const Calculator = () => {
                       Cotización: +54 9 11 5185-7753
                     </Button>
                     <Button
-                      onClick={() => window.open("https://wa.me/5491166230246", "_blank")}
+                      onClick={() => {
+                        const url = "https://wa.me/5491166230246";
+                        window.location.href = url;
+                      }}
                       className="gap-2"
                       size="lg"
                       variant="outline"

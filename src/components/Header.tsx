@@ -26,7 +26,10 @@ const Header = () => {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href="/productos"]');
 
-      if (link) {
+      // Solo aplicar si estamos en el header/nav, no en toda la página
+      const isInNav = target.closest('header, nav, .pill-nav-custom');
+
+      if (link && isInNav) {
         e.preventDefault();
         e.stopPropagation();
         navigate('/productos', { replace: true });

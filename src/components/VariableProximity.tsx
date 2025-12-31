@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useRef, useEffect, RefObject } from 'react';
+import { forwardRef, useMemo, useRef, useEffect, RefObject, useState } from 'react';
 import { motion } from 'framer-motion';
 import './VariableProximity.css';
 
@@ -12,6 +12,12 @@ interface VariableProximityProps {
   className?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
+}
+
+// Detectar si es un dispositivo Android
+function isAndroid() {
+  if (typeof window === 'undefined') return false;
+  return /Android/i.test(navigator.userAgent);
 }
 
 function useAnimationFrame(callback: () => void) {
@@ -70,6 +76,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     ...restProps
   } = props;
 
+  const [isAndroidDevice] = useState(isAndroid());
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const interpolatedSettingsRef = useRef<string[]>([]);
   const mousePositionRef = useMousePositionRef(containerRef);
@@ -113,7 +120,9 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
   };
 
   useAnimationFrame(() => {
-    if (!containerRef?.current) return;
+    // Desactivar animación en Android para evitar problemas de rendering
+    if (isAndroidDevice || !containerRef?.current) return;
+
     const containerRect = containerRef.current.getBoundingClientRect();
     const { x, y } = mousePositionRef.current;
     if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
@@ -155,6 +164,21 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
 
   const lines = label.split('\n');
   let letterIndex = 0;
+
+  // En Android, renderizar texto simple sin animaciones
+  if (isAndroidDevice) {
+    return (
+      <span
+        ref={ref}
+        className={className}
+        onClick={onClick}
+        style={style}
+        {...restProps}
+      >
+        {label}
+      </span>
+    );
+  }
 
   return (
     <span
