@@ -113,15 +113,22 @@ const Contact = () => {
 
             {/* WhatsApp & Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="group hover:shadow-green transition-all duration-500 bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-4 text-center">
-                  <div className="w-12 h-12 bg-gradient-energy rounded-full flex items-center justify-center mx-auto mb-3">
-                    <MessageSquare className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <h4 className="font-semibold mb-2">WhatsApp</h4>
-                  <p className="text-sm text-muted-foreground">+54 11 1234-5678</p>
-                </CardContent>
-              </Card>
+              <a
+                href="https://wa.me/5491178980848"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Card className="group hover:shadow-green transition-all duration-500 bg-card/50 backdrop-blur-sm cursor-pointer">
+                  <CardContent className="p-4 text-center">
+                    <div className="w-12 h-12 bg-gradient-energy rounded-full flex items-center justify-center mx-auto mb-3">
+                      <MessageSquare className="h-6 w-6 text-primary-foreground" />
+                    </div>
+                    <h4 className="font-semibold mb-2">WhatsApp</h4>
+                    <p className="text-sm text-muted-foreground">+54 9 11 7898-0848</p>
+                  </CardContent>
+                </Card>
+              </a>
               
               <Card className="group hover:shadow-energy transition-all duration-500 bg-card/50 backdrop-blur-sm">
                 <CardContent className="p-4 text-center">

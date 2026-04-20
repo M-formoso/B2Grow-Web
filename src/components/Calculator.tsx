@@ -466,21 +466,21 @@ const Calculator = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Button
-                      onClick={() => window.open("https://wa.me/5491151857753", "_blank")}
+                      onClick={() => window.open("https://wa.me/5491178980848", "_blank")}
                       className="gap-2"
                       size="lg"
                     >
                       <MessageCircle />
-                      Cotización: +54 9 11 5185-7753
+                      Cotización: +54 9 11 7898-0848
                     </Button>
                     <Button
-                      onClick={() => window.open("https://wa.me/5491166230246", "_blank")}
+                      onClick={() => window.open("https://wa.me/5491178980848", "_blank")}
                       variant="secondary"
                       className="gap-2"
                       size="lg"
                     >
                       <MessageCircle />
-                      Asesoramiento: +54 9 11 6623-0246
+                      Asesoramiento: +54 9 11 7898-0848
                     </Button>
                   </div>
                   <p className="text-sm font-semibold text-foreground mt-4">
