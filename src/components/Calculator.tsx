@@ -589,18 +589,18 @@ const Calculator = () => {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                     <Button
                       onClick={() => {
-                        const url = "https://wa.me/5491151857753";
+                        const url = `https://wa.me/5491178980848?text=${encodeURIComponent("Hola! Vengo desde la web de B2Grow y quisiera pedir una cotización.")}`;
                         window.location.href = url;
                       }}
                       className="gap-2"
                       size="lg"
                     >
                       <MessageCircle />
-                      Cotización: +54 9 11 5185-7753
+                      Cotización: +54 9 11 7898-0848
                     </Button>
                     <Button
                       onClick={() => {
-                        const url = "https://wa.me/5491166230246";
+                        const url = `https://wa.me/5491178980848?text=${encodeURIComponent("Hola! Vengo desde la web de B2Grow y quisiera recibir asesoramiento.")}`;
                         window.location.href = url;
                       }}
                       className="gap-2"
@@ -608,7 +608,7 @@ const Calculator = () => {
                       variant="outline"
                     >
                       <MessageCircle />
-                      Asesoramiento: +54 9 11 6623-0246
+                      Asesoramiento: +54 9 11 7898-0848
                     </Button>
                   </div>
                   <p className="text-sm font-semibold text-foreground mt-4">

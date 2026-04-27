@@ -134,8 +134,17 @@ const Header = () => {
           />
         </div>
 
-        {/* Espacio vacío - Columna derecha para balance */}
-        <div></div>
+        {/* CTA Calculadora - Columna derecha */}
+        <div className="flex justify-end">
+          {location.pathname !== "/calculadora" && (
+            <Link
+              to="/calculadora"
+              className="px-6 py-3 bg-gradient-primary text-primary-foreground rounded-full font-semibold text-sm hover:scale-105 transition-all shadow-lg hover:shadow-green whitespace-nowrap"
+            >
+              Calculá tu equipo ideal
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

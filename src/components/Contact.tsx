@@ -278,7 +278,7 @@ const Contact = () => {
                 <div className="space-y-4">
                   {/* Cotización */}
                   <a
-                    href="https://wa.me/5491151857753"
+                    href={`https://wa.me/5491178980848?text=${encodeURIComponent("Hola! Vengo desde la web de B2Grow y quisiera pedir una cotización.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
@@ -290,7 +290,7 @@ const Contact = () => {
                         </div>
                         <div>
                           <p className="font-semibold text-foreground">Cotización</p>
-                          <p className="text-sm text-muted-foreground">+54 9 11 5185-7753</p>
+                          <p className="text-sm text-muted-foreground">+54 9 11 7898-0848</p>
                         </div>
                       </div>
                       <ExternalLink className="h-5 w-5 text-green-500" />
@@ -299,7 +299,7 @@ const Contact = () => {
                   
                   {/* Asesoramiento */}
                   <a
-                    href="https://wa.me/5491166230246"
+                    href={`https://wa.me/5491178980848?text=${encodeURIComponent("Hola! Vengo desde la web de B2Grow y quisiera recibir asesoramiento.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
@@ -311,7 +311,7 @@ const Contact = () => {
                         </div>
                         <div>
                           <p className="font-semibold text-foreground">Asesoramiento</p>
-                          <p className="text-sm text-muted-foreground">+54 9 11 6623-0246</p>
+                          <p className="text-sm text-muted-foreground">+54 9 11 7898-0848</p>
                         </div>
                       </div>
                       <ExternalLink className="h-5 w-5 text-blue-500" />
