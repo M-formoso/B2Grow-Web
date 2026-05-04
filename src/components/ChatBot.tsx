@@ -80,7 +80,7 @@ const ChatBot = () => {
       {/* Floating Chat Button */}
       <button
         onClick={handleBubbleClick}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-white hover:bg-gray-100 text-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.25)] hover:scale-110 active:scale-95 transition-all duration-200 z-[9999] flex items-center justify-center cursor-pointer border-2 border-gray-200"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white hover:bg-gray-100 text-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.25)] hover:scale-110 active:scale-95 transition-all duration-200 z-[9999] flex items-center justify-center cursor-pointer border-2 border-gray-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ const ChatBot = () => {
 
       {/* Floating Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[340px] h-[480px] bg-[#1c1c1c] rounded-2xl border border-[#2e2e2e] shadow-[0_6px_25px_rgba(0,0,0,0.4)] flex flex-col overflow-hidden z-[10000]">
+        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[340px] max-w-[340px] h-[70vh] max-h-[480px] sm:h-[480px] bg-[#1c1c1c] rounded-2xl border border-[#2e2e2e] shadow-[0_6px_25px_rgba(0,0,0,0.4)] flex flex-col overflow-hidden z-[10000]">
           {/* Chat Header */}
           <div className="bg-[#2f2f2f] text-white p-4 text-center font-semibold border-b border-[#3b3b3b]">
             Bitu 🤖

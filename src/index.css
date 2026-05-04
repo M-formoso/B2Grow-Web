@@ -127,10 +127,12 @@ All colors MUST be HSL. Futuristic red-tech aesthetic with energy themes.
 
   body {
     @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   /* Custom scrollbar */
