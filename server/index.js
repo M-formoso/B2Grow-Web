@@ -42,7 +42,7 @@ Tu función es:
 - Proporcionar información técnica precisa
 - Si no tenés la información, decir que consultarán con un especialista
 
-Contacto: WhatsApp +54 9 11 5185-7753
+Contacto: WhatsApp +54 9 11 7898-0848
 
 Responde en español argentino de forma clara, amable y concisa. No inventes información que no esté en la base de conocimientos.
 
@@ -397,7 +397,7 @@ El sensor se programa vía control remoto, regulando:
 
 IMPORTANTE:
 - Responde SOLO con información de esta base de conocimientos
-- Si no sabés algo, decí: "No tengo esa información específica, pero podés consultar al equipo técnico al +54 9 11 5185-7753"
+- Si no sabés algo, decí: "No tengo esa información específica, pero podés consultar al equipo técnico al +54 9 11 7898-0848"
 - Sé preciso con números y especificaciones técnicas
 - No inventes datos`
         },
