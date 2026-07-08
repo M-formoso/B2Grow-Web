@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
 import StaggeredMenu from "./StaggeredMenu";
 import PillNav from "./PillNav";
+import greensideLogo from "@/assets/b2grow-greenside-logo.png";
+import multiselectLogo from "@/assets/b2grow-multiselect-logo.png";
+import greensideBg from "@/assets/greenside-bg.png";
 
 const b2growLogo = "/Marca B2Grow png.png";
 
@@ -43,14 +47,42 @@ const Header = () => {
 
   const navItems = [
     { label: "Inicio", href: "/", ariaLabel: "Ir al inicio" },
-    { label: "Productos", href: "/productos", ariaLabel: "Ver productos" },
+    {
+      label: "Productos",
+      href: "/productos",
+      ariaLabel: "Ver productos",
+      children: [
+        {
+          label: "Greenside",
+          href: "/greenside",
+          ariaLabel: "Ver línea Greenside",
+          icon: greensideLogo,
+          description: "Estaciones de energía portátil, paneles solares y proyectos de energía solar",
+        },
+        {
+          label: "Multiselect",
+          href: "/multiselect",
+          ariaLabel: "Ver línea Multiselect",
+          icon: multiselectLogo,
+          description: "Luminarias UFO industriales y decorativas con color, potencia y ángulo seleccionables",
+        },
+      ],
+      featured: {
+        label: "TODAS LAS LÍNEAS",
+        title: "Ver todos los productos",
+        description: "Explorá el catálogo completo de B2Grow en una sola vista.",
+        image: greensideBg,
+        href: "/productos",
+      },
+    },
     { label: "Nosotros", href: "/nosotros", ariaLabel: "Conocer sobre nosotros" },
     { label: "Contacto", href: "/contacto", ariaLabel: "Contactar" },
   ];
 
   const staggeredNavItems = [
     { label: "Inicio", link: "/", ariaLabel: "Ir al inicio" },
-    { label: "Productos", link: "/productos", ariaLabel: "Ver productos" },
+    { label: "Greenside", link: "/greenside", ariaLabel: "Ver línea Greenside" },
+    { label: "Multiselect", link: "/multiselect", ariaLabel: "Ver línea Multiselect" },
     { label: "Nosotros", link: "/nosotros", ariaLabel: "Conocer sobre nosotros" },
     { label: "Contacto", link: "/contacto", ariaLabel: "Contactar" },
   ];
@@ -70,6 +102,34 @@ const Header = () => {
             className="fixed inset-0 bg-black/50 z-40"
             onClick={() => setMenuOpen(false)}
           />
+        )}
+
+        {/* Botones de tiendas visibles fuera del menú hamburguesa */}
+        {!menuOpen && (
+          <div className="fixed top-[30px] right-[110px] z-[60] flex flex-col gap-1.5 pointer-events-auto">
+            <a
+              href="https://estaciondeenergia.mitiendanube.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: "#E63329" }}
+              className="inline-flex items-center justify-center gap-1 px-2.5 py-1 text-white rounded-full font-semibold text-[10px] shadow-md whitespace-nowrap"
+              aria-label="Comprá acá · Clientes"
+            >
+              <ShoppingCart className="w-3 h-3" strokeWidth={2.25} />
+              Clientes
+            </a>
+            <a
+              href="https://bnaconecta.com.ar/B2Grow"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: "#16A34A" }}
+              className="inline-flex items-center justify-center gap-1 px-2.5 py-1 text-white rounded-full font-semibold text-[10px] shadow-md whitespace-nowrap"
+              aria-label="Comprá acá · Industrias"
+            >
+              <ShoppingCart className="w-3 h-3" strokeWidth={2.25} />
+              Industrias
+            </a>
+          </div>
         )}
 
         {/* StaggeredMenu se renderiza directamente, maneja su propio posicionamiento */}
@@ -135,7 +195,29 @@ const Header = () => {
         </div>
 
         {/* CTA Calculadora - Columna derecha */}
-        <div className="flex justify-end">
+        <div className="flex justify-end items-center gap-3">
+          <div className="flex flex-col gap-2">
+            <a
+              href="https://estaciondeenergia.mitiendanube.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: "#E63329" }}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 text-white rounded-full font-semibold text-xs hover:scale-105 hover:brightness-110 transition-all shadow-md whitespace-nowrap"
+            >
+              <ShoppingCart className="w-3.5 h-3.5" strokeWidth={2.25} />
+              Comprá acá · Clientes
+            </a>
+            <a
+              href="https://bnaconecta.com.ar/B2Grow"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ backgroundColor: "#16A34A" }}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 text-white rounded-full font-semibold text-xs hover:scale-105 hover:brightness-110 transition-all shadow-md whitespace-nowrap"
+            >
+              <ShoppingCart className="w-3.5 h-3.5" strokeWidth={2.25} />
+              Comprá acá · Industrias
+            </a>
+          </div>
           {location.pathname !== "/calculadora" && (
             <Link
               to="/calculadora"

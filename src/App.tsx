@@ -9,6 +9,8 @@ import ChatBot from "@/components/ChatBot";
 import ScrollToTop from "@/components/ScrollToTop";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
+import Greenside from "./pages/Greenside";
+import Multiselect from "./pages/Multiselect";
 import Calculator from "./pages/Calculator";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
@@ -47,6 +49,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Products />} />
+              <Route path="/greenside" element={<Greenside />} />
+              <Route path="/multiselect" element={<Multiselect />} />
               <Route path="/calculadora" element={<Calculator />} />
               <Route path="/nosotros" element={<AboutUs />} />
               <Route path="/contacto" element={<Contact />} />

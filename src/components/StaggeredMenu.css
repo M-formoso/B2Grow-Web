@@ -1,8 +1,16 @@
 .staggered-menu-wrapper {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 40;
+  pointer-events: none;
+}
+
+.staggered-menu-wrapper > .staggered-menu-header,
+.staggered-menu-wrapper[data-open] {
+  pointer-events: auto;
 }
 
 .staggered-menu-header {

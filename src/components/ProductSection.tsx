@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ProductGallery from "./ProductGallery";
 import DotGrid from "@/components/effects/DotGrid";
 import VariableProximity from "@/components/effects/VariableProximity";
@@ -201,11 +202,21 @@ const productLines = [
   }
 ];
 
-const ProductSection = () => {
-  const [activeModule, setActiveModule] = useState<string | null>(null);
+interface ProductSectionProps {
+  initialModule?: "greenside" | "multiselect" | null;
+  lockModule?: boolean;
+}
+
+const ProductSection = ({ initialModule = null, lockModule = false }: ProductSectionProps = {}) => {
+  const [activeModule, setActiveModule] = useState<string | null>(initialModule);
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
   const headerContainerRef = useRef<HTMLDivElement>(null);
   const { setColor } = useCursorColor();
+
+  useEffect(() => {
+    setActiveModule(initialModule);
+    setActiveSubcategory(null);
+  }, [initialModule]);
 
   // Update cursor color based on active module
   useEffect(() => {
@@ -349,14 +360,26 @@ const ProductSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-lg hover:shadow-xl transition-all"
-                  onClick={() => setActiveModule(null)}
-                >
-                  <ArrowLeft className="mr-2 h-5 w-5" />
-                  Volver Atrás
-                </Button>
+                {lockModule ? (
+                  <Link to="/productos">
+                    <Button
+                      size="lg"
+                      className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-lg hover:shadow-xl transition-all"
+                    >
+                      <ArrowLeft className="mr-2 h-5 w-5" />
+                      Ver todas las líneas
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="bg-primary hover:bg-primary/90 text-background font-bold px-6 py-5 text-base shadow-lg hover:shadow-xl transition-all"
+                    onClick={() => setActiveModule(null)}
+                  >
+                    <ArrowLeft className="mr-2 h-5 w-5" />
+                    Volver Atrás
+                  </Button>
+                )}
               </motion.div>
             </div>
 

@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Leaf, Globe, Sun, Lightbulb } from "lucide-react";
 import powerStationHero from "@/assets/power-station-new.png";
-const powerStationCard = "/central-electrica-modular-card-home.png";
 import solarPanelsHero from "@/assets/solar-panel-new.png";
 import ledLightingHero from "@/assets/led-light-new.png";
-import CardSwap, { Card } from "@/components/CardSwap";
 import GradientText from "@/components/effects/GradientText";
 import DecryptedText from "@/components/effects/DecryptedText";
 import ScrollReveal from "@/components/effects/ScrollReveal";
@@ -486,6 +485,21 @@ const Hero = () => {
                     </motion.div>
                   ))}
                 </div>
+                <motion.div
+                  className="mt-8 flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <Link
+                    to="/greenside"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-lime-500 hover:bg-lime-600 text-black font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  >
+                    Ver productos Greenside
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -553,6 +567,21 @@ const Hero = () => {
                     </motion.div>
                   ))}
                 </div>
+                <motion.div
+                  className="mt-8 flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  viewport={{ once: true }}
+                >
+                  <Link
+                    to="/multiselect"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  >
+                    Ver productos Multiselect
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
@@ -745,66 +774,6 @@ const Hero = () => {
                 </motion.div>
               </div>
 
-              {/* CardSwap - RIGHT SIDE */}
-              <div className="flex-shrink-0 w-full lg:w-auto flex items-center justify-center">
-              <CardSwap
-                width={500}
-                height={500}
-                cardDistance={60}
-                verticalDistance={70}
-                delay={4000}
-                pauseOnHover={false}
-                easing="elastic"
-              >
-                <Card>
-                  <motion.div
-                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.img
-                      src={powerStationCard}
-                      alt="Estación de Energía Portátil B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
-                      initial={{ opacity: 1 }}
-                      whileHover={{ opacity: 0.7 }}
-                    />
-                  </motion.div>
-                </Card>
-
-                <Card>
-                  <motion.div
-                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.img
-                      src={solarPanelsHero}
-                      alt="Paneles Solares Flexibles B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
-                      initial={{ opacity: 1 }}
-                      whileHover={{ opacity: 0.7 }}
-                    />
-                  </motion.div>
-                </Card>
-
-                <Card>
-                  <motion.div
-                    className="relative rounded-2xl h-full overflow-hidden bg-transparent group cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.img
-                      src={ledLightingHero}
-                      alt="Iluminación LED Inteligente B2Grow"
-                      className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
-                      initial={{ opacity: 1 }}
-                      whileHover={{ opacity: 0.7 }}
-                    />
-                  </motion.div>
-                </Card>
-              </CardSwap>
-              </div>
             </div>
           </div>
         </div>

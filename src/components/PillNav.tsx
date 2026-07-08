@@ -92,7 +92,7 @@ const PillNav = ({
       const navItems = navItemsRef.current;
 
       if (navItems) {
-        gsap.set(navItems, { width: 0, overflow: 'hidden' });
+        gsap.set(navItems, { width: 0, overflow: 'visible' });
         gsap.to(navItems, {
           width: 'auto',
           duration: 0.6,
@@ -200,57 +200,122 @@ const PillNav = ({
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">
-            {items.map((item, i) => (
-              <li key={item.href || `item-${i}`} role="none">
-                {isRouterLink(item.href) ? (
-                  <Link
-                    role="menuitem"
-                    to={item.href}
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                    aria-label={item.ariaLabel || item.label}
-                    onMouseEnter={() => handleEnter(i)}
-                    onMouseLeave={() => handleLeave(i)}
-                  >
-                    <span
-                      className="hover-circle"
-                      aria-hidden="true"
-                      ref={el => {
-                        circleRefs.current[i] = el;
-                      }}
-                    />
-                    <span className="label-stack">
-                      <span className="pill-label">{item.label}</span>
-                      <span className="pill-label-hover" aria-hidden="true">
-                        {item.label}
+            {items.map((item, i) => {
+              const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+              return (
+                <li
+                  key={item.href || `item-${i}`}
+                  role="none"
+                  className={hasChildren ? 'has-dropdown' : ''}
+                >
+                  {isRouterLink(item.href) ? (
+                    <Link
+                      role="menuitem"
+                      to={item.href}
+                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                      aria-label={item.ariaLabel || item.label}
+                      aria-haspopup={hasChildren ? 'menu' : undefined}
+                      onMouseEnter={() => handleEnter(i)}
+                      onMouseLeave={() => handleLeave(i)}
+                    >
+                      <span
+                        className="hover-circle"
+                        aria-hidden="true"
+                        ref={el => {
+                          circleRefs.current[i] = el;
+                        }}
+                      />
+                      <span className="label-stack">
+                        <span className="pill-label">{item.label}</span>
+                        <span className="pill-label-hover" aria-hidden="true">
+                          {item.label}
+                        </span>
                       </span>
-                    </span>
-                  </Link>
-                ) : (
-                  <a
-                    role="menuitem"
-                    href={item.href}
-                    className={`pill${activeHref === item.href ? ' is-active' : ''}`}
-                    aria-label={item.ariaLabel || item.label}
-                    onMouseEnter={() => handleEnter(i)}
-                    onMouseLeave={() => handleLeave(i)}
-                  >
-                    <span
-                      className="hover-circle"
-                      aria-hidden="true"
-                      ref={el => {
-                        circleRefs.current[i] = el;
-                      }}
-                    />
-                    <span className="label-stack">
-                      <span className="pill-label">{item.label}</span>
-                      <span className="pill-label-hover" aria-hidden="true">
-                        {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      role="menuitem"
+                      href={item.href}
+                      className={`pill${activeHref === item.href ? ' is-active' : ''}`}
+                      aria-label={item.ariaLabel || item.label}
+                      aria-haspopup={hasChildren ? 'menu' : undefined}
+                      onMouseEnter={() => handleEnter(i)}
+                      onMouseLeave={() => handleLeave(i)}
+                    >
+                      <span
+                        className="hover-circle"
+                        aria-hidden="true"
+                        ref={el => {
+                          circleRefs.current[i] = el;
+                        }}
+                      />
+                      <span className="label-stack">
+                        <span className="pill-label">{item.label}</span>
+                        <span className="pill-label-hover" aria-hidden="true">
+                          {item.label}
+                        </span>
                       </span>
-                    </span>
-                  </a>
-                )}
-              </li>
-            ))}
+                    </a>
+                  )}
+                  {hasChildren && (
+                    <div className="pill-megamenu" role="menu">
+                      <div className="pill-megamenu-inner">
+                        <ul className="pill-megamenu-list">
+                          {item.children.map((child, ci) => (
+                            <li key={child.href || `child-${i}-${ci}`} role="none">
+                              <a
+                                role="menuitem"
+                                href={child.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`pill-megamenu-link${activeHref === child.href ? ' is-active' : ''}`}
+                                aria-label={child.ariaLabel || child.label}
+                              >
+                                {child.icon && (
+                                  <span className="pill-megamenu-icon">
+                                    <img src={child.icon} alt="" />
+                                  </span>
+                                )}
+                                <span className="pill-megamenu-text">
+                                  <span className="pill-megamenu-title">{child.label}</span>
+                                  {child.description && (
+                                    <span className="pill-megamenu-desc">{child.description}</span>
+                                  )}
+                                </span>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                        {item.featured && (
+                          <a
+                            className="pill-megamenu-featured"
+                            href={item.featured.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span className="pill-megamenu-featured-label">
+                              {item.featured.label}
+                            </span>
+                            <span
+                              className="pill-megamenu-featured-image"
+                              style={{ backgroundImage: `url(${item.featured.image})` }}
+                            />
+                            <span className="pill-megamenu-featured-title">
+                              {item.featured.title}
+                            </span>
+                            {item.featured.description && (
+                              <span className="pill-megamenu-featured-desc">
+                                {item.featured.description}
+                              </span>
+                            )}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
